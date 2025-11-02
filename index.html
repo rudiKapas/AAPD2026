@@ -148,6 +148,24 @@
     .ov-item:focus-within{outline:0;box-shadow:0 0 0 3px rgba(15,118,110,.25), 0 8px 18px rgba(15,23,42,.10);background:#fff}
     .ov-item:hover .ov-icon{background:#e2e8f0}
 
+    /* === Desktop-only CTA inside overlay card === */
+    .overlay-cta{
+      display:none;           /* hidden on mobile */
+      margin-top:10px;
+      text-align:right;       /* align to the right edge */
+    }
+    .overlay-cta .btn{
+      border-radius:999px;    /* pill shape */
+      padding:.52rem 1rem;    /* slightly chunkier for balance */
+    }
+    
+    /* Desktop: show inside card, hide the floating image button */
+    @media (min-width:1101px){
+      .overlay-cta{ display:block; }
+      .img-register{ display:none; }
+    }
+
+
 
     /* Generic white section (second section) */
     .section{background:#fff;padding:36px 0}
@@ -391,6 +409,12 @@
                 </div>
               </div>
             </div>
+            
+            <!-- DESKTOP CTA inside overlay card -->
+              <div class="overlay-cta">
+                <a class="btn btn-teal" href="#register">Register Now</a>
+              </div>
+
           </div> <!-- /overlay-card -->
         </div> <!-- /hero-img -->
       </div><!-- /container -->
