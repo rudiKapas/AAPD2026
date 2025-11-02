@@ -242,7 +242,7 @@
 
 
     /* Bold tagline just below the conference name (same size, bolder) */
-    .lead-strong{font-weight:600;color:inherit}
+    .lead-strong{font-weight:300;color:inherit}
     /* Register pill sitting on the hero image, top-right */
     .img-register{position:absolute;top:12px;right:12px;z-index:3}
 
@@ -251,9 +251,18 @@
     @media (min-width:1101px){
       .hero-grid{align-items:stretch}
       .right-col{height:100%;display:flex;flex-direction:column;justify-content:space-between}
-      .lead{color:var(--muted);display:flex;flex-direction:column;justify-content:space-between;height:100%}
+      /* Keep the two lines close and pinned to the top */
+      .lead{
+        color:var(--muted);
+        display:flex;
+        flex-direction:column;
+        gap:4px;                 /* adjust to 2px if you want it tighter */
+        justify-content:flex-start;
+        height:auto;
+      }
+
       .lead-top,.lead-strong{font-size:clamp(1.05rem, .9vw + .6rem, 1.25rem);line-height:1.08}
-      .lead-strong{font-weight:600;color:var(--navy)}
+      .lead-strong{font-weight:300;color:var(--navy)}
     }
     @media (max-width:1100px){
       .right-col{height:auto}
@@ -271,6 +280,35 @@
       .overlay-card.fx{transform:translate(-50%, 50%) translateY(10px)}
       body.loaded .overlay-card.fx{transform:translate(-50%, 50%)}
     }
+
+    /* First sentence: bold */
+    .lead-top{font-weight:700;color:var(--navy);}
+
+    /* Reveal-once animation for Section 2 */
+    .reveal{
+      opacity:0;
+      transform:translateY(12px);
+      transition:opacity .6s cubic-bezier(.2,.65,.3,1),
+                transform .6s cubic-bezier(.2,.65,.3,1);
+      will-change:opacity,transform;
+    }
+
+    /* When shown (IntersectionObserver toggles .show) */
+    body.loaded .reveal.show{
+      opacity:1;
+      transform:none;
+      transition-delay:var(--d,0s); /* stagger via --d */
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .reveal,
+      body.loaded .reveal.show{
+        opacity:1 !important;
+        transform:none !important;
+        transition:none !important;
+      }
+    }
+
 
 </style>
 </head>
@@ -482,5 +520,43 @@
       });
     })();
   </script>
+  <script>
+  // Reveal-once for the "Media Materials" section
+  (function(){
+    const about = document.getElementById('about');
+    if(!about) return;
+
+    // Mark items to reveal (title, blurb, and all cards)
+    const targets = Array.from(about.querySelectorAll('h2, p, .media-card'));
+
+    // Ensure they have the .reveal class and stagger delay
+    targets.forEach((el, i) => {
+      el.classList.add('reveal');
+      el.style.setProperty('--d', (i * 0.06) + 's'); // 60ms stagger
+    });
+
+    // If IO not supported, just show them
+    if(!('IntersectionObserver' in window)){
+      targets.forEach(el => el.classList.add('show'));
+      return;
+    }
+
+    // Reveal once when they enter the viewport
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('show');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    targets.forEach(el => io.observe(el));
+  })();
+</script>
+
+
+
+
 </body>
 </html>
