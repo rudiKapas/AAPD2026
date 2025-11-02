@@ -120,6 +120,29 @@
     .ov-label{font-size:.78rem;color:#6b7280}
     .ov-value{font-size:.95rem;color:#0f172a}
 
+    /* === AAPD: CTA aligned with overlay items (desktop only) === */
+    .overlay-cta{ display:none; }   /* hidden on mobile */
+    
+    /* Desktop: make grid 4 items + auto CTA column */
+    @media (min-width:1101px){
+      .overlay-grid{
+        grid-template-columns: repeat(4, 1fr) auto;
+        align-items:center;          /* keeps all items + button aligned */
+      }
+      .overlay-cta{
+        display:block;
+        justify-self:end;            /* push button to the right edge */
+      }
+      .overlay-cta .btn{
+        border-radius:999px;         /* pill */
+        padding:.56rem 1rem;
+      }
+    
+      /* Hide the floating image button on desktop */
+      .img-register{ display:none; }
+    }
+
+
     @media (max-width: 900px){
       .overlay-grid{grid-template-columns:repeat(2,1fr)}
     }
@@ -408,12 +431,14 @@
                   <div class="ov-value">PDF (Coming Soon)</div>
                 </div>
               </div>
+
+                <!-- DESKTOP CTA inside overlay card (grid item) -->
+                <div class="overlay-cta">
+                  <a class="btn btn-teal" href="#register">Register Now</a>
+                </div>
+              
             </div>
             
-            <!-- DESKTOP CTA inside overlay card -->
-              <div class="overlay-cta">
-                <a class="btn btn-teal" href="#register">Register Now</a>
-              </div>
 
           </div> <!-- /overlay-card -->
         </div> <!-- /hero-img -->
