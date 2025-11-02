@@ -6,37 +6,22 @@
   <title>AAPD 2026 — Kota Kinabalu (Hero Section Only)</title>
   <meta name="description" content="Minimal hero section for AAPD 2026 — Kota Kinabalu, Sabah, Malaysia." />
 
-  <!-- =============================================================
-       AAPD 2026 – HERO SECTION ONLY (Minimal)
-       -------------------------------------------------------------
-       • This file contains ONLY the top (first) section that matches
-         the provided reference layout: big title on the left, a short
-         paragraph on the right, and a large rounded hero image below.
-       • Keep this minimal while fully responsive for mobile.
-
-       🖼️ Image instructions
-       • Place your hero image here in your repo:  assets/img/hero.jpg
-       • Best format:  WEBP (small + sharp). Also OK: JPG/JPEG. PNG is larger.
-       • Recommended width ~ 1600–2200px. Use descriptive alt text.
-     ============================================================= -->
-
-  <!-- Google Fonts (optional; can remove to be extra-minimal) -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      /* Core design tokens */
-      --navy:#0f172a;       /* text color on light backgrounds */
-      --muted:#6b7280;      /* secondary text */
-      --bg:#ffffff;         /* LIGHT page background (page white) */
-      --hero-bg:#f6f7fb;   /* first section light grey */
-      --radius:22px;        /* large rounded corners */
-      --btn-radius:calc(var(--radius) * 0.64); /* button corners visually match image curvature */
-      --container:1152px;   /* content max width */
-      --btn-nudge:0;    /* aligns pill to heading */
-      --media-thumb-h:200px; /* desktop target height for media thumbnails to keep section height compact */
+      --navy:#0f172a;
+      --muted:#6b7280;
+      --bg:#ffffff;
+      --hero-bg:#f6f7fb;
+      --radius:22px;
+      --btn-radius:calc(var(--radius) * 0.64);
+      --container:1152px;
+      --btn-nudge:0;
+      --media-thumb-h:200px;
     }
 
     *{box-sizing:border-box}
@@ -48,42 +33,33 @@
       line-height:1.5;
     }
 
-    /* ============ Simple layout helpers ============ */
     .container{width:100%;max-width:var(--container);margin-inline:auto;padding:16px 20px}
 
-    /* ============ HERO ============ */
-    .hero{padding:8px 0 0; background: var(--hero-bg)}
+    /* HERO */
+    .hero{padding:8px 0 0; background:var(--hero-bg)}
     .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:16px;align-items:stretch}
-    /* Left big title */
     h1{font-family:Poppins,Inter,sans-serif;font-weight:500;line-height:1.08;margin:0;font-size:clamp(1.8rem, 3.2vw + .8rem, 3.4rem);}
-    /* Right paragraph (long form) */
     .lead{color:var(--muted);max-width:56ch;margin:0}
 
-    /* Large rounded hero image */
     .hero-img{margin-top:10px; position:relative; margin-bottom:70px}
     .hero-img img{width:100%;height:360px;object-fit:cover;object-position:center;border-radius:var(--radius);display:block;box-shadow:0 14px 28px rgba(15,23,42,.14)}
 
-    /* ===== Responsive ===== */
-    @media (max-width: 980px){
+    @media (max-width:980px){
       .hero-grid{grid-template-columns:1fr;gap:12px}
       .hero-img img{height:260px}
     }
-  
-    /* ======= Header styles (top bar like the example) ======= */
-    .site-header{position:sticky;top:0;z-index:50;background:#ffffff;border-bottom:1px solid rgba(15,23,42,.06)}
-    .header-row{display:flex;align-items:center;justify-content:space-between;gap:12px;height:56px;padding:0}
-    .brand{display:flex;align-items:center;gap:0;font-weight:500;letter-spacing:0}
-    .brand-dot{width:10px;height:10px;border-radius:50%;background:#FBAC45}
 
+    /* Header */
+    .site-header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid rgba(15,23,42,.06)}
+    .header-row{display:flex;align-items:center;justify-content:space-between;gap:12px;height:56px;padding:0}
+    .brand{display:flex;align-items:center;gap:0;font-weight:500}
     .pill-nav{display:flex;align-items:center;gap:22px;background:#fff;border:1px solid rgba(15,23,42,.08);border-radius:999px;padding:10px 16px;box-shadow:0 10px 24px rgba(15,23,42,.06)}
     .pill-nav a{color:var(--navy);text-decoration:none;font-weight:600;white-space:nowrap}
-
     .header-actions{display:flex;align-items:center;gap:10px}
     .icon-btn{width:34px;height:34px;border-radius:999px;border:1px solid rgba(15,23,42,.12);background:#fff;display:grid;place-items:center;cursor:pointer}
     .icon-btn.hamburger{display:none}
 
-    /* Mobile header behaviour */
-    @media (max-width: 900px){
+    @media (max-width:900px){
       .pill-nav{display:none}
       .icon-btn.hamburger{display:grid}
       .mobile-menu{display:none;position:absolute;inset:auto 16px auto 16px;margin-top:8px;background:#fff;border:1px solid rgba(15,23,42,.08);border-radius:14px;box-shadow:0 12px 28px rgba(15,23,42,.10);overflow:hidden}
@@ -92,26 +68,18 @@
       .mobile-menu a:last-child{border-bottom:0}
     }
 
-
-    /* ======= Register Now pill button (green) ======= */
-    .right-col{display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:10px;height:100%} 
+    /* Buttons */
+    .right-col{display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:10px;height:100%}
     .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.48rem .9rem;border-radius:var(--btn-radius);border:0;font-weight:500;font-size:.92rem;text-decoration:none;cursor:pointer;transition:transform .12s ease, box-shadow .12s ease, filter .12s ease}
     .btn.btn-teal{background:#0f766e;color:#fff;box-shadow:0 8px 20px rgba(15,118,110,.25);margin-top:var(--btn-nudge)}
     .btn.btn-teal:hover{filter:brightness(.98);transform:translateY(-1px);box-shadow:0 10px 24px rgba(15,118,110,.30)}
+    .img-register{position:absolute;top:12px;right:12px;z-index:3}
 
-
-    /* Extra mobile tightening for image height */
-    @media (max-width: 980px){
-      .hero-img img{height:220px}
-    }
-
-
-    /* Shared rails (separate header from hero so header can be shorter) */
+    /* Shared rails */
     .hero > .container{padding-left:20px !important; padding-right:20px !important; max-width:var(--container); margin-inline:auto}
     .site-header .container{padding:0 20px !important;max-width:var(--container);margin-inline:auto;height:56px;display:flex;align-items:center}
 
-
-    /* ===== Overlay info card in front of the image ===== */
+    /* Overlay info card */
     .overlay-card{position:absolute;left:50%;bottom:0;transform:translate(-50%, 50%);width:min(96%, 980px);background:#fff;border:1px solid rgba(15,23,42,.06);border-radius:18px;box-shadow:0 12px 26px rgba(15,23,42,.12);padding:14px}
     .overlay-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
     .ov-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;background:transparent;border:0;cursor:pointer;transition:transform .16s ease, box-shadow .16s ease, background-color .16s ease}
@@ -120,15 +88,13 @@
     .ov-label{font-size:.78rem;color:#6b7280}
     .ov-value{font-size:.95rem;color:#0f172a}
 
-    @media (max-width: 900px){
+    @media (max-width:900px){
       .overlay-grid{grid-template-columns:repeat(2,1fr)}
     }
-    @media (max-width: 520px){
+    @media (max-width:520px){
       .overlay-grid{grid-template-columns:repeat(2,1fr)}
-      /* Place overlay BELOW image on mobile, same width as image */
       .overlay-card{position:static;transform:none;left:auto;bottom:auto;width:100%;margin-top:12px}
       .hero-img{margin-bottom:16px}
-      /* Smaller overlay typography on mobile only */
       .ov-item{padding:8px 10px}
       .ov-label{font-size:.72rem}
       .ov-value{font-size:.88rem; line-height:1.25}
@@ -136,51 +102,38 @@
       .ov-icon img{width:18px;height:18px}
     }
 
-
-    /* icon images and tiny subtitle under values */
     .ov-icon img{width:20px;height:20px;object-fit:contain}
     .ov-sub{font-size:.75rem;color:#94a3b8}
 
-
-    /* Hover/focus animation for each card (will feel like a link) */
     .ov-item:hover{background:#ffffff;box-shadow:0 10px 22px rgba(15,23,42,.12);transform:translateY(-2px)}
     .ov-item:active{transform:translateY(0);box-shadow:0 6px 14px rgba(15,23,42,.10)}
     .ov-item:focus-within{outline:0;box-shadow:0 0 0 3px rgba(15,118,110,.25), 0 8px 18px rgba(15,23,42,.10);background:#fff}
     .ov-item:hover .ov-icon{background:#e2e8f0}
 
-
-    /* Generic white section (second section) */
+    /* Section 2 */
     .section{background:#fff;padding:36px 0}
     .section h2{font-family:Poppins,Inter,sans-serif;font-weight:500;margin:0 0 6px;font-size:clamp(1.2rem,1.3vw + .6rem,1.8rem)}
     .section p{color:var(--muted);margin:0}
 
-
-    /* ===== Media Materials grid (2 YouTube + 2 A4) ===== */
     .media-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:16px}
     .media-card{background:#fff;border:2px solid rgba(15,23,42,.12);border-radius:22px;box-shadow:0 18px 32px rgba(15,23,42,.14);overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:transform .16s ease, box-shadow .16s ease}
     .media-card:hover{transform:translateY(-3px);box-shadow:0 22px 38px rgba(15,23,42,.18)}
     .media-thumb{position:relative;background:transparent;margin:12px;border:2px solid rgba(15,23,42,.10);border-radius:16px;overflow:hidden}
-    /* Aspect ratios: YouTube 16:9, A4 portrait ~210:297 */
     .media-thumb.yt{aspect-ratio:16/9}
     .media-thumb.a4{aspect-ratio:210/297}
     .media-thumb img{width:100%;height:100%;object-fit:cover;display:block}
-    /* Play pill for YouTube */
     .play{position:absolute;inset:auto auto 10px 10px;padding:.38rem .6rem;border-radius:999px;background:rgba(15,23,42,.75);color:#fff;font-size:.8rem}
     .media-body{padding:10px 14px 14px}
     .media-title{margin:0 0 2px;font-family:Poppins,Inter,sans-serif;font-weight:500;font-size:1rem}
     .media-sub{margin:0;color:var(--muted);font-size:.88rem}
 
-    /* Responsive: horizontal row on smaller screens (no 2x2) */
-    @media (max-width: 1100px){
+    @media (max-width:1100px){
       .media-grid{display:flex;gap:12px;overflow-x:auto;padding:0 4px 8px;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;scroll-behavior:smooth}
-      /* hide native scrollbar */
       .media-grid::-webkit-scrollbar{display:none}
       .media-grid{ -ms-overflow-style:none; scrollbar-width:none }
-      /* Facebook-like narrow cards */
       .media-card{flex:0 0 220px;width:220px;min-width:220px;scroll-snap-align:start}
     }
-    @media (max-width: 520px){
-      /* Compact, short cards for mobile */
+    @media (max-width:520px){
       .media-card{flex:0 0 180px;width:180px;min-width:180px}
       .media-thumb{margin:8px;border-radius:12px}
       .media-thumb.yt,.media-thumb.a4{height:120px;aspect-ratio:auto}
@@ -190,10 +143,8 @@
       .media-sub{font-size:.78rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     }
 
-    /* Make Section 2 visually as compact as Section 1 (desktop) */
-    @media (min-width: 521px){
+    @media (min-width:521px){
       .section{padding:24px 0}
-      /* Constrain card thumbnail height and crop (no distortion) */
       .media-thumb.yt, .media-thumb.a4{height:var(--media-thumb-h); aspect-ratio:auto}
       .media-thumb img{object-fit:cover}
       .media-body{padding:10px 12px}
@@ -201,8 +152,6 @@
       .media-sub{font-size:.82rem}
     }
 
-
-    /* Row wrapper + left/right scroll buttons */
     .media-row{position:relative}
     .scroll-btn{position:absolute;top:40%;transform:translateY(-50%);width:36px;height:36px;border-radius:999px;border:1px solid rgba(15,23,42,.14);background:#fff;box-shadow:0 10px 22px rgba(15,23,42,.12);display:grid;place-items:center;cursor:pointer;z-index:2}
     .scroll-btn.left{left:-10px}
@@ -214,40 +163,12 @@
       .media-card{width:100%;flex:auto}
     }
 
-
-    /* ===== Footer (minimal) ===== */
+    /* Footer */
     .site-footer{background:#fff;border-top:1px solid rgba(15,23,42,.08)}
     .footer-inner{padding:12px 0; display:flex; justify-content:center; text-align:center}
     .footer-inner small{color:var(--muted)}
 
-
-    /* Hero tagline under conference name */
-    .lead .tagline{display:block;margin-top:4px;color:var(--muted);font-size:.95rem}
-
-
-    /* Right column should not stretch on mobile stacking */
-    @media (max-width: 980px){
-      .right-col{height:auto;justify-content:flex-start}
-    }
-
-
-    /* Desktop-only: match screenshot layout
-       - Right column same height as left heading
-       - Register button aligned to the RIGHT edge of its column */
-    @media (min-width:1101px){
-      .hero-grid{align-items:stretch}
-      .right-col{height:100%;justify-content:space-between}
-      .right-col .btn.btn-teal{align-self:flex-end;margin-left:auto}
-    }
-
-
-    /* Bold tagline just below the conference name (same size, bolder) */
-    .lead-strong{font-weight:600;color:inherit}
-    /* Register pill sitting on the hero image, top-right */
-    .img-register{position:absolute;top:12px;right:12px;z-index:3}
-
-
-    /* Right-side copy split into top & bottom lines with exact alignment */
+    /* Typography alignment (desktop) */
     @media (min-width:1101px){
       .hero-grid{align-items:stretch}
       .right-col{height:100%;display:flex;flex-direction:column;justify-content:space-between}
@@ -260,47 +181,37 @@
       .lead{height:auto}
     }
 
-
-    /* ========= Page-load entry animations ========= */
+    /* Entry animations */
     .fx{opacity:0;transform:translateY(10px);will-change:opacity,transform}
     body.loaded .fx{opacity:1;transform:none;transition:opacity .6s cubic-bezier(.2,.65,.3,1), transform .6s cubic-bezier(.2,.65,.3,1);transition-delay:var(--d,0s)}
-    @media (prefers-reduced-motion: reduce){.fx, body.loaded .fx{opacity:1 !important;transform:none !important;transition:none !important}}
-
-    /* Keep overlay centered while animating (desktop only) */
+    @media (prefers-reduced-motion:reduce){.fx, body.loaded .fx{opacity:1 !important;transform:none !important;transition:none !important}}
     @media (min-width:521px){
       .overlay-card.fx{transform:translate(-50%, 50%) translateY(10px)}
       body.loaded .overlay-card.fx{transform:translate(-50%, 50%)}
     }
-
-</style>
+  </style>
 </head>
 <body>
-  <!-- ======= TOP BAR (like the example) ======= -->
+  <!-- Header -->
   <header class="site-header">
     <div class="container header-row fx" style="--d:.04s">
-      <!-- Brand on the left -->
       <div class="brand" aria-label="AAPD 2026 brand">
         <span>AAPD 2026</span>
       </div>
-
-      <!-- Right icon buttons (simple placeholders) -->
       <div class="header-actions">
         <button class="icon-btn" aria-label="Travel/Flights">✈️</button>
         <button class="icon-btn" aria-label="Account">👤</button>
         <button class="icon-btn hamburger" id="navToggle" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu">☰</button>
       </div>
     </div>
-</header>
+  </header>
 
   <main>
-    <!-- ================= HERO (First Section Only) ================= -->
+    <!-- HERO -->
     <section class="hero">
       <div class="container">
         <div class="hero-grid">
-          <!-- Left: Big minimal title -->
           <h1 class="fx" style="--d:.08s">AAPD 2026 Kota Kinabalu</h1>
-
-          <!-- Right: Long form of AAPD (keep as a single concise paragraph) -->
           <div class="right-col">
             <div class="lead">
               <div class="lead-top fx" style="--d:.16s">18th International Conference of Asian Academy of Preventive Dentistry.</div>
@@ -311,45 +222,42 @@
 
         <!-- Big rounded hero image -->
         <div class="hero-img fx" style="--d:.28s" aria-label="Scenic Mount Kinabalu hero image">
-          <!-- Replace the file below with your own hero image.
-               Put it at:  assets/img/hero.jpg
-               Suggested type:  .webp (preferred) or .jpg/.jpeg -->
+          <!-- Put your image at: assets/img/hero.jpg  (prefer .webp; ok .jpg/.jpeg) -->
           <img src="assets/img/hero.jpg" alt="Mount Kinabalu ridgeline at sunrise" />
           <a class="btn btn-teal img-register fx" style="--d:.34s" href="#register">Register Now</a>
-          
-          <!-- Front overlay info card -->
+
+          <!-- Overlay quick facts -->
           <div class="overlay-card fx" style="--d:.40s" role="group" aria-label="Conference quick facts">
             <div class="overlay-grid">
-              <!-- Item 1: Location -->
               <div class="ov-item">
-                <!-- Replace this icon by swapping the file path below -->
+                <!-- Replace icon file at assets/icons/location.svg -->
                 <span class="ov-icon" aria-hidden="true"><img src="assets/icons/location.svg" alt="" /></span>
                 <div class="ov-text">
                   <div class="ov-label">Location</div>
                   <div class="ov-value">Kota Kinabalu, Sabah</div>
                 </div>
               </div>
-              <!-- Item 2: Date -->
+
               <div class="ov-item">
-                <!-- Replace this icon by swapping the file path below -->
+                <!-- Replace icon file at assets/icons/calendar.svg -->
                 <span class="ov-icon" aria-hidden="true"><img src="assets/icons/calendar.svg" alt="" /></span>
                 <div class="ov-text">
                   <div class="ov-label">Dates</div>
                   <div class="ov-value">30 Sept – 3 Oct 2026</div>
                 </div>
               </div>
-              <!-- Item 3: Registration Due -->
+
               <div class="ov-item">
-                <!-- Replace this icon by swapping the file path below -->
+                <!-- Replace icon file at assets/icons/registration.svg -->
                 <span class="ov-icon" aria-hidden="true"><img src="assets/icons/registration.svg" alt="" /></span>
                 <div class="ov-text">
                   <div class="ov-label">Registration Due</div>
                   <div class="ov-value">TBA (Opens Soon)</div>
                 </div>
               </div>
-              <!-- Item 4: Program Book -->
+
               <div class="ov-item">
-                <!-- Replace this icon by swapping the file path below -->
+                <!-- Replace icon file at assets/icons/book.svg -->
                 <span class="ov-icon" aria-hidden="true"><img src="assets/icons/book.svg" alt="" /></span>
                 <div class="ov-text">
                   <div class="ov-label">Program Book</div>
@@ -357,11 +265,12 @@
                 </div>
               </div>
             </div>
-          </div><!-- /hero-img -->
-      </div><!-- /container -->
+          </div> <!-- /overlay-card -->
+        </div> <!-- /hero-img -->
+      </div> <!-- /container -->
     </section>
 
-    <!-- ================= SECOND SECTION (white background) ================= -->
+    <!-- SECTION 2 -->
     <section class="section" id="about">
       <div class="container">
         <h2>Media Materials</h2>
@@ -370,93 +279,79 @@
         <div class="media-row">
           <button class="scroll-btn left" type="button" aria-label="Scroll left">‹</button>
           <button class="scroll-btn right" type="button" aria-label="Scroll right">›</button>
+
           <div class="media-grid" id="mediaGrid">
-          <!-- ===== YOUTUBE CARD 1 =====
-               Replace VIDEO_ID below; the thumbnail will appear automatically.
-               The link opens YouTube in a new tab. -->
-          <a class="media-card" href="https://www.youtube.com/watch?v=VIDEO_ID_1" target="_blank" rel="noopener">
-            <div class="media-thumb yt">
-              <img src="https://img.youtube.com/vi/VIDEO_ID_1/hqdefault.jpg" alt="YouTube thumbnail: Opening message" />
-              <span class="play">▶ Watch</span>
-            </div>
-            <div class="media-body">
-              <h3 class="media-title">Opening Message</h3>
-              <p class="media-sub">YouTube • 1:23</p>
-            </div>
-          </a>
+            <!-- YouTube 1 -->
+            <a class="media-card" href="https://www.youtube.com/watch?v=VIDEO_ID_1" target="_blank" rel="noopener">
+              <div class="media-thumb yt">
+                <img src="https://img.youtube.com/vi/VIDEO_ID_1/hqdefault.jpg" alt="YouTube thumbnail: Opening message" />
+                <span class="play">▶ Watch</span>
+              </div>
+              <div class="media-body">
+                <h3 class="media-title">Opening Message</h3>
+                <p class="media-sub">YouTube • 1:23</p>
+              </div>
+            </a>
 
-          <!-- ===== YOUTUBE CARD 2 ===== -->
-          <a class="media-card" href="https://www.youtube.com/watch?v=VIDEO_ID_2" target="_blank" rel="noopener">
-            <div class="media-thumb yt">
-              <img src="https://img.youtube.com/vi/VIDEO_ID_2/hqdefault.jpg" alt="YouTube thumbnail: Teaser trailer" />
-              <span class="play">▶ Watch</span>
-            </div>
-            <div class="media-body">
-              <h3 class="media-title">Teaser Trailer</h3>
-              <p class="media-sub">YouTube • 0:45</p>
-            </div>
-          </a>
+            <!-- YouTube 2 -->
+            <a class="media-card" href="https://www.youtube.com/watch?v=VIDEO_ID_2" target="_blank" rel="noopener">
+              <div class="media-thumb yt">
+                <img src="https://img.youtube.com/vi/VIDEO_ID_2/hqdefault.jpg" alt="YouTube thumbnail: Teaser trailer" />
+                <span class="play">▶ Watch</span>
+              </div>
+              <div class="media-body">
+                <h3 class="media-title">Teaser Trailer</h3>
+                <p class="media-sub">YouTube • 0:45</p>
+              </div>
+            </a>
 
-          <!-- ===== A4 FLYER CARD 1 =====
-               Put your A4 image at assets/media/flyer-a4-1.jpg (or .webp/.png)
-               The link points to the same file so users can view/download full size. -->
-          <a class="media-card" href="assets/media/flyer-a4-1.jpg" target="_blank">
-            <div class="media-thumb a4">
-              <img src="assets/media/flyer-a4-1.jpg" alt="AAPD 2026 Flyer – A4 (Poster 1)" />
-            </div>
-            <div class="media-body">
-              <h3 class="media-title">Flyer — A4 (Poster 1)</h3>
-              <p class="media-sub">JPG • Click to open full size</p>
-            </div>
-          </a>
+            <!-- A4 Flyer 1 -->
+            <a class="media-card" href="assets/media/flyer-a4-1.jpg" target="_blank">
+              <div class="media-thumb a4">
+                <img src="assets/media/flyer-a4-1.jpg" alt="AAPD 2026 Flyer – A4 (Poster 1)" />
+              </div>
+              <div class="media-body">
+                <h3 class="media-title">Flyer — A4 (Poster 1)</h3>
+                <p class="media-sub">JPG • Click to open full size</p>
+              </div>
+            </a>
 
-          <!-- ===== A4 FLYER CARD 2 ===== -->
-          <a class="media-card" href="assets/media/flyer-a4-2.jpg" target="_blank">
-            <div class="media-thumb a4">
-              <img src="assets/media/flyer-a4-2.jpg" alt="AAPD 2026 Flyer — A4 (Poster 2)" />
-            </div>
-            <div class="media-body">
-              <h3 class="media-title">Flyer — A4 (Poster 2)</h3>
-              <p class="media-sub">JPG • Click to open full size</p>
-            </div>
-          </a>
+            <!-- A4 Flyer 2 -->
+            <a class="media-card" href="assets/media/flyer-a4-2.jpg" target="_blank">
+              <div class="media-thumb a4">
+                <img src="assets/media/flyer-a4-2.jpg" alt="AAPD 2026 Flyer — A4 (Poster 2)" />
+              </div>
+              <div class="media-body">
+                <h3 class="media-title">Flyer — A4 (Poster 2)</h3>
+                <p class="media-sub">JPG • Click to open full size</p>
+              </div>
+            </a>
+          </div>
         </div>
-      </div>
       </div>
     </section>
   </main>
+
   <footer class="site-footer">
     <div class="container footer-inner">
       <small>Copyright © AAPD 2026 Organizing Committee and MADPHS. All rights reserved.</small>
     </div>
   </footer>
+
   <script>
-    // Mobile menu toggle for the top bar
+    // Mobile menu toggle (safe: only if elements exist)
     (function(){
       const btn = document.getElementById('navToggle');
       const menu = document.getElementById('mobileMenu');
       if(btn && menu){
         btn.addEventListener('click', ()=>{
           const isOpen = menu.classList.toggle('open');
-          btn.setAttribute('aria-expanded', isOpen? 'true':'false');
-        });
-      }
-    })();
-  </script>
-  <script>
-    // Mobile menu toggle for the top bar
-    (function(){
-      const btn = document.getElementById('navToggle');
-      const menu = document.getElementById('mobileMenu');
-      if(btn && menu){
-        btn.addEventListener('click', ()=>{
-          const isOpen = menu.classList.toggle('open');
-          btn.setAttribute('aria-expanded', isOpen? 'true':'false');
+          btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         });
       }
     })();
 
-    // Scroll buttons for media row
+    // Media row scroll buttons
     (function(){
       const grid = document.getElementById('mediaGrid');
       const left = document.querySelector('.scroll-btn.left');
@@ -475,9 +370,8 @@
       window.addEventListener('resize', update);
       update();
     })();
-  </script>
-  <script>
-    // Add 'loaded' class once DOM is ready to trigger entry animations
+
+    // Page-load animations
     (function(){
       document.documentElement.classList.add('js');
       window.addEventListener('DOMContentLoaded', function(){
