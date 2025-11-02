@@ -23,8 +23,7 @@
   <!-- Google Fonts (optional; can remove to be extra-minimal) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
     :root{
@@ -254,8 +253,7 @@
       .right-col{height:100%;display:flex;flex-direction:column;justify-content:space-between}
       .lead{color:var(--muted);display:flex;flex-direction:column;justify-content:space-between;height:100%}
       .lead-top,.lead-strong{font-size:clamp(1.05rem, .9vw + .6rem, 1.25rem);line-height:1.08}
-      .lead-strong{font-weight:600;color:var(--navy); margin-top:-8px;} /* tweak -4px to -12px to taste */
-
+      .lead-strong{font-weight:600;color:var(--navy)}
     }
     @media (max-width:1100px){
       .right-col{height:auto}
@@ -274,30 +272,6 @@
       body.loaded .overlay-card.fx{transform:translate(-50%, 50%)}
     }
 
-    /* --- Tighten right-column copy (desktop only) --- */
-    @media (min-width:1101px){
-      /* Stop spacing them to top/bottom of the column */
-      .lead{
-        justify-content:flex-start !important;
-        gap:6px;                 /* space between the two lines */
-        height:auto !important;  /* don’t force it to stretch */
-      }
-    
-      /* If you still need a tiny nudge, tweak this: */
-      .lead-strong{ margin-top:-2px !important; } /* adjust -2px…-6px to taste */
-    }
-    
-    /* Make top line bold, bottom line light */
-    @media (min-width:1101px){
-      .lead-top{ 
-        font-weight:600 !important;   /* bold(ish) */
-      }
-      .lead-strong{
-        font-weight:300 !important;   /* light */
-      }
-    }
-
-    
 </style>
 </head>
 <body>
@@ -390,15 +364,6 @@
         <h2>Media Materials</h2>
         <p>Official videos and downloadable flyers for AAPD 2026.</p>
 
-        <div class="container fx" style="--d:.05s">
-          <a class="media-card fx" style="--d:.10s" ...> ... </a>
-          <a class="media-card fx" style="--d:.16s" ...> ... </a>
-          <a class="media-card fx" style="--d:.22s" ...> ... </a>
-          <a class="media-card fx" style="--d:.28s" ...> ... </a>
-
-
-
-          
         <div class="media-row">
           <button class="scroll-btn left" type="button" aria-label="Scroll left">‹</button>
           <button class="scroll-btn right" type="button" aria-label="Scroll right">›</button>
