@@ -120,6 +120,26 @@
     .ov-label{font-size:.78rem;color:#6b7280}
     .ov-value{font-size:.95rem;color:#0f172a}
 
+    /* === AAPD HOTFIX — remove icon chip completely === */
+    .overlay-card .ov-icon,
+    .overlay-card .ov-item:hover .ov-icon{
+      width:auto !important;
+      height:auto !important;
+      padding:0 !important;
+      background:transparent !important;   /* no fill */
+      border:0 !important;
+      border-radius:0 !important;
+      box-shadow:none !important;
+    }
+    .overlay-card .ov-icon img{
+      display:block;
+      width:24px;                          /* icon size */
+      height:24px;
+      background:transparent !important;   /* for PNGs with alpha */
+      border-radius:0 !important;
+    }
+
+
 
     /* === AAPD FIX 1: Flat icons & label alignment === */
     .overlay-card .overlay-grid{ align-items:stretch; }     /* grid stretches all items */
