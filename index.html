@@ -120,6 +120,41 @@
     .ov-label{font-size:.78rem;color:#6b7280}
     .ov-value{font-size:.95rem;color:#0f172a}
 
+
+    /* === AAPD FIX 1: Flat icons & label alignment === */
+    .overlay-card .overlay-grid{ align-items:stretch; }     /* grid stretches all items */
+    
+    .overlay-card .ov-item{
+      display:flex;
+      align-items:flex-start;                                /* top-align icon with label */
+      height:100%;                                          /* equal card height in row */
+    }
+    
+    .overlay-card .ov-icon{
+      width:auto !important;
+      height:auto !important;
+      padding:0 !important;
+      background:transparent !important;                    /* remove round chip */
+      border:0 !important;
+      border-radius:0 !important;
+      box-shadow:none !important;
+      margin-top:2px;                                       /* subtle nudge to label */
+      line-height:1;
+    }
+    
+    .overlay-card .ov-icon img{
+      width:24px;                                           /* icon size */
+      height:24px;
+      display:block;
+    }
+    
+    /* kill any hover chip color that might reappear */
+    .overlay-card .ov-item:hover .ov-icon{ background:transparent !important; }
+
+    /* === AAPD FIX 2: Equalize ov-item height === */
+  .overlay-card .ov-item{ min-height:84px; }  /* tweak 78–92px to taste */
+  
+
     /* === AAPD: flatten icon style & align with label === */
     .overlay-card .ov-item{
       align-items:flex-start;           /* icon aligns to top (with ov-label) */
@@ -157,7 +192,7 @@
         justify-self:end;            /* push button to the right edge */
       }
       .overlay-cta .btn{
-        border-radius:18px;         /* pill */
+        border-radius:18px !important;          /* pill */
         padding:.56rem 1rem;
       }
     
