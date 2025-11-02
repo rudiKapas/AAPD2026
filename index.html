@@ -120,6 +120,29 @@
     .ov-label{font-size:.78rem;color:#6b7280}
     .ov-value{font-size:.95rem;color:#0f172a}
 
+    /* === AAPD: flatten icon style & align with label === */
+    .overlay-card .ov-item{
+      align-items:flex-start;           /* icon aligns to top (with ov-label) */
+    }
+    
+    .overlay-card .ov-icon{
+      display:block;
+      width:auto; height:auto;
+      background:transparent;           /* remove rounded container */
+      border:0; border-radius:0;
+      margin-top:2px;                   /* tiny nudge to align with ov-label */
+      line-height:1;
+    }
+    
+    /* size of the actual SVG/PNG icon */
+    .overlay-card .ov-icon img{
+      width:22px; height:22px; display:block;
+    }
+    
+    /* neutralize old hover background on the icon container */
+    .overlay-card .ov-item:hover .ov-icon{ background:transparent; }
+
+
     /* === AAPD: CTA aligned with overlay items (desktop only) === */
     .overlay-cta{ display:none; }   /* hidden on mobile */
     
@@ -134,7 +157,7 @@
         justify-self:end;            /* push button to the right edge */
       }
       .overlay-cta .btn{
-        border-radius:999px;         /* pill */
+        border-radius:18px;         /* pill */
         padding:.56rem 1rem;
       }
     
