@@ -140,10 +140,12 @@
       .hero-img img{height:220px}
     }
 
-    /* ——— MOBILE HERO OVERLAY HARD LOCK (keeps overlay centered & on top) ——— */
+
+    /* >>> AAPD MOBILE OVERLAY: SINGLE SOURCE OF TRUTH <<< */
     @media (max-width: 980px){
-      .hero-img{ position:relative; }
+      .hero-img{ position:relative; isolation:isolate; } /* own stacking context */
     
+      /* base image defines the box height */
       .hero-img .hero-base{
         height:220px !important;
         object-fit:cover; object-position:center;
@@ -151,65 +153,27 @@
         z-index:0;
       }
     
-      .hero-img .hero-overlay{
+      /* herotextFront.png sits exactly on top of hero.png */
+      .hero-img img.hero-overlay{
         position:absolute !important;
         inset:0 !important;
         width:100% !important; height:100% !important;
         object-fit:cover !important; object-position:center !important;
         border-radius:var(--radius);
         transform:none !important;
-        opacity:1 !important;
-        animation:none !important;
-        z-index:2 !important;     /* in front of hero.png */
+        opacity:1 !important;          /* visible regardless of animation */
+        animation:none !important;      /* no mobile animation */
+        z-index:2 !important;           /* above base, below button/card */
         pointer-events:none;
       }
     }
 
 
-  /* === AAPD MOBILE FIX — align herotextFront.png exactly over hero.png === */
-    @media (max-width: 980px){
-      /* Base defines the box height */
-      .hero-img .hero-base{
-        height:220px !important;
-        object-fit:cover; object-position:center;
-      }
-      /* Overlay: same size/position, no slide, fade only */
-      .hero-img .hero-overlay{
-        position:absolute; inset:0;
-        width:100%; height:100% !important;
-        object-fit:cover; object-position:center;
-        border-radius:var(--radius);
-        transform:none !important;          /* kill translateY on mobile */
-      }
-      /* Replace slide animation with fade-only (keep your delay; adjust as needed) */
-      .hero-img .hero-overlay.reveal-in{
-        animation: hero-overlay-fade 520ms cubic-bezier(.2,.65,.3,1) 1.2s 1 both !important;
-      }
-    }
-    
-    /* Mobile fade-only keyframes */
-    @keyframes hero-overlay-fade{
-      from{ opacity:0; }
-      to  { opacity:1; }
-    }
+
+
 
     
-    /* === AAPD MOBILE FIX — make herotextFront.png match hero.png === */
-    @media (max-width: 980px){
-      /* Ensure the base defines the container height consistently */
-      .hero-img .hero-base{ height:220px !important; object-fit:cover; object-position:center; }
-    
-      /* Force the overlay to sit exactly on top, same size */
-      .hero-img img.hero-overlay{
-        position:absolute; top:0; right:0; bottom:0; left:0;
-        width:100%;
-        height:100% !important;               /* beat generic img height */
-        object-fit:cover; object-position:center;
-        border-radius:var(--radius);
-        transform: none;                       /* no residual transform blur on small screens */
-        image-rendering:auto;                  /* natural scaling */
-      }
-    }
+
 
 
     /* Shared rails (separate header from hero so header can be shorter) */
@@ -562,15 +526,7 @@
       }
     }
 
-    /* === FINAL MOBILE FIX: lock herotextFront.png over hero.png === */
-      @media (max-width: 980px){
-        /* Keep the hero box height consistent */
-        .hero-img img{ height:220px; }
-        .hero-img .hero-base{
-          height:220px !important;
-          object-fit:cover; object-position:center;
-          display:block;
-        }
+
       
         /* Overlay: exact same box, no translate during delay */
         .hero-img > img.hero-overlay{
@@ -592,28 +548,6 @@
           to  { opacity:1; }
         }
       
-      /* === MOBILE FINAL OVERRIDE — show herotextFront.png exactly over hero.png === */
-      @media (max-width: 980px){
-        .hero-img .hero-base{
-          height:220px !important;
-          object-fit:cover; object-position:center;
-          display:block;
-        }
-        .hero-img .hero-overlay{
-          position:absolute !important;
-          inset:0 !important;
-          width:100% !important;
-          height:100% !important;
-          object-fit:cover !important;
-          object-position:center !important;
-          border-radius:var(--radius);
-          z-index:1 !important;         /* above base */
-          transform:none !important;    /* kill any slide */
-          opacity:1 !important;         /* make sure it’s visible */
-          animation:none !important;    /* no mobile animation to avoid drift */
-          pointer-events:none;
-        }
-      }
 
 
 
