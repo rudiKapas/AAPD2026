@@ -537,34 +537,57 @@
     }
 
     /* === FINAL MOBILE FIX: lock herotextFront.png over hero.png === */
-@media (max-width: 980px){
-  /* Keep the hero box height consistent */
-  .hero-img img{ height:220px; }
-  .hero-img .hero-base{
-    height:220px !important;
-    object-fit:cover; object-position:center;
-    display:block;
-  }
-
-  /* Overlay: exact same box, no translate during delay */
-  .hero-img > img.hero-overlay{
-      position:absolute !important;
-      top:0 !important; left:0 !important; right:0 !important; bottom:0 !important;
-      width:100% !important; height:100% !important;
-      object-fit:cover !important; object-position:center !important;
-      border-radius:var(--radius);
-      transform:none !important;      /* kill any slide */
-      opacity:0 !important;           /* stay hidden during delay */
-      animation: hero-overlay-fade 520ms cubic-bezier(.2,.65,.3,1) 1.2s 1 both !important; /* fade only, with your delay */
-      pointer-events:none;
-    }
-  }
-  
-  /* Fade-only keyframes (mobile) */
-  @keyframes hero-overlay-fade{
-    from{ opacity:0; }
-    to  { opacity:1; }
-  }
+      @media (max-width: 980px){
+        /* Keep the hero box height consistent */
+        .hero-img img{ height:220px; }
+        .hero-img .hero-base{
+          height:220px !important;
+          object-fit:cover; object-position:center;
+          display:block;
+        }
+      
+        /* Overlay: exact same box, no translate during delay */
+        .hero-img > img.hero-overlay{
+            position:absolute !important;
+            top:0 !important; left:0 !important; right:0 !important; bottom:0 !important;
+            width:100% !important; height:100% !important;
+            object-fit:cover !important; object-position:center !important;
+            border-radius:var(--radius);
+            transform:none !important;      /* kill any slide */
+            opacity:0 !important;           /* stay hidden during delay */
+            animation: hero-overlay-fade 520ms cubic-bezier(.2,.65,.3,1) 1.2s 1 both !important; /* fade only, with your delay */
+            pointer-events:none;
+          }
+        }
+        
+        /* Fade-only keyframes (mobile) */
+        @keyframes hero-overlay-fade{
+          from{ opacity:0; }
+          to  { opacity:1; }
+        }
+      
+      /* === MOBILE FINAL OVERRIDE — show herotextFront.png exactly over hero.png === */
+      @media (max-width: 980px){
+        .hero-img .hero-base{
+          height:220px !important;
+          object-fit:cover; object-position:center;
+          display:block;
+        }
+        .hero-img .hero-overlay{
+          position:absolute !important;
+          inset:0 !important;
+          width:100% !important;
+          height:100% !important;
+          object-fit:cover !important;
+          object-position:center !important;
+          border-radius:var(--radius);
+          z-index:1 !important;         /* above base */
+          transform:none !important;    /* kill any slide */
+          opacity:1 !important;         /* make sure it’s visible */
+          animation:none !important;    /* no mobile animation to avoid drift */
+          pointer-events:none;
+        }
+      }
 
 
 </style>
