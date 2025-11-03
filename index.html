@@ -62,7 +62,44 @@
     /* Large rounded hero image */
     .hero-img{margin-top:10px; position:relative; margin-bottom:70px}
     .hero-img img{width:100%;height:360px;object-fit:cover;object-position:center;border-radius:var(--radius);display:block;box-shadow:0 14px 28px rgba(15,23,42,.14)}
+      /* === AAPD: stacked overlay text on hero image === */
+      .hero-img .hero-base{ z-index:0; }  /* base stays underneath */
+      
+      /* overlay sits perfectly on top of the base image */
+      .hero-img .hero-overlay{
+        position:absolute; inset:0;
+        width:100%; height:100%;
+        object-fit:cover; object-position:center;
+        border-radius:var(--radius);
+        z-index:1;
+        pointer-events:none;            /* don't block clicks */
+        opacity:1;
+      }
+      
+      /* glitch animation (runs once) */
+      @keyframes hero-glitch {
+        0%   { transform:translate(0,0); filter:none; }
+        8%   { transform:translate(-2px, 1px) skewX(1deg); filter:contrast(1.05) saturate(1.1); }
+        16%  { transform:translate(2px,-1px)  skewX(-1deg); }
+        24%  { transform:translate(-1px,2px); }
+        32%  { transform:translate(1px,-2px); }
+        40%  { transform:translate(0,0); }
+        48%  { transform:translate(-3px,0); }
+        56%  { transform:translate(3px,0);  }
+        64%  { transform:translate(-1px,1px); }
+        72%  { transform:translate(1px,-1px); }
+        80%  { transform:translate(0,0); }
+        100% { transform:none; filter:none; }
+      }
+      .hero-img .hero-overlay.glitch-active{
+        animation: hero-glitch 900ms steps(12,end) 1 both;
+      }
+      
+      @media (prefers-reduced-motion: reduce){
+        .hero-img .hero-overlay.glitch-active{ animation:none; }
+      }
 
+    
     /* ===== Responsive ===== */
     @media (max-width: 980px){
       .hero-grid{grid-template-columns:1fr;gap:12px}
@@ -473,7 +510,11 @@
           <!-- Replace the file below with your own hero image.
                Put it at:  assets/img/hero.jpg
                Suggested type:  .webp (preferred) or .jpg/.jpeg -->
-          <img src="assets/img/hero.png" alt="Mount Kinabalu ridgeline at sunrise" />
+          <!-- Base hero image -->
+          <img class="hero-base" src="assets/img/hero.png" alt="Mount Kinabalu ridgeline at sunrise" />
+          <!-- Overlay text image (same size/position as base) -->
+          <img class="hero-overlay" src="assets/img/herotextFront.png" alt="" aria-hidden="true" />
+
           <a class="btn btn-teal img-register fx" style="--d:.34s" href="#register">Register Now</a>
           
           <!-- Front overlay info card -->
@@ -692,6 +733,33 @@
   })();
 </script>
 
+    <script>
+      // Add 'loaded' class once DOM is ready to trigger entry animations
+      (function(){
+        document.documentElement.classList.add('js');
+        window.addEventListener('DOMContentLoaded', function(){
+          document.body.classList.add('loaded');
+        });
+      })();
+    </script>
+
+    <script>
+      // Start overlay glitch as soon as the base hero image has fully loaded
+      (function(){
+        const base = document.querySelector('.hero-img .hero-base');
+        const overlay = document.querySelector('.hero-img .hero-overlay');
+        if(!base || !overlay) return;
+    
+        function startGlitch(){ overlay.classList.add('glitch-active'); }
+    
+        if (base.complete && base.naturalWidth > 0){
+          // already loaded from cache
+          startGlitch();
+        } else {
+          base.addEventListener('load', startGlitch, { once:true });
+        }
+      })();
+    </script>
 
 
 
