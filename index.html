@@ -276,8 +276,10 @@
 
     /* ===== Media Materials grid (2 YouTube + 2 A4) ===== */
     .media-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:16px}
-    .media-card{background:#fff;border:2px solid rgba(15,23,42,.12);border-radius:22px;box-shadow:0 18px 32px rgba(15,23,42,.14);overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:transform .16s ease, box-shadow .16s ease}
-    .media-card:hover{transform:translateY(-3px);box-shadow:0 22px 38px rgba(15,23,42,.18)}
+    .media-card{background:#fff;border:2px solid rgba(15,23,42,.12);border-radius:22px;box-shadow:0 18px 32px rgba(15,23,42,.14);overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:transform .16s ease, box-shadow .16s ease, background-color .16s ease;will-change:transform,box-shadow}
+    .media-card:hover{background:#ffffff;transform:translateY(-2px);box-shadow:0 10px 22px rgba(15,23,42,.12)}
+    .media-card:active{transform:translateY(0);box-shadow:0 6px 14px rgba(15,23,42,.10)}
+    .media-card:focus-within{outline:0;box-shadow:0 0 0 3px rgba(15,118,110,.25), 0 8px 18px rgba(15,23,42,.10);background:#fff}
     .media-thumb{position:relative;background:transparent;margin:12px;border:2px solid rgba(15,23,42,.10);border-radius:16px;overflow:hidden}
     /* Aspect ratios: YouTube 16:9, A4 portrait ~210:297 */
     .media-thumb.yt{aspect-ratio:16/9}
