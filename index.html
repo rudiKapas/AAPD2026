@@ -140,6 +140,23 @@
       .hero-img img{height:220px}
     }
 
+    /* === AAPD MOBILE FIX — make herotextFront.png match hero.png === */
+    @media (max-width: 980px){
+      /* Ensure the base defines the container height consistently */
+      .hero-img .hero-base{ height:220px !important; object-fit:cover; object-position:center; }
+    
+      /* Force the overlay to sit exactly on top, same size */
+      .hero-img img.hero-overlay{
+        position:absolute; top:0; right:0; bottom:0; left:0;
+        width:100%;
+        height:100% !important;               /* beat generic img height */
+        object-fit:cover; object-position:center;
+        border-radius:var(--radius);
+        transform: none;                       /* no residual transform blur on small screens */
+        image-rendering:auto;                  /* natural scaling */
+      }
+    }
+
 
     /* Shared rails (separate header from hero so header can be shorter) */
     .hero > .container{padding-left:20px !important; padding-right:20px !important; max-width:var(--container); margin-inline:auto}
