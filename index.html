@@ -74,27 +74,24 @@
         z-index:1;
         pointer-events:none;            /* don't block clicks */
         opacity:1;
+        opacity:0;                    /* start hidden */
+        transform:translateY(14px);   /* start slightly below */
       }
       
-      /* glitch animation (runs once) */
-      @keyframes hero-glitch {
-        0%   { transform:translate(0,0); filter:none; }
-        8%   { transform:translate(-2px, 1px) skewX(1deg); filter:contrast(1.05) saturate(1.1); }
-        16%  { transform:translate(2px,-1px)  skewX(-1deg); }
-        24%  { transform:translate(-1px,2px); }
-        32%  { transform:translate(1px,-2px); }
-        40%  { transform:translate(0,0); }
-        48%  { transform:translate(-3px,0); }
-        56%  { transform:translate(3px,0);  }
-        64%  { transform:translate(-1px,1px); }
-        72%  { transform:translate(1px,-1px); }
-        80%  { transform:translate(0,0); }
-        100% { transform:none; filter:none; }
-      }
-      .hero-img .hero-overlay.glitch-active{
-        animation: hero-glitch 900ms steps(12,end) 1 both;
-      }
-      
+      /* Smooth slide-up + fade-in (runs once) */
+        @keyframes hero-overlay-in{
+          from{ opacity:0; transform:translateY(14px); }
+          to  { opacity:1; transform:none; }
+        }
+        .hero-img .hero-overlay.reveal-in{
+          animation: hero-overlay-in 520ms cubic-bezier(.2,.65,.3,1) 1 both;
+        }
+        
+        @media (prefers-reduced-motion: reduce){
+          .hero-img .hero-overlay{ opacity:1; transform:none; }
+          .hero-img .hero-overlay.reveal-in{ animation:none; }
+        }
+
       @media (prefers-reduced-motion: reduce){
         .hero-img .hero-overlay.glitch-active{ animation:none; }
       }
@@ -744,22 +741,22 @@
     </script>
 
     <script>
-      // Start overlay glitch as soon as the base hero image has fully loaded
+      // Start overlay slide/fade once the base hero image has fully loaded
       (function(){
         const base = document.querySelector('.hero-img .hero-base');
         const overlay = document.querySelector('.hero-img .hero-overlay');
         if(!base || !overlay) return;
     
-        function startGlitch(){ overlay.classList.add('glitch-active'); }
+        function start(){ overlay.classList.add('reveal-in'); }
     
         if (base.complete && base.naturalWidth > 0){
-          // already loaded from cache
-          startGlitch();
+          start();              // image came from cache
         } else {
-          base.addEventListener('load', startGlitch, { once:true });
+          base.addEventListener('load', start, { once:true });
         }
       })();
     </script>
+
 
 
 
