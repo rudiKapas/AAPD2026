@@ -140,6 +140,32 @@
       .hero-img img{height:220px}
     }
 
+    /* ——— MOBILE HERO OVERLAY HARD LOCK (keeps overlay centered & on top) ——— */
+    @media (max-width: 980px){
+      .hero-img{ position:relative; }
+    
+      .hero-img .hero-base{
+        height:220px !important;
+        object-fit:cover; object-position:center;
+        display:block;
+        z-index:0;
+      }
+    
+      .hero-img .hero-overlay{
+        position:absolute !important;
+        inset:0 !important;
+        width:100% !important; height:100% !important;
+        object-fit:cover !important; object-position:center !important;
+        border-radius:var(--radius);
+        transform:none !important;
+        opacity:1 !important;
+        animation:none !important;
+        z-index:2 !important;     /* in front of hero.png */
+        pointer-events:none;
+      }
+    }
+
+
   /* === AAPD MOBILE FIX — align herotextFront.png exactly over hero.png === */
     @media (max-width: 980px){
       /* Base defines the box height */
@@ -589,25 +615,7 @@
         }
       }
 
-  /* === MOBILE-ONLY FIX — draw overlay as a background so it always aligns === */
-  @media (max-width: 980px){
-    .hero-img{ position:relative; }
-  
-    /* Use a pseudo-element that exactly matches the hero box */
-    .hero-img::after{
-      content:"";
-      position:absolute; inset:0;
-      background-image:url("assets/img/herotextFront.png");
-      background-size:cover;            /* same scaling as hero.png */
-      background-position:center;
-      border-radius:var(--radius);
-      z-index:2;                        /* above base (0/1), below button(3)/card(5) */
-      pointer-events:none;
-    }
-  
-    /* Hide the <img class="hero-overlay"> on mobile to avoid conflicts */
-    .hero-img .hero-overlay{ display:none ! important; }
-  }
+
 
     
 
