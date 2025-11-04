@@ -515,11 +515,37 @@
       100%{ box-shadow:0 0 0 16px rgba(255,59,48,0) }
     }
     
-    /* Rod (minimized) style when row can’t fit all cards */
+
+    /* Rod (minimized) style when row can’t fit all cards — VERTICAL */
     .ccard.rod{
-      min-width:140px; height:52px; padding:8px 14px;
-      border-radius:999px; flex-direction:row; align-items:center; gap:10px;
+      min-width:90px;            /* narrow, fixed width */
+      width:90px;
+      height:150px;              /* tall pill */
+      padding:10px 10px 12px;
+      border-radius:22px;
+      display:flex;
+      flex-direction:column;     /* stack inside vertically */
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:6px;
     }
+    .ccard.rod .title{
+      font-size:.76rem;
+      line-height:1.1;
+      white-space:normal;
+      display:-webkit-box;
+      -webkit-line-clamp:2;      /* clamp to two lines */
+      -webkit-box-orient:vertical;
+      overflow:hidden;
+    }
+    .ccard.rod .date{ display:none; }   /* hide date on the mini pill */
+    .ccard.rod .time{
+      font-size:.88rem;
+      font-weight:700;
+      margin-top:auto;           /* pin to the bottom */
+    }
+    .ccard.rod .bar{ display:none; }    /* no progress runner on the mini pill */
+
     .ccard.rod .title{font-size:.86rem; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
     .ccard.rod .date{display:none}
     .ccard.rod .time{font-size:.9rem; font-weight:700; margin:0 0 0 auto}
@@ -988,7 +1014,7 @@
         const n = cards.length;
     
         const full  = 260;    // px (matches .ccard min-width)
-        const rod   = 140;    // px
+        const rod   = 90;    // px
         const W = row.clientWidth;
     
         // Max k full cards that can fit
