@@ -37,6 +37,7 @@
       --container:1152px;   /* content max width */
       --btn-nudge:0;    /* aligns pill to heading */
       --media-thumb-h:200px; /* desktop target height for media thumbnails to keep section height compact */
+      --ccard-h: 200px;   /* full card height; rods will match this */
     }
 
     *{box-sizing:border-box}
@@ -485,6 +486,7 @@
       background: radial-gradient(120% 140% at 80% -20%, #192033 0%, #0b0f1a 55%, #0b0f1a 100%);
       box-shadow:0 18px 32px rgba(15,23,42,.22);
       display:flex; flex-direction:column; justify-content:space-between;
+      height: var(--ccard-h);
     }
     .ccard .title{font-family:Poppins,Inter,sans-serif; font-size:1rem; font-weight:500; opacity:.9}
     .ccard .date {font-size:.85rem; color:#cbd5e1; margin-top:2px}
@@ -518,17 +520,23 @@
 
     /* Rod (minimized) style when row can’t fit all cards — VERTICAL */
     .ccard.rod{
-      min-width:90px;            /* narrow, fixed width */
-      width:90px;
-      height:150px;              /* tall pill */
+      min-width:90px; width:90px;
+      height:var(--ccard-h);        /* ← same height as full */
       padding:10px 10px 12px;
       border-radius:22px;
-      display:flex;
-      flex-direction:column;     /* stack inside vertically */
-      justify-content:space-between;
-      align-items:flex-start;
-      gap:6px;
+      display:flex; flex-direction:column; justify-content:space-between;
+      align-items:flex-start; gap:6px;
     }
+    .ccard.rod .title{
+      font-size:.76rem; line-height:1.1;
+      white-space:normal;
+      display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
+      overflow:hidden;
+    }
+    .ccard.rod .date{ display:none; }
+    .ccard.rod .time{ font-size:.88rem; font-weight:700; margin-top:auto; }
+    .ccard.rod .bar{ display:none; }
+
     .ccard.rod .title{
       font-size:.76rem;
       line-height:1.1;
@@ -998,9 +1006,12 @@
         el.textContent = 'Closed';
         card.setAttribute('aria-label', title + ' has passed');
       } else {
-        el.textContent = fmtLong(d);             // e.g., "2 months, 3 weeks, and 2 days"
-        card.setAttribute('data-compact', fmtShort(d));
-        card.setAttribute('aria-label', title + ' in ' + fmtLong(d));
+          const long  = fmtLong(d);     // e.g., "2 months, 3 weeks, and 2 days"
+          const short = fmtShort(d);    // e.g., "2m 3w 2d"
+          el.textContent = long;
+          card.setAttribute('data-long', long);     // ← store long label
+          card.setAttribute('data-compact', short); // ← store short label
+          card.setAttribute('aria-label', title + ' in ' + long);
       }
     });
   }
@@ -1048,7 +1059,70 @@
         setTimeout(tick, 24*60*60*1000); // every 24h
       }, nextMidnight - new Date());
     
-      window.addEventListener('resize', layout, {passive:true});
+      // ---- LAYOUT: contiguous “full” window + vertical rods of same height
+      const cards  = Array.from(row.children);
+      
+      // how many full cards fit, and where that full window starts
+      let k = 0;               // number of full cards that can fit
+      let start = 0;           // index where the contiguous full-window begins
+      
+      const gapPx   = parseFloat(getComputedStyle(row).columnGap) || 14;
+      const ROD_W   = 90;      // must match .ccard.rod width
+      const FULL_MIN = 260;    // must match .ccard min-width
+      
+      function totalWidthFor(kTest, Wrow){
+        const n = cards.length, G = gapPx * (n - 1);
+        return kTest * FULL_MIN + (n - kTest) * ROD_W + G;
+      }
+      
+      function computeK(){
+        const n   = cards.length;
+        const W   = row.clientWidth;
+        const G   = gapPx * (n - 1);
+        // closed-form upper bound then verify downward
+        const upper = Math.floor((W - G - n * ROD_W) / (FULL_MIN - ROD_W));
+        let kTest = Math.min(n, Math.max(0, upper));
+        while (kTest > 0 && totalWidthFor(kTest, W) > W) kTest--;
+        return kTest;
+      }
+      
+      function applyLayout(){
+        const n = cards.length;
+        start = Math.max(0, Math.min(start, n - k));  // clamp window to valid range
+      
+        for (let i = 0; i < n; i++){
+          const isFull = (i >= start && i < start + k);
+          const timeEl = cards[i].querySelector('.time .remain');
+          cards[i].classList.toggle('rod', !isFull);
+      
+          if (!isFull){
+            const s = cards[i].getAttribute('data-compact');
+            if (s) timeEl.textContent = s;
+          } else {
+            const s = cards[i].getAttribute('data-long');
+            if (s) timeEl.textContent = s;
+          }
+        }
+      }
+      
+      // Clicking a rod expands it; the full window slides so that card becomes full.
+      // The opposite end (left edge) of the full block turns into a rod.
+      cards.forEach((card, i) => {
+        card.addEventListener('click', () => {
+          if (k === 0 || k === cards.length) return;   // nothing to minimize
+          if (!card.classList.contains('rod')) return; // already full
+      
+          // Slide the contiguous full window so index i is included as the rightmost full
+          start = Math.min(Math.max(0, i - (k - 1)), cards.length - k);
+          applyLayout();
+        });
+      });
+      
+      function layout(){
+        k = computeK();   // how many full cards fit now
+        applyLayout();    // apply with current start
+      }
+
     })();
     </script>
     
