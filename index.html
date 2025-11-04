@@ -468,6 +468,73 @@
       }
     }
 
+    /* ==== Section 3 uses same bg as Section 1 ==== */
+    .section.alt{ background: var(--hero-bg); }
+    
+    /* ==== Section 2: Countdown row ==== */
+    .section.deadlines{ background:#fff; padding:24px 0; }
+    .countdown-row{
+      display:grid; grid-auto-flow:column; grid-auto-columns:1fr;
+      gap:14px; align-items:stretch; overflow:hidden;  /* single row, no scroll */
+    }
+    
+    /* Full countdown card */
+    .ccard{
+      position:relative; min-width:260px; border-radius:22px;
+      padding:16px 18px; color:#fff;
+      background: radial-gradient(120% 140% at 80% -20%, #192033 0%, #0b0f1a 55%, #0b0f1a 100%);
+      box-shadow:0 18px 32px rgba(15,23,42,.22);
+      display:flex; flex-direction:column; justify-content:space-between;
+    }
+    .ccard .title{font-family:Poppins,Inter,sans-serif; font-size:1rem; font-weight:500; opacity:.9}
+    .ccard .date {font-size:.85rem; color:#cbd5e1; margin-top:2px}
+    .ccard .time {margin-top:10px; font-size:1.35rem; font-weight:700; letter-spacing:.2px}
+    
+    /* Active bar (animated) */
+    .ccard .bar{height:12px; border-radius:999px; margin-top:12px;
+      background:rgba(255,255,255,.10); overflow:hidden; position:relative}
+    .ccard .bar span{
+      --acc:#33ff99;
+      position:absolute; inset:0 auto 0 0; width:58%;
+      background:linear-gradient(90deg, transparent 0%, var(--acc) 20%, var(--acc) 80%, transparent 100%);
+      filter:drop-shadow(0 0 10px var(--acc));
+      animation:runner 1.8s linear infinite;
+    }
+    @keyframes runner{
+      from{ transform:translateX(-60%); opacity:.9 }
+      to  { transform:translateX(120%); opacity:.9 }
+    }
+    /* subtle pulse to show “live” */
+    .ccard::after{
+      content:""; position:absolute; right:14px; top:14px; width:8px; height:8px; border-radius:50%;
+      background:#ff3b30; box-shadow:0 0 0 0 rgba(255,59,48,.55);
+      animation:ping 1.8s ease-out infinite;
+    }
+    @keyframes ping{
+      0%{ box-shadow:0 0 0 0 rgba(255,59,48,.55) }
+      100%{ box-shadow:0 0 0 16px rgba(255,59,48,0) }
+    }
+    
+    /* Rod (minimized) style when row can’t fit all cards */
+    .ccard.rod{
+      min-width:140px; height:52px; padding:8px 14px;
+      border-radius:999px; flex-direction:row; align-items:center; gap:10px;
+    }
+    .ccard.rod .title{font-size:.86rem; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+    .ccard.rod .date{display:none}
+    .ccard.rod .time{font-size:.9rem; font-weight:700; margin:0 0 0 auto}
+    .ccard.rod .bar{display:none}
+    
+    /* Accent colors (optional per card) */
+    .ccard[data-accent="teal"] .bar span{ --acc:#21ffa7; }
+    .ccard[data-accent="yellow"] .bar span{ --acc:#ffe44d; }
+    .ccard[data-accent="pink"] .bar span{ --acc:#ff5fd1; }
+    .ccard[data-accent="lime"] .bar span{ --acc:#bbff5e; }
+    .ccard[data-accent="orange"] .bar span{ --acc:#ff9a3b; }
+    .ccard[data-accent="blue"] .bar span{ --acc:#5aaee1; }
+    
+
+    
 
 </style>
 </head>
@@ -577,8 +644,75 @@
       </div><!-- /container -->
     </section>
 
-    <!-- ================= SECOND SECTION (white background) ================= -->
-    <section class="section" id="about">
+    <!-- ============== SECTION 2 — DEADLINES (COUNTDOWN ROW) ============== -->
+    <section class="section deadlines" id="deadlines">
+      <div class="container">
+        <h2>Key Dates</h2>
+        <p>Live countdowns to important milestones.</p>
+    
+        <div class="countdown-row" id="deadlineRow">
+          <article class="ccard" data-accent="teal"   data-title="Registration Opens"              data-date="2026-06-01">
+            <div>
+              <div class="title">Registration Opens</div>
+              <div class="date">1 Jun 2026</div>
+              <div class="time"><span class="remain">—</span></div>
+            </div>
+            <div class="bar"><span></span></div>
+          </article>
+    
+          <article class="ccard" data-accent="yellow" data-title="Standard Registration Deadline"  data-date="2026-07-30">
+            <div>
+              <div class="title">Standard Registration Deadline</div>
+              <div class="date">30 Jul 2026</div>
+              <div class="time"><span class="remain">—</span></div>
+            </div>
+            <div class="bar"><span></span></div>
+          </article>
+    
+          <article class="ccard" data-accent="pink"   data-title="Late Registration (Online)"      data-date="2026-08-30">
+            <div>
+              <div class="title">Late Registration (Online)</div>
+              <div class="date">30 Aug 2026</div>
+              <div class="time"><span class="remain">—</span></div>
+            </div>
+            <div class="bar"><span></span></div>
+          </article>
+    
+          <article class="ccard" data-accent="lime"   data-title="On-Site Registration"             data-date="2026-09-30">
+            <div>
+              <div class="title">On-Site Registration</div>
+              <div class="date">30 Sep 2026</div>
+              <div class="time"><span class="remain">—</span></div>
+            </div>
+            <div class="bar"><span></span></div>
+          </article>
+    
+          <article class="ccard" data-accent="orange" data-title="Abstract Submission Deadline"     data-date="2026-07-30">
+            <div>
+              <div class="title">Abstract Submission Deadline</div>
+              <div class="date">30 Jul 2026</div>
+              <div class="time"><span class="remain">—</span></div>
+            </div>
+            <div class="bar"><span></span></div>
+          </article>
+    
+          <article class="ccard" data-accent="blue"   data-title="Notification of Acceptance"       data-date="2026-08-15">
+            <div>
+              <div class="title">Notification of Acceptance</div>
+              <div class="date">15 Aug 2026</div>
+              <div class="time"><span class="remain">—</span></div>
+            </div>
+            <div class="bar"><span></span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+    
+    
+
+    
+    <!-- ================= third SECTION media (white background) ================= -->
+    <section class="section alt" id="about">
       <div class="container">
         <h2>Media Materials</h2>
         <p>Official videos and downloadable flyers for AAPD 2026.</p>
@@ -771,7 +905,127 @@
       })();
     </script>
 
+    <script>
+  /* ========= Countdown (months, weeks, days) + rod layout ========= */
+  (function(){
+    const row = document.getElementById('deadlineRow');
+    if(!row) return;
+  
+    const MS_DAY = 86400000;
+  
+    // Add months while preserving day-of-month
+    function addMonths(base, m){
+      const d = new Date(base.getFullYear(), base.getMonth(), base.getDate());
+      const day = d.getDate();
+      const x = new Date(d); x.setDate(1); x.setMonth(x.getMonth()+m);
+      const last = new Date(x.getFullYear(), x.getMonth()+1, 0).getDate();
+      x.setDate(Math.min(day, last));
+      return x;
+    }
+  
+    // Return {months,weeks,days} from now -> target (dates only; no hours/seconds)
+    function diffMWD(now, target){
+      const a = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      const b = new Date(target.getFullYear(), target.getMonth(), target.getDate());
+      if (b <= a) return {months:0,weeks:0,days:0,past:(b<a),today:(+a===+b)};
+  
+      let months = 0, cursor = a;
+      while (true){
+        const nxt = addMonths(cursor, 1);
+        if (nxt <= b){ months++; cursor = nxt; } else { break; }
+      }
+      const daysAll = Math.floor((b - cursor)/MS_DAY);
+      const weeks = Math.floor(daysAll/7);
+      const days  = daysAll % 7;
+      return {months,weeks,days,past:false,today:false};
+    }
+  
+    function plural(n, s){ return n + ' ' + s + (n===1?'':'s'); }
+    function fmtLong(o){
+      const parts = [];
+      if (o.months) parts.push(plural(o.months,'month'));
+      if (o.weeks)  parts.push(plural(o.weeks,'week'));
+      // Always show days, even if 0 (to keep a steady readout)
+      parts.push(plural(o.days,'day'));
+      return parts.join(', ').replace(/, ([^,]*)$/, ', and $1');
+    }
+    function fmtShort(o){
+      const p=[]; if(o.months) p.push(o.months+'m'); if(o.weeks) p.push(o.weeks+'w'); p.push(o.days+'d'); 
+      return p.join(' ');
+    }
 
+  // Fill all cards
+  function render(){
+    const now = new Date();
+    row.querySelectorAll('.ccard').forEach(card=>{
+      const el = card.querySelector('.remain');
+      const dateStr = card.getAttribute('data-date');
+      const title   = card.getAttribute('data-title') || '';
+      const target  = new Date(dateStr+'T00:00:00');
+
+      const d = diffMWD(now, target);
+
+      if (d.today){
+        el.textContent = 'Today';
+        card.setAttribute('aria-label', title + ' is today');
+      } else if (d.past){
+        el.textContent = 'Closed';
+        card.setAttribute('aria-label', title + ' has passed');
+      } else {
+        el.textContent = fmtLong(d);             // e.g., "2 months, 3 weeks, and 2 days"
+        card.setAttribute('data-compact', fmtShort(d));
+        card.setAttribute('aria-label', title + ' in ' + fmtLong(d));
+      }
+    });
+  }
+
+      // Rod minimization (keeps single row, no scroll)
+      function layout(){
+        const cards = Array.from(row.children);
+        if (!cards.length) return;
+        const styles = getComputedStyle(row);
+        const gap = parseFloat(styles.columnGap || '14');
+        const n = cards.length;
+    
+        const full  = 260;    // px (matches .ccard min-width)
+        const rod   = 140;    // px
+        const W = row.clientWidth;
+    
+        // Max k full cards that can fit
+        let k = n;
+        while (k >= 0){
+          const total = k*full + (n-k)*rod + gap*(n-1);
+          if (total <= W) break;
+          k--;
+        }
+        cards.forEach((c,i)=>{
+          const rodOn = i >= k;
+          c.classList.toggle('rod', rodOn);
+          if (rodOn){
+            // Put short text on the right when minimized
+            const short = c.getAttribute('data-compact') || '';
+            const time = c.querySelector('.time .remain');
+            if (short) time.textContent = short;
+          } else {
+            // Restore long wording for full cards
+            // (render() will set the long phrasing again next tick)
+          }
+        });
+      }
+    
+      render();
+      layout();
+      // Update once per day (just after midnight)
+      const nextMidnight = new Date(); nextMidnight.setHours(24,0,2,0);
+      setTimeout(function tick(){
+        render(); layout();
+        setTimeout(tick, 24*60*60*1000); // every 24h
+      }, nextMidnight - new Date());
+    
+      window.addEventListener('resize', layout, {passive:true});
+    })();
+    </script>
+    
 
 
 </body>
