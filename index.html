@@ -1018,36 +1018,118 @@
   }
 
       // Rod minimization (keeps single row, no scroll)
-      function layout(){
-        const cards = Array.from(row.children);
-        if (!cards.length) return;
-        const styles = getComputedStyle(row);
-        const gap = parseFloat(styles.columnGap || '14');
-        const n = cards.length;
-    
-        const full  = 260;    // px (matches .ccard min-width)
-        const rod   = 90;    // px
-        const W = row.clientWidth;
-    
-        // Max k full cards that can fit
-        let k = n;
-        while (k >= 0){
-          const total = k*full + (n-k)*rod + gap*(n-1);
-          if (total <= W) break;
-          k--;
-        }
-        cards.forEach((c,i)=>{
-          const rodOn = i >= k;
-          c.classList.toggle('rod', rodOn);
-          if (rodOn){
-            // Put short text on the right when minimized
-            const short = c.getAttribute('data-compact') || '';
-            const time = c.querySelector('.time .remain');
-            if (short) time.textContent = short;
-          } else {
-            // Restore long wording for full cards
-            // (render() will set the long phrasing again next tick)
-          }
+            // ---- variable-width countdown with clickable rods/full window ----
+            // (Replaces the old "Rod minimization" section)
+      
+            // First, render the month–week–day strings and store long/short labels
+            function render(){
+              const now = new Date();
+              row.querySelectorAll('.ccard').forEach(card=>{
+                const el = card.querySelector('.remain');
+                const dateStr = card.getAttribute('data-date');
+                const title   = card.getAttribute('data-title') || '';
+                const target  = new Date(dateStr+'T00:00:00');
+                const d = diffMWD(now, target);
+      
+                if (d.today){
+                  el.textContent = 'Today';
+                  card.dataset.long = 'Today';
+                  card.dataset.compact = 'Today';
+                  card.setAttribute('aria-label', title + ' is today');
+                } else if (d.past){
+                  el.textContent = 'Closed';
+                  card.dataset.long = 'Closed';
+                  card.dataset.compact = 'Closed';
+                  card.setAttribute('aria-label', title + ' has passed');
+                } else {
+                  const long  = fmtLong(d);   // e.g., "2 months, 3 weeks, and 2 days"
+                  const short = fmtShort(d);  // e.g., "2m 3w 2d"
+                  el.textContent = long;
+                  card.dataset.long = long;
+                  card.dataset.compact = short;
+                  card.setAttribute('aria-label', title + ' in ' + long);
+                }
+              });
+            }
+      
+            // Cards & constants
+            const cards = Array.from(row.querySelectorAll('.ccard'));
+            cards.forEach(c => { c.tabIndex = 0; c.setAttribute('role','button'); });
+      
+            const GAP   = parseFloat(getComputedStyle(row).columnGap) || 14;
+            const FULL  = 260;   // must match .ccard min-width
+            const ROD   = 90;    // must match .ccard.rod width
+      
+            // how many FULL cards fit, and where that contiguous window starts
+            let k = 0;
+            let start = 0;
+      
+            function totalWidth(kTest){
+              const n = cards.length;
+              return kTest*FULL + (n-kTest)*ROD + GAP*(n-1);
+            }
+            function computeK(){
+              const n = cards.length, W = row.clientWidth;
+              // upper-bound guess, then walk down if needed
+              let guess = Math.min(n, Math.max(0, Math.floor((W - GAP*(n-1) - n*ROD) / (FULL - ROD))));
+              while (guess > 0 && totalWidth(guess) > W) guess--;
+              return guess;
+            }
+            function applyLayout(){
+              const n = cards.length;
+              start = Math.max(0, Math.min(start, n - k)); // clamp window
+              for (let i=0;i<n;i++){
+                const full = (i >= start && i < start + k);
+                const t = cards[i].querySelector('.time .remain');
+                cards[i].classList.toggle('rod', !full);
+                t.textContent = full ? (cards[i].dataset.long || t.textContent)
+                                     : (cards[i].dataset.compact || t.textContent);
+              }
+            }
+            function doLayout(){
+              k = computeK();
+              applyLayout();
+            }
+      
+            // Click-to-toggle (event delegation on the row)
+            row.addEventListener('click', (ev) => {
+              const card = ev.target.closest('.ccard');
+              if (!card) return;
+      
+              const i = cards.indexOf(card);
+              if (i === -1 || k === 0 || k === cards.length) return;
+      
+              if (card.classList.contains('rod')){
+                // Expand this card into the visible FULL window
+                start = Math.min(Math.max(0, i - (k - 1)), cards.length - k);
+              } else {
+                // Already FULL: shift which edge gets demoted
+                if (i === start)           start = Math.min(start + 1, cards.length - k);
+                else if (i === start+k-1)  start = Math.max(0, start - 1);
+                else                       start = Math.min(Math.max(0, i - Math.floor(k/2)), cards.length - k);
+              }
+              applyLayout();
+            });
+      
+            // Keyboard support
+            row.addEventListener('keydown', (e) => {
+              if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('ccard')){
+                e.preventDefault();
+                e.target.click();
+              }
+            });
+      
+            // Initial paint + responsive + midnight refresh
+            render();
+            doLayout();
+            window.addEventListener('resize', doLayout, {passive:true});
+      
+            const nextMidnight = new Date(); nextMidnight.setHours(24,0,2,0);
+            setTimeout(function tick(){
+              render(); doLayout();
+              setTimeout(tick, 24*60*60*1000);
+            }, nextMidnight - new Date());
+
         });
       }
     
