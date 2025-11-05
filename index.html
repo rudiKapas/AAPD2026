@@ -486,6 +486,31 @@
       scroll-snap-type:x proximity;
       padding:12px 4px 8px;            /* small breathing room for scroll */
     }
+
+    /* Wrap + arrow buttons */
+    .deadlines-wrap{ position:relative; }
+    
+    /* Hide the horizontal scrollbar but keep scrolling enabled */
+    .countdown-row{
+      overflow-x:auto;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type:x proximity;
+    }
+    .countdown-row::-webkit-scrollbar{ display:none; }
+    .countdown-row{ -ms-overflow-style:none; scrollbar-width:none; }
+    
+    /* Left/Right arrow buttons for Section 2 */
+    .cd-btn{
+      position:absolute; top:50%; transform:translateY(-50%);
+      width:36px; height:36px; border-radius:999px;
+      border:1px solid rgba(15,23,42,.14); background:#fff;
+      box-shadow:0 10px 22px rgba(15,23,42,.12);
+      display:grid; place-items:center; cursor:pointer; z-index:5;
+    }
+    .cd-btn.left{  left:-10px; }
+    .cd-btn.right{ right:-10px; }
+    .cd-btn[disabled]{ opacity:.35; pointer-events:none; }
+
     
     /* a tiny spacer so the last big card never gets cut on the right */
     .countdown-row::after{
@@ -701,73 +726,76 @@
       </div><!-- /container -->
     </section>
 
-    <!-- ============== SECTION 2 — DEADLINES (COUNTDOWN ROW) ============== -->
-    <section class="section deadlines" id="deadlines">
-      <div class="container">
-        <h2>Key Dates</h2>
-        <p>Live countdowns to important milestones.</p>
-    
-        <div class="countdown-row" id="deadlineRow">
-          <article class="ccard" data-accent="teal"   data-title="Registration Opens"              data-date="2026-06-01">
-            <div>
-              <div class="title">Registration Opens</div>
-              <div class="date">1 Jun 2026</div>
-              <div class="time"><span class="remain">—</span></div>
-            </div>
-            <div class="bar"><span></span></div>
-          </article>
-    
-          <article class="ccard" data-accent="yellow" data-title="Standard Registration Deadline"  data-date="2026-07-30">
-            <div>
-              <div class="title">Standard Registration Deadline</div>
-              <div class="date">30 Jul 2026</div>
-              <div class="time"><span class="remain">—</span></div>
-            </div>
-            <div class="bar"><span></span></div>
-          </article>
-    
-          <article class="ccard" data-accent="pink"   data-title="Late Registration (Online)"      data-date="2026-08-30">
-            <div>
-              <div class="title">Late Registration (Online)</div>
-              <div class="date">30 Aug 2026</div>
-              <div class="time"><span class="remain">—</span></div>
-            </div>
-            <div class="bar"><span></span></div>
-          </article>
-    
-          <article class="ccard" data-accent="lime"   data-title="On-Site Registration"             data-date="2026-09-30">
-            <div>
-              <div class="title">On-Site Registration</div>
-              <div class="date">30 Sep 2026</div>
-              <div class="time"><span class="remain">—</span></div>
-            </div>
-            <div class="bar"><span></span></div>
-          </article>
-    
-          <article class="ccard" data-accent="orange" data-title="Abstract Submission Deadline"     data-date="2026-07-30">
-            <div>
-              <div class="title">Abstract Submission Deadline</div>
-              <div class="date">30 Jul 2026</div>
-              <div class="time"><span class="remain">—</span></div>
-            </div>
-            <div class="bar"><span></span></div>
-          </article>
-    
-          <article class="ccard" data-accent="blue"   data-title="Notification of Acceptance"       data-date="2026-08-15">
-            <div>
-              <div class="title">Notification of Acceptance</div>
-              <div class="date">15 Aug 2026</div>
-              <div class="time"><span class="remain">—</span></div>
-            </div>
-            <div class="bar"><span></span></div>
-          </article>
-        </div>
-      </div>
-    </section>
-    
-    
+   <!-- ============== SECTION 2 — DEADLINES (COUNTDOWN ROW) ============== -->
+<section class="section deadlines" id="deadlines">
+  <div class="container">
+    <h2>Key Dates</h2>
+    <p>Live countdowns to important milestones.</p>
 
-    
+    <div class="deadlines-wrap">
+      <button class="cd-btn left" id="cdLeft" aria-label="Scroll left">‹</button>
+
+      <div class="countdown-row" id="deadlineRow">
+        <article class="ccard" data-accent="teal"   data-title="Registration Opens"              data-date="2026-06-01">
+          <div>
+            <div class="title">Registration Opens</div>
+            <div class="date">1 Jun 2026</div>
+            <div class="time"><span class="remain">—</span></div>
+          </div>
+          <div class="bar"><span></span></div>
+        </article>
+
+        <article class="ccard" data-accent="yellow" data-title="Standard Registration Deadline"  data-date="2026-07-30">
+          <div>
+            <div class="title">Standard Registration Deadline</div>
+            <div class="date">30 Jul 2026</div>
+            <div class="time"><span class="remain">—</span></div>
+          </div>
+          <div class="bar"><span></span></div>
+        </article>
+
+        <article class="ccard" data-accent="pink"   data-title="Late Registration (Online)"      data-date="2026-08-30">
+          <div>
+            <div class="title">Late Registration (Online)</div>
+            <div class="date">30 Aug 2026</div>
+            <div class="time"><span class="remain">—</span></div>
+          </div>
+          <div class="bar"><span></span></div>
+        </article>
+
+        <article class="ccard" data-accent="lime"   data-title="On-Site Registration"            data-date="2026-09-30">
+          <div>
+            <div class="title">On-Site Registration</div>
+            <div class="date">30 Sep 2026</div>
+            <div class="time"><span class="remain">—</span></div>
+          </div>
+          <div class="bar"><span></span></div>
+        </article>
+
+        <article class="ccard" data-accent="orange" data-title="Abstract Submission Deadline"     data-date="2026-07-30">
+          <div>
+            <div class="title">Abstract Submission Deadline</div>
+            <div class="date">30 Jul 2026</div>
+            <div class="time"><span class="remain">—</span></div>
+          </div>
+          <div class="bar"><span></span></div>
+        </article>
+
+        <article class="ccard" data-accent="blue"   data-title="Notification of Acceptance"       data-date="2026-08-15">
+          <div>
+            <div class="title">Notification of Acceptance</div>
+            <div class="date">15 Aug 2026</div>
+            <div class="time"><span class="remain">—</span></div>
+          </div>
+          <div class="bar"><span></span></div>
+        </article>
+      </div>
+
+      <button class="cd-btn right" id="cdRight" aria-label="Scroll right">›</button>
+    </div>
+  </div>
+</section>
+
     <!-- ================= third SECTION media (white background) ================= -->
     <section class="section alt" id="about">
       <div class="container">
@@ -1024,6 +1052,36 @@
       const GAP  = parseFloat(getComputedStyle(row).columnGap) || 14;
       const FULL = 260;  // = .ccard min-width
       const ROD  = 90;   // = .ccard.rod width
+      // Arrow buttons for Section 2 horizontal scroll
+      const btnL = document.getElementById('cdLeft');
+      const btnR = document.getElementById('cdRight');
+      
+      // keep edges from cutting the last card
+      row.style.scrollPaddingLeft = '8px';
+      row.style.scrollPaddingRight = '28px';
+      
+      function step(){
+        // scroll roughly two full cards at a time
+        return 2*FULL + GAP;
+      }
+      function updateArrows(){
+        const max = row.scrollWidth - row.clientWidth - 2;
+        if (btnL) btnL.disabled = row.scrollLeft <= 2;
+        if (btnR) btnR.disabled = row.scrollLeft >= max;
+      }
+      
+      [btnL, btnR].forEach(btn=>{
+        if (!btn) return;
+        btn.addEventListener('click', ()=>{
+          row.scrollBy({ left: btn === btnL ? -step() : step(), behavior:'smooth' });
+          setTimeout(updateArrows, 320);
+        });
+      });
+      
+      row.addEventListener('scroll', updateArrows, {passive:true});
+      window.addEventListener('resize', updateArrows, {passive:true});
+      updateArrows();
+
     
       let k = 0;      // how many FULLs fit
       let start = 0;  // start index of contiguous FULL window
