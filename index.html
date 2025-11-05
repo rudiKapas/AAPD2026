@@ -744,23 +744,35 @@
     .ccard[data-accent="orange"] .bar span{ --acc:#ff9a3b; }
     .ccard[data-accent="blue"] .bar span{ --acc:#5aaee1; }
 
-    /* === Unify "Starting in" spacing + weights on all full cards === */
-    /* === DEADLINES (DESKTOP ONLY) — bars visible + tighter spacing === */
+    /* === DEADLINES (DESKTOP FINAL OVERRIDES — DESKTOP ONLY) === */
     @media (min-width:1101px){
-      /* keep a normal gap, don't stretch cards to edges */
-      #deadlineRow.countdown-row{ gap:12px; justify-content:flex-start; }
-      #deadlineRow.countdown-row.fit{ justify-content:flex-start; }
     
-      /* make each full card a bit wider so two cards fill the row nicely */
-      .section.deadlines .ccard{ min-width:320px; }  /* was 260px */
+      /* tighter row + distribute leftover space so the last card hugs the right */
+      #deadlineRow.countdown-row{
+        gap:12px;
+        padding-inline:0;
+        justify-content:flex-start;
+      }
+      #deadlineRow.countdown-row.fit{
+        justify-content:space-between; /* was flex-start */
+      }
     
-      /* ensure the indeterminate bar is shown on ALL full cards */
+      /* two-up layout: each full card is ~half the row */
+      .section.deadlines .ccard{
+        min-width:calc((100% - 12px)/2); /* two cards fill the container width */
+      }
+    
+      /* make sure the indeterminate bar is visible on ALL maximized cards */
       .section.deadlines .ccard:not(.rod) .bar{
-        display:block;
-        opacity:1;
-        transform:none;
+        display:block !important;
+        opacity:1 !important;
+        transform:none !important;
+      }
+      .section.deadlines .ccard.rod .bar{
+        display:none !important;
       }
     }
+
 
     .section.deadlines .ccard .title{ margin:0 0 4px; }
     .section.deadlines .ccard .date{ margin:0 0 10px; color:#cbd5e1; }
@@ -1491,15 +1503,18 @@
         }
       }
 
-      function doLayout(){
-        setFULL();  // re-sync JS with CSS (desktop/min-width)
-        k = computeK();
-        applyLayout();
-        // If total card width <= row width, use .fit to remove right slack
-        const TW = totalWidth(k);
-        const W  = row.clientWidth;
-        row.classList.toggle('fit', TW <= W + 0.5);
-      }
+    function doLayout(){
+      setFULL();              // NEW: re-read CSS min-width (desktop calc(...))
+      k = computeK();         // still 2 full cards on desktop
+      applyLayout();
+    
+      // decide if row has extra space (toggles .fit for right edge)
+      const TW = totalWidth(k);
+      const W  = row.clientWidth;
+      row.classList.toggle('fit', TW <= W + 0.5);
+    
+      updateArrows();         // NEW: refresh arrow disabled state after layout
+    }
 
     
       // Interactions
