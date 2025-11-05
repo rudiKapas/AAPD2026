@@ -752,13 +752,26 @@
         --rod-w:      124px;  /* minimized (rod) card width */
       }
 
-        /* --- Progress bar: FULL cards only + pinned to bottom --- */
-      .section.deadlines .ccard{ justify-content:flex-start; }  /* stack content */
-      .section.deadlines .ccard .bar{
-        display:block !important;
-        margin-top:auto;               /* keeps the bar at the bottom */
-      }
-      .section.deadlines .ccard.rod .bar{ display:none !important; }
+        /* --- Progress bar: FULL cards only, anchored to bottom --- */
+        .section.deadlines .ccard{
+          position:relative;            /* anchor context */
+          justify-content:flex-start;   /* stack content top→down */
+          padding-bottom:34px;          /* room for the bar */
+        }
+        .section.deadlines .ccard .bar{
+          display:block !important;
+          position:absolute;            /* pin to bottom */
+          left:18px;
+          right:18px;
+          bottom:12px;
+          margin:0;                     /* no push from content above */
+          height:12px;                  /* keep the same height */
+        }
+        .section.deadlines .ccard.rod .bar{
+          display:none !important;      /* hide on minimized cards */
+          position:static;              /* neutralize absolute if toggled */
+        }
+
 
 
       
