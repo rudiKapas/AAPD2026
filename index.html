@@ -654,7 +654,32 @@
     .ccard[data-accent="lime"] .bar span{ --acc:#bbff5e; }
     .ccard[data-accent="orange"] .bar span{ --acc:#ff9a3b; }
     .ccard[data-accent="blue"] .bar span{ --acc:#5aaee1; }
+
+    /* === Deadlines: rod view shows ONLY the title =================== */
+    .section.deadlines .ccard.rod .date,
+    .section.deadlines .ccard.rod .time,
+    .section.deadlines .ccard.rod .bar,
+    .section.deadlines .ccard.rod .label{
+      display:none !important;          /* hide everything except the title */
+    }
     
+    .section.deadlines .ccard.rod{
+      min-width:90px; width:90px;
+      padding:12px 10px 14px;
+      display:flex; flex-direction:column; justify-content:flex-start;
+    }
+    
+    .section.deadlines .ccard.rod .title{
+      white-space:normal;               /* allow wrapping */
+      overflow:hidden;
+      display:-webkit-box;              /* clamp lines to avoid overflow */
+      -webkit-box-orient:vertical;
+      -webkit-line-clamp:3;             /* up to 3 lines in the mini card */
+      line-height:1.15;
+      font-size:.86rem;
+      font-weight:600;
+    }
+
 
     
 
