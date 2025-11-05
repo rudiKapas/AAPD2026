@@ -1376,19 +1376,22 @@
           } else if (d.past){
             el.textContent='Closed'; card.dataset.long='Closed'; card.dataset.compact='Closed';
             card.setAttribute('aria-label', title+' has passed');
-          } else {
-            const L = fmtLong(d), S = fmtShort(d);
-            // break line before "and X days" on full cards
-            const Lhtml = L.replace(/,\s+and\s+(\d+\s+day[s]?)/, ',<br class="br-days" />and $1');
-            
-            el.textContent = L;                 // initial plain text
-            card.dataset.long      = L;         // full text (fallback)
-            card.dataset.longHtml  = Lhtml;     // full text with line break
-            card.dataset.compact   = S;         // rod text (e.g., 8m 3w 4d)
+        } else {
+          const L = fmtLong(d), S = fmtShort(d);
+          // break line before "and X days" on full cards
+          const Lhtml = L.replace(/,\s+and\s+(\d+\s+day[s]?)/, ',<br class="br-days" />and $1');
+        
+          // store variations
+          card.dataset.long = L;         // full text (fallback)
+          card.dataset.longHtml = Lhtml; // full text with line break
+          card.dataset.compact = S;      // rod text (e.g., 8m 3w 4d)
+        
+          // initial visible text (plain); applyLayout will swap to innerHTML for full cards
+          el.textContent = L;
+        
+          card.setAttribute('aria-label', title + ' in ' + L);
+        }
 
-            el.textContent = L; card.dataset.long=L; card.dataset.compact=S;
-            card.setAttribute('aria-label', title+' in '+L);
-          }
         });
       }
     
