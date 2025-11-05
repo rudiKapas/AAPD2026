@@ -655,15 +655,63 @@
     .ccard[data-accent="lime"] .bar span{ --acc:#bbff5e; }
     .ccard[data-accent="orange"] .bar span{ --acc:#ff9a3b; }
     .ccard[data-accent="blue"] .bar span{ --acc:#5aaee1; }
+    /* Minimized (.rod) — center icon + make title same style as .date */
+    .section.deadlines .ccard.rod{
+      min-width:110px;              /* keep in sync with JS ROD=110 */
+      width:110px;
+      padding:14px 18px 16px;       /* comfy side padding */
+      position:relative;            /* for the centered icon */
+    }
+    
+    .section.deadlines .ccard.rod::before{
+      content:"";
+      position:absolute;
+      top:50%; left:50%;
+      transform:translate(-50%,-50%);   /* perfectly centered */
+      width:34px; height:34px;
+      background:url("assets/icons/maximizeCountCard.svg") center/contain no-repeat;
+      opacity:.85;
+      pointer-events:none;              /* click passes to the card */
+      filter:drop-shadow(0 2px 6px rgba(0,0,0,.25));
+    }
+    
+    /* Title in minimized card should look like .date */
+    .section.deadlines .ccard.rod .title{
+      font-weight:300;              /* Inter/Poppins light */
+      font-size:.85rem;             /* same as .date */
+      color:#cbd5e1;                /* same as .date */
+      line-height:1.15;
+      margin:0;                     /* avoid pushing content */
+      word-break:break-word;
+    }
+    
+    /* Hide other bits smoothly when minimized */
+    .section.deadlines .ccard.rod .date,
+    .section.deadlines .ccard.rod .time,
+    .section.deadlines .ccard.rod .bar{
+      opacity:0;
+      transform:translateY(-6px);
+      pointer-events:none;
+    }
+
+
+    
     /* Smooth size/content transition between FULL and .rod */
     .section.deadlines .ccard{
       transition:
-        min-width .28s cubic-bezier(.2,.65,.3,1),
-        width .28s cubic-bezier(.2,.65,.3,1),
-        padding .28s cubic-bezier(.2,.65,.3,1),
-        box-shadow .28s ease,
-        transform .28s cubic-bezier(.2,.65,.3,1);
+        min-width .55s cubic-bezier(.2,.65,.3,1),
+        width .55s cubic-bezier(.2,.65,.3,1),
+        padding .55s cubic-bezier(.2,.65,.3,1),
+        box-shadow .55s ease,
+        transform .55s cubic-bezier(.2,.65,.3,1);
     }
+    
+    .section.deadlines .ccard .date,
+    .section.deadlines .ccard .time,
+    .section.deadlines .ccard .bar{
+      transition: opacity .45s ease, transform .45s ease;
+    }
+
     
     /* Fade/slide the extra content when collapsing or expanding */
     .section.deadlines .ccard .date,
