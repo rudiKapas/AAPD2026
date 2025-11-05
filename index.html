@@ -807,6 +807,30 @@
         min-width: var(--rod-w);
         width:     var(--rod-w);
       }
+
+        /* --- Normalize "Starting in:" on ALL full cards --- */
+        /* Hide the separate .label on full-size cards */
+        .section.deadlines .ccard:not(.rod) .label{
+          display:none;
+        }
+      
+        /* If a card doesn't already have <small> inside .time, inject one */
+        .section.deadlines .ccard:not(.rod) .time:not(:has(small))::before{
+          content:"Starting in:";
+          display:block;
+          font-weight:400;
+          color:#cbd5e1;
+          margin-bottom:2px;
+          font-size:clamp(1rem,.9vw + .55rem,1.12rem);
+          line-height:1.1;
+        }
+      
+        /* Remove extra vertical offset (since we inject the label above) */
+        .section.deadlines .ccard:not(.rod) .time{
+          margin-top:0;
+        }
+
+      
     }
 
 
