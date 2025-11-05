@@ -23,7 +23,8 @@
   <!-- Google Fonts (optional; can remove to be extra-minimal) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
 
   <style>
     :root{
@@ -654,6 +655,51 @@
     .ccard[data-accent="lime"] .bar span{ --acc:#bbff5e; }
     .ccard[data-accent="orange"] .bar span{ --acc:#ff9a3b; }
     .ccard[data-accent="blue"] .bar span{ --acc:#5aaee1; }
+    /* Smooth size/content transition between FULL and .rod */
+    .section.deadlines .ccard{
+      transition:
+        min-width .28s cubic-bezier(.2,.65,.3,1),
+        width .28s cubic-bezier(.2,.65,.3,1),
+        padding .28s cubic-bezier(.2,.65,.3,1),
+        box-shadow .28s ease,
+        transform .28s cubic-bezier(.2,.65,.3,1);
+    }
+    
+    /* Fade/slide the extra content when collapsing or expanding */
+    .section.deadlines .ccard .date,
+    .section.deadlines .ccard .time,
+    .section.deadlines .ccard .bar{
+      transition: opacity .22s ease, transform .22s ease;
+    }
+    
+    /* Full state shows everything */
+    .section.deadlines .ccard:not(.rod) .date,
+    .section.deadlines .ccard:not(.rod) .time,
+    .section.deadlines .ccard:not(.rod) .bar{
+      opacity:1; transform:none;
+    }
+    
+    /* Minimized (rod) state — lighter title, hide extras smoothly,
+       and give more side padding so text doesn't hug the edge */
+    .section.deadlines .ccard.rod{
+      min-width:110px;   /* keep in sync with JS ROD=110 */
+      width:110px;
+      padding:14px 18px 16px; /* extra left/right spacing */
+    }
+    
+    .section.deadlines .ccard.rod .title{
+      font-weight:300;          /* light */
+      letter-spacing:.1px;
+    }
+    
+    .section.deadlines .ccard.rod .date,
+    .section.deadlines .ccard.rod .time,
+    .section.deadlines .ccard.rod .bar{
+      opacity:0;
+      transform:translateY(-6px);
+      pointer-events:none;
+    }
+
 
 
     /* Remove any phantom end spacer on the row (even if added elsewhere) */
@@ -837,7 +883,7 @@
 <section class="section deadlines" id="deadlines">
   <div class="container">
     <h2>Key Dates</h2>
-    <p>Live countdowns to important milestones.</p>
+    <p>Live countdowns to important dates.</p>
 
     <div class="deadlines-wrap">
       <button class="cd-btn left" id="cdLeft" aria-label="Scroll left">‹</button>
