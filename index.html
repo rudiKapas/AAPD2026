@@ -564,7 +564,30 @@
       0%{ box-shadow:0 0 0 0 rgba(255,59,48,.55) }
       100%{ box-shadow:0 0 0 16px rgba(255,59,48,0) }
     }
+
+    /* Remove the red status dot */
+    .ccard::after{
+      content: none !important;
+      animation: none !important;
+      box-shadow: none !important;
+    }
     
+    /* Curved outer frame for each card */
+    .ccard::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius:inherit;      /* follow the 22px curve */
+      pointer-events:none;
+      box-shadow:0 0 0 2px rgba(255,255,255,.10);  /* subtle frame */
+    }
+    
+    /* Optional: brighter frame on hover/focus */
+    .ccard:hover::before,
+    .ccard:focus-within::before{
+      box-shadow:0 0 0 2px rgba(255,255,255,.16);
+    }
+
 
     /* Rod (minimized) style when row can’t fit all cards — VERTICAL */
     .ccard.rod{
