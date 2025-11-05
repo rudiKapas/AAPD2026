@@ -511,6 +511,23 @@
       padding:12px 4px 8px;            /* small breathing room for scroll */
     }
 
+    /* MOBILE: make a maximized card span the full container width (match hero image) */
+      @media (max-width:1100px){
+        /* remove the row’s side padding so cards can reach the same edges as the hero image */
+        #deadlineRow.countdown-row{
+          padding-left:0;
+          padding-right:0;
+        }
+      
+        /* full (non-rod) card = 100% of the container content box */
+        .section.deadlines .ccard:not(.rod){
+          flex: 0 0 100%;
+          min-width: 100%;
+          width: 100%;
+        }
+      }
+
+
     /* Wrap + arrow buttons */
     .deadlines-wrap{ position:relative; }
     
