@@ -703,6 +703,30 @@
     .section.deadlines .ccard.rod .more-btn{ display:none; }
     
     /* Use the same fill color as the indeterminate bar (per accent) */
+
+    /* === Fix: label weight + line break for countdown === */
+    .section.deadlines .ccard .time{
+      margin-top:10px;
+      letter-spacing:.2px;
+      font-size:initial;           /* reset any inherited size */
+      font-weight:400;             /* keep container normal */
+    }
+    .section.deadlines .ccard .time small{
+      display:block !important;    /* own line */
+      font-size:clamp(1rem,.9vw + .55rem,1.12rem);
+      font-weight:400 !important;  /* regular, not bold */
+      color:#cbd5e1;               /* same as other cards */
+      margin:0 0 2px 0;
+    }
+    .section.deadlines .ccard .time .remain{
+      display:block !important;    /* push to next line */
+      margin-top:6px;
+      font-size:clamp(1.25rem,2.1vw,1.8rem);
+      font-weight:800;
+      color:#fff;
+    }
+
+    
     .section.deadlines .ccard[data-accent="teal"]   .more-btn{ background-color:#21ffa7; }
     .section.deadlines .ccard[data-accent="orange"] .more-btn{ background-color:#ff9a3b; }
     /* (If later you want CTAs on other accents, add lines for yellow/pink/lime/blue) */
@@ -1017,7 +1041,7 @@
       <div>
         <div class="title">Early Bird Registration</div>
         <div class="date">1 Jun 2026 – 31 Jul 2026</div>
-        <div class="time"><small>Starting in:</small> <span class="remain">—</span></div>
+        <div class="time"><small>Starting in:</small><span class="remain">—</span></div>
       </div>
       <div class="bar"><span></span></div>
     </article>
@@ -1059,7 +1083,7 @@
       <div>
         <div class="title">Abstract Submission</div>
         <div class="date">1 Jul 2026 – 31 Jul 2026</div>
-        <div class="time"><small>Starting in:</small> <span class="remain">—</span></div>
+        <div class="time"><small>Starting in:</small><span class="remain">—</span></div>
       </div>
       <div class="bar"><span></span></div>
     </article>
