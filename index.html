@@ -745,6 +745,23 @@
     .ccard[data-accent="blue"] .bar span{ --acc:#5aaee1; }
 
     /* === Unify "Starting in" spacing + weights on all full cards === */
+    /* === DEADLINES (DESKTOP ONLY) — bars visible + tighter spacing === */
+    @media (min-width:1101px){
+      /* keep a normal gap, don't stretch cards to edges */
+      #deadlineRow.countdown-row{ gap:12px; justify-content:flex-start; }
+      #deadlineRow.countdown-row.fit{ justify-content:flex-start; }
+    
+      /* make each full card a bit wider so two cards fill the row nicely */
+      .section.deadlines .ccard{ min-width:320px; }  /* was 260px */
+    
+      /* ensure the indeterminate bar is shown on ALL full cards */
+      .section.deadlines .ccard:not(.rod) .bar{
+        display:block;
+        opacity:1;
+        transform:none;
+      }
+    }
+
     .section.deadlines .ccard .title{ margin:0 0 4px; }
     .section.deadlines .ccard .date{ margin:0 0 10px; color:#cbd5e1; }
     
@@ -1405,10 +1422,16 @@
       const cards = Array.from(row.querySelectorAll('.ccard'));
       cards.forEach(c=>{ c.tabIndex=0; c.setAttribute('role','button'); });
     
-      const GAP  = parseFloat(getComputedStyle(row).columnGap) || 10;
-      // read the actual CSS min-width so JS stays in sync with style
-      let FULL = parseFloat(getComputedStyle(row.querySelector('.ccard')).minWidth) || 340;
+      const GAP  = parseFloat(getComputedStyle(row).gap || getComputedStyle(row).columnGap) || 12;
+      let   FULL = 0;
       const ROD  = 110;
+      
+      function setFULL(){
+        const first = row.querySelector('.ccard');
+        FULL = parseFloat(getComputedStyle(first).minWidth) || 320;  // 320 on desktop via CSS
+      }
+      setFULL();
+
 
       // Arrow buttons for Section 2 horizontal scroll
       const btnL = document.getElementById('cdLeft');
@@ -1469,6 +1492,7 @@
       }
 
       function doLayout(){
+        setFULL();  // re-sync JS with CSS (desktop/min-width)
         k = computeK();
         applyLayout();
         // If total card width <= row width, use .fit to remove right slack
@@ -1502,7 +1526,7 @@
     
       // Init + resize + midnight
       render(); doLayout();
-      window.addEventListener('resize', doLayout, {passive:true});
+      window.addEventListener('resize', () => { setFULL(); doLayout(); }, {passive:true});
       const nextMidnight = new Date(); nextMidnight.setHours(24,0,2,0);
       setTimeout(function tick(){ render(); doLayout(); setTimeout(tick, 86400000); },
                  nextMidnight - new Date());
