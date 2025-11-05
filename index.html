@@ -475,9 +475,12 @@
     /* ==== Section 2: Countdown row ==== */
     .section.deadlines{ background:#fff; padding:24px 0; }
     .countdown-row{
-      display:grid; grid-auto-flow:column; grid-auto-columns:1fr;
-      gap:14px; align-items:stretch; overflow:hidden;  /* single row, no scroll */
+      display:grid;
+      grid-auto-flow:column;
+      grid-auto-columns:max-content; /* allow variable widths */
+      gap:14px; align-items:stretch; overflow:hidden;
     }
+
     
     /* Full countdown card */
     .ccard{
@@ -940,300 +943,122 @@
       })();
     </script>
 
-    <script>
-  /* ========= Countdown (months, weeks, days) + rod layout ========= */
-  (function(){
-    const row = document.getElementById('deadlineRow');
-    if(!row) return;
-  
-    const MS_DAY = 86400000;
-  
-    // Add months while preserving day-of-month
-    function addMonths(base, m){
-      const d = new Date(base.getFullYear(), base.getMonth(), base.getDate());
-      const day = d.getDate();
-      const x = new Date(d); x.setDate(1); x.setMonth(x.getMonth()+m);
-      const last = new Date(x.getFullYear(), x.getMonth()+1, 0).getDate();
-      x.setDate(Math.min(day, last));
-      return x;
-    }
-  
-    // Return {months,weeks,days} from now -> target (dates only; no hours/seconds)
-    function diffMWD(now, target){
-      const a = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-      const b = new Date(target.getFullYear(), target.getMonth(), target.getDate());
-      if (b <= a) return {months:0,weeks:0,days:0,past:(b<a),today:(+a===+b)};
-  
-      let months = 0, cursor = a;
-      while (true){
-        const nxt = addMonths(cursor, 1);
-        if (nxt <= b){ months++; cursor = nxt; } else { break; }
+   <script>
+    /* ========= Countdown (months, weeks, days) + clickable rods ========= */
+    (function(){
+      const row = document.getElementById('deadlineRow');
+      if(!row) return;
+    
+      const MS_DAY = 86400000;
+    
+      function addMonths(base, m){
+        const d = new Date(base.getFullYear(), base.getMonth(), base.getDate());
+        const keep = d.getDate();
+        const x = new Date(d); x.setDate(1); x.setMonth(x.getMonth()+m);
+        const last = new Date(x.getFullYear(), x.getMonth()+1, 0).getDate();
+        x.setDate(Math.min(keep, last));
+        return x;
       }
-      const daysAll = Math.floor((b - cursor)/MS_DAY);
-      const weeks = Math.floor(daysAll/7);
-      const days  = daysAll % 7;
-      return {months,weeks,days,past:false,today:false};
-    }
-  
-    function plural(n, s){ return n + ' ' + s + (n===1?'':'s'); }
-    function fmtLong(o){
-      const parts = [];
-      if (o.months) parts.push(plural(o.months,'month'));
-      if (o.weeks)  parts.push(plural(o.weeks,'week'));
-      // Always show days, even if 0 (to keep a steady readout)
-      parts.push(plural(o.days,'day'));
-      return parts.join(', ').replace(/, ([^,]*)$/, ', and $1');
-    }
-    function fmtShort(o){
-      const p=[]; if(o.months) p.push(o.months+'m'); if(o.weeks) p.push(o.weeks+'w'); p.push(o.days+'d'); 
-      return p.join(' ');
-    }
-
-  // Fill all cards
-  function render(){
-    const now = new Date();
-    row.querySelectorAll('.ccard').forEach(card=>{
-      const el = card.querySelector('.remain');
-      const dateStr = card.getAttribute('data-date');
-      const title   = card.getAttribute('data-title') || '';
-      const target  = new Date(dateStr+'T00:00:00');
-
-      const d = diffMWD(now, target);
-
-      if (d.today){
-        el.textContent = 'Today';
-        card.setAttribute('aria-label', title + ' is today');
-      } else if (d.past){
-        el.textContent = 'Closed';
-        card.setAttribute('aria-label', title + ' has passed');
-      } else {
-          const long  = fmtLong(d);     // e.g., "2 months, 3 weeks, and 2 days"
-          const short = fmtShort(d);    // e.g., "2m 3w 2d"
-          el.textContent = long;
-          card.setAttribute('data-long', long);     // ← store long label
-          card.setAttribute('data-compact', short); // ← store short label
-          card.setAttribute('aria-label', title + ' in ' + long);
+      function diffMWD(now, target){
+        const a = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        const b = new Date(target.getFullYear(), target.getMonth(), target.getDate());
+        if (b <= a) return {months:0,weeks:0,days:0,past:(b<a),today:(+a===+b)};
+        let months = 0, cursor = a;
+        while (true){ const nxt = addMonths(cursor,1); if (nxt <= b){ months++; cursor = nxt; } else break; }
+        const daysAll = Math.floor((b - cursor)/MS_DAY);
+        return {months, weeks:Math.floor(daysAll/7), days:daysAll%7, past:false, today:false};
       }
-    });
-  }
-
-      // Rod minimization (keeps single row, no scroll)
-            // ---- variable-width countdown with clickable rods/full window ----
-            // (Replaces the old "Rod minimization" section)
-      
-            // First, render the month–week–day strings and store long/short labels
-            function render(){
-              const now = new Date();
-              row.querySelectorAll('.ccard').forEach(card=>{
-                const el = card.querySelector('.remain');
-                const dateStr = card.getAttribute('data-date');
-                const title   = card.getAttribute('data-title') || '';
-                const target  = new Date(dateStr+'T00:00:00');
-                const d = diffMWD(now, target);
-      
-                if (d.today){
-                  el.textContent = 'Today';
-                  card.dataset.long = 'Today';
-                  card.dataset.compact = 'Today';
-                  card.setAttribute('aria-label', title + ' is today');
-                } else if (d.past){
-                  el.textContent = 'Closed';
-                  card.dataset.long = 'Closed';
-                  card.dataset.compact = 'Closed';
-                  card.setAttribute('aria-label', title + ' has passed');
-                } else {
-                  const long  = fmtLong(d);   // e.g., "2 months, 3 weeks, and 2 days"
-                  const short = fmtShort(d);  // e.g., "2m 3w 2d"
-                  el.textContent = long;
-                  card.dataset.long = long;
-                  card.dataset.compact = short;
-                  card.setAttribute('aria-label', title + ' in ' + long);
-                }
-              });
-            }
-      
-            // Cards & constants
-            const cards = Array.from(row.querySelectorAll('.ccard'));
-            cards.forEach(c => { c.tabIndex = 0; c.setAttribute('role','button'); });
-      
-            const GAP   = parseFloat(getComputedStyle(row).columnGap) || 14;
-            const FULL  = 260;   // must match .ccard min-width
-            const ROD   = 90;    // must match .ccard.rod width
-      
-            // how many FULL cards fit, and where that contiguous window starts
-            let k = 0;
-            let start = 0;
-      
-            function totalWidth(kTest){
-              const n = cards.length;
-              return kTest*FULL + (n-kTest)*ROD + GAP*(n-1);
-            }
-            function computeK(){
-              const n = cards.length, W = row.clientWidth;
-              // upper-bound guess, then walk down if needed
-              let guess = Math.min(n, Math.max(0, Math.floor((W - GAP*(n-1) - n*ROD) / (FULL - ROD))));
-              while (guess > 0 && totalWidth(guess) > W) guess--;
-              return guess;
-            }
-            function applyLayout(){
-              const n = cards.length;
-              start = Math.max(0, Math.min(start, n - k)); // clamp window
-              for (let i=0;i<n;i++){
-                const full = (i >= start && i < start + k);
-                const t = cards[i].querySelector('.time .remain');
-                cards[i].classList.toggle('rod', !full);
-                t.textContent = full ? (cards[i].dataset.long || t.textContent)
-                                     : (cards[i].dataset.compact || t.textContent);
-              }
-            }
-            function doLayout(){
-              k = computeK();
-              applyLayout();
-            }
-      
-            // Click-to-toggle (event delegation on the row)
-            row.addEventListener('click', (ev) => {
-              const card = ev.target.closest('.ccard');
-              if (!card) return;
-      
-              const i = cards.indexOf(card);
-              if (i === -1 || k === 0 || k === cards.length) return;
-      
-              if (card.classList.contains('rod')){
-                // Expand this card into the visible FULL window
-                start = Math.min(Math.max(0, i - (k - 1)), cards.length - k);
-              } else {
-                // Already FULL: shift which edge gets demoted
-                if (i === start)           start = Math.min(start + 1, cards.length - k);
-                else if (i === start+k-1)  start = Math.max(0, start - 1);
-                else                       start = Math.min(Math.max(0, i - Math.floor(k/2)), cards.length - k);
-              }
-              applyLayout();
-            });
-      
-            // Keyboard support
-            row.addEventListener('keydown', (e) => {
-              if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('ccard')){
-                e.preventDefault();
-                e.target.click();
-              }
-            });
-      
-            // Initial paint + responsive + midnight refresh
-            render();
-            doLayout();
-            window.addEventListener('resize', doLayout, {passive:true});
-      
-            const nextMidnight = new Date(); nextMidnight.setHours(24,0,2,0);
-            setTimeout(function tick(){
-              render(); doLayout();
-              setTimeout(tick, 24*60*60*1000);
-            }, nextMidnight - new Date());
-
+      const plural = (n,s)=> n+' '+s+(n===1?'':'s');
+      const fmtLong  = o => [o.months?plural(o.months,'month'):null, o.weeks?plural(o.weeks,'week'):null, plural(o.days,'day')]
+                             .filter(Boolean).join(', ').replace(/, ([^,]*)$/, ', and $1');
+      const fmtShort = o => [o.months?o.months+'m':null, o.weeks?o.weeks+'w':null, o.days+'d']
+                             .filter(Boolean).join(' ');
+    
+      // Labels
+      function render(){
+        const now = new Date();
+        row.querySelectorAll('.ccard').forEach(card=>{
+          const el = card.querySelector('.remain');
+          const title  = card.getAttribute('data-title')||'';
+          const target = new Date(card.getAttribute('data-date')+'T00:00:00');
+          const d = diffMWD(now, target);
+          if (d.today){
+            el.textContent='Today'; card.dataset.long='Today'; card.dataset.compact='Today';
+            card.setAttribute('aria-label', title+' is today');
+          } else if (d.past){
+            el.textContent='Closed'; card.dataset.long='Closed'; card.dataset.compact='Closed';
+            card.setAttribute('aria-label', title+' has passed');
+          } else {
+            const L = fmtLong(d), S = fmtShort(d);
+            el.textContent = L; card.dataset.long=L; card.dataset.compact=S;
+            card.setAttribute('aria-label', title+' in '+L);
+          }
         });
       }
     
-      render();
-      layout();
-      // Update once per day (just after midnight)
-      const nextMidnight = new Date(); nextMidnight.setHours(24,0,2,0);
-      setTimeout(function tick(){
-        render(); layout();
-        setTimeout(tick, 24*60*60*1000); // every 24h
-      }, nextMidnight - new Date());
+      // Layout
+      const cards = Array.from(row.querySelectorAll('.ccard'));
+      cards.forEach(c=>{ c.tabIndex=0; c.setAttribute('role','button'); });
     
-      // ---- LAYOUT: contiguous “full” window + vertical rods of same height
-      const cards  = Array.from(row.children);
-      
-      // how many full cards fit, and where that full window starts
-      let k = 0;               // number of full cards that can fit
-      let start = 0;           // index where the contiguous full-window begins
-      
-      const gapPx   = parseFloat(getComputedStyle(row).columnGap) || 14;
-      const ROD_W   = 90;      // must match .ccard.rod width
-      const FULL_MIN = 260;    // must match .ccard min-width
-      
-      function totalWidthFor(kTest, Wrow){
-        const n = cards.length, G = gapPx * (n - 1);
-        return kTest * FULL_MIN + (n - kTest) * ROD_W + G;
-      }
-      
+      const GAP  = parseFloat(getComputedStyle(row).columnGap) || 14;
+      const FULL = 260;  // = .ccard min-width
+      const ROD  = 90;   // = .ccard.rod width
+    
+      let k = 0;      // how many FULLs fit
+      let start = 0;  // start index of contiguous FULL window
+    
+      const totalWidth = kTest => kTest*FULL + (cards.length-kTest)*ROD + GAP*(cards.length-1);
       function computeK(){
-        const n   = cards.length;
-        const W   = row.clientWidth;
-        const G   = gapPx * (n - 1);
-        // closed-form upper bound then verify downward
-        const upper = Math.floor((W - G - n * ROD_W) / (FULL_MIN - ROD_W));
-        let kTest = Math.min(n, Math.max(0, upper));
-        while (kTest > 0 && totalWidthFor(kTest, W) > W) kTest--;
-        return kTest;
+        const W = row.clientWidth, n = cards.length;
+        let guess = Math.min(n, Math.max(0, Math.floor((W - GAP*(n-1) - n*ROD) / (FULL - ROD))));
+        while (guess>0 && totalWidth(guess) > W) guess--;
+        return guess;
       }
-      
       function applyLayout(){
         const n = cards.length;
-        start = Math.max(0, Math.min(start, n - k));  // clamp window to valid range
-      
-        for (let i = 0; i < n; i++){
-          const isFull = (i >= start && i < start + k);
-          const timeEl = cards[i].querySelector('.time .remain');
-          cards[i].classList.toggle('rod', !isFull);
-      
-          if (!isFull){
-            const s = cards[i].getAttribute('data-compact');
-            if (s) timeEl.textContent = s;
-          } else {
-            const s = cards[i].getAttribute('data-long');
-            if (s) timeEl.textContent = s;
-          }
+        start = Math.max(0, Math.min(start, n - k));
+        for (let i=0;i<n;i++){
+          const full = (i>=start && i<start+k);
+          const t = cards[i].querySelector('.time .remain');
+          cards[i].classList.toggle('rod', !full);
+          t.textContent = full ? (cards[i].dataset.long||t.textContent)
+                               : (cards[i].dataset.compact||t.textContent);
         }
       }
-      
-      // Click-to-toggle using event delegation on the row.
-      // - Clicking a ROD expands it and slides the full window so it’s included.
-      // - Clicking a FULL demotes the opposite edge (keeps total width constant).
-      row.addEventListener('click', (ev) => {
-        const card = ev.target.closest('.ccard');
-        if (!card || !row.contains(card)) return;
-      
+      function doLayout(){ k = computeK(); applyLayout(); }
+    
+      // Interactions
+      row.addEventListener('click', e=>{
+        const card = e.target.closest('.ccard');
+        if (!card) return;
         const i = cards.indexOf(card);
-        if (i === -1 || k === 0 || k === cards.length) return;
-      
-        if (card.classList.contains('rod')) {
-          // Make this the RIGHTMOST card in the full window
+        if (i===-1 || k===0 || k===cards.length) return;
+    
+        if (card.classList.contains('rod')){
           start = Math.min(Math.max(0, i - (k - 1)), cards.length - k);
         } else {
-          // It’s already full:
-          // - if left edge clicked, slide window right by 1 (demote leftmost)
-          // - if right edge clicked, slide window left by 1 (demote rightmost)
-          // - if middle full clicked, center window around it (best effort)
-          if (i === start) {
-            start = Math.min(start + 1, cards.length - k);
-          } else if (i === start + k - 1) {
-            start = Math.max(0, start - 1);
-          } else {
-            start = Math.min(Math.max(0, i - Math.floor(k / 2)), cards.length - k);
-          }
+          if (i === start)           start = Math.min(start+1, cards.length-k);
+          else if (i === start+k-1)  start = Math.max(0, start-1);
+          else                       start = Math.min(Math.max(0, i - Math.floor(k/2)), cards.length-k);
         }
         applyLayout();
       });
-      
-      // (optional) keyboard support
-      row.addEventListener('keydown', (e) => {
-        if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('ccard')) {
-          e.preventDefault();
-          e.target.click();
+      row.addEventListener('keydown', e=>{
+        if ((e.key==='Enter' || e.key===' ') && e.target.classList.contains('ccard')){
+          e.preventDefault(); e.target.click();
         }
       });
-
-      
-      function layout(){
-        k = computeK();   // how many full cards fit now
-        applyLayout();    // apply with current start
-      }
-
+    
+      // Init + resize + midnight
+      render(); doLayout();
+      window.addEventListener('resize', doLayout, {passive:true});
+      const nextMidnight = new Date(); nextMidnight.setHours(24,0,2,0);
+      setTimeout(function tick(){ render(); doLayout(); setTimeout(tick, 86400000); },
+                 nextMidnight - new Date());
     })();
     </script>
     
+        
 
 
 </body>
