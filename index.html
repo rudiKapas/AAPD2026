@@ -474,12 +474,31 @@
     
     /* ==== Section 2: Countdown row ==== */
     .section.deadlines{ background:#fff; padding:24px 0; }
+    
+    /* Make it a horizontal scroller that never clips the last card */
     .countdown-row{
-      display:grid;
-      grid-auto-flow:column;
-      grid-auto-columns:max-content; /* allow variable widths */
-      gap:14px; align-items:stretch; overflow:hidden;
+      display:flex;
+      gap:14px;
+      align-items:stretch;
+      overflow-x:auto;                 /* ← horizontal scroll */
+      overflow-y:hidden;
+      -webkit-overflow-scrolling:touch;
+      scroll-snap-type:x proximity;
+      padding:12px 4px 8px;            /* small breathing room for scroll */
     }
+    
+    /* a tiny spacer so the last big card never gets cut on the right */
+    .countdown-row::after{
+      content:"";
+      flex:0 0 24px;
+    }
+    
+    /* cards behave nicely in a flex scroller */
+    .ccard{
+      flex:0 0 auto;
+      scroll-snap-align:start;
+    }
+
 
     
     /* Full countdown card */
@@ -947,6 +966,8 @@
     /* ========= Countdown (months, weeks, days) + clickable rods ========= */
     (function(){
       const row = document.getElementById('deadlineRow');
+      row.style.scrollPaddingLeft = '8px';
+      row.style.scrollPaddingRight = '28px';
       if(!row) return;
     
       const MS_DAY = 86400000;
@@ -1009,11 +1030,11 @@
     
       const totalWidth = kTest => kTest*FULL + (cards.length-kTest)*ROD + GAP*(cards.length-1);
       function computeK(){
-        const W = row.clientWidth, n = cards.length;
-        let guess = Math.min(n, Math.max(0, Math.floor((W - GAP*(n-1) - n*ROD) / (FULL - ROD))));
-        while (guess>0 && totalWidth(guess) > W) guess--;
-        return guess;
+        return Math.min(2, cards.length);  // always 2 full-size cards
       }
+
+
+      
       function applyLayout(){
         const n = cards.length;
         start = Math.max(0, Math.min(start, n - k));
