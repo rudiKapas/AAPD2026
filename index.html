@@ -739,6 +739,31 @@
     .ccard[data-accent="lime"] .bar span{ --acc:#bbff5e; }
     .ccard[data-accent="orange"] .bar span{ --acc:#ff9a3b; }
     .ccard[data-accent="blue"] .bar span{ --acc:#5aaee1; }
+
+    /* === Unify "Starting in" spacing + weights on all full cards === */
+    .section.deadlines .ccard .title{ margin:0 0 4px; }
+    .section.deadlines .ccard .date{ margin:0 0 10px; color:#cbd5e1; }
+    
+    .section.deadlines .ccard .time{
+      margin-top:8px;
+      letter-spacing:.2px;
+    }
+    .section.deadlines .ccard .time small{
+      display:block;
+      font-weight:400;            /* regular, not bold */
+      color:#cbd5e1;              /* same color on all cards */
+      margin:0 0 4px 0;
+    }
+    .section.deadlines .ccard .time .remain{
+      display:block;              /* sits on its own line */
+      line-height:1.15;
+    }
+    
+    /* Rods show ONLY the title now (no date/label/countdown) */
+    .section.deadlines .ccard.rod .date,
+    .section.deadlines .ccard.rod .time{ display:none !important; }
+
+    
     /* Minimized (.rod) — center icon + make title same style as .date */
     .section.deadlines .ccard.rod{
       min-width:110px;              /* keep in sync with JS ROD=110 */
@@ -1353,6 +1378,14 @@
             card.setAttribute('aria-label', title+' has passed');
           } else {
             const L = fmtLong(d), S = fmtShort(d);
+            // break line before "and X days" on full cards
+            const Lhtml = L.replace(/,\s+and\s+(\d+\s+day[s]?)/, ',<br class="br-days" />and $1');
+            
+            el.textContent = L;                 // initial plain text
+            card.dataset.long      = L;         // full text (fallback)
+            card.dataset.longHtml  = Lhtml;     // full text with line break
+            card.dataset.compact   = S;         // rod text (e.g., 8m 3w 4d)
+
             el.textContent = L; card.dataset.long=L; card.dataset.compact=S;
             card.setAttribute('aria-label', title+' in '+L);
           }
@@ -1410,14 +1443,22 @@
       function applyLayout(){
         const n = cards.length;
         start = Math.max(0, Math.min(start, n - k));
-        for (let i=0;i<n;i++){
-          const full = (i>=start && i<start+k);
-          const t = cards[i].querySelector('.time .remain');
-          cards[i].classList.toggle('rod', !full);
-          t.textContent = full ? (cards[i].dataset.long||t.textContent)
-                               : (cards[i].dataset.compact||t.textContent);
+        for (let i = 0; i < n; i++){
+          const full = (i >= start && i < start + k);
+          const card = cards[i];
+          const t = card.querySelector('.time .remain');
+          card.classList.toggle('rod', !full);
+      
+          if (full){
+            // show two-line version on maximized card
+            t.innerHTML = card.dataset.longHtml || card.dataset.long || t.textContent;
+          } else {
+            // compact (rod) stays single-line shorthand
+            t.textContent = card.dataset.compact || t.textContent;
+          }
         }
       }
+
       function doLayout(){
         k = computeK();
         applyLayout();
