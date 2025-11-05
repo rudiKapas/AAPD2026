@@ -582,8 +582,15 @@
     .ccard .time {margin-top:10px; font-size:1.35rem; font-weight:700; letter-spacing:.2px}
     
     /* Active bar (animated) */
-    .ccard .bar{height:12px; border-radius:999px; margin-top:12px;
-      background:rgba(255,255,255,.10); overflow:hidden; position:relative}
+      .ccard .bar{
+        height:6px;                 /* thinner bar (applies to desktop + mobile) */
+        border-radius:999px;
+        margin-top:8px;             /* was 12px */
+        background:rgba(255,255,255,.10);
+        overflow:hidden;
+        position:relative;
+      }
+
     .ccard .bar span{
       --acc:#33ff99;
       position:absolute; inset:0 auto 0 0; width:58%;
