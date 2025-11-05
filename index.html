@@ -1337,9 +1337,11 @@
     /* ========= Countdown (months, weeks, days) + clickable rods ========= */
     (function(){
       const row = document.getElementById('deadlineRow');
-      row.style.scrollPaddingLeft = '8px';
+      if (!row) return;
+      
+      row.style.scrollPaddingLeft  = '8px';
       row.style.scrollPaddingRight = '8px';
-      if(!row) return;
+
     
       const MS_DAY = 86400000;
     
