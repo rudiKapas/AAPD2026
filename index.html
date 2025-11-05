@@ -655,6 +655,38 @@
     .ccard[data-accent="orange"] .bar span{ --acc:#ff9a3b; }
     .ccard[data-accent="blue"] .bar span{ --acc:#5aaee1; }
 
+    /* === Deadlines: rod view padding + wrap and remove row ::after === */
+    #deadlineRow.countdown-row::after{
+      content:none !important;
+      display:none !important;
+      width:0 !important;
+    }
+    
+    /* Mini (rod) card: add safe padding and robust wrapping */
+    .section.deadlines .ccard.rod{
+      min-width:110px;                 /* a touch wider to prevent clipping */
+      width:110px;
+      padding:14px 14px 16px;          /* more left/right breathing room */
+      border-radius:var(--radius);     /* same curve as hero image */
+    }
+    
+    .section.deadlines .ccard.rod .title{
+      margin:0;
+      /* wrap rules so long words don’t hang over rounded edge */
+      overflow:hidden;
+      white-space:normal;
+      display:-webkit-box;
+      -webkit-box-orient:vertical;
+      -webkit-line-clamp:3;            /* up to 3 lines on mini card */
+      line-height:1.15;
+      font-size:.86rem;
+      font-weight:600;
+      word-break:break-word;
+      overflow-wrap:break-word;
+      hyphens:auto;
+    }
+
+
     /* === Deadlines: rod view shows ONLY the title =================== */
     .section.deadlines .ccard.rod .date,
     .section.deadlines .ccard.rod .time,
@@ -1129,7 +1161,7 @@
     
       const GAP  = parseFloat(getComputedStyle(row).columnGap) || 14;
       const FULL = 260;  // = .ccard min-width
-      const ROD  = 90;   // = .ccard.rod width
+      const ROD  = 110;   // = .ccard.rod width
       // Arrow buttons for Section 2 horizontal scroll
       const btnL = document.getElementById('cdLeft');
       const btnR = document.getElementById('cdRight');
