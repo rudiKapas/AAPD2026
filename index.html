@@ -751,7 +751,17 @@
         --ccard-full: 300px;  /* full (maximized) card width */
         --rod-w:      124px;  /* minimized (rod) card width */
       }
-    
+
+        /* --- Progress bar: FULL cards only + pinned to bottom --- */
+      .section.deadlines .ccard{ justify-content:flex-start; }  /* stack content */
+      .section.deadlines .ccard .bar{
+        display:block !important;
+        margin-top:auto;               /* keeps the bar at the bottom */
+      }
+      .section.deadlines .ccard.rod .bar{ display:none !important; }
+
+
+      
       /* row spacing */
       #deadlineRow.countdown-row{
         gap:12px;
