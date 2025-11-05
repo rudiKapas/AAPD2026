@@ -981,6 +981,35 @@
       font-weight:600;
     }
 
+    /* === DESKTOP FINAL OVERRIDES (must be last) === */
+    @media (min-width:1101px){
+      /* Desktop widths (JS will read these) */
+      :root{
+        --ccard-full: 460px;   /* width of a maximized card */
+        --rod-w:      122px;   /* width of a minimized card */
+      }
+    
+      /* row spacing */
+      #deadlineRow.countdown-row{ gap:12px; padding-inline:0; justify-content:flex-start; }
+      #deadlineRow.countdown-row.fit{ justify-content:flex-start; }
+    
+      /* apply widths */
+      .section.deadlines .ccard{ min-width:var(--ccard-full); }
+      .section.deadlines .ccard.rod{
+        min-width:var(--rod-w);
+        width:var(--rod-w);
+      }
+    
+      /* keep bar visible and not covered by the text */
+      .section.deadlines .ccard:not(.rod) .time{ margin-bottom:14px; }
+      .section.deadlines .ccard:not(.rod) .bar{
+        display:block !important;
+        visibility:visible !important;
+        opacity:1 !important;
+        transform:none !important;
+      }
+      .section.deadlines .ccard.rod .bar{ display:none !important; }
+    }
 
     
 
@@ -1447,27 +1476,22 @@
       // Layout
       const cards = Array.from(row.querySelectorAll('.ccard'));
       cards.forEach(c=>{ c.tabIndex=0; c.setAttribute('role','button'); });
-    
-      const GAP  = parseFloat(getComputedStyle(row).gap || getComputedStyle(row).columnGap) || 12;
-      let   FULL = 0;
-      let   ROD  = 110;  // fallback for mobile / no var
       
-      function setFULL(){
-        const first = row.querySelector('.ccard');
-        FULL = parseFloat(getComputedStyle(first).minWidth) || 300;  // matches --ccard-full
+      const GAP = parseFloat(getComputedStyle(row).gap || getComputedStyle(row).columnGap) || 12;
+      let FULL = 0;
+      let ROD  = 110; // fallback; will be overwritten on desktop via CSS vars
+      
+      function cssNum(varName, fallback){
+        const v = getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+        const n = parseFloat(v);
+        return Number.isFinite(n) ? n : fallback;
       }
-      function setROD(){
-        // prefer CSS var (desktop), otherwise probe a .rod card or fallback
-        const cssRod = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--rod-w')) || 0;
-        if (cssRod) { ROD = cssRod; }
-        else {
-          const probe = row.querySelector('.ccard.rod') || row.querySelector('.ccard');
-          ROD = parseFloat(getComputedStyle(probe).minWidth) || 124;
-        }
-      }
+      function setFULL(){ FULL = cssNum('--ccard-full', FULL || 460); }
+      function setROD(){  ROD  = cssNum('--rod-w',      ROD  || 122); }
       
       setFULL();
       setROD();
+
 
 
 
@@ -1530,9 +1554,9 @@
       }
 
       function doLayout(){
-        setFULL();              // re-read full width from CSS
-        setROD();               // re-read rod width from CSS
-        k = computeK();         // still 2 full cards on desktop
+        setFULL();          // re-read CSS full width
+        setROD();           // re-read CSS rod width
+        k = computeK();     // still 2 full cards on desktop
         applyLayout();
       
         const TW = totalWidth(k);
@@ -1541,6 +1565,7 @@
       
         updateArrows();
       }
+
       
 
     
@@ -1568,7 +1593,7 @@
     
       // Init + resize + midnight
       render(); doLayout();
-      window.addEventListener('resize', () => { setFULL(); doLayout(); }, {passive:true});
+      window.addEventListener('resize', () => { setFULL(); setROD(); doLayout(); }, {passive:true});
       const nextMidnight = new Date(); nextMidnight.setHours(24,0,2,0);
       setTimeout(function tick(){ render(); doLayout(); setTimeout(tick, 86400000); },
                  nextMidnight - new Date());
