@@ -746,32 +746,46 @@
 
     /* === DEADLINES (DESKTOP FINAL OVERRIDES — DESKTOP ONLY) === */
     @media (min-width:1101px){
+      /* desktop tokens used by CSS + read by JS */
+      :root{
+        --ccard-full: 300px;  /* full (maximized) card width */
+        --rod-w:      124px;  /* minimized (rod) card width */
+      }
     
-      /* tighter row + distribute leftover space so the last card hugs the right */
+      /* row spacing */
       #deadlineRow.countdown-row{
         gap:12px;
         padding-inline:0;
         justify-content:flex-start;
       }
-      #deadlineRow.countdown-row.fit{
-        justify-content:space-between; /* was flex-start */
-      }
+      #deadlineRow.countdown-row.fit{ justify-content:flex-start; }
     
-      /* two-up layout: each full card is ~half the row */
+      /* shorter full card */
       .section.deadlines .ccard{
-        min-width:calc((100% - 12px)/2); /* two cards fill the container width */
+        min-width: var(--ccard-full);
       }
     
-      /* make sure the indeterminate bar is visible on ALL maximized cards */
+      /* keep space above the bar so text never covers it */
+      .section.deadlines .ccard:not(.rod) .time{
+        margin-bottom:8px;
+      }
+    
+      /* bar MUST be visible on all maximized cards */
       .section.deadlines .ccard:not(.rod) .bar{
         display:block !important;
+        visibility:visible !important;
         opacity:1 !important;
         transform:none !important;
       }
-      .section.deadlines .ccard.rod .bar{
-        display:none !important;
+      .section.deadlines .ccard.rod .bar{ display:none !important; }
+    
+      /* wider minimized cards on desktop */
+      .section.deadlines .ccard.rod{
+        min-width: var(--rod-w);
+        width:     var(--rod-w);
       }
     }
+
 
 
     .section.deadlines .ccard .title{ margin:0 0 4px; }
@@ -1436,13 +1450,25 @@
     
       const GAP  = parseFloat(getComputedStyle(row).gap || getComputedStyle(row).columnGap) || 12;
       let   FULL = 0;
-      const ROD  = 110;
+      let   ROD  = 110;  // fallback for mobile / no var
       
       function setFULL(){
         const first = row.querySelector('.ccard');
-        FULL = parseFloat(getComputedStyle(first).minWidth) || 320;  // 320 on desktop via CSS
+        FULL = parseFloat(getComputedStyle(first).minWidth) || 300;  // matches --ccard-full
       }
+      function setROD(){
+        // prefer CSS var (desktop), otherwise probe a .rod card or fallback
+        const cssRod = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--rod-w')) || 0;
+        if (cssRod) { ROD = cssRod; }
+        else {
+          const probe = row.querySelector('.ccard.rod') || row.querySelector('.ccard');
+          ROD = parseFloat(getComputedStyle(probe).minWidth) || 124;
+        }
+      }
+      
       setFULL();
+      setROD();
+
 
 
       // Arrow buttons for Section 2 horizontal scroll
@@ -1503,18 +1529,19 @@
         }
       }
 
-    function doLayout(){
-      setFULL();              // NEW: re-read CSS min-width (desktop calc(...))
-      k = computeK();         // still 2 full cards on desktop
-      applyLayout();
-    
-      // decide if row has extra space (toggles .fit for right edge)
-      const TW = totalWidth(k);
-      const W  = row.clientWidth;
-      row.classList.toggle('fit', TW <= W + 0.5);
-    
-      updateArrows();         // NEW: refresh arrow disabled state after layout
-    }
+      function doLayout(){
+        setFULL();              // re-read full width from CSS
+        setROD();               // re-read rod width from CSS
+        k = computeK();         // still 2 full cards on desktop
+        applyLayout();
+      
+        const TW = totalWidth(k);
+        const W  = row.clientWidth;
+        row.classList.toggle('fit', TW <= W + 0.5);
+      
+        updateArrows();
+      }
+      
 
     
       // Interactions
