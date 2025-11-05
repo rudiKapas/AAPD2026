@@ -735,61 +735,68 @@
     <div class="deadlines-wrap">
       <button class="cd-btn left" id="cdLeft" aria-label="Scroll left">‹</button>
 
-      <div class="countdown-row" id="deadlineRow">
-        <article class="ccard" data-accent="teal"   data-title="Registration Opens"              data-date="2026-06-01">
-          <div>
-            <div class="title">Registration Opens</div>
-            <div class="date">1 Jun 2026</div>
-            <div class="time"><span class="remain">—</span></div>
-          </div>
-          <div class="bar"><span></span></div>
-        </article>
+    <div class="countdown-row" id="deadlineRow">
+      <!-- Early Bird -->
+      <article class="ccard" data-accent="teal"
+               data-title="Early Bird Registration"
+               data-start="2026-06-01" data-end="2026-07-31">
+        <div>
+          <div class="title">Early Bird Registration</div>
+          <div class="date">1 Jun 2026 – 31 Jul 2026</div>
+          <div class="time"><small>Starting in:</small> <span class="remain">—</span></div>
+        </div>
+        <div class="bar"><span></span></div>
+      </article>
+    
+      <!-- Late Registration (Online) -->
+      <article class="ccard" data-accent="yellow"
+               data-title="Late Registration (Online)"
+               data-start="2026-08-01" data-end="2026-09-15">
+        <div>
+          <div class="title">Late Registration (Online)</div>
+          <div class="date">1 Aug 2026 – 15 Sep 2026</div>
+          <div class="time"><small>Starting in:</small> <span class="remain">—</span></div>
+        </div>
+        <div class="bar"><span></span></div>
+      </article>
+    
+      <!-- On-Site Registration -->
+      <article class="ccard" data-accent="lime"
+               data-title="On-Site Registration"
+               data-start="2026-09-30" data-end="2026-10-03">
+        <div>
+          <div class="title">On-Site Registration</div>
+          <div class="date">30 Sep 2026 – 3 Oct 2026</div>
+          <div class="time"><small>Starting in:</small> <span class="remain">—</span></div>
+        </div>
+        <div class="bar"><span></span></div>
+      </article>
+    
+      <!-- Abstract Submission -->
+      <article class="ccard" data-accent="orange"
+               data-title="Abstract Submission"
+               data-start="2026-07-01" data-end="2026-07-31">
+        <div>
+          <div class="title">Abstract Submission</div>
+          <div class="date">1 Jul 2026 – 31 Jul 2026</div>
+          <div class="time"><small>Starting in:</small> <span class="remain">—</span></div>
+        </div>
+        <div class="bar"><span></span></div>
+      </article>
+    
+      <!-- Notification of Acceptance -->
+      <article class="ccard" data-accent="blue"
+               data-title="Notification of Acceptance"
+               data-start="2026-08-15" data-end="2026-08-15">
+        <div>
+          <div class="title">Notification of Acceptance</div>
+          <div class="date">15 Aug 2026 – 15 Aug 2026</div>
+          <div class="time"><small>Starting in:</small> <span class="remain">—</span></div>
+        </div>
+        <div class="bar"><span></span></div>
+      </article>
+    </div>
 
-        <article class="ccard" data-accent="yellow" data-title="Standard Registration Deadline"  data-date="2026-07-30">
-          <div>
-            <div class="title">Standard Registration Deadline</div>
-            <div class="date">30 Jul 2026</div>
-            <div class="time"><span class="remain">—</span></div>
-          </div>
-          <div class="bar"><span></span></div>
-        </article>
-
-        <article class="ccard" data-accent="pink"   data-title="Late Registration (Online)"      data-date="2026-08-30">
-          <div>
-            <div class="title">Late Registration (Online)</div>
-            <div class="date">30 Aug 2026</div>
-            <div class="time"><span class="remain">—</span></div>
-          </div>
-          <div class="bar"><span></span></div>
-        </article>
-
-        <article class="ccard" data-accent="lime"   data-title="On-Site Registration"            data-date="2026-09-30">
-          <div>
-            <div class="title">On-Site Registration</div>
-            <div class="date">30 Sep 2026</div>
-            <div class="time"><span class="remain">—</span></div>
-          </div>
-          <div class="bar"><span></span></div>
-        </article>
-
-        <article class="ccard" data-accent="orange" data-title="Abstract Submission Deadline"     data-date="2026-07-30">
-          <div>
-            <div class="title">Abstract Submission Deadline</div>
-            <div class="date">30 Jul 2026</div>
-            <div class="time"><span class="remain">—</span></div>
-          </div>
-          <div class="bar"><span></span></div>
-        </article>
-
-        <article class="ccard" data-accent="blue"   data-title="Notification of Acceptance"       data-date="2026-08-15">
-          <div>
-            <div class="title">Notification of Acceptance</div>
-            <div class="date">15 Aug 2026</div>
-            <div class="time"><span class="remain">—</span></div>
-          </div>
-          <div class="bar"><span></span></div>
-        </article>
-      </div>
 
       <button class="cd-btn right" id="cdRight" aria-label="Scroll right">›</button>
     </div>
@@ -1029,7 +1036,7 @@
         row.querySelectorAll('.ccard').forEach(card=>{
           const el = card.querySelector('.remain');
           const title  = card.getAttribute('data-title')||'';
-          const target = new Date(card.getAttribute('data-date')+'T00:00:00');
+          const target = new Date(card.getAttribute('data-start') + 'T00:00:00');
           const d = diffMWD(now, target);
           if (d.today){
             el.textContent='Today'; card.dataset.long='Today'; card.dataset.compact='Today';
