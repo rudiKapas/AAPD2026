@@ -538,6 +538,23 @@
     }
     .ccard .title{font-family:Poppins,Inter,sans-serif; font-size:1rem; font-weight:500; opacity:.9}
     .ccard .date {font-size:.85rem; color:#cbd5e1; margin-top:2px}
+
+    /* “Starting in:” label sits above the countdown value */
+    .ccard .label{
+      font-size:1.1rem;
+      font-weight:400;          /* regular (not bold) */
+      color:#cbd5e1;
+      margin-top:14px;          /* space below the date */
+    }
+    
+    /* Countdown value directly under the label */
+    .ccard .time{
+      margin-top:6px;           /* sits under the label */
+      font-size:clamp(1.3rem, 2vw + .6rem, 2rem);
+      font-weight:700;          /* keep value bold */
+      line-height:1.15;
+    }
+
     .ccard .time {margin-top:10px; font-size:1.35rem; font-weight:700; letter-spacing:.2px}
     
     /* Active bar (animated) */
@@ -759,18 +776,19 @@
       <button class="cd-btn left" id="cdLeft" aria-label="Scroll left">‹</button>
 
     <div class="countdown-row" id="deadlineRow">
-      <!-- Early Bird -->
+     <!-- Early Bird -->
       <article class="ccard" data-accent="teal"
                data-title="Early Bird Registration"
                data-start="2026-06-01" data-end="2026-07-31">
         <div>
           <div class="title">Early Bird Registration</div>
           <div class="date">1 Jun 2026 – 31 Jul 2026</div>
-          <div class="time"><small>Starting in:</small> <span class="remain">—</span></div>
+          <div class="label">Starting in:</div>
+          <div class="time"><span class="remain">—</span></div>
         </div>
         <div class="bar"><span></span></div>
       </article>
-    
+      
       <!-- Late Registration (Online) -->
       <article class="ccard" data-accent="yellow"
                data-title="Late Registration (Online)"
@@ -778,11 +796,12 @@
         <div>
           <div class="title">Late Registration (Online)</div>
           <div class="date">1 Aug 2026 – 15 Sep 2026</div>
-          <div class="time"><small>Starting in:</small> <span class="remain">—</span></div>
+          <div class="label">Starting in:</div>
+          <div class="time"><span class="remain">—</span></div>
         </div>
         <div class="bar"><span></span></div>
       </article>
-    
+      
       <!-- On-Site Registration -->
       <article class="ccard" data-accent="lime"
                data-title="On-Site Registration"
@@ -790,11 +809,12 @@
         <div>
           <div class="title">On-Site Registration</div>
           <div class="date">30 Sep 2026 – 3 Oct 2026</div>
-          <div class="time"><small>Starting in:</small> <span class="remain">—</span></div>
+          <div class="label">Starting in:</div>
+          <div class="time"><span class="remain">—</span></div>
         </div>
         <div class="bar"><span></span></div>
       </article>
-    
+      
       <!-- Abstract Submission -->
       <article class="ccard" data-accent="orange"
                data-title="Abstract Submission"
@@ -802,11 +822,12 @@
         <div>
           <div class="title">Abstract Submission</div>
           <div class="date">1 Jul 2026 – 31 Jul 2026</div>
-          <div class="time"><small>Starting in:</small> <span class="remain">—</span></div>
+          <div class="label">Starting in:</div>
+          <div class="time"><span class="remain">—</span></div>
         </div>
         <div class="bar"><span></span></div>
       </article>
-    
+      
       <!-- Notification of Acceptance -->
       <article class="ccard" data-accent="blue"
                data-title="Notification of Acceptance"
@@ -814,10 +835,12 @@
         <div>
           <div class="title">Notification of Acceptance</div>
           <div class="date">15 Aug 2026 – 15 Aug 2026</div>
-          <div class="time"><small>Starting in:</small> <span class="remain">—</span></div>
+          <div class="label">Starting in:</div>
+          <div class="time"><span class="remain">—</span></div>
         </div>
         <div class="bar"><span></span></div>
       </article>
+
     </div>
 
 
