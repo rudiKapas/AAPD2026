@@ -655,6 +655,16 @@
     .ccard[data-accent="orange"] .bar span{ --acc:#ff9a3b; }
     .ccard[data-accent="blue"] .bar span{ --acc:#5aaee1; }
 
+
+    /* Remove any phantom end spacer on the row (even if added elsewhere) */
+    .countdown-row::after{ content:none !important; display:none !important; }
+    
+    /* When content is narrower than the container, stretch gaps so the last card
+       sits flush with the right edge (toggled by JS with .fit) */
+    .countdown-row{ justify-content:flex-start; }
+    .countdown-row.fit{ justify-content:space-between; }
+
+
     /* === Deadlines: rod view padding + wrap and remove row ::after === */
     #deadlineRow.countdown-row::after{
       content:none !important;
@@ -1214,7 +1224,15 @@
                                : (cards[i].dataset.compact||t.textContent);
         }
       }
-      function doLayout(){ k = computeK(); applyLayout(); }
+      function doLayout(){
+        k = computeK();
+        applyLayout();
+        // If total card width <= row width, use .fit to remove right slack
+        const TW = totalWidth(k);
+        const W  = row.clientWidth;
+        row.classList.toggle('fit', TW <= W + 0.5);
+      }
+
     
       // Interactions
       row.addEventListener('click', e=>{
