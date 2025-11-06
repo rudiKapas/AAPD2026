@@ -109,11 +109,28 @@
   
     /* ======= Header styles (top bar like the example) ======= */
     .site-header{position:sticky;top:0;z-index:50;background:#ffffff;border-bottom:1px solid rgba(15,23,42,.06)}
-    .header-row{display:flex;align-items:center;justify-content:space-between;gap:12px;height:56px;padding:0}
+    .header-row{display:flex;align-items:center;justify-content:space-between;gap:8px;height:56px;padding:0}
     .brand{display:flex;align-items:center;gap:0;font-weight:500;letter-spacing:0}
     .brand-dot{width:10px;height:10px;border-radius:50%;background:#FBAC45}
 
     .pill-nav{display:flex;align-items:center;gap:22px;background:#fff;border:1px solid rgba(15,23,42,.08);border-radius:999px;padding:10px 16px;box-shadow:0 10px 24px rgba(15,23,42,.06)}
+
+    /* Center the island between brand and hamburger */
+    .header-row .pill-nav{ margin: 0 auto; }
+    
+    /* Slightly softer island look (optional but nice) */
+    .pill-nav{
+      padding:10px 18px;
+      box-shadow:0 10px 24px rgba(15,23,42,.06), 0 2px 6px rgba(15,23,42,.05);
+    }
+    
+    /* Hide island on small screens (you already have this, keeping it here for clarity) */
+    @media (max-width: 900px){
+      .pill-nav{ display:none; }       /* desktop-only island */
+      .icon-btn.hamburger{ display:grid; } /* show hamburger on mobile */
+    }
+
+    
     .pill-nav a{color:var(--navy);text-decoration:none;font-weight:600;white-space:nowrap}
 
     .header-actions{display:flex;align-items:center;gap:10px}
@@ -1097,12 +1114,29 @@
         <span>AAPD 2026</span>
       </div>
 
+      <!-- ======= pill island ======= -->
+      <nav class="pill-nav" aria-label="Primary">
+        <a href="#about">About Us</a>
+        <a href="#register">Registration</a>
+        <a href="#keynotes">Keynote Speakers</a>
+        <a href="#sponsors">Sponsors</a>
+        <a href="#contact">Contact Us</a>
+      </nav>
+
+
       <!-- Right icon buttons (simple placeholders) -->
       <div class="header-actions">
-        <button class="icon-btn" aria-label="Travel/Flights">✈️</button>
-        <button class="icon-btn" aria-label="Account">👤</button>
         <button class="icon-btn hamburger" id="navToggle" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu">☰</button>
       </div>
+      <div class="mobile-menu" id="mobileMenu" role="menu">
+        <a href="#about">About Us</a>
+        <a href="#register">Registration</a>
+        <a href="#keynotes">Keynote Speakers</a>
+        <a href="#sponsors">Sponsors</a>
+        <a href="#contact">Contact Us</a>
+      </div>
+
+      
     </div>
 </header>
 
