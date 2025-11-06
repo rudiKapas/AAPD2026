@@ -30,6 +30,7 @@
     .site-header .container{height:56px;display:flex;align-items:center;justify-content:space-between}
     .header-row{display:flex;align-items:center;gap:12px;width:100%}
     .brand span{font-weight:600;letter-spacing:.2px}
+    .brand{ margin-left: 10px; }   /* ← nudge brand text a bit to the right */
     .mid-nav{display:flex;gap:22px;position:absolute;left:50%;transform:translateX(-50%)}
     .mid-nav a{text-decoration:none;font-weight:500;transition:opacity .18s ease}
     .icon-btn{width:34px;height:34px;border-radius:999px;border:1px solid;display:grid;place-items:center;cursor:pointer;background:transparent}
@@ -76,10 +77,20 @@
 
     /* Overlay card (reuse look from index) */
     .overlay-card{
-      position:absolute; left:50%; bottom:0; transform:translate(-50%, 50%);
-      width:min(96%, 980px); background:#fff; border:1px solid rgba(15,23,42,.06);
-      border-radius:18px; box-shadow:0 12px 26px rgba(15,23,42,.12); padding:14px; z-index:4;
+      position:absolute;
+      /* center the card at 66.666% (≈ one-third from the right) */
+      left:66.666%;
+      bottom:0;
+      transform:translate(-50%, 50%);
+      width:50%;                              /* half the image width */
+      background:#fff;
+      border:1px solid rgba(15,23,42,.06);
+      border-radius:18px;
+      box-shadow:0 12px 26px rgba(15,23,42,.12);
+      padding:14px;
+      z-index:4;
     }
+
     .overlay-grid{display:grid;grid-template-columns:repeat(4,1fr) auto;gap:12px;align-items:center}
     .ov-item{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:12px;background:transparent}
     .ov-icon{width:auto;height:auto;margin-top:2px}
@@ -112,6 +123,10 @@
     .site-footer{background:#fff;border-top:1px solid rgba(15,23,42,.08)}
     .footer-inner{padding:12px 0; display:flex; justify-content:center; text-align:center}
     .footer-inner small{color:var(--muted)}
+
+    .site-footer{padding:0}                  /* guardrail */
+    .footer-inner small{margin:0; line-height:1.2}
+
   </style>
 </head>
 <body>
@@ -152,42 +167,8 @@
           <img src="assets/img/welcomMessageTop.png" alt="Welcome to AAPD 2026 at Kota Kinabalu" />
 
           <!-- Reused overlay card (same look as index) -->
-          <div class="overlay-card" role="group" aria-label="Quick facts">
-            <div class="overlay-grid">
-              <div class="ov-item">
-                <span class="ov-icon"><img src="assets/icons/info.svg" alt=""></span>
-                <div class="ov-text">
-                  <div class="ov-label">Welcome Message</div>
-                  <div class="ov-value">From the Organising Committee</div>
-                </div>
-              </div>
-              <div class="ov-item">
-                <span class="ov-icon"><img src="assets/icons/location.svg" alt=""></span>
-                <div class="ov-text">
-                  <div class="ov-label">Location</div>
-                  <div class="ov-value">Kota Kinabalu, Sabah</div>
-                </div>
-              </div>
-              <div class="ov-item">
-                <span class="ov-icon"><img src="assets/icons/calendar.svg" alt=""></span>
-                <div class="ov-text">
-                  <div class="ov-label">Dates</div>
-                  <div class="ov-value">30 Sept – 3 Oct 2026</div>
-                </div>
-              </div>
-              <div class="ov-item">
-                <span class="ov-icon"><img src="assets/icons/registration.svg" alt=""></span>
-                <div class="ov-text">
-                  <div class="ov-label">Registration</div>
-                  <div class="ov-value">Opens Soon</div>
-                </div>
-              </div>
+          <div class="overlay-card" aria-hidden="true"></div>
 
-              <div class="overlay-cta">
-                <a class="btn" href="index.html#register">Register Now</a>
-              </div>
-            </div>
-          </div>
           <!-- /overlay-card -->
         </div>
       </div>
