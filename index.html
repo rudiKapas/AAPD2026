@@ -149,15 +149,42 @@
     .icon-btn{width:34px;height:34px;border-radius:999px;border:1px solid rgba(15,23,42,.12);background:#fff;display:grid;place-items:center;cursor:pointer}
     .icon-btn.hamburger{display:none}
 
-    /* Mobile header behaviour */
-    @media (max-width: 900px){
-      .pill-nav{display:none}
-      .icon-btn.hamburger{display:grid}
-      .mobile-menu{display:none;position:absolute;inset:auto 16px auto 16px;margin-top:8px;background:#fff;border:1px solid rgba(15,23,42,.08);border-radius:14px;box-shadow:0 12px 28px rgba(15,23,42,.10);overflow:hidden}
-      .mobile-menu.open{display:block}
-      .mobile-menu a{display:block;padding:14px 16px;border-bottom:1px solid rgba(15,23,42,.06);text-decoration:none;color:var(--navy);font-weight:600}
-      .mobile-menu a:last-child{border-bottom:0}
-    }
+/* Mobile header behaviour */
+.icon-btn.hamburger{ display:none; }
+
+@media (max-width:900px){
+  .icon-btn.hamburger{ display:grid; }
+}
+
+  /* Mobile menu — hidden by default on ALL sizes */
+  .header-row{ position:relative; } /* anchor for absolute dropdown (you already have this, ok to keep) */
+  
+  .mobile-menu{
+    display:none;                 /* hide on all breakpoints by default */
+    position:absolute;
+    top:calc(100% + 8px);         /* drop just below the header row */
+    left:16px;
+    right:16px;
+    background:#fff;
+    border:1px solid rgba(15,23,42,.08);
+    border-radius:14px;
+    box-shadow:0 12px 28px rgba(15,23,42,.10);
+    z-index:60;                   /* over page content */
+  }
+  
+  .mobile-menu.open{ display:block; }
+  
+  /* Links inside the mobile menu */
+  .mobile-menu a{
+    display:block;
+    padding:14px 16px;
+    border-bottom:1px solid rgba(15,23,42,.06);
+    text-decoration:none;
+    color:var(--navy);
+    font-weight:600;
+  }
+  .mobile-menu a:last-child{ border-bottom:0; }
+
 
 
     /* ======= Register Now pill button (green) ======= */
@@ -1417,39 +1444,44 @@
       }
     })();
   </script>
+
   <script>
-    // Mobile menu toggle for the top bar
     (function(){
-      const btn = document.getElementById('navToggle');
       const menu = document.getElementById('mobileMenu');
-      if(btn && menu){
-        btn.addEventListener('click', ()=>{
-          const isOpen = menu.classList.toggle('open');
-          btn.setAttribute('aria-expanded', isOpen? 'true':'false');
+      const btn  = document.getElementById('navToggle');
+      if(!menu) return;
+      menu.querySelectorAll('a').forEach(a=>{
+        a.addEventListener('click', ()=>{
+          menu.classList.remove('open');
+          if(btn) btn.setAttribute('aria-expanded','false');
         });
-      }
-    })();
-
-    // Scroll buttons for media row
-    (function(){
-      const grid = document.getElementById('mediaGrid');
-      const left = document.querySelector('.scroll-btn.left');
-      const right = document.querySelector('.scroll-btn.right');
-      if(!grid || !left || !right) return;
-
-      function step(){ return Math.max(180, Math.floor(grid.clientWidth * 0.7)); }
-      function update(){
-        left.disabled = grid.scrollLeft <= 2;
-        const max = grid.scrollWidth - grid.clientWidth - 2;
-        right.disabled = grid.scrollLeft >= max;
-      }
-      left.addEventListener('click', ()=>{ grid.scrollBy({left:-step(), behavior:'smooth'}); setTimeout(update, 300); });
-      right.addEventListener('click', ()=>{ grid.scrollBy({left: step(), behavior:'smooth'}); setTimeout(update, 300); });
-      grid.addEventListener('scroll', update, {passive:true});
-      window.addEventListener('resize', update);
-      update();
+      });
     })();
   </script>
+
+  
+<script>
+// Scroll buttons for media row
+(function(){
+  const grid = document.getElementById('mediaGrid');
+  const left = document.querySelector('.scroll-btn.left');
+  const right = document.querySelector('.scroll-btn.right');
+  if(!grid || !left || !right) return;
+
+  function step(){ return Math.max(180, Math.floor(grid.clientWidth * 0.7)); }
+  function update(){
+    left.disabled = grid.scrollLeft <= 2;
+    const max = grid.scrollWidth - grid.clientWidth - 2;
+    right.disabled = grid.scrollLeft >= max;
+  }
+  left.addEventListener('click', ()=>{ grid.scrollBy({left:-step(), behavior:'smooth'}); setTimeout(update, 300); });
+  right.addEventListener('click', ()=>{ grid.scrollBy({left: step(), behavior:'smooth'}); setTimeout(update, 300); });
+  grid.addEventListener('scroll', update, {passive:true});
+  window.addEventListener('resize', update);
+  update();
+})();
+</script>
+
   <script>
     // Add 'loaded' class once DOM is ready to trigger entry animations
     (function(){
