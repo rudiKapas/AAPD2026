@@ -464,34 +464,40 @@
     .img-register{position:absolute;top:12px;right:12px;z-index:3}
 
 
-    /* Right-side copy split into top & bottom lines with exact alignment */
+    /* Right-side copy split into top (↑) & bottom (↓) using grid — DESKTOP ONLY */
     @media (min-width:1101px){
-      .hero-grid{align-items:stretch}
-      .right-col{height:100%;display:flex;flex-direction:column;justify-content:space-between}
-      /* Keep the two lines close and pinned to the top */
+      .hero-grid{ align-items:stretch; }
+    
+      .right-col{ height:100%; }                 /* make column match H1 height */
+    
       .lead{
+        display:grid;
+        grid-template-rows: auto 1fr auto;       /* top line | spacer | bottom line */
+        align-content:stretch;
+        justify-items:start;
+        height:100%;
+        gap:0;
         color:var(--muted);
-        display:flex;
-        flex-direction:column;
-        justify-content: flex-start;  /* top line to top, bottom line to bottom */
-        gap:0;                           /* no extra gap so bottoms align exactly */
-        height:100%;                     /* fill the right column height */
-        flex:1 1 auto;                   /* ensure it stretches with the row */
       }
-
+    
+      .lead-top{
+        align-self:start;
+        line-height:1.06;
+      }
+    
       .lead-strong{
-          margin-top:auto;      /* pushes this line to the bottom edge = bottom of H1 */
-          line-height:1.05;     /* tighten vertical metrics */
-          margin-bottom:-2px;   /* tiny nudge so the baseline visually sits on the edge */
-        }
-        /* optional: nudge the top line slightly to taste */
-        .lead-top{ line-height:1.06; }
-
-
-
-      .lead-top,.lead-strong{font-size:clamp(1.05rem, .9vw + .6rem, 1.25rem);line-height:1.08}
-      .lead-strong{font-weight:300;color:var(--navy)}
+        align-self:end;                           /* ← pins to the bottom edge */
+        margin:0;                                 /* override any earlier nudges */
+        line-height:1.06;
+        font-weight:300;
+        color:var(--navy);
+      }
+    
+      .lead-top, .lead-strong{
+        font-size:clamp(1.05rem, .9vw + .6rem, 1.25rem);
+      }
     }
+
     @media (max-width:1100px){
       .right-col{height:auto}
       .lead{height:auto}
