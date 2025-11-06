@@ -109,7 +109,7 @@
   
     /* ======= Header styles (top bar like the example) ======= */
     .site-header{position:sticky;top:0;z-index:50;background:#ffffff;border-bottom:1px solid rgba(15,23,42,.06)}
-    .header-row{display:flex;align-items:center;justify-content:space-between;gap:8px;height:56px;padding:0}
+    .header-row{display:flex;align-items:center;justify-content:space-between;gap:8px;height:56px;padding:0;position:relative}
     .brand{display:flex;align-items:center;gap:0;font-weight:500;letter-spacing:0}
     .brand-dot{width:10px;height:10px;border-radius:50%;background:#FBAC45}
 
@@ -155,24 +155,32 @@
 
 
     
-    .pill-nav a{color:var(--navy);text-decoration:none;font-weight:600;white-space:nowrap}
+    .pill-nav a{
+      color:var(--navy);
+      text-decoration:none;
+      font-weight:300;               /* lighter text */
+      white-space:nowrap;
+      padding:.55rem .9rem;          /* tap target */
+      border-radius:999px;
+      transition:background-color .2s ease, transform .2s ease, box-shadow .2s ease;
+    }
+    .pill-nav a:hover{
+      background:#f1f5f9;
+      transform:translateY(-1px);
+      box-shadow:0 6px 14px rgba(15,23,42,.10);
+    }
+
 
     .header-actions{display:flex;align-items:center;gap:10px}
     .icon-btn{width:34px;height:34px;border-radius:999px;border:1px solid rgba(15,23,42,.12);background:#fff;display:grid;place-items:center;cursor:pointer}
     .icon-btn.hamburger{display:none}
 
-    /* Mobile header behaviour */
-    @media (max-width: 900px){
-      .pill-nav{display:none}
-      .icon-btn.hamburger{display:grid}
-      .mobile-menu{display:none;position:absolute;inset:auto 16px auto 16px;margin-top:8px;background:#fff;border:1px solid rgba(15,23,42,.08);border-radius:14px;box-shadow:0 12px 28px rgba(15,23,42,.10);overflow:hidden}
-      .mobile-menu.open{display:block}
-      .mobile-menu a{display:block;padding:14px 16px;border-bottom:1px solid rgba(15,23,42,.06);text-decoration:none;color:var(--navy);font-weight:600}
-      .mobile-menu a:last-child{border-bottom:0}
-    }
 
     /* NEW: keep the mobile menu hidden by default (prevents blue links on desktop) */
     .mobile-menu{ display:none; }
+    /* Make the toggle work even if media rules collide */
+    .mobile-menu.open{ display:block; }
+
 
     /* ======= Register Now pill button (green) ======= */
     .right-col{display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:10px;height:100%} 
@@ -191,21 +199,31 @@
     .hero > .container{padding-left:20px !important; padding-right:20px !important; max-width:var(--container); margin-inline:auto}
     .site-header .container{padding:0 20px !important;max-width:var(--container);margin-inline:auto;height:56px;display:flex;align-items:center}
 
-    /* DESKTOP: no header bar, just the floating island centered */
+    /* DESKTOP: transparent bar, island centered, brand on the left */
     @media (min-width: 901px){
       .site-header{
-        background:transparent;          /* kill the bar */
+        background:transparent;    /* no bar */
         border:0;
         box-shadow:none;
       }
       .header-row{
-        justify-content:center;          /* center the island */
+        position:relative;         /* anchor the mobile pop-up too */
+        justify-content:center;    /* center the island */
         height:auto;
         padding:12px 0;
       }
-      .brand, .header-actions{ display:none; }  /* “just the island” as requested */
-      .header-row .pill-nav{ margin:8px auto; } /* keep the pill centered */
+      .brand{                      /* show brand on the left */
+        display:flex;
+        position:absolute;
+        left:20px;
+        top:50%;
+        transform:translateY(-50%);
+        font-weight:700;
+      }
+      .header-actions{ display:none; }         /* hide right controls on desktop */
+      .header-row .pill-nav{ margin:8px auto; }/* keep the pill centered */
     }
+
 
 
     /* ===== Overlay info card in front of the image ===== */
@@ -1437,19 +1455,6 @@
       <small>Copyright © AAPD 2026 Organizing Committee and MADPHS. All rights reserved.</small>
     </div>
   </footer>
-  <script>
-    // Mobile menu toggle for the top bar
-    (function(){
-      const btn = document.getElementById('navToggle');
-      const menu = document.getElementById('mobileMenu');
-      if(btn && menu){
-        btn.addEventListener('click', ()=>{
-          const isOpen = menu.classList.toggle('open');
-          btn.setAttribute('aria-expanded', isOpen? 'true':'false');
-        });
-      }
-    })();
-  </script>
   <script>
     // Mobile menu toggle for the top bar
     (function(){
