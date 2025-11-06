@@ -36,6 +36,17 @@
     .icon-btn{width:34px;height:34px;border-radius:999px;border:1px solid;display:grid;place-items:center;cursor:pointer;background:transparent}
     .icon-btn.hamburger{display:none}
 
+    /* Underline slide-in for all header text links */
+    .mid-nav a, .brand-link{ position:relative; }
+    .mid-nav a::after, .brand-link::after{
+      content:""; position:absolute; left:0; right:0; bottom:-4px; height:2px;
+      background: currentColor; transform:scaleX(0); transform-origin:left;
+      transition: transform .25s cubic-bezier(.2,.65,.3,1);
+      opacity:.9;
+    }
+    .mid-nav a:hover::after, .brand-link:hover::after{ transform:scaleX(1); }
+
+
     /* transparent (over the hero) */
     .site-header.transparent{background:transparent;border-bottom:1px solid transparent}
     .site-header.transparent .brand span,
@@ -127,6 +138,39 @@
     .site-footer{padding:0}                  /* guardrail */
     .footer-inner small{margin:0; line-height:1.2}
 
+    .site-footer{background:#fff;border-top:1px solid rgba(15,23,42,.08);padding:0}
+    .footer-inner{
+      padding:8px 0;                 /* tighter than before */
+      min-height:36px;               /* cap the height */
+      display:flex;justify-content:center;text-align:center
+    }
+    .footer-inner *{margin:0}        /* kill stray margins */
+    .footer-inner small{color:var(--muted);line-height:1}
+
+    /* Nudge a bit right (you already added this earlier) */
+    .brand{ margin-left:10px; }
+    
+    /* Make brand look/behave like a button/link */
+    .brand-link{
+      color:inherit; text-decoration:none; display:inline-block;
+      padding:2px 4px;
+      transition:transform .18s cubic-bezier(.2,.65,.3,1), opacity .18s ease;
+      position:relative;
+    }
+    .brand-link:hover{ transform:translateY(-1px); opacity:.9; }
+
+    .overlay-quote{
+      margin:0;
+      font-family:Poppins,Inter,sans-serif;
+      font-size:clamp(1rem, .9vw + .6rem, 1.2rem);
+      font-weight:600;
+      color:#0f172a;     /* readable on white card */
+      letter-spacing:.2px;
+    }
+
+
+
+
   </style>
 </head>
 <body>
@@ -134,7 +178,9 @@
   <!-- ===== Header (transparent on load; turns solid after hero) ===== -->
   <header class="site-header transparent" id="siteHeader">
     <div class="container header-row">
-      <div class="brand"><span>AAPD 2026</span></div>
+      <div class="brand" aria-label="AAPD 2026 brand">
+        <a href="index.html" class="brand-link">AAPD 2026</a>
+      </div>
 
       <nav class="mid-nav" aria-label="Primary">
         <a href="aboutus.html">About Us</a>
@@ -167,7 +213,12 @@
           <img src="assets/img/welcomMessageTop.png" alt="Welcome to AAPD 2026 at Kota Kinabalu" />
 
           <!-- Reused overlay card (same look as index) -->
-          <div class="overlay-card" aria-hidden="true"></div>
+          <div class="overlay-card fx" style="--d:.16s" role="note" aria-label="Welcome message">
+            <p class="overlay-quote">
+              Associate Professor Dr. Budi Aslinie, President of the Asian Academy of Preventive Dentistry.
+            </p>
+          </div>
+
 
           <!-- /overlay-card -->
         </div>
