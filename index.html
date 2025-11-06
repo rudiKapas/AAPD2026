@@ -473,11 +473,20 @@
         color:var(--muted);
         display:flex;
         flex-direction:column;
-        justify-content:space-between;  /* top line to top, bottom line to bottom */
+        justify-content: flex-start;  /* top line to top, bottom line to bottom */
         gap:0;                           /* no extra gap so bottoms align exactly */
         height:100%;                     /* fill the right column height */
         flex:1 1 auto;                   /* ensure it stretches with the row */
       }
+
+      .lead-strong{
+          margin-top:auto;      /* pushes this line to the bottom edge = bottom of H1 */
+          line-height:1.05;     /* tighten vertical metrics */
+          margin-bottom:-2px;   /* tiny nudge so the baseline visually sits on the edge */
+        }
+        /* optional: nudge the top line slightly to taste */
+        .lead-top{ line-height:1.06; }
+
 
 
       .lead-top,.lead-strong{font-size:clamp(1.05rem, .9vw + .6rem, 1.25rem);line-height:1.08}
