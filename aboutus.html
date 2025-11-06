@@ -36,15 +36,21 @@
     .icon-btn{width:34px;height:34px;border-radius:999px;border:1px solid;display:grid;place-items:center;cursor:pointer;background:transparent}
     .icon-btn.hamburger{display:none}
 
-    /* Underline slide-in for all header text links */
-    .mid-nav a, .brand-link{ position:relative; }
-    .mid-nav a::after, .brand-link::after{
-      content:""; position:absolute; left:0; right:0; bottom:-4px; height:2px;
-      background: currentColor; transform:scaleX(0); transform-origin:left;
-      transition: transform .25s cubic-bezier(.2,.65,.3,1);
-      opacity:.9;
+    /* Pop-up hover like index.html (no underline) */
+    .mid-nav a, .brand-link{
+      transition: transform .18s cubic-bezier(.2,.65,.3,1), opacity .18s ease;
+      will-change: transform;
     }
-    .mid-nav a:hover::after, .brand-link:hover::after{ transform:scaleX(1); }
+    .mid-nav a:hover, .brand-link:hover{
+      transform: translateY(-1px);
+      opacity: .85;
+    }
+    
+    @media (prefers-reduced-motion: reduce){
+      .mid-nav a:hover, .brand-link:hover{ transform:none; opacity:1; }
+    }
+
+
 
 
     /* transparent (over the hero) */
