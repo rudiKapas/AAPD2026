@@ -412,14 +412,16 @@
     @media (min-width:1101px){
       .hero-grid{align-items:stretch}
       .right-col{height:100%;display:flex;flex-direction:column;justify-content:space-between}
-      /* Keep the two lines close and pinned to the top */
+      /* Align first line to top and second to bottom of the H1 track */
       .lead{
         color:var(--muted);
         display:flex;
         flex-direction:column;
-        gap:4px;                 /* adjust to 2px if you want it tighter */
-        justify-content:flex-start;
-        height:auto;
+        height:100%;
+        flex:1;
+        justify-content:space-between;  /* top & bottom alignment */
+        gap:0;                          /* space is handled by padding-block */
+        padding-block:6px;              /* TWEAK THIS to control distance */
       }
 
       .lead-top,.lead-strong{font-size:clamp(1.05rem, .9vw + .6rem, 1.25rem);line-height:1.08}
