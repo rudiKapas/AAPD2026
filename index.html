@@ -124,11 +124,35 @@
       box-shadow:0 10px 24px rgba(15,23,42,.06), 0 2px 6px rgba(15,23,42,.05);
     }
     
-    /* Hide island on small screens (you already have this, keeping it here for clarity) */
-    @media (max-width: 900px){
-      .pill-nav{ display:none; }       /* desktop-only island */
-      .icon-btn.hamburger{ display:grid; } /* show hamburger on mobile */
+      @media (max-width: 900px){
+      .pill-nav{ display:none; }                 /* island is desktop-only */
+      .icon-btn.hamburger{ display:grid; }
+    
+      /* POP-UP menu (opens when #navToggle toggles .open) */
+      .mobile-menu{
+        display:none;                            /* closed by default */
+        position:absolute;
+        top:56px;                                /* sits just under the header row */
+        left:16px; right:16px;
+        background:#fff;
+        border:1px solid rgba(15,23,42,.08);
+        border-radius:14px;
+        box-shadow:0 12px 28px rgba(15,23,42,.10);
+        overflow:hidden;
+        z-index:60;
+      }
+      .mobile-menu.open{ display:block; }
+      .mobile-menu a{
+        display:block;
+        padding:14px 16px;
+        border-bottom:1px solid rgba(15,23,42,.06);
+        text-decoration:none;
+        color:var(--navy);
+        font-weight:600;
+      }
+      .mobile-menu a:last-child{ border-bottom:0; }
     }
+
 
     
     .pill-nav a{color:var(--navy);text-decoration:none;font-weight:600;white-space:nowrap}
@@ -147,6 +171,8 @@
       .mobile-menu a:last-child{border-bottom:0}
     }
 
+    /* NEW: keep the mobile menu hidden by default (prevents blue links on desktop) */
+    .mobile-menu{ display:none; }
 
     /* ======= Register Now pill button (green) ======= */
     .right-col{display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:10px;height:100%} 
@@ -164,6 +190,22 @@
     /* Shared rails (separate header from hero so header can be shorter) */
     .hero > .container{padding-left:20px !important; padding-right:20px !important; max-width:var(--container); margin-inline:auto}
     .site-header .container{padding:0 20px !important;max-width:var(--container);margin-inline:auto;height:56px;display:flex;align-items:center}
+
+    /* DESKTOP: no header bar, just the floating island centered */
+    @media (min-width: 901px){
+      .site-header{
+        background:transparent;          /* kill the bar */
+        border:0;
+        box-shadow:none;
+      }
+      .header-row{
+        justify-content:center;          /* center the island */
+        height:auto;
+        padding:12px 0;
+      }
+      .brand, .header-actions{ display:none; }  /* “just the island” as requested */
+      .header-row .pill-nav{ margin:8px auto; } /* keep the pill centered */
+    }
 
 
     /* ===== Overlay info card in front of the image ===== */
