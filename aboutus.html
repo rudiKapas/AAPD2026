@@ -34,6 +34,14 @@
     .mid-nav{display:flex;gap:22px;position:absolute;left:50%;transform:translateX(-50%)}
     .mid-nav a{text-decoration:none;font-weight:500}
 
+    /* AAPD 2026 brand link — no underline in any state */
+    .brand-link{ text-decoration:none; }
+    .brand-link:link,
+    .brand-link:visited{ text-decoration:none; }
+    .brand-link:hover,
+    .brand-link:focus{ text-decoration:none; transform:translateY(-1px); opacity:.85; }
+    
+
     /* Pop-up hover (no underline) — same feel as index */
     .mid-nav a, .brand-link{
       transition: transform .18s cubic-bezier(.2,.65,.3,1), opacity .18s ease;
