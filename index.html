@@ -473,10 +473,12 @@
         color:var(--muted);
         display:flex;
         flex-direction:column;
-        gap:4px;                 /* adjust to 2px if you want it tighter */
-        justify-content:flex-start;
-        height:auto;
+        justify-content:space-between;  /* top line to top, bottom line to bottom */
+        gap:0;                           /* no extra gap so bottoms align exactly */
+        height:100%;                     /* fill the right column height */
+        flex:1 1 auto;                   /* ensure it stretches with the row */
       }
+
 
       .lead-top,.lead-strong{font-size:clamp(1.05rem, .9vw + .6rem, 1.25rem);line-height:1.08}
       .lead-strong{font-weight:300;color:var(--navy)}
