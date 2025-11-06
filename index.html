@@ -117,6 +117,35 @@
     .pill-nav a{color:var(--navy);text-decoration:none;font-weight:600;white-space:nowrap}
 
     .header-actions{display:flex;align-items:center;gap:10px}
+
+    /* === Centered text-only nav (desktop) === */
+    .header-row{ position:relative; } /* anchor for absolute centering */
+    .mid-nav{
+      position:absolute;
+      left:50%;
+      transform:translateX(-50%);
+      display:flex;
+      align-items:center;
+      gap:22px;
+      font-weight:300; /* light font as requested */
+    }
+    .mid-nav a{
+      text-decoration:none;
+      color:var(--navy);
+      font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      letter-spacing:.2px;
+      transition:transform .18s cubic-bezier(.2,.65,.3,1), opacity .18s ease;
+    }
+    .mid-nav a:hover{
+      transform:translateY(-1px);
+      opacity:.85; /* subtle “clickable” cue */
+    }
+    /* Hide center nav on mobile; use the pop-up menu instead */
+    @media (max-width:900px){
+      .mid-nav{ display:none; }
+    }
+
+    
     .icon-btn{width:34px;height:34px;border-radius:999px;border:1px solid rgba(15,23,42,.12);background:#fff;display:grid;place-items:center;cursor:pointer}
     .icon-btn.hamburger{display:none}
 
@@ -1087,20 +1116,36 @@
 </style>
 </head>
 <body>
+  
   <!-- ======= TOP BAR (like the example) ======= -->
-  <header class="site-header">
-    <div class="container header-row fx" style="--d:.04s">
-      <!-- Brand on the left -->
-      <div class="brand" aria-label="AAPD 2026 brand">
-        <span>AAPD 2026</span>
-      </div>
+      <header class="site-header">
+        <div class="container header-row fx" style="--d:.04s">
+        <!-- Brand on the left -->
+        <div class="brand" aria-label="AAPD 2026 brand">
+          <span>AAPD 2026</span>
+        </div>
+    
+          <nav class="mid-nav" aria-label="Primary">
+              <a href="#about">About Us</a>
+              <a href="#registration">Registration</a>
+              <a href="#keynotes">Keynote Speakers</a>
+              <a href="#sponsors">Sponsors</a>
+              <a href="#contact">Contact Us</a>
+            </nav>
+
 
       <!-- Right icon buttons (simple placeholders) -->
       <div class="header-actions">
-        <button class="icon-btn" aria-label="Travel/Flights">✈️</button>
-        <button class="icon-btn" aria-label="Account">👤</button>
         <button class="icon-btn hamburger" id="navToggle" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu">☰</button>
       </div>
+          <nav id="mobileMenu" class="mobile-menu" aria-label="Mobile menu">
+            <a href="#about">About Us</a>
+            <a href="#registration">Registration</a>
+            <a href="#keynotes">Keynote Speakers</a>
+            <a href="#sponsors">Sponsors</a>
+            <a href="#contact">Contact Us</a>
+          </nav>
+
     </div>
 </header>
 
