@@ -109,77 +109,26 @@
   
     /* ======= Header styles (top bar like the example) ======= */
     .site-header{position:sticky;top:0;z-index:50;background:#ffffff;border-bottom:1px solid rgba(15,23,42,.06)}
-    .header-row{display:flex;align-items:center;justify-content:space-between;gap:8px;height:56px;padding:0;position:relative}
+    .header-row{display:flex;align-items:center;justify-content:space-between;gap:12px;height:56px;padding:0}
     .brand{display:flex;align-items:center;gap:0;font-weight:500;letter-spacing:0}
     .brand-dot{width:10px;height:10px;border-radius:50%;background:#FBAC45}
 
     .pill-nav{display:flex;align-items:center;gap:22px;background:#fff;border:1px solid rgba(15,23,42,.08);border-radius:999px;padding:10px 16px;box-shadow:0 10px 24px rgba(15,23,42,.06)}
-
-    /* Center the island between brand and hamburger */
-    .header-row .pill-nav{ margin: 0 auto; }
-    
-    /* Slightly softer island look (optional but nice) */
-    .pill-nav{
-      padding:10px 18px;
-      box-shadow:0 10px 24px rgba(15,23,42,.06), 0 2px 6px rgba(15,23,42,.05);
-    }
-    
-      @media (max-width: 900px){
-      .pill-nav{ display:none; }                 /* island is desktop-only */
-      .icon-btn.hamburger{ display:grid; }
-    
-      /* POP-UP menu (opens when #navToggle toggles .open) */
-      .mobile-menu{
-        display:none;                            /* closed by default */
-        position:absolute;
-        top:56px;                                /* sits just under the header row */
-        left:16px; right:16px;
-        background:#fff;
-        border:1px solid rgba(15,23,42,.08);
-        border-radius:14px;
-        box-shadow:0 12px 28px rgba(15,23,42,.10);
-        overflow:hidden;
-        z-index:60;
-      }
-      .mobile-menu.open{ display:block; }
-      .mobile-menu a{
-        display:block;
-        padding:14px 16px;
-        border-bottom:1px solid rgba(15,23,42,.06);
-        text-decoration:none;
-        color:var(--navy);
-        font-weight:600;
-      }
-      .mobile-menu a:last-child{ border-bottom:0; }
-    }
-
-
-    
-    .pill-nav a{
-      color:var(--navy);
-      text-decoration:none;
-      font-weight:300;               /* lighter text */
-      white-space:nowrap;
-      padding:.55rem .9rem;          /* tap target */
-      border-radius:999px;
-      transition:background-color .2s ease, transform .2s ease, box-shadow .2s ease;
-    }
-    .pill-nav a:hover{
-      background:#f1f5f9;
-      transform:translateY(-1px);
-      box-shadow:0 6px 14px rgba(15,23,42,.10);
-    }
-
+    .pill-nav a{color:var(--navy);text-decoration:none;font-weight:600;white-space:nowrap}
 
     .header-actions{display:flex;align-items:center;gap:10px}
     .icon-btn{width:34px;height:34px;border-radius:999px;border:1px solid rgba(15,23,42,.12);background:#fff;display:grid;place-items:center;cursor:pointer}
     .icon-btn.hamburger{display:none}
 
-
-    /* NEW: keep the mobile menu hidden by default (prevents blue links on desktop) */
-    .mobile-menu{ display:none; }
-    /* Make the toggle work even if media rules collide */
-    .mobile-menu.open{ display:block; }
+    /* Mobile header behaviour */
+    @media (max-width: 900px){
+      .pill-nav{display:none}
+      .icon-btn.hamburger{display:grid}
+      .mobile-menu{display:none;position:absolute;inset:auto 16px auto 16px;margin-top:8px;background:#fff;border:1px solid rgba(15,23,42,.08);border-radius:14px;box-shadow:0 12px 28px rgba(15,23,42,.10);overflow:hidden}
+      .mobile-menu.open{display:block}
+      .mobile-menu a{display:block;padding:14px 16px;border-bottom:1px solid rgba(15,23,42,.06);text-decoration:none;color:var(--navy);font-weight:600}
+      .mobile-menu a:last-child{border-bottom:0}
+    }
 
 
     /* ======= Register Now pill button (green) ======= */
@@ -198,32 +147,6 @@
     /* Shared rails (separate header from hero so header can be shorter) */
     .hero > .container{padding-left:20px !important; padding-right:20px !important; max-width:var(--container); margin-inline:auto}
     .site-header .container{padding:0 20px !important;max-width:var(--container);margin-inline:auto;height:56px;display:flex;align-items:center}
-
-    /* DESKTOP: transparent bar, island centered, brand on the left */
-    @media (min-width: 901px){
-      .site-header{
-        background:transparent;    /* no bar */
-        border:0;
-        box-shadow:none;
-      }
-      .header-row{
-        position:relative;         /* anchor the mobile pop-up too */
-        justify-content:center;    /* center the island */
-        height:auto;
-        padding:12px 0;
-      }
-      .brand{                      /* show brand on the left */
-        display:flex;
-        position:absolute;
-        left:20px;
-        top:50%;
-        transform:translateY(-50%);
-        font-weight:700;
-      }
-      .header-actions{ display:none; }         /* hide right controls on desktop */
-      .header-row .pill-nav{ margin:8px auto; }/* keep the pill centered */
-    }
-
 
 
     /* ===== Overlay info card in front of the image ===== */
@@ -489,16 +412,14 @@
     @media (min-width:1101px){
       .hero-grid{align-items:stretch}
       .right-col{height:100%;display:flex;flex-direction:column;justify-content:space-between}
-      /* Align first line to top and second to bottom of the H1 track */
+      /* Keep the two lines close and pinned to the top */
       .lead{
         color:var(--muted);
         display:flex;
         flex-direction:column;
-        height:100%;
-        flex:1;
-        justify-content:space-between;  /* top & bottom alignment */
-        gap:0;                          /* space is handled by padding-block */
-        padding-block:6px;              /* TWEAK THIS to control distance */
+        gap:4px;                 /* adjust to 2px if you want it tighter */
+        justify-content:flex-start;
+        height:auto;
       }
 
       .lead-top,.lead-strong{font-size:clamp(1.05rem, .9vw + .6rem, 1.25rem);line-height:1.08}
@@ -1174,29 +1095,12 @@
         <span>AAPD 2026</span>
       </div>
 
-      <!-- ======= pill island ======= -->
-      <nav class="pill-nav" aria-label="Primary">
-        <a href="#about">About Us</a>
-        <a href="#register">Registration</a>
-        <a href="#keynotes">Keynote Speakers</a>
-        <a href="#sponsors">Sponsors</a>
-        <a href="#contact">Contact Us</a>
-      </nav>
-
-
       <!-- Right icon buttons (simple placeholders) -->
       <div class="header-actions">
+        <button class="icon-btn" aria-label="Travel/Flights">✈️</button>
+        <button class="icon-btn" aria-label="Account">👤</button>
         <button class="icon-btn hamburger" id="navToggle" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu">☰</button>
       </div>
-      <div class="mobile-menu" id="mobileMenu" role="menu">
-        <a href="#about">About Us</a>
-        <a href="#register">Registration</a>
-        <a href="#keynotes">Keynote Speakers</a>
-        <a href="#sponsors">Sponsors</a>
-        <a href="#contact">Contact Us</a>
-      </div>
-
-      
     </div>
 </header>
 
@@ -1211,8 +1115,8 @@
           <!-- Right: Long form of AAPD (keep as a single concise paragraph) -->
           <div class="right-col">
             <div class="lead">
-              <div class="lead-top fx" style="--d:.16s">Empowering Communities Through Preventive Dentistry</div>
-              <div class="lead-strong fx" style="--d:.22s">18th International Conference of Asian Academy of Preventive Dentistry</div>
+              <div class="lead-top fx" style="--d:.16s">18th International Conference of Asian Academy of Preventive Dentistry.</div>
+              <div class="lead-strong fx" style="--d:.22s">Empowering Communities Through Preventive Dentistry</div>
             </div>
           </div>
         </div>
@@ -1455,6 +1359,19 @@
       <small>Copyright © AAPD 2026 Organizing Committee and MADPHS. All rights reserved.</small>
     </div>
   </footer>
+  <script>
+    // Mobile menu toggle for the top bar
+    (function(){
+      const btn = document.getElementById('navToggle');
+      const menu = document.getElementById('mobileMenu');
+      if(btn && menu){
+        btn.addEventListener('click', ()=>{
+          const isOpen = menu.classList.toggle('open');
+          btn.setAttribute('aria-expanded', isOpen? 'true':'false');
+        });
+      }
+    })();
+  </script>
   <script>
     // Mobile menu toggle for the top bar
     (function(){
