@@ -302,33 +302,34 @@
       .hero-img{margin-bottom:16px}
     }
 
-    /* === Mobile: show the full person + keep text readable === */
+    /* === Mobile: shorter frame + push figure to the right so text doesn't sit on top === */
     @media (max-width: 600px){
       .hero-img img{
-        height:480px;                 /* a bit shorter so more width is visible */
-        object-fit:cover;             /* no distortion */
-        object-position: 90% 50%;     /* bias to the right so the person stays inside */
+        height:420px;            /* shorter image frame */
+        object-fit:cover;        /* no distortion */
+        object-position: 100% 50%; /* shift image to the right (figure clears the text) */
       }
     
       .welcome-block{
-        left:18px;
-        right:auto;                   /* don't stretch to the right edge */
-        width:60%;                    /* leave space for the figure on the right */
-        top:46%;
-        transform:translateY(-46%);
+        left:16px;               /* safe inset from rounded corner */
+        right:auto;
+        width:62%;               /* give text a fixed column; leaves space for the figure */
+        top:48%;
+        transform:translateY(-48%);
       }
     
       .welcome-block h2{
-        font-size:clamp(1.7rem, 7.6vw, 2.1rem);  /* slightly smaller on phones */
-        line-height:1.08;
+        font-size:clamp(1.6rem, 7vw, 2rem);
+        line-height:1.06;
       }
     
       .welcome-block p{
-        font-size:.92rem;
-        line-height:1.38;
-        max-width:30ch;               /* narrower measure = more legible */
+        font-size:.9rem;
+        line-height:1.36;
+        max-width:28ch;          /* a bit narrower = keeps off the figure */
       }
     }
+
 
 
 
