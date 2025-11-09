@@ -302,40 +302,45 @@
       .hero-img{margin-bottom:16px}
     }
 
-    /* === Mobile hero: shorter frame, crop from TOP, figure kept to the RIGHT === */
+    /* === Mobile hero (final): shorter, crop TOP, figure to the RIGHT, text clear === */
     @media (max-width: 600px){
-      /* keep the card masking clean */
-      .hero-img{
-        overflow: hidden;
-      }
+      .hero-img{ overflow:hidden; }
     
-      /* shorter hero; bottom anchored; shifted to the right */
+      /* Shorter frame; anchored bottom-right so only TOP is cropped */
       .hero-img img{
-        height: 420px;                /* shorten the frame */
+        height: 380px;            /* was 420px */
         object-fit: cover;
-        object-position: 92% 100%;    /* 92% to the right, 100% = bottom — cuts TOP only */
+        object-position: 100% 100%; /* push image fully right & to the bottom */
       }
     
-      /* keep text on the left, away from the person */
+      /* Keep copy as a left column so it doesn't cover the person */
       .welcome-block{
         left: 16px;
-        width: 58%;                   /* left column */
-        right: auto;                  /* stop stretching over the figure */
-        top: 46%;
-        transform: translateY(-46%);
-        padding-right: 8px;           /* small buffer from column edge */
+        right: auto;
+        width: 52%;                /* was 58% */
+        top: 48%;                  /* slightly lower for balance */
+        transform: translateY(-48%);
+        padding-right: 10px;
       }
     
       .welcome-block h2{
-        font-size: 1.9rem;            /* slightly smaller for readability */
-        line-height: 1.05;
+        font-size: 1.7rem;         /* tighten for readability over image */
+        line-height: 1.06;
       }
     
       .welcome-block p{
-        font-size: 0.95rem;
-        line-height: 1.38;
-        max-width: 30ch;              /* keeps copy from drifting into the figure */
+        font-size: 0.92rem;
+        line-height: 1.36;
+        max-width: 28ch;           /* prevents copy drifting into the figure */
       }
+    }
+    
+    /* Very small phones: trim a bit more */
+    @media (max-width: 360px){
+      .hero-img img{ height: 360px; object-position: 100% 100%; }
+      .welcome-block{ width: 50%; top: 49%; transform: translateY(-49%); }
+      .welcome-block h2{ font-size: 1.6rem; }
+      .welcome-block p{ font-size: 0.9rem; max-width: 26ch; }
     }
 
 
