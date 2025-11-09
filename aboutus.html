@@ -364,6 +364,96 @@
     .section h2{font-family:Poppins,Inter,sans-serif;font-weight:500;margin:0 0 6px;font-size:clamp(1.2rem,1.3vw + .6rem,1.8rem)}
     .section p{color:var(--muted);margin:0;max-width:80ch}
 
+    /* ========== Contact section cards ========== */
+    .contact .contact-sub{ margin-top:4px; }
+    
+    .contact-grid{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap:min(3vw,22px);
+      margin-top:18px;
+    }
+    
+    /* match the “Media Materials” look: white card, soft border & radius */
+    .info-card{
+      background:#fff;
+      border:1px solid rgba(15,23,42,.08);
+      border-radius:var(--radius);
+      box-shadow:0 8px 18px rgba(15,23,42,.06);
+      padding:20px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      min-height:220px;          /* same visual height */
+      position:relative;
+      transition: box-shadow .25s ease, transform .25s ease;
+    }
+    
+    /* blue “glow” only on hover */
+    .info-card::after{
+      content:"";
+      position:absolute;
+      left:0; right:0; bottom:0;
+      height:0;
+      background:linear-gradient(180deg, rgba(37,99,235,0), rgba(37,99,235,.18));
+      border-radius:0 0 var(--radius) var(--radius);
+      transition: height .25s ease, opacity .25s ease;
+      opacity:0;
+    }
+    .info-card:hover{
+      transform:translateY(-2px);
+      box-shadow:0 16px 34px rgba(15,23,42,.12);
+    }
+    .info-card:hover::after{
+      height:8px; opacity:1;
+    }
+    
+    /* empty icon frame (drop your SVG/PNG later) */
+    .icon-box{
+      width:64px; height:64px;
+      border-radius:14px;
+      border:1px solid rgba(15,23,42,.12);
+      background:rgba(15,23,42,.02);
+    }
+    
+    /* typography inside card */
+    .info-card h3{
+      margin:8px 0 2px;
+      font-weight:600;
+      font-size:clamp(1.05rem, .6vw + 1rem, 1.2rem);
+      color:var(--navy);
+    }
+    .info-card p{ color:var(--muted); }
+    
+    /* “Learn more” shows only on hover */
+    .learn-more{
+      margin-top:auto;                      /* pins to bottom */
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-weight:600;
+      color:var(--navy);
+      text-decoration:none;
+      opacity:0;
+      transform:translateY(4px);
+      transition:opacity .25s ease, transform .25s ease;
+    }
+    .info-card:hover .learn-more{
+      opacity:1;
+      transform:translateY(0);
+    }
+    .learn-more .arrow{ transition:transform .25s ease; }
+    .info-card:hover .learn-more .arrow{ transform:translateX(3px); }
+    
+    /* responsive: stack on small screens */
+    @media (max-width:900px){
+      .contact-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
+    @media (max-width:640px){
+      .contact-grid{ grid-template-columns: 1fr; }
+    }
+
+
     /* ========== Footer (compact, same height feel as index) ========== */
     .site-footer{background:#fff;border-top:1px solid rgba(15,23,42,.08);padding:0}
     .footer-inner{
@@ -457,6 +547,39 @@
       </div>
     </section>
 
+    <!-- ========= CONTACT: 3 cards ========= -->
+    <section id="contact" class="section contact">
+      <div class="container">
+        <h2>Contact Us</h2>
+        <p class="contact-sub">We are always ready to help you and answer your questions.</p>
+    
+        <div class="contact-grid">
+          <!-- Card 1 -->
+          <article class="info-card">
+            <div class="icon-box" aria-hidden="true"></div>
+            <h3>WhatsApp</h3>
+            <p>Get immediate assistance and quick responses to your queries through our dedicated WhatsApp channel.</p>
+            <a class="learn-more" href="#" aria-label="Open WhatsApp">Learn more <span class="arrow">→</span></a>
+          </article>
+    
+          <!-- Card 2 -->
+          <article class="info-card">
+            <div class="icon-box" aria-hidden="true"></div>
+            <h3>Email</h3>
+            <p>Send us your comprehensive questions, feedback, or detailed requests, and we'll get back to you promptly.</p>
+            <a class="learn-more" href="mailto:info@example.com">Learn more <span class="arrow">→</span></a>
+          </article>
+    
+          <!-- Card 3 -->
+          <article class="info-card">
+            <div class="icon-box" aria-hidden="true"></div>
+            <h3>Facebook</h3>
+            <p>Stay informed, engage with our community, and receive updates directly in your social feed.</p>
+            <a class="learn-more" href="#" target="_blank" rel="noopener">Learn more <span class="arrow">→</span></a>
+          </article>
+        </div>
+      </div>
+    </section>
 
     
   </main>
