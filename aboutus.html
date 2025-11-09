@@ -400,21 +400,34 @@
       transition: height .25s ease, opacity .25s ease;
       opacity:0;
     }
+    /* Card hover: no blue glow, just blue border */
     .info-card:hover{
-      transform:translateY(-2px);
-      box-shadow:0 16px 34px rgba(15,23,42,.12);
+      transform: translateY(-2px);                   /* keep the subtle lift */
+      box-shadow: 0 12px 24px rgba(15,23,42,.08);    /* neutral shadow (no blue) */
+      border-color: #2563eb;                         /* blue frame on hover */
     }
+
     .info-card:hover::after{
       height:8px; opacity:1;
     }
     
     /* empty icon frame (drop your SVG/PNG later) */
+    /* Blue-filled icon frame */
     .icon-box{
       width:64px; height:64px;
-      border-radius:14px;
-      border:1px solid rgba(15,23,42,.12);
-      background:rgba(15,23,42,.02);
+      border-radius:16px;
+      background:#2563eb;              /* fill the badge in blue */
+      border:1px solid transparent;    /* border handled by card */
+      display:grid; place-items:center;
     }
+    
+    /* If you add monochrome SVGs, they’ll appear white automatically */
+    .icon-box img{
+      width:28px; height:28px;
+      display:block;
+      filter: invert(1);
+    }
+
     
     /* typography inside card */
     .info-card h3{
@@ -547,13 +560,6 @@
     </section>
 
     <!-- ========= Body: Welcome text ========= -->
-    <!-- ========= CONTACT US ========= -->
-    <section class="section" id="contact">
-      <div class="container">
-        <h2>Contact Us</h2>
-        <p>We are always ready to help you and answer your questions.</p>
-      </div>
-    </section>
 
     <!-- ========= CONTACT: 3 cards ========= -->
     <section id="contact" class="section contact">
@@ -575,7 +581,7 @@
           <!-- Card 2 -->
           <article class="info-card">
             <div class="icon-box">
-              <img src="assets/icons/whatsapp.svg" alt="" width="28" height="28" loading="lazy">
+              <img src="assets/icons/email.svg" alt="" width="28" height="28" loading="lazy">
             </div>
             <h3>Email</h3>
             <p>Send us your comprehensive questions, feedback, or detailed requests, and we'll get back to you promptly.</p>
@@ -585,7 +591,7 @@
           <!-- Card 3 -->
           <article class="info-card">
             <div class="icon-box">
-              <img src="assets/icons/whatsapp.svg" alt="" width="28" height="28" loading="lazy">
+              <img src="assets/icons/facebook.svg" alt="" width="28" height="28" loading="lazy">
             </div>
             <h3>Facebook</h3>
             <p>Stay informed, engage with our community, and receive updates directly in your social feed.</p>
