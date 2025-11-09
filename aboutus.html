@@ -268,8 +268,8 @@
       color:#eef2f7;             /* slightly softer white */
     }
     
-    /* Mobile: hide the overlay text and use the regular section */
-
+    /* hidden by default; we reveal this on mobile only */
+    .welcome-short{ display:none; }
 
 
 
@@ -306,43 +306,42 @@
     @media (max-width: 600px){
       .hero-img{ overflow:hidden; }
     
-      /* Shorter frame; crop TOP; push image further RIGHT so text doesn’t cover it */
+      /* Shorter frame; crop from TOP; push person to the RIGHT */
       .hero-img img{
         height: 340px;
         object-fit: cover;
-        object-position: 122% 100%;   /* ← shove subject to the right */
+        object-position: 135% 100%;   /* ← moves image to the right */
       }
     
-      /* Move copy LOWER (clear of the “AAPD 2026” brand) and make it narrower */
+      /* Move welcome copy lower and keep it narrow on the left */
       .welcome-block{
         left: 16px;
         right: auto;
         width: 52%;
-        top: 60%;                      /* ↓ lower */
-        transform: translateY(-60%);
+        top: 62%;                      /* ← lower so it clears the AAPD 2026 brand */
+        transform: translateY(-62%);
         padding-right: 12px;
       }
     
       .welcome-block h2{
-        font-size: 1.45rem;            /* smaller so it stays inside the frame */
+        font-size: 1.42rem;            /* smaller so it stays inside the frame */
         line-height: 1.06;
       }
     
-      .welcome-block p{
-        font-size: 0.88rem;            /* smaller body text */
+      /* Hide the long paragraph on mobile; show the short one */
+      .welcome-block p{ display:none; }
+      .welcome-block .welcome-short{
+        display:block;
+        font-size: 0.88rem;
         line-height: 1.34;
-        max-width: 24ch;               /* prevents overlap with the figure */
+        max-width: 24ch;               /* keeps text well inside the image */
+        color:#eef2f7;
       }
     }
 
+
     
-    /* Very small phones: one more step down */
-    @media (max-width: 360px){
-      .hero-img img{ height: 350px; object-position: 114% 100%; }
-      .welcome-block{ width: 48%; top: 57%; transform: translateY(-57%); }
-      .welcome-block h2{ font-size: 1.45rem; }
-      .welcome-block p{ font-size: 0.88rem; max-width: 25ch; }
-    }
+
 
     
 
@@ -420,6 +419,9 @@
                 Asian Academy of Preventive Dentistry in Kota Kinabalu, Sabah. This meeting
                 brings together clinicians, educators, researchers, and policy-makers to
                 advance preventive dentistry through evidence, collaboration, and innovation.
+              </p>
+              <p class="welcome-short">
+                Welcome to the 18th AAPD Conference in Kota Kinabalu. Clinicians, educators, and researchers advancing preventive dentistry through evidence, collaboration, and innovation.
               </p>
             </div>
 
