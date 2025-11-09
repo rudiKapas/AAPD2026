@@ -375,26 +375,47 @@
     }
 
     /* Mobile: horizontal swipe for contact cards */
+    /* Mobile: horizontal swipe + square, smaller cards */
     @media (max-width: 768px){
       .contact-grid{
-        display:grid;                    /* turn the grid into a scroller */
+        display:grid;
         grid-auto-flow: column;
-        grid-auto-columns: 84%;          /* each card ~84% of viewport width */
-        gap:16px;
+        grid-auto-columns: 78%;          /* a bit narrower so cards feel smaller */
+        gap:14px;
         overflow-x:auto;
         scroll-snap-type:x mandatory;
         -webkit-overflow-scrolling:touch;
-        padding: 8px 12px 12px;
+        padding: 6px 12px 10px;
         margin: 0 -20px;                 /* full-bleed to screen edges (matches .container padding) */
       }
+    
+      /* Square card, compact padding */
       .contact-grid .info-card{
+        aspect-ratio: 1 / 1;             /* <— makes every card perfectly square */
+        min-height: 0;                    /* let aspect-ratio control height */
+        padding:16px;
         scroll-snap-align:start;
-        min-height: 240px;               /* keeps a steady height while swiping */
       }
-      /* hide mobile scrollbar */
-      .contact-grid::-webkit-scrollbar{ display:none; }
-      .contact-grid{ scrollbar-width:none; -ms-overflow-style:none; }
+    
+      /* Smaller text so content fits the square cleanly */
+      .info-card h3{ font-size:1rem; margin:8px 0 2px; }
+      .info-card p{
+        font-size:.92rem;
+        line-height:1.35;
+        display:-webkit-box;              /* 4-line clamp so heights stay equal */
+        -webkit-line-clamp:4;
+        -webkit-box-orient:vertical;
+        overflow:hidden;
+      }
+    
+      /* No “Learn more” on mobile (no hover state, and saves space) */
+      .info-card .learn-more{ display:none; }
+    
+      /* Slightly smaller badge + icon for the compact square */
+      .icon-box{ width:56px; height:56px; border-radius:12px; }
+      .icon-box img{ width:30px; height:30px; }
     }
+
 
     
     /* match the “Media Materials” look: white card, soft border & radius */
@@ -501,8 +522,11 @@
     .footer-inner small{color:var(--muted);line-height:1}
     /* ensure hero content never collides with footer (matches index spacing) */
     .hero{ padding-bottom:110px; }  /* pushes footer lower */
-
-
+    /* About page: tighter gap below the hero */
+    main .hero{ padding-bottom:24px; }
+    @media (max-width:600px){
+      main .hero{ padding-bottom:12px; }
+    }
   </style>
 </head>
 <body>
