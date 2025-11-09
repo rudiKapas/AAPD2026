@@ -306,34 +306,35 @@
     @media (max-width: 600px){
       .hero-img{ overflow:hidden; }
     
-      /* Shorter frame; crop from TOP; push image further to the RIGHT */
+      /* Shorter frame; crop TOP; push image further RIGHT so text doesn’t cover it */
       .hero-img img{
-        height: 370px;                 /* a touch shorter so content fits */
+        height: 340px;
         object-fit: cover;
-        object-position: 112% 100%;    /* <- move subject right; 100%→112% */
+        object-position: 122% 100%;   /* ← shove subject to the right */
       }
     
-      /* Keep copy below the brand and away from the person */
+      /* Move copy LOWER (clear of the “AAPD 2026” brand) and make it narrower */
       .welcome-block{
         left: 16px;
         right: auto;
-        width: 50%;                    /* narrower left column */
-        top: 56%;                      /* <- move the block lower */
-        transform: translateY(-56%);
+        width: 52%;
+        top: 60%;                      /* ↓ lower */
+        transform: translateY(-60%);
         padding-right: 12px;
       }
     
       .welcome-block h2{
-        font-size: 1.55rem;            /* smaller headline on mobile */
+        font-size: 1.45rem;            /* smaller so it stays inside the frame */
         line-height: 1.06;
       }
     
       .welcome-block p{
-        font-size: 0.90rem;            /* smaller body so it stays inside the frame */
-        line-height: 1.36;
-        max-width: 26ch;               /* prevents overlap with the figure */
+        font-size: 0.88rem;            /* smaller body text */
+        line-height: 1.34;
+        max-width: 24ch;               /* prevents overlap with the figure */
       }
     }
+
     
     /* Very small phones: one more step down */
     @media (max-width: 360px){
@@ -344,13 +345,6 @@
     }
 
     
-    /* Very small phones: trim a bit more */
-    @media (max-width: 360px){
-      .hero-img img{ height: 360px; object-position: 100% 100%; }
-      .welcome-block{ width: 50%; top: 49%; transform: translateY(-49%); }
-      .welcome-block h2{ font-size: 1.6rem; }
-      .welcome-block p{ font-size: 0.9rem; max-width: 26ch; }
-    }
 
 
 
