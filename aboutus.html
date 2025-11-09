@@ -302,38 +302,47 @@
       .hero-img{margin-bottom:16px}
     }
 
-    /* === Mobile hero (final): shorter, crop TOP, figure to the RIGHT, text clear === */
+    /* === Mobile hero (tighter): lower headline, smaller text, figure pushed right === */
     @media (max-width: 600px){
       .hero-img{ overflow:hidden; }
     
-      /* Shorter frame; anchored bottom-right so only TOP is cropped */
+      /* Shorter frame; crop from TOP; push image further to the RIGHT */
       .hero-img img{
-        height: 380px;            /* was 420px */
+        height: 370px;                 /* a touch shorter so content fits */
         object-fit: cover;
-        object-position: 100% 100%; /* push image fully right & to the bottom */
+        object-position: 112% 100%;    /* <- move subject right; 100%→112% */
       }
     
-      /* Keep copy as a left column so it doesn't cover the person */
+      /* Keep copy below the brand and away from the person */
       .welcome-block{
         left: 16px;
         right: auto;
-        width: 52%;                /* was 58% */
-        top: 48%;                  /* slightly lower for balance */
-        transform: translateY(-48%);
-        padding-right: 10px;
+        width: 50%;                    /* narrower left column */
+        top: 56%;                      /* <- move the block lower */
+        transform: translateY(-56%);
+        padding-right: 12px;
       }
     
       .welcome-block h2{
-        font-size: 1.7rem;         /* tighten for readability over image */
+        font-size: 1.55rem;            /* smaller headline on mobile */
         line-height: 1.06;
       }
     
       .welcome-block p{
-        font-size: 0.92rem;
+        font-size: 0.90rem;            /* smaller body so it stays inside the frame */
         line-height: 1.36;
-        max-width: 28ch;           /* prevents copy drifting into the figure */
+        max-width: 26ch;               /* prevents overlap with the figure */
       }
     }
+    
+    /* Very small phones: one more step down */
+    @media (max-width: 360px){
+      .hero-img img{ height: 350px; object-position: 114% 100%; }
+      .welcome-block{ width: 48%; top: 57%; transform: translateY(-57%); }
+      .welcome-block h2{ font-size: 1.45rem; }
+      .welcome-block p{ font-size: 0.88rem; max-width: 25ch; }
+    }
+
     
     /* Very small phones: trim a bit more */
     @media (max-width: 360px){
