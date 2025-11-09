@@ -310,15 +310,15 @@
       .hero-img img{
         height: 340px;
         object-fit: cover;
-        object-position: 75% 100% !important;  /* smaller = pushes subject to the right */
+        object-position: 85% 100% !important;  /* smaller = pushes subject to the right */
       }
     
       /* Keep the copy narrow, left, and LOWER than the brand */
       .welcome-block{
         left: 16px;
         width: 46%;
-        top: 60%;
-        transform: translateY(-60%);
+        top: 54%;
+        transform: translateY(-54%);
         padding-right: 10px;
       }
     
@@ -340,8 +340,8 @@
     
     /* Extra-tight screens */
     @media (max-width: 360px){
-      .hero-img img{ height: 320px; object-position: 75% 100% !important; }
-      .welcome-block{ width: 50%; top: 62%; transform: translateY(-62%); }
+      hero-img img{ height: 320px; object-position: 96% 100% !important; }  /* keep person right */
+      welcome-block{ width: 50%; top: 56%; transform: translateY(-56%); }   /* lift text */
       .welcome-block h2{ font-size: 1.12rem; }
       .welcome-block .welcome-short{ font-size:.82rem; max-width: 22ch; }
     }
