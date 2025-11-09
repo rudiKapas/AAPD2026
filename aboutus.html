@@ -269,14 +269,8 @@
     }
     
     /* Mobile: hide the overlay text and use the regular section */
-    @media (max-width:980px){
-      .welcome-block{ display:none; }
-    }
-    
-    /* Show the regular section only on mobile */
-    @media (min-width:981px){
-      .welcome-mobile{ display:none; }
-    }
+
+
 
 
     /* Name/role styling inside overlay card */
@@ -311,24 +305,28 @@
     /* === Mobile: keep welcome text inside the image frame === */
     @media (max-width: 600px){
       .hero-img img{
-        height:520px;                  /* a bit taller so text fits comfortably */
+        height:560px;               /* make the frame taller to fit text */
+        object-position:center;     /* keep focal point centered */
       }
       .welcome-block{
-        left:18px;                     /* safe padding from the rounded edge */
-        right:18px;                    /* allow auto width */
+        display:block;              /* ensure it's visible on phones */
+        left:18px;                  /* safe breathing space from the rounded corner */
+        right:18px;                 /* let it wrap naturally */
         width:auto;
-        top:44%;                       /* a touch above middle looks best on phones */
-        transform:translateY(-44%);
+        top:46%;                    /* slightly above center feels right */
+        transform:translateY(-46%);
       }
       .welcome-block h2{
-        font-size:clamp(2.1rem, 9.5vw, 2.7rem);
+        font-size:clamp(2.0rem, 9vw, 2.6rem);
+        line-height:1.08;
       }
       .welcome-block p{
         font-size:0.98rem;
-        line-height:1.4;
-        max-width:36ch;               /* avoid colliding with the person image */
+        line-height:1.42;
+        max-width:36ch;            /* avoid colliding with the figure on the right */
       }
     }
+
 
 
     /* ========== Welcome body section ========== */
@@ -403,21 +401,7 @@
               </p>
             </div>
 
-            <!-- Left text overlay -->
-            <div class="welcome-block">
-              <h2>
-                <span class="hand">Welcome to AAPD</span>
-                <span class="year">2026</span>
-              </h2>
-              <p>
-                It is our pleasure to welcome you to the 18th International Conference of the Asian
-                Academy of Preventive Dentistry in Kota Kinabalu, Sabah. This meeting brings together
-                clinicians, educators, researchers, and policy-makers to advance preventive dentistry
-                through evidence, collaboration, and innovation.
-              </p>
-            </div>
-
-            
+        
           
           <!-- Overlay card -->
           <div class="overlay-card" role="note" aria-label="Welcome message">
@@ -432,17 +416,6 @@
     </section>
 
     <!-- ========= Body: Welcome text ========= -->
-    <section class="section welcome-mobile">
-      <div class="container">
-        <h2>Welcome to AAPD 2026</h2>
-        <p>
-          It is our pleasure to welcome you to the 18th International Conference of the Asian
-          Academy of Preventive Dentistry in Kota Kinabalu, Sabah. This meeting brings together
-          clinicians, educators, researchers, and policy-makers to advance preventive dentistry
-          through evidence, collaboration, and innovation.
-        </p>
-      </div>
-    </section>
   </main>
 
   <footer class="site-footer">
