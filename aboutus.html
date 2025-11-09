@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
 
   <style>
     :root{
@@ -48,6 +49,35 @@
       transition: transform .18s cubic-bezier(.2,.65,.3,1), opacity .18s ease;
       will-change: transform;
     }
+
+    /* Active nav item (glass frame, not pill) */
+    .mid-nav a.active{
+      position:relative;
+      padding:6px 10px;                   /* small, not pill */
+      border-radius:12px;                 /* gentle corners only */
+      border:1px solid rgba(255,255,255,.36);
+      background:linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.10));
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      box-shadow:
+        inset 0 6px 18px rgba(2,12,32,.18),
+        0 2px 8px rgba(2,12,32,.08);
+    }
+    
+    /* When header turns solid on white, keep frame visible */
+    .site-header.solid .mid-nav a.active{
+      border-color:rgba(15,23,42,.10);
+      background:linear-gradient(180deg, rgba(15,23,42,.05), rgba(15,23,42,.03));
+      box-shadow: inset 0 6px 16px rgba(2,12,32,.06);
+      color:var(--navy);
+    }
+    
+    /* Mobile menu active state */
+    .mobile-menu a.active{
+      background:rgba(15,23,42,.05);
+      font-weight:700;
+    }
+
     .mid-nav a:hover, .brand-link:hover{ transform: translateY(-1px); opacity:.85; }
     @media (prefers-reduced-motion: reduce){
       .mid-nav a:hover, .brand-link:hover{ transform:none; opacity:1; }
@@ -112,16 +142,53 @@
     }
 
 
-    /* ===== Left text overlay on hero (desktop) ===== */
+    /* Centered welcome overlay on the hero image */
     .welcome-block{
       position:absolute;
-      left:24px;                 /* nudge from left edge */
-      top:40px;                  /* down from top edge */
-      width:min(44%, 520px);     /* stays on left half */
-      z-index:5;
+      left:50%;
+      top:44%;                               /* slightly lower than center */
+      transform:translate(-50%,-50%);
+      width:min(820px, 86%);
+      text-align:center;
       color:#fff;
-      text-shadow:0 2px 10px rgba(0,0,0,.35);  /* readability on photo */
+      z-index:3;
+      padding:0 8px;
+      text-shadow:0 2px 8px rgba(0,0,0,.35);
     }
+    
+    .welcome-block h2{
+      margin:0 0 10px;
+      font-size:clamp(1.6rem, 2.6vw + .8rem, 3rem);
+      line-height:1.1;
+      font-weight:700;                        /* year stays bold */
+      color:#fff;
+    }
+    
+    .welcome-block .hand{
+      font-family:'Shadows Into Light', cursive; /* handwritten */
+      font-weight:400;
+      letter-spacing:.5px;
+      margin-right:.3ch;
+    }
+    
+    .welcome-block .year{
+      font-family:Poppins, Inter, system-ui, sans-serif;
+      font-weight:700;
+    }
+    
+    .welcome-block p{
+      margin:0 auto;
+      max-width:72ch;
+      font-size:clamp(.95rem, .9vw + .55rem, 1.1rem);
+      line-height:1.45;
+      color:#eaf2ff;
+    }
+    
+    @media (max-width: 640px){
+      .welcome-block{ top:46%; width:92%; }
+      .welcome-block p{ font-size:clamp(.94rem, 3.4vw, 1.02rem); }
+    }
+
     
     .welcome-block h2{
       margin:0 0 8px;
@@ -204,6 +271,9 @@
     }
     .footer-inner *{margin:0}
     .footer-inner small{color:var(--muted);line-height:1}
+    /* ensure hero content never collides with footer */
+    .hero{ padding-bottom:64px; }
+
   </style>
 </head>
 <body>
@@ -216,7 +286,7 @@
       </div>
 
       <nav class="mid-nav" aria-label="Primary">
-        <a href="aboutus.html">About Us</a>
+        <a href="aboutus.html" class="active">About Us</a>
         <a href="index.html#registration">Registration</a>
         <a href="index.html#keynotes">Keynote Speakers</a>
         <a href="index.html#sponsors">Sponsors</a>
@@ -228,7 +298,7 @@
       </div>
 
       <nav id="mobileMenu" class="mobile-menu" aria-label="Mobile menu">
-        <a href="aboutus.html">About Us</a>
+        <a href="aboutus.html" class="active">About Us</a>
         <a href="index.html#registration">Registration</a>
         <a href="index.html#keynotes">Keynote Speakers</a>
         <a href="index.html#sponsors">Sponsors</a>
@@ -244,6 +314,19 @@
       <div class="container">
         <div class="hero-img" id="welcomeHero" aria-label="Welcome image">
           <img src="assets/img/welcomMessageTop.png" alt="Welcome to AAPD 2026 at Kota Kinabalu" />
+            <!-- Centered welcome text overlay -->
+            <div class="welcome-block">
+              <h2>
+                <span class="hand">Welcome to AAPD</span>
+                <span class="year">2026</span>
+              </h2>
+              <p>
+                It is our pleasure to welcome you to the 18th International Conference of the
+                Asian Academy of Preventive Dentistry in Kota Kinabalu, Sabah. This meeting
+                brings together clinicians, educators, researchers, and policy-makers to
+                advance preventive dentistry through evidence, collaboration, and innovation.
+              </p>
+            </div>
 
             <!-- Left text overlay -->
             <div class="welcome-block">
