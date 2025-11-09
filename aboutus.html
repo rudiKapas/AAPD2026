@@ -373,6 +373,29 @@
       gap:min(3vw,22px);
       margin-top:18px;
     }
+
+    /* Mobile: horizontal swipe for contact cards */
+    @media (max-width: 768px){
+      .contact-grid{
+        display:grid;                    /* turn the grid into a scroller */
+        grid-auto-flow: column;
+        grid-auto-columns: 84%;          /* each card ~84% of viewport width */
+        gap:16px;
+        overflow-x:auto;
+        scroll-snap-type:x mandatory;
+        -webkit-overflow-scrolling:touch;
+        padding: 8px 12px 12px;
+        margin: 0 -20px;                 /* full-bleed to screen edges (matches .container padding) */
+      }
+      .contact-grid .info-card{
+        scroll-snap-align:start;
+        min-height: 240px;               /* keeps a steady height while swiping */
+      }
+      /* hide mobile scrollbar */
+      .contact-grid::-webkit-scrollbar{ display:none; }
+      .contact-grid{ scrollbar-width:none; -ms-overflow-style:none; }
+    }
+
     
     /* match the “Media Materials” look: white card, soft border & radius */
     .info-card{
@@ -414,7 +437,7 @@
     /* empty icon frame (drop your SVG/PNG later) */
     /* Blue-filled icon frame */
     .icon-box{
-      width:64px; height:64px;
+      width:80px; height:80px;
       border-radius:16px;
       background:#2563eb;              /* fill the badge in blue */
       border:1px solid transparent;    /* border handled by card */
@@ -423,7 +446,7 @@
     
     /* If you add monochrome SVGs, they’ll appear white automatically */
     .icon-box img{
-      width:28px; height:28px;
+      width:40px; height:40px;
       display:block;
       filter: invert(1);
     }
