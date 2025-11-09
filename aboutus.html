@@ -8,7 +8,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Poppins:wght@300;400;500&family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
 
@@ -33,7 +33,16 @@
     .header-row{display:flex;align-items:center;gap:12px;width:100%}
     .brand{ margin-left:10px; } /* nudge brand a bit to the right */
 
-    .mid-nav{display:flex;gap:22px;position:absolute;left:50%;transform:translateX(-50%)}
+    .mid-nav{
+      display:flex;
+      gap:22px;
+      position:absolute;
+      left:50%;
+      transform:translateX(-50%);
+      align-items:center;
+      flex-wrap:nowrap;            /* keep nav on one line */
+    }
+
     .mid-nav a{text-decoration:none;font-weight:500}
 
     /* AAPD 2026 brand link — no underline in any state */
@@ -48,12 +57,14 @@
     .mid-nav a, .brand-link{
       display:inline-flex;
       align-items:center;
-      height:34px;           /* same visual height for all items */
-      padding:0 10px;        /* horizontal breathing room */
-      line-height:1;         /* keeps the glass chip short */
+      height:34px;
+      padding:0 10px;
+      line-height:1;
+      white-space:nowrap;          /* stop “About Us” splitting */
       transition: transform .18s cubic-bezier(.2,.65,.3,1), opacity .18s ease;
       will-change: transform;
     }
+
 
 
     /* Active nav item (glass frame, not pill) */
@@ -162,6 +173,15 @@
       padding-right:12px;              /* small gutter on the right of block */
       text-shadow:0 2px 8px rgba(0,0,0,.35);
     }
+
+    /* Make the year use the same handwritten font as the first span */
+    .welcome-block h2 .year{
+      font-family: 'Amatic SC', cursive;  /* same as the hand-written part */
+      font-weight: 700;
+      letter-spacing: .5px;
+    }
+
+
     
     /* On wider desktops keep it clearly away from the figure on the right */
     @media (min-width:1100px){
