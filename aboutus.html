@@ -306,38 +306,46 @@
     @media (max-width: 600px){
       .hero-img{ overflow:hidden; }
     
-      /* Shorter frame; crop from TOP; push person to the RIGHT */
+      /* Shorter frame, crop from the TOP, and keep the subject on the RIGHT */
       .hero-img img{
         height: 340px;
         object-fit: cover;
-        object-position: 135% 100%;   /* ← moves image to the right */
+        object-position: 90% 100%;     /* ← right side (135% was forcing it left) */
       }
     
-      /* Move welcome copy lower and keep it narrow on the left */
+      /* Keep the copy narrow, left, and LOWER than the brand */
       .welcome-block{
         left: 16px;
-        right: auto;
-        width: 52%;
-        top: 62%;                      /* ← lower so it clears the AAPD 2026 brand */
-        transform: translateY(-62%);
-        padding-right: 12px;
+        width: 46%;
+        top: 60%;
+        transform: translateY(-60%);
+        padding-right: 10px;
       }
     
       .welcome-block h2{
-        font-size: 1.42rem;            /* smaller so it stays inside the frame */
-        line-height: 1.06;
+        font-size: 1.28rem;
+        line-height: 1.05;
       }
     
-      /* Hide the long paragraph on mobile; show the short one */
+      /* Hide long paragraph on phones; show the short one only */
       .welcome-block p{ display:none; }
       .welcome-block .welcome-short{
         display:block;
-        font-size: 0.88rem;
-        line-height: 1.34;
-        max-width: 24ch;               /* keeps text well inside the image */
+        font-size: .86rem;
+        line-height: 1.32;
+        max-width: 22ch;               /* stops spill outside the image frame */
         color:#eef2f7;
       }
     }
+    
+    /* Extra-tight screens */
+    @media (max-width: 360px){
+      .hero-img img{ height: 320px; object-position: 92% 100%; }
+      .welcome-block{ width: 50%; top: 58%; transform: translateY(-58%); }
+      .welcome-block h2{ font-size: 1.18rem; }
+      .welcome-block .welcome-short{ font-size:.84rem; max-width: 21ch; }
+    }
+
 
 
     
@@ -421,7 +429,7 @@
                 advance preventive dentistry through evidence, collaboration, and innovation.
               </p>
               <p class="welcome-short">
-                Welcome to the 18th AAPD Conference in Kota Kinabalu. Clinicians, educators, and researchers advancing preventive dentistry through evidence, collaboration, and innovation.
+                Welcome to the 18th AAPD Conference in Kota Kinabalu—advancing preventive dentistry through evidence and collaboration.
               </p>
             </div>
 
