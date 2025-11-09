@@ -44,17 +44,23 @@
     .brand-link:focus{ text-decoration:none; transform:translateY(-1px); opacity:.85; }
     
 
-    /* Pop-up hover (no underline) — same feel as index */
+    /* Nav alignment + hover (no underline) */
     .mid-nav a, .brand-link{
+      display:inline-flex;
+      align-items:center;
+      height:34px;           /* same visual height for all items */
+      padding:0 10px;        /* horizontal breathing room */
+      line-height:1;         /* keeps the glass chip short */
       transition: transform .18s cubic-bezier(.2,.65,.3,1), opacity .18s ease;
       will-change: transform;
     }
 
+
     /* Active nav item (glass frame, not pill) */
     .mid-nav a.active{
       position:relative;
-      padding:6px 10px;                   /* small, not pill */
-      border-radius:12px;                 /* gentle corners only */
+      padding:3px 10px;      /* ↓ shorter */
+      border-radius:12px;    /* subtle corners (not pill) */
       border:1px solid rgba(255,255,255,.36);
       background:linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.10));
       -webkit-backdrop-filter: blur(8px);
@@ -63,6 +69,7 @@
         inset 0 6px 18px rgba(2,12,32,.18),
         0 2px 8px rgba(2,12,32,.08);
     }
+
     
     /* When header turns solid on white, keep frame visible */
     .site-header.solid .mid-nav a.active{
@@ -142,19 +149,25 @@
     }
 
 
-    /* Centered welcome overlay on the hero image */
+    /* right welcome overlay on the hero image */
     .welcome-block{
       position:absolute;
-      left:50%;
-      top:44%;                               /* slightly lower than center */
-      transform:translate(-50%,-50%);
-      width:min(820px, 86%);
-      text-align:center;
+      left:clamp(16px, 3.5vw, 40px);   /* keeps it off the border */
+      top:46%;                         /* slightly lower */
+      transform:translate(0,-50%);
+      width:min(620px, 55%);           /* stays on left half; avoids the figure */
+      text-align:left;                 /* ← left aligned */
       color:#fff;
       z-index:3;
-      padding:0 8px;
+      padding-right:12px;              /* small gutter on the right of block */
       text-shadow:0 2px 8px rgba(0,0,0,.35);
     }
+    
+    /* On wider desktops keep it clearly away from the figure on the right */
+    @media (min-width:1100px){
+      .welcome-block{ width:46%; }
+    }
+
     
     .welcome-block h2{
       margin:0 0 10px;
@@ -177,12 +190,13 @@
     }
     
     .welcome-block p{
-      margin:0 auto;
+      margin:0;                         /* no centering */
       max-width:72ch;
       font-size:clamp(.95rem, .9vw + .55rem, 1.1rem);
       line-height:1.45;
       color:#eaf2ff;
     }
+
     
     @media (max-width: 640px){
       .welcome-block{ top:46%; width:92%; }
@@ -271,8 +285,9 @@
     }
     .footer-inner *{margin:0}
     .footer-inner small{color:var(--muted);line-height:1}
-    /* ensure hero content never collides with footer */
-    .hero{ padding-bottom:64px; }
+    /* ensure hero content never collides with footer (matches index spacing) */
+    .hero{ padding-bottom:110px; }  /* pushes footer lower */
+
 
   </style>
 </head>
