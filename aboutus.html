@@ -302,30 +302,34 @@
       .hero-img{margin-bottom:16px}
     }
 
-    /* === Mobile: keep welcome text inside the image frame === */
+    /* === Mobile: show the full person + keep text readable === */
     @media (max-width: 600px){
       .hero-img img{
-        height:560px;               /* make the frame taller to fit text */
-        object-position:center;     /* keep focal point centered */
+        height:480px;                 /* a bit shorter so more width is visible */
+        object-fit:cover;             /* no distortion */
+        object-position: 90% 50%;     /* bias to the right so the person stays inside */
       }
+    
       .welcome-block{
-        display:block;              /* ensure it's visible on phones */
-        left:18px;                  /* safe breathing space from the rounded corner */
-        right:18px;                 /* let it wrap naturally */
-        width:auto;
-        top:46%;                    /* slightly above center feels right */
+        left:18px;
+        right:auto;                   /* don't stretch to the right edge */
+        width:60%;                    /* leave space for the figure on the right */
+        top:46%;
         transform:translateY(-46%);
       }
+    
       .welcome-block h2{
-        font-size:clamp(2.0rem, 9vw, 2.6rem);
+        font-size:clamp(1.7rem, 7.6vw, 2.1rem);  /* slightly smaller on phones */
         line-height:1.08;
       }
+    
       .welcome-block p{
-        font-size:0.98rem;
-        line-height:1.42;
-        max-width:36ch;            /* avoid colliding with the figure on the right */
+        font-size:.92rem;
+        line-height:1.38;
+        max-width:30ch;               /* narrower measure = more legible */
       }
     }
+
 
 
 
