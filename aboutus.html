@@ -8,7 +8,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Poppins:wght@300;400;500&family=Caveat:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Poppins:wght@300;400;500&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 
 
   <style>
@@ -173,13 +173,18 @@
       text-shadow:0 2px 8px rgba(0,0,0,.35);
     }
 
-    /* Make both parts of the title use the SAME handwritten font */
+    /* Connected handwritten headline */
     .welcome-block h2 .hand,
     .welcome-block h2 .year{
-      font-family: 'Pacifico', cursive;  /* same style for both */
-      font-weight: 400;
-      letter-spacing: .5px;
+      font-family: 'Dancing Script', cursive;
+      font-weight: 700;
+      letter-spacing: 0;                 /* ensure letters touch */
+      font-variant-ligatures: common-ligatures contextual;
+      font-feature-settings: "liga" 1, "clig" 1, "calt" 1; /* keep strokes connected */
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
+
 
 
     
