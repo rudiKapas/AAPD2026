@@ -376,6 +376,19 @@
     .section h2{font-family:Poppins,Inter,sans-serif;font-weight:500;margin:0 0 6px;font-size:clamp(1.2rem,1.3vw + .6rem,1.8rem)}
     .section p{color:var(--muted);margin:0;max-width:80ch}
 
+    /* ========== Welcoming Speech (About page) ========== */
+    .speech .speech-lead{margin-top:6px;color:var(--muted)}
+    .speech-panel{background:#fff;border:1px solid rgba(15,23,42,.08);border-radius:var(--radius);box-shadow:0 8px 18px rgba(15,23,42,.04);padding:18px}
+    .speech-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:min(2.2vw,22px);margin-top:16px}
+    .speech-panel h3{margin:0 0 8px;font-weight:600;color:var(--navy)}
+    .speech-panel p{margin:.4rem 0;color:var(--navy)}
+    .speech-panel ul{margin:.4rem 0 .2rem 1.2rem}
+    .speech-panel li{margin:.35rem 0;color:var(--navy)}
+    .speech-signoff p{margin:.35rem 0}
+    @media (max-width:900px){.speech-grid{grid-template-columns:1fr}}
+
+    
+
     /* ========== Contact section cards ========== */
     .contact .contact-sub{ margin-top:4px; }
     
@@ -606,6 +619,52 @@
     </section>
 
     <!-- ========= Body: Welcome text ========= -->
+
+    <!-- ========= WELCOMING SPEECH ========= -->
+    <section id="speech" class="section speech">
+      <div class="container">
+        <h2>Welcoming Speech</h2>
+        <p class="speech-lead">A warm welcome to the 18th International Conference of The Asian Academy of Preventive Dentistry</p>
+    
+        <!-- Section 1: Greeting & Invitation -->
+        <div class="speech-panel">
+          <p><strong>Dear Esteemed Colleagues, Researchers, Practitioners, and Partners,</strong></p>
+          <p>On behalf of the Organising Committee, I extend the warmest of greetings and a sincere invitation to join us for the 18<sup>th</sup> International Conference of the Asian Academy of Preventive Dentistry (18<sup>th</sup> ICAAPD). We are thrilled to host this prestigious event in the heart of Borneo, the strategic and beautiful city of Kota Kinabalu, Sabah, Malaysia, from 30 September to 3 October 2026 at the world-class Sabah International Convention Centre (SICC).</p>
+        </div>
+    
+        <!-- Section 2: Two-column content -->
+        <div class="speech-grid">
+          <div class="speech-panel">
+            <h3>Conference Theme & Focus</h3>
+            <p>Our theme for this year’s conference, the second time Malaysia has had the honor of hosting, is <em>“Empowering Communities Through Preventive Dentistry”</em>. The 18<sup>th</sup> ICAAPD is designed to be the premier regional platform where leading minds converge to synthesize the latest scientific advancements, translate research into actionable public health policies, and foster regional collaboration to address Asia’s unique oral health challenges.</p>
+            <h3>At this conference, we aim to:</h3>
+            <ul>
+              <li><strong>Advance Science:</strong> Critically evaluate the latest evidence, research, and technological advancements, including digital dentistry, AI, and tele-dentistry.</li>
+              <li><strong>Focus on Asia:</strong> Develop adaptable, cost-effective strategies for high-burden diseases such as early childhood caries and periodontal disease, with emphasis on high-risk and ageing populations in the Asian context.</li>
+              <li><strong>Strengthen Public Health:</strong> Promote robust community- and school-based preventive programmes that enhance oral health literacy and encourage sustainable healthy behaviours.</li>
+              <li><strong>Accelerate Collaboration:</strong> Facilitate networking among researchers, policymakers, clinicians, and industry partners to harmonise preventive dentistry standards regionally and globally.</li>
+            </ul>
+          </div>
+    
+          <div class="speech-panel">
+            <h3>Our Host City</h3>
+            <p>While the SICC provides a world-class environment for academic exchange, we invite you to experience the natural majesty of our host city, Kota Kinabalu (KK), Sabah—known affectionately as the “Land Below the Wind.” KK is a charming, modern city that offers international-standard accommodation and serves as the celebrated gateway to Mount Kinabalu, one of Southeast Asia’s tallest peaks.</p>
+            <p>We encourage you to explore nearby pristine islands and beaches, immerse yourself in local cultural villages and markets, and savour the region’s diverse and renowned cuisine. We believe this stunning backdrop will provide the perfect setting.</p>
+          </div>
+        </div>
+    
+        <!-- Section 3: Closing & Sign-off -->
+        <div class="speech-panel speech-signoff" style="margin-top:16px">
+          <p>We eagerly anticipate your active participation. By attending the 18<sup>th</sup> ICAAPD, you will not only gain critical knowledge but also forge valuable connections that will shape the future of oral health across the continent.</p>
+          <p>We look forward to welcoming you to Kota Kinabalu, Sabah in 2026!</p>
+          <p>Yours sincerely,</p>
+          <p><strong>Professor Rahimah Abdul Kadir</strong><br>
+             17<sup>th</sup> AAPD President (2025–2026) and Chairperson, Organising Committee 18<sup>th</sup> ICAAPD
+          </p>
+        </div>
+      </div>
+    </section>
+
 
     <!-- ========= CONTACT: 3 cards ========= -->
     <section id="contact" class="section contact">
