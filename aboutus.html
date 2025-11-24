@@ -221,10 +221,9 @@
       margin-right:.3ch;
     }
     
-    .welcome-block .year{
-      font-family:Poppins, Inter, system-ui, sans-serif;
-      font-weight:700;
-    }
+    .welcome-block .year{ font-family:'Dancing Script', cursive; font-weight:700; }
+    .welcome-block .kk{ font-family:'Dancing Script', cursive; font-weight:700; }
+
 
     .welcome-block .place{
           font-family:Poppins, Inter, system-ui, sans-serif; font-weight:600; margin-left:.35ch;
@@ -339,6 +338,10 @@
         font-size: 1.28rem;
         line-height: 1.05;
       }
+
+      .welcome-block .title-line{ white-space:nowrap; display:inline-block; }
+      @media (max-width:600px){ .welcome-block h2 .kk{ display:block; } }
+
     
 
     }
@@ -575,8 +578,8 @@
             <!-- Centered welcome text overlay -->
             <div class="welcome-block">
               <h2>
-                <span class="hand">Welcome to AAPD</span>
-                <span class="year">2026</span><span class="place">Kota Kinabalu</span>
+                <span class="title-line"><span class="hand">Welcome to AAPD</span> <span class="year">2026</span></span>
+                <span class="kk">Kota Kinabalu</span>
 
               </h2>
 
