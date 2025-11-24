@@ -291,6 +291,14 @@
       line-height:1.2;
     }
 
+    /* Tidy ordinal superscripts in the welcome card */
+    .overlay-card .ov-role sup{
+      font-size:.6em;
+      line-height:0;
+      vertical-align:super;
+    }
+
+
     @media (max-width:1100px){
       .overlay-card{width:64%; left:62%;}
     }
@@ -590,7 +598,7 @@
           <div class="overlay-card" role="note" aria-label="Welcome message">
             <div class="overlay-inner">
               <div class="ov-name">Professor Rahimah Abdul Kadir</div>
-              <div class="ov-role">17th AAPD President (2025-2026) and, Chairperson, Organising Committee 18th ICAAPD</div>
+              <div class="ov-role">17<sup>th</sup> AAPD President (2025-2026) and, Chairperson, Organising Committee 18<sup>th</sup> ICAAPD</div>
             </div>
           </div>
           <!-- /overlay-card -->
