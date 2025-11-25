@@ -421,8 +421,15 @@
     @media (max-width:900px){ .speech-grid{ grid-template-columns:1fr } }
 
     .host-note{ margin:0 0 10px 0; font-weight:500; color:var(--navy); }
-    
 
+    /* Justify the two specific paragraphs the client requested */
+    .speech-intro p:nth-of-type(2),
+    .speech-signoff p:nth-of-type(1){
+      text-align: justify;
+      hyphens: auto;     /* use hyphens to avoid large gaps in justified text */
+    }
+
+    
     /* ========== Contact section cards ========== */
     .contact .contact-sub{ margin-top:4px; }
     
