@@ -378,14 +378,14 @@
 
     /* ========== Welcoming Speech (About page) ========== */
     .speech .speech-lead{margin-top:6px;color:var(--muted)}
-    .speech .container{max-width:1000px}              /* same inner width for intro, grid, outro */
-    .speech .speech-panel{padding:0 12px}             /* align text edges with the grid cards */
+    .speech .container{max-width:980px!important}
+    .speech-grid,.speech-intro,.speech-signoff{max-width:980px;margin-inline:auto}
     .speech .speech-signoff{margin-top:16px}          /* preserves spacing without inline style */
     .speech .speech-intro,.speech .speech-signoff{margin-left:auto;margin-right:auto}
     .speech-panel{background:transparent;border:0;border-radius:0;box-shadow:none;padding:0;height:100%;display:flex;flex-direction:column}
     .speech-grid{display:grid;grid-template-columns:repeat(2,1fr);grid-auto-rows:1fr;align-items:stretch;gap:min(2.2vw,22px);margin-top:16px}
     .speech-panel h3{margin:0 0 8px;font-weight:600;color:var(--navy)}
-    .speech-panel p{margin:.4rem 0;color:var(--navy);text-align:justify;hyphens:auto}
+    .speech-intro p,.speech-signoff p{max-width:65ch;margin:.4rem 0;text-align:justify;hyphens:auto}
     .speech-panel ul{margin:.4rem 0 .2rem 1.2rem}
     .speech-panel li{margin:.35rem 0;color:var(--navy);text-align:justify;hyphens:auto}
     .speech-signoff p{margin:.35rem 0}
