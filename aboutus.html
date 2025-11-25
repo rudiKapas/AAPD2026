@@ -593,6 +593,156 @@
     @media (max-width:600px){
       main .hero{ padding-bottom:12px; }
     }
+
+    /* ================== Committee Members ================== */
+    .section.committee { padding-top: 8px; }
+    .section.committee h2 { margin-bottom: 8px; }
+    
+    /* Upper hero: horizontal slider with snap */
+    .committee-hero {
+      position: relative;
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: 100%;
+      gap: 16px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 8px;
+    }
+    
+    /* Each slide */
+    .committee-slide {
+      scroll-snap-align: center;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      gap: 16px;
+      min-height: 420px;
+      padding: 12px;
+      border-radius: var(--radius);
+      background: linear-gradient(180deg,#fff, #fafbff);
+      border: 1px solid rgba(15,23,42,.06);
+      box-shadow: 0 12px 24px rgba(15,23,42,.06);
+    }
+    
+    .committee-text h3 {
+      margin: 0 0 6px 0;
+      font-family: Poppins, Inter, sans-serif;
+      font-size: clamp(1.6rem, 1.5vw + 1.2rem, 2.4rem);
+      font-weight: 500;
+      letter-spacing: .2px;
+      color: var(--navy);
+    }
+    .committee-text .subtitle {
+      margin: 0 0 12px 0;
+      font-size: clamp(1.02rem, .6vw + .8rem, 1.2rem);
+      color: var(--muted);
+      font-weight: 500;
+    }
+    .committee-text .bio {
+      margin: 0;
+      color: var(--navy);
+      text-align: justify;             /* match your requested alignment style */
+      hyphens: auto;
+      white-space: pre-line;           /* preserve line breaks from data */
+    }
+    .committee-text .email {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: .98rem;
+    }
+    
+    /* Large portrait on the right */
+    .committee-photo {
+      width: 100%;
+      max-height: 420px;
+      object-fit: contain;
+      object-position: center bottom;
+      border-radius: 16px;
+    }
+    
+    /* Lower rail (thumbnails) – frosted bar look */
+    .committee-rail-wrap {
+      margin-top: 12px;
+      position: relative;
+    }
+    .committee-rail {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: 160px;
+      gap: 14px;
+      overflow-x: auto;
+      scroll-snap-type: x proximity;
+      -webkit-overflow-scrolling: touch;
+      padding: 12px;
+      background: rgba(255,255,255,.82);
+      border: 1px solid rgba(15,23,42,.06);
+      border-radius: 16px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 10px 22px rgba(15,23,42,.08);
+    }
+    
+    .committee-thumb {
+      scroll-snap-align: start;
+      display: grid;
+      justify-items: center;
+      text-align: center;
+      gap: 6px;
+      padding: 10px 8px;
+      border-radius: 14px;
+      transition: box-shadow .2s ease, transform .2s ease, border-color .2s ease;
+      border: 1px solid transparent;
+      background: #fff;
+    }
+    .committee-thumb:hover { transform: translateY(-2px); box-shadow: 0 10px 18px rgba(15,23,42,.08); }
+    .committee-thumb.active { border-color: #2563eb; box-shadow: 0 10px 22px rgba(37,99,235,.12); }
+    
+    .committee-thumb img {
+      width: 76px; height: 76px;
+      border-radius: 999px;        /* force circular mask even if source isn’t perfectly round */
+      object-fit: cover;
+      display: block;
+    }
+    .committee-thumb .name {
+      font-weight: 700;
+      font-size: .95rem;
+      color: var(--navy);
+      line-height: 1.1;
+    }
+    .committee-thumb .role {
+      font-size: .85rem;
+      color: var(--muted);
+      line-height: 1.1;
+    }
+    
+    /* Prev/Next arrow buttons over the hero */
+    .committee-nav {
+      pointer-events: none;
+    }
+    .committee-nav button {
+      pointer-events: auto;
+      position: absolute; top: 50%;
+      transform: translateY(-50%);
+      width: 40px; height: 40px;
+      border-radius: 999px;
+      border: 1px solid rgba(15,23,42,.12);
+      background: #fff;
+      color: var(--navy);
+      display: grid; place-items: center;
+      box-shadow: 0 6px 14px rgba(15,23,42,.12);
+      cursor: pointer;
+    }
+    .committee-nav .prev { left: 8px; }
+    .committee-nav .next { right: 8px; }
+    
+    /* Responsive: stack text over image on small screens */
+    @media (max-width: 900px){
+      .committee-slide{ grid-template-columns: 1fr; min-height: 520px; }
+      .committee-photo{ max-height: 300px; }
+    }
+    
+    
   </style>
 </head>
 <body>
@@ -713,6 +863,30 @@
       </div>
     </section>
 
+    <!-- ========== COMMITTEE MEMBERS ========== -->
+    <section id="committee" class="section committee">
+      <div class="container">
+        <h2>Committee Members</h2>
+    
+        <!-- Upper horizontally-scrollable hero -->
+        <div class="committee-hero" id="committeeSlides" aria-live="polite">
+          <!-- Slides are injected by JS -->
+          <div class="committee-nav">
+            <button class="prev" type="button" aria-label="Previous">&#8592;</button>
+            <button class="next" type="button" aria-label="Next">&#8594;</button>
+          </div>
+        </div>
+    
+        <!-- Lower horizontally-scrollable round thumbnails -->
+        <div class="committee-rail-wrap">
+          <div class="committee-rail" id="committeeRail" aria-label="Committee thumbnails">
+            <!-- Thumbs are injected by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+
 
     <!-- ========= CONTACT: 3 cards ========= -->
     <section id="contact" class="section contact">
@@ -803,5 +977,258 @@
       io.observe(hero);
     })();
   </script>
+
+  <script>
+  /* ===== Committee dataset (assets are in assets/committee) ===== */
+  const committeeData = [
+    {
+      memberId: "rahimah-abdulkadir",
+      mainTitle: "Chairperson",
+      subTitle: "Professor Dr Rahimah Abdul Kadir",
+      bioText: `AAPD Council Member Since 2010
+  Qualifications:
+  BSc, DMD, DDS (Padjajaran)
+  MSD (Indiana)
+  MPH (Michigan), DrPH (Michigan)
+  Distinguished Fellow (ICD, USA)
+  Former Dean, Faculty of Dentistry, University of Malaya
+  Founding Dean, Faculty of Dentistry, 
+  Lincoln University College, Malaysia
+  Founding President, MADPHS
+  Chairman, Alliance For Cavity Free Future, Malaysia`,
+      email: ["rahimahk@gmail.com","rahimahk@um.edu.my"],
+      fullImage: "profRahimahFull.png",
+      roundImage: "profRahimahRound.png",
+      memberName: "Prof Rahimah",
+      memberRole: "Chairperson"
+    },
+    {
+      memberId: "haslina-rani",
+      mainTitle: "Co-chair 1",
+      subTitle: "Associate Professor Dr Haslina Rani",
+      bioText: `MADPHS Assistant Secretary 2022-2024
+  Dental Public Health Discipline Head, 
+  Faculty of Dentistry,
+  Universiti Kebangsaan Malaysia
+  Qualifications:
+  DDS (Tokyo Medical & Dental University)
+  PhD (Tokyo Medical & Dental University)`,
+      email: ["hr@ukm.edu.my"],
+      fullImage: "drHaslinaFull.png",
+      roundImage: "drHaslinaRound.png",
+      memberName: "AP Dr Haslina Rani",
+      memberRole: "Co-chair 1"
+    },
+    {
+      memberId: "salleh-zakaria",
+      mainTitle: "Co-chair 2",
+      subTitle: "Dr Salleh Zakaria",
+      bioText: `MADPHS President 2022-2024
+  Dental Public Health Specialist & 
+  State Deputy Director of Health (Dental), 
+  Perak State Health Department, 
+  Ministry of Health Malaysia
+  Qualifications:
+  BDS (Malaya)
+  MPH (OH) (Malaya)`,
+      email: ["drsalleh@moh.gov.my"],
+      fullImage: "drSallehFull.png",
+      roundImage: "drSallehRound.png",
+      memberName: "Dr Salleh",
+      memberRole: "Co-chair 2"
+    },
+    {
+      memberId: "tuti-ningseh",
+      mainTitle: "Scientific (including IJOH)",
+      subTitle: "Prof Dr Tuti Ningseh Mohd Dom",
+      bioText: `Faculty  of Dentistry
+  Universiti Kebangsaan Malaysia`,
+      fullImage: "profTutiFull.png",
+      roundImage: "profTutiRound.png",
+      memberName: "Prof Tuti Ningseh",
+      memberRole: "Scientific"
+    },
+    {
+      memberId: "azliza-zabha",
+      mainTitle: "Secretary",
+      subTitle: "Dr Azliza Dato’ Zabha",
+      bioText: `Oral Health Programme
+  Ministry of Health Malaysia`,
+      fullImage: "drAzlizaFull.png",
+      roundImage: "drAzlizaRound.png",
+      memberName: "Dr Azliza",
+      memberRole: "Secretary"
+    },
+    {
+      memberId: "nuryastri-mustafa",
+      mainTitle: "Treasurer",
+      subTitle: "Dr Nuryastri Md Mustafa",
+      bioText: `Oral Health Programme
+  Ministry of Health Malaysia`,
+      fullImage: "drNuryastriFull.png",
+      roundImage: "drNuryastriRound.png",
+      memberName: "Dr Nuryastri",
+      memberRole: "Treasurer"
+    },
+    {
+      memberId: "farid-nordin",
+      mainTitle: "Sponsorship",
+      subTitle: "Dr Mohd Farid Nordin",
+      bioText: `Oral Health Programme
+  Ministry of Health Malaysia`,
+      fullImage: "drFaridFull.png",
+      roundImage: "drFaridRound.png",
+      memberName: "Dr Farid",
+      memberRole: "Sponsorship"
+    },
+    {
+      memberId: "enny-esdayanty",
+      mainTitle: "Registration & Certificate",
+      subTitle: "Dr Enny Esdayanty Abdul Manap",
+      bioText: `Oral Health Programme
+  Ministry of Health Malaysia`,
+      fullImage: "drEnnyFull.png",
+      roundImage: "drEnnyRound.png",
+      memberName: "Dr Enny Esdayanty",
+      memberRole: "Registration & Certificate"
+    },
+    {
+      memberId: "hartini-idris",
+      mainTitle: "Social Programme",
+      subTitle: "Colonel (Dr) Hartini Idris",
+      bioText: `Ministry of Defence`,
+      fullImage: "drHartiniFull.png",
+      roundImage: "drHartiniRound.png",
+      memberName: "Colonel (Dr) Hartini",
+      memberRole: "Social Programme"
+    },
+    {
+      memberId: "nurul-izzati",
+      mainTitle: "Prizes",
+      subTitle: "Dr Nurul Izzati Mohamad Ali",
+      bioText: `Sabah State Health Department
+  Ministry of Health Malaysia`,
+      fullImage: "drIzzatiFull.png",
+      roundImage: "drIzzatiRound.png",
+      memberName: "Dr Nurul Izzati",
+      memberRole: "Prizes"
+    },
+    {
+      memberId: "thaddius-herman",
+      mainTitle: "Sabah Liaison",
+      subTitle: "Dr Thaddius Herman Maling",
+      bioText: `Sabah State Health Department
+  Ministry of Health Malaysia`,
+      fullImage: "drThaddiusFull.png",
+      roundImage: "drThaddiusRound.png",
+      memberName: "Dr Thaddius Herman",
+      memberRole: "Sabah Liaison"
+    },
+    {
+      memberId: "datu-amyril",
+      mainTitle: "Technical & Logistic",
+      subTitle: "Dr Datu Mohd Amyril Abduludin",
+      bioText: `Sabah State Health Department
+  Ministry of Health Malaysia`,
+      fullImage: "drDatuFull.png",
+      roundImage: "drDatuRound.png",
+      memberName: "Dr Datu Mohd Amyril",
+      memberRole: "Technical & Logistic"
+    },
+    {
+      memberId: "budi-aslinie",
+      mainTitle: "Publicity & Promotion",
+      subTitle: "Professor Dr Budi Aslinie Md Sabri",
+      bioText: `Faculty of Dentistry 
+  Universiti Teknologi MARA`,
+      fullImage: "drBudiFull.png",
+      roundImage: "drBudiRound.png",
+      memberName: "Professor Dr Budi Aslinie",
+      memberRole: "Publicity & Promotion"
+    }
+  ];
+  
+  /* ===== Build section ===== */
+  (function(){
+    const slidesEl = document.getElementById('committeeSlides');
+    const railEl   = document.getElementById('committeeRail');
+    if(!slidesEl || !railEl) return;
+  
+    const imgBase = 'assets/committee/';
+  
+    committeeData.forEach((m, idx) => {
+      // slide
+      const slide = document.createElement('article');
+      slide.className = 'committee-slide';
+      slide.id = `slide-${m.memberId}`;
+      slide.setAttribute('role','group');
+      slide.setAttribute('aria-label', `${m.memberName}, ${m.memberRole}`);
+  
+      slide.innerHTML = `
+        <div class="committee-text">
+          <h3>${m.mainTitle}</h3>
+          <p class="subtitle">${m.subTitle}</p>
+          <p class="bio">${m.bioText || ''}</p>
+          ${m.email ? `<p class="email">Email: ${
+            (Array.isArray(m.email)? m.email : [m.email])
+            .map(e=>`<a href="mailto:${e}">${e}</a>`).join(' &middot; ')
+          }</p>` : ``}
+        </div>
+        <div class="committee-figure">
+          <img class="committee-photo" src="${imgBase + m.fullImage}" alt="${m.memberName}" loading="lazy">
+        </div>
+      `;
+      slidesEl.appendChild(slide);
+  
+      // thumb
+      const thumb = document.createElement('button');
+      thumb.type = 'button';
+      thumb.className = 'committee-thumb' + (idx===0 ? ' active' : '');
+      thumb.setAttribute('data-target', slide.id);
+      thumb.innerHTML = `
+        <img src="${imgBase + m.roundImage}" alt="${m.memberName}">
+        <div class="name">${m.memberName}</div>
+        <div class="role">${m.memberRole}</div>
+      `;
+      railEl.appendChild(thumb);
+    });
+  
+    // click -> scroll slide into view and mark active
+    function selectById(id){
+      const el = document.getElementById(id);
+      if(!el) return;
+      el.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
+    }
+    railEl.addEventListener('click', (e)=>{
+      const btn = e.target.closest('.committee-thumb');
+      if(!btn) return;
+      selectById(btn.dataset.target);
+    });
+  
+    // keep active thumb in sync with the most-centered slide
+    const thumbs = Array.from(railEl.querySelectorAll('.committee-thumb'));
+    const slides = Array.from(slidesEl.querySelectorAll('.committee-slide'));
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting && entry.intersectionRatio > 0.6){
+          const id = entry.target.id;
+          thumbs.forEach(t => t.classList.toggle('active', t.dataset.target === id));
+        }
+      });
+    }, {root: slidesEl, threshold: [0.6]});
+    slides.forEach(s => io.observe(s));
+  
+    // arrow buttons
+    const prevBtn = slidesEl.querySelector('.committee-nav .prev');
+    const nextBtn = slidesEl.querySelector('.committee-nav .next');
+    const scrollAmount = () => slidesEl.clientWidth * 0.95;
+    prevBtn.addEventListener('click', ()=> slidesEl.scrollBy({left: -scrollAmount(), behavior: 'smooth'}));
+    nextBtn.addEventListener('click', ()=> slidesEl.scrollBy({left:  scrollAmount(), behavior: 'smooth'}));
+  })();
+  </script>
+
+
+
+  
 </body>
 </html>
