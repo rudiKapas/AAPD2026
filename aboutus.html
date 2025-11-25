@@ -378,6 +378,10 @@
 
     /* ========== Welcoming Speech (About page) ========== */
     .speech .speech-lead{margin-top:6px;color:var(--muted)}
+    .speech .container{max-width:1000px}              /* same inner width for intro, grid, outro */
+    .speech .speech-panel{padding:0 12px}             /* align text edges with the grid cards */
+    .speech .speech-signoff{margin-top:16px}          /* preserves spacing without inline style */
+    .speech .speech-intro,.speech .speech-signoff{margin-left:auto;margin-right:auto}
     .speech-panel{background:transparent;border:0;border-radius:0;box-shadow:none;padding:0;height:100%;display:flex;flex-direction:column}
     .speech-grid{display:grid;grid-template-columns:repeat(2,1fr);grid-auto-rows:1fr;align-items:stretch;gap:min(2.2vw,22px);margin-top:16px}
     .speech-panel h3{margin:0 0 8px;font-weight:600;color:var(--navy)}
@@ -627,7 +631,8 @@
         <p class="speech-lead">A warm welcome to the 18th International Conference of The Asian Academy of Preventive Dentistry</p>
     
         <!-- Section 1: Greeting & Invitation -->
-        <div class="speech-panel">
+        <div class="speech-panel speech-intro">
+
           <p><strong>Dear Esteemed Colleagues, Researchers, Practitioners, and Partners,</strong></p>
           <p>On behalf of the Organising Committee, I extend the warmest of greetings and a sincere invitation to join us for the 18<sup>th</sup> International Conference of the Asian Academy of Preventive Dentistry (18<sup>th</sup> ICAAPD). We are thrilled to host this prestigious event in the heart of Borneo, the strategic and beautiful city of Kota Kinabalu, Sabah, Malaysia, from 30 September to 3 October 2026 at the world-class Sabah International Convention Centre (SICC).</p>
         </div>
@@ -658,8 +663,8 @@
           </div>
         </div>
         <!-- Section 3: Closing & Sign-off -->
+        <div class="speech-panel speech-signoff">
 
-        <div class="speech-panel speech-signoff" style="margin-top:16px">
           <p>We eagerly anticipate your active participation. By attending the 18<sup>th</sup> ICAAPD, you will not only gain critical knowledge but also forge valuable connections that will shape the future of oral health across the continent.</p>
           <p>We look forward to welcoming you to Kota Kinabalu, Sabah in 2026!</p>
           <p>Yours sincerely,</p>
