@@ -847,6 +847,25 @@
       .committee-slide{ grid-template-columns: 1fr; min-height: 520px; }
       .committee-photo{ max-height: 300px; }
     }
+
+    /* Mobile-only tightening for Committee Hero */
+    @media (max-width: 600px){
+      .committee-hero{
+        padding: 10px 10px 88px;   /* a bit less padding while keeping space for the rail overlay */
+      }
+      .committee-slide{
+        min-height: 380px;         /* was 520px via the <=900px rule; shorten for phones only */
+        padding: 14px 12px 18px;   /* tighter internal padding */
+      }
+      .committee-photo{
+        max-height: 200px;         /* lower the image height to avoid tall tiles */
+      }
+      .committee-text .bio{
+        font-size: .95rem;         /* slightly smaller copy to fit */
+        line-height: 1.45;
+      }
+    }
+
     
     
   </style>
@@ -1283,6 +1302,12 @@
     
       // Build slides + thumbnails
       committeeData.forEach((m, idx) => {
+
+          const isMobile = window.matchMedia('(max-width: 600px)').matches;
+          if (isMobile && m.memberId === 'rahimah-abdulkadir') {
+            m.bioText = 'AAPD Council Member Since 2010 Qualifications: BSc, DMD, DDS (Padjajaran), MSD (Indiana) MPH (Michigan), DrPH (Michigan), Distinguished Fellow (ICD, USA) Former Dean, Faculty of Dentistry, University of Malaya';
+          }
+        
         const slide = document.createElement('article');
         slide.className = 'committee-slide';
         slide.id = `slide-${m.memberId}`;
