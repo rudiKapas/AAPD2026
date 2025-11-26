@@ -665,6 +665,38 @@
       border-radius: 16px;
     }
 
+    /* Wrapper so we can apply a GRADIENT blur to the bottom only */
+    .committee-figure{
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;                  /* keeps the effect inside rounded corners */
+    }
+    
+    /* Gradient blur: fades from no blur at the top of the strip to full blur at the bottom */
+    .committee-figure::after{
+      content: "";
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 22%;                        /* adjust to taste (e.g., 18–28%) */
+      pointer-events: none;
+    
+      /* The blur itself */
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    
+      /* Soften the transition with a very light tint (matches light-blue hero) */
+      background: linear-gradient(
+        to bottom,
+        rgba(234,242,255,0) 0%,
+        rgba(234,242,255,0.55) 100%
+      );
+    
+      /* Key part: gradient mask so blur strength ramps in smoothly from 0 to full */
+      mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.5) 35%, black 100%);
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.5) 35%, black 100%);
+    }
+
+
     /* Wrap the image so we can blur just the bottom strip */
     .committee-figure{
       position: relative;
