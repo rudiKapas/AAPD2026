@@ -655,6 +655,11 @@
       padding: 12px 12px 112px; /* extra bottom space for overlaid rail */
     }
 
+    .committee-hero, .committee-rail{
+      overscroll-behavior-x: contain;  /* keep horizontal overscroll local */
+    }
+
+
     
     /* Each slide */
     .committee-slide {
@@ -1279,11 +1284,7 @@
         if(idx >= 0) goTo(idx);
       });
     
-      // disable manual scroll on hero/rail
-      ['wheel','touchstart','touchmove'].forEach(type=>{
-        slidesEl.addEventListener(type, e => e.preventDefault(), { passive: false });
-        railEl.addEventListener(type,   e => e.preventDefault(), { passive: false });
-      });
+
     
       goTo(0);
     })();
