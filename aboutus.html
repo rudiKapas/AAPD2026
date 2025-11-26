@@ -741,47 +741,11 @@
     }
 
 
-    /* Wrap the image so we can blur just the bottom strip */
-    .committee-figure{
-      position: relative;
-      border-radius: 16px;
-      overflow: hidden;                 /* ensures the blur stays inside the rounded frame */
-    }
-    
-    /* Blur the bottom 15% of whatever is behind this overlay (the image) */
-    .committee-figure::after{
-      content: "";
-      position: absolute;
-      left: 0; right: 0; bottom: 0;
-      height: 15%;
-      pointer-events: none;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px); /* Safari */
-      /* soft fade so the transition isn't harsh */
-      background: linear-gradient(to bottom, rgba(234,242,255,0), rgba(234,242,255,.45));
-    }
+
 
     
     /* Lower rail (thumbnails) – frosted bar look */
-    .committee-rail-wrap {
-      margin-top: 12px;
-      position: relative;
-    }
-    .committee-rail {
-      display: grid;
-      grid-auto-flow: column;
-      grid-auto-columns: 160px;
-      gap: 14px;
-      overflow-x: auto;
-      scroll-snap-type: x proximity;
-      -webkit-overflow-scrolling: touch;
-      padding: 12px;
-      background: rgba(255,255,255,.82);
-      border: 1px solid rgba(15,23,42,.06);
-      border-radius: 16px;
-      backdrop-filter: blur(8px);
-      box-shadow: 0 10px 22px rgba(15,23,42,.08);
-    }
+
     
     .committee-thumb {
       scroll-snap-align: start;
@@ -1290,30 +1254,7 @@
       railEl.appendChild(thumb);
     });
   
-    // click -> scroll slide into view and mark active
-    function selectById(id){
-      const el = document.getElementById(id);
-      if(!el) return;
-      el.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
-    }
-    railEl.addEventListener('click', (e)=>{
-      const btn = e.target.closest('.committee-thumb');
-      if(!btn) return;
-      selectById(btn.dataset.target);
-    });
-  
-    // keep active thumb in sync with the most-centered slide
-    const thumbs = Array.from(railEl.querySelectorAll('.committee-thumb'));
-    const slides = Array.from(slidesEl.querySelectorAll('.committee-slide'));
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        if(entry.isIntersecting && entry.intersectionRatio > 0.6){
-          const id = entry.target.id;
-          thumbs.forEach(t => t.classList.toggle('active', t.dataset.target === id));
-        }
-      });
-    }, {root: slidesEl, threshold: [0.6]});
-    slides.forEach(s => io.observe(s));
+    
   
     // arrow buttons
     // Build arrays once
@@ -1339,13 +1280,43 @@
     prevBtn.addEventListener('click', ()=> goTo(current - 1));
     nextBtn.addEventListener('click', ()=> goTo(current + 1));
     
-    // rail click selects slide
+    // Build arrays once (no duplicates)
+    const thumbs = Array.from(railEl.querySelectorAll('.committee-thumb'));
+    const slides = Array.from(slidesEl.querySelectorAll('.committee-slide'));
+    
+    // index navigation
+    let current = 0;
+    function goTo(idx){
+      current = Math.max(0, Math.min(slides.length - 1, idx));
+      const id = slides[current].id;
+      slides[current].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      thumbs.forEach(t => t.classList.toggle('active', t.dataset.target === id));
+      railEl.scrollTo({ left: Math.max(0, (current * 160) - 40), behavior: 'smooth' });
+    }
+    
+    // arrows
+    const prevBtn = slidesEl.querySelector('.committee-nav .prev');
+    const nextBtn = slidesEl.querySelector('.committee-nav .next');
+    prevBtn.addEventListener('click', ()=> goTo(current - 1));
+    nextBtn.addEventListener('click', ()=> goTo(current + 1));
+    
+    // rail click
     railEl.addEventListener('click', (e)=>{
       const btn = e.target.closest('.committee-thumb');
       if(!btn) return;
       const idx = slides.findIndex(s => s.id === btn.dataset.target);
       if(idx >= 0) goTo(idx);
     });
+    
+    // block manual wheel/touch on hero and rail
+    ['wheel','touchstart','touchmove'].forEach(type=>{
+      slidesEl.addEventListener(type, e => e.preventDefault(), { passive: false });
+      railEl.addEventListener(type,   e => e.preventDefault(), { passive: false });
+    });
+    
+    // start
+    goTo(0);
+
     
     // prevent manual wheel/touch scrolling on hero and rail
     ['wheel','touchstart','touchmove'].forEach(type=>{
