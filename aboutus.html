@@ -664,6 +664,27 @@
       object-position: center bottom;
       border-radius: 16px;
     }
+
+    /* Wrap the image so we can blur just the bottom strip */
+    .committee-figure{
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;                 /* ensures the blur stays inside the rounded frame */
+    }
+    
+    /* Blur the bottom 15% of whatever is behind this overlay (the image) */
+    .committee-figure::after{
+      content: "";
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 15%;
+      pointer-events: none;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px); /* Safari */
+      /* soft fade so the transition isn't harsh */
+      background: linear-gradient(to bottom, rgba(234,242,255,0), rgba(234,242,255,.45));
+    }
+
     
     /* Lower rail (thumbnails) – frosted bar look */
     .committee-rail-wrap {
