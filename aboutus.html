@@ -1209,126 +1209,87 @@
     }
   ];
   
-  /* ===== Build section ===== */
-  (function(){
-    const slidesEl = document.getElementById('committeeSlides');
-    const railEl   = document.getElementById('committeeRail');
-    if(!slidesEl || !railEl) return;
-  
-    const imgBase = 'assets/committee/';
-  
-    committeeData.forEach((m, idx) => {
-      // slide
-      const slide = document.createElement('article');
-      slide.className = 'committee-slide';
-      slide.id = `slide-${m.memberId}`;
-      slide.setAttribute('role','group');
-      slide.setAttribute('aria-label', `${m.memberName}, ${m.memberRole}`);
-  
-      slide.innerHTML = `
-        <div class="committee-text">
-          <h3>${m.mainTitle}</h3>
-          <p class="subtitle">${m.subTitle}</p>
-          <p class="bio">${m.bioText || ''}</p>
-          ${m.email ? `<p class="email">Email: ${
-            (Array.isArray(m.email)? m.email : [m.email])
-            .map(e=>`<a href="mailto:${e}">${e}</a>`).join(' &middot; ')
-          }</p>` : ``}
-        </div>
-        <div class="committee-figure">
-          <img class="committee-photo" src="${imgBase + m.fullImage}" alt="${m.memberName}" loading="lazy">
-        </div>
-      `;
-      slidesEl.appendChild(slide);
-  
-      // thumb
-      const thumb = document.createElement('button');
-      thumb.type = 'button';
-      thumb.className = 'committee-thumb' + (idx===0 ? ' active' : '');
-      thumb.setAttribute('data-target', slide.id);
-      thumb.innerHTML = `
-        <img src="${imgBase + m.roundImage}" alt="${m.memberName}">
-        <div class="name">${m.memberName}</div>
-        <div class="role">${m.memberRole}</div>
-      `;
-      railEl.appendChild(thumb);
-    });
-  
+     /* ===== Build section ===== */
+    (function(){
+      const slidesEl = document.getElementById('committeeSlides');
+      const railEl   = document.getElementById('committeeRail');
+      if(!slidesEl || !railEl) return;
     
-  
-    // arrow buttons
-    // Build arrays once
-    const thumbs = Array.from(railEl.querySelectorAll('.committee-thumb'));
-    const slides = Array.from(slidesEl.querySelectorAll('.committee-slide'));
+      const imgBase = 'assets/committee/';
     
-    // helper: go to a slide by index
-    let current = 0;
-    function goTo(idx){
-      current = Math.max(0, Math.min(slides.length - 1, idx));
-      const id = slides[current].id;
-      // center the slide
-      slides[current].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-      // mark active thumb
-      thumbs.forEach(t => t.classList.toggle('active', t.dataset.target === id));
-      // reveal the active thumb in the (non-scrollable) rail using transform-free scroll
-      railEl.scrollTo({ left: Math.max(0, (current * 160) - 40), behavior: 'smooth' });
-    }
+      // Build slides + thumbnails
+      committeeData.forEach((m, idx) => {
+        const slide = document.createElement('article');
+        slide.className = 'committee-slide';
+        slide.id = `slide-${m.memberId}`;
+        slide.setAttribute('role','group');
+        slide.setAttribute('aria-label', `${m.memberName}, ${m.memberRole}`);
+        slide.innerHTML = `
+          <div class="committee-text">
+            <h3>${m.mainTitle}</h3>
+            <p class="subtitle">${m.subTitle}</p>
+            <p class="bio">${m.bioText || ''}</p>
+            ${m.email ? `<p class="email">Email: ${
+              (Array.isArray(m.email)? m.email : [m.email])
+              .map(e=>`<a href="mailto:${e}">${e}</a>`).join(' &middot; ')
+            }</p>` : ``}
+          </div>
+          <div class="committee-figure">
+            <img class="committee-photo" src="${imgBase + m.fullImage}" alt="${m.memberName}" loading="lazy">
+          </div>
+        `;
+        slidesEl.appendChild(slide);
     
-    // arrow buttons replace any manual slider
-    const prevBtn = slidesEl.querySelector('.committee-nav .prev');
-    const nextBtn = slidesEl.querySelector('.committee-nav .next');
-    prevBtn.addEventListener('click', ()=> goTo(current - 1));
-    nextBtn.addEventListener('click', ()=> goTo(current + 1));
+        const thumb = document.createElement('button');
+        thumb.type = 'button';
+        thumb.className = 'committee-thumb' + (idx===0 ? ' active' : '');
+        thumb.dataset.target = slide.id;
+        thumb.innerHTML = `
+          <img src="${imgBase + m.roundImage}" alt="${m.memberName}">
+          <div class="name">${m.memberName}</div>
+          <div class="role">${m.memberRole}</div>
+        `;
+        railEl.appendChild(thumb);
+      });
     
-    // Build arrays once (no duplicates)
-    const thumbs = Array.from(railEl.querySelectorAll('.committee-thumb'));
-    const slides = Array.from(slidesEl.querySelectorAll('.committee-slide'));
+      // Single set of state and handlers
+      const thumbs = Array.from(railEl.querySelectorAll('.committee-thumb'));
+      const slides = Array.from(slidesEl.querySelectorAll('.committee-slide'));
     
-    // index navigation
-    let current = 0;
-    function goTo(idx){
-      current = Math.max(0, Math.min(slides.length - 1, idx));
-      const id = slides[current].id;
-      slides[current].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-      thumbs.forEach(t => t.classList.toggle('active', t.dataset.target === id));
-      railEl.scrollTo({ left: Math.max(0, (current * 160) - 40), behavior: 'smooth' });
-    }
+      let current = 0;
+      function goTo(idx){
+        current = Math.max(0, Math.min(slides.length - 1, idx));
+        const id = slides[current].id;
+        slides[current].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        thumbs.forEach(t => t.classList.toggle('active', t.dataset.target === id));
+        railEl.scrollTo({ left: Math.max(0, (current * 160) - 40), behavior: 'smooth' });
+      }
     
-    // arrows
-    const prevBtn = slidesEl.querySelector('.committee-nav .prev');
-    const nextBtn = slidesEl.querySelector('.committee-nav .next');
-    prevBtn.addEventListener('click', ()=> goTo(current - 1));
-    nextBtn.addEventListener('click', ()=> goTo(current + 1));
+      const prevBtn = slidesEl.querySelector('.committee-nav .prev');
+      const nextBtn = slidesEl.querySelector('.committee-nav .next');
+      if(prevBtn && nextBtn){
+        prevBtn.addEventListener('click', ()=> goTo(current - 1));
+        nextBtn.addEventListener('click', ()=> goTo(current + 1));
+      }
     
-    // rail click
-    railEl.addEventListener('click', (e)=>{
-      const btn = e.target.closest('.committee-thumb');
-      if(!btn) return;
-      const idx = slides.findIndex(s => s.id === btn.dataset.target);
-      if(idx >= 0) goTo(idx);
-    });
+      railEl.addEventListener('click', (e)=>{
+        const btn = e.target.closest('.committee-thumb');
+        if(!btn) return;
+        const idx = slides.findIndex(s => s.id === btn.dataset.target);
+        if(idx >= 0) goTo(idx);
+      });
     
-    // block manual wheel/touch on hero and rail
-    ['wheel','touchstart','touchmove'].forEach(type=>{
-      slidesEl.addEventListener(type, e => e.preventDefault(), { passive: false });
-      railEl.addEventListener(type,   e => e.preventDefault(), { passive: false });
-    });
+      // disable manual scroll on hero/rail
+      ['wheel','touchstart','touchmove'].forEach(type=>{
+        slidesEl.addEventListener(type, e => e.preventDefault(), { passive: false });
+        railEl.addEventListener(type,   e => e.preventDefault(), { passive: false });
+      });
     
-    // start
-    goTo(0);
+      goTo(0);
+    })();
+    
 
-    
-    // prevent manual wheel/touch scrolling on hero and rail
-    ['wheel','touchstart','touchmove'].forEach(type=>{
-      slidesEl.addEventListener(type, e => e.preventDefault(), { passive: false });
-      railEl.addEventListener(type,   e => e.preventDefault(), { passive: false });
-    });
-    
-    // initialize at first member
-    goTo(0);
 
-  
-  })();
   </script>
 
 
