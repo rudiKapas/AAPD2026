@@ -610,16 +610,48 @@
       bottom: 18px;
       z-index: 7;
     }
+
+    /* position the wrap above hero; already absolute in your code */
+    .section.committee .container { position: relative; }
+    .committee-rail-wrap { position: absolute; left: 20px; right: 20px; bottom: 18px; z-index: 7; }
     
-    /* liquid glass rail; no manual slider */
+    /* rail arrow buttons – desktop only */
+    @media (hover: hover) and (pointer: fine){
+      .committee-rail-wrap .rail-prev,
+      .committee-rail-wrap .rail-next{
+        position: absolute; top: 50%; transform: translateY(-50%);
+        width: 40px; height: 40px;
+        border-radius: 999px;
+        border: 1px solid rgba(15,23,42,.12);
+        background: #fff; color: var(--navy);
+        display: grid; place-items: center;
+        box-shadow: 0 6px 14px rgba(15,23,42,.12);
+        cursor: pointer; z-index: 8;
+      }
+      .committee-rail-wrap .rail-prev { left: -12px; }  /* slight overlap outside */
+      .committee-rail-wrap .rail-next { right: -12px; }
+    }
+    
+    /* hide on touch devices */
+    @media (hover: none), (pointer: coarse){
+      .committee-rail-wrap .rail-prev,
+      .committee-rail-wrap .rail-next{ display: none; }
+    }
+    
+    /* minor guard: avoid horizontal “bounce” */
+    .committee-rail{ overscroll-behavior-x: contain; }
+
+    
+    /* liquid glass rail; allow programmatic scroll */
     .committee-rail {
       display: grid;
       grid-auto-flow: column;
       grid-auto-columns: 160px;
       gap: 14px;
     
-      overflow-x: hidden;                 /* disable drag/scroll */
-      scroll-snap-type: none;
+      overflow-x: auto;          /* was hidden */
+      scroll-behavior: smooth;   /* smooth JS scroll */
+      -webkit-overflow-scrolling: touch;
     
       padding: 12px;
       border: 1px solid rgba(255,255,255,.35);
@@ -630,6 +662,11 @@
       backdrop-filter: saturate(180%) blur(14px);
       box-shadow: 0 10px 22px rgba(15,23,42,.12), inset 0 1px 0 rgba(255,255,255,.4);
     }
+    
+    /* optional: hide scrollbar */
+    .committee-rail::-webkit-scrollbar{ display:none; }
+    .committee-rail{ scrollbar-width: none; }
+
     
     /* ensure rail sits above hero image and hero arrows */
     .committee-nav { z-index: 6; }
@@ -948,10 +985,13 @@
     
         <!-- Lower horizontally-scrollable round thumbnails -->
         <div class="committee-rail-wrap">
+          <button class="rail-prev" type="button" aria-label="Scroll thumbnails left">←</button>
           <div class="committee-rail" id="committeeRail" aria-label="Committee thumbnails">
             <!-- Thumbs are injected by JS -->
           </div>
+          <button class="rail-next" type="button" aria-label="Scroll thumbnails right">→</button>
         </div>
+        
       </div>
     </section>
 
@@ -1218,6 +1258,25 @@
     (function(){
       const slidesEl = document.getElementById('committeeSlides');
       const railEl   = document.getElementById('committeeRail');
+
+      // rail desktop arrows
+      const railPrevBtn = document.querySelector('.committee-rail-wrap .rail-prev');
+      const railNextBtn = document.querySelector('.committee-rail-wrap .rail-next');
+      
+      // compute one “step” ≈ one thumb + gap
+      function getRailStep(){
+        const first = railEl.querySelector('.committee-thumb');
+        const gap = parseInt(getComputedStyle(railEl).columnGap || getComputedStyle(railEl).gap || '14', 10);
+        return (first ? first.getBoundingClientRect().width : 160) + gap;
+      }
+      function scrollRail(dir){
+        const step = getRailStep();
+        railEl.scrollBy({ left: dir * step * 3, behavior: 'smooth' }); // 3 thumbs per click
+      }
+      railPrevBtn.addEventListener('click', ()=>scrollRail(-1));
+      railNextBtn.addEventListener('click', ()=>scrollRail(1));
+
+      
       if(!slidesEl || !railEl) return;
     
       const imgBase = 'assets/committee/';
