@@ -848,6 +848,14 @@
       .committee-photo{ max-height: 300px; }
     }
 
+    /* Mobile: remove the full portrait; keep only text + the rail */
+    @media (max-width: 600px){
+      .committee-figure{
+        display: none !important;  /* hides the right-side full image on phones */
+      }
+    }
+
+
     /* Mobile-only tightening for Committee Hero */
     @media (max-width: 600px){
       .committee-hero{
