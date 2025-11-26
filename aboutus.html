@@ -598,35 +598,79 @@
     /* ================== Committee Members ================== */
     .section.committee { padding-top: 8px; }
     .section.committee h2 { margin-bottom: 8px; }
+
+    /* make container the positioning context for overlay */
+    .section.committee .container { position: relative; }
     
-    /* Upper hero: horizontal slider with snap */
+    /* place rail over the bottom of the hero */
+    .committee-rail-wrap {
+      position: absolute;
+      left: 20px;
+      right: 20px;
+      bottom: 18px;
+      z-index: 7;
+    }
+    
+    /* liquid glass rail; no manual slider */
+    .committee-rail {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: 160px;
+      gap: 14px;
+    
+      overflow-x: hidden;                 /* disable drag/scroll */
+      scroll-snap-type: none;
+    
+      padding: 12px;
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 16px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.56), rgba(255,255,255,.28));
+      -webkit-backdrop-filter: saturate(180%) blur(14px);
+      backdrop-filter: saturate(180%) blur(14px);
+      box-shadow: 0 10px 22px rgba(15,23,42,.12), inset 0 1px 0 rgba(255,255,255,.4);
+    }
+    
+    /* ensure rail sits above hero image and hero arrows */
+    .committee-nav { z-index: 6; }
+
+    
+    /* Upper hero: now light blue, no manual slider */
     .committee-hero {
       position: relative;
       display: grid;
       grid-auto-flow: column;
       grid-auto-columns: 100%;
       gap: 16px;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      padding-bottom: 8px;
+    
+      /* remove manual scrolling; keep only arrows via JS */
+      overflow-x: hidden;
+      scroll-snap-type: none;
+    
+      /* light blue panel + room for overlaid rail */
+      background: #eaf2ff;
+      border: 1px solid rgba(15,23,42,.06);
+      border-radius: var(--radius);
+      box-shadow: 0 12px 24px rgba(15,23,42,.06);
+      padding: 12px 12px 112px; /* extra bottom space for overlaid rail */
     }
+
     
     /* Each slide */
     .committee-slide {
-      scroll-snap-align: center;
+      scroll-snap-align: none;
       display: grid;
       grid-template-columns: 1.15fr 0.85fr;
-      align-items: start;  
+      align-items: start;         /* top-align content */
       gap: 16px;
       min-height: 504px;
-      padding: 28px 28px 22px; 
+      padding: 18px 14px 24px;    /* slight top padding */
       border-radius: var(--radius);
-      background: #eaf2ff; /* light blue */
-      border: 1px solid rgba(15,23,42,.08);
+      background: linear-gradient(180deg,#fff,#fafbff);
+      border: 1px solid rgba(15,23,42,.06);
       box-shadow: 0 12px 24px rgba(15,23,42,.06);
     }
-    
+
     .committee-text h3{
       margin:0 0 6px;
       font-family:Poppins, Inter, sans-serif;
@@ -1272,11 +1316,47 @@
     slides.forEach(s => io.observe(s));
   
     // arrow buttons
+    // Build arrays once
+    const thumbs = Array.from(railEl.querySelectorAll('.committee-thumb'));
+    const slides = Array.from(slidesEl.querySelectorAll('.committee-slide'));
+    
+    // helper: go to a slide by index
+    let current = 0;
+    function goTo(idx){
+      current = Math.max(0, Math.min(slides.length - 1, idx));
+      const id = slides[current].id;
+      // center the slide
+      slides[current].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      // mark active thumb
+      thumbs.forEach(t => t.classList.toggle('active', t.dataset.target === id));
+      // reveal the active thumb in the (non-scrollable) rail using transform-free scroll
+      railEl.scrollTo({ left: Math.max(0, (current * 160) - 40), behavior: 'smooth' });
+    }
+    
+    // arrow buttons replace any manual slider
     const prevBtn = slidesEl.querySelector('.committee-nav .prev');
     const nextBtn = slidesEl.querySelector('.committee-nav .next');
-    const scrollAmount = () => slidesEl.clientWidth * 0.95;
-    prevBtn.addEventListener('click', ()=> slidesEl.scrollBy({left: -scrollAmount(), behavior: 'smooth'}));
-    nextBtn.addEventListener('click', ()=> slidesEl.scrollBy({left:  scrollAmount(), behavior: 'smooth'}));
+    prevBtn.addEventListener('click', ()=> goTo(current - 1));
+    nextBtn.addEventListener('click', ()=> goTo(current + 1));
+    
+    // rail click selects slide
+    railEl.addEventListener('click', (e)=>{
+      const btn = e.target.closest('.committee-thumb');
+      if(!btn) return;
+      const idx = slides.findIndex(s => s.id === btn.dataset.target);
+      if(idx >= 0) goTo(idx);
+    });
+    
+    // prevent manual wheel/touch scrolling on hero and rail
+    ['wheel','touchstart','touchmove'].forEach(type=>{
+      slidesEl.addEventListener(type, e => e.preventDefault(), { passive: false });
+      railEl.addEventListener(type,   e => e.preventDefault(), { passive: false });
+    });
+    
+    // initialize at first member
+    goTo(0);
+
+  
   })();
   </script>
 
