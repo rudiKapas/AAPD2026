@@ -58,12 +58,18 @@
 
     .hero-img img{
       width:100%;
-      aspect-ratio:16/9;           /* match 1920×1080 */
-      object-fit:cover;            /* keeps image nicely filled */
+      object-fit:cover;
       object-position:center;
       border-radius:var(--radius);
       display:block;
       box-shadow:0 14px 28px rgba(15,23,42,.14);
+    }
+    
+    /* Desktop-only: make hero shallower */
+    @media (min-width:1101px){
+      .hero-img img{
+        aspect-ratio:3/1;   /* matches 1920 × 640 */
+      }
     }
 
 
