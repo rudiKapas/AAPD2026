@@ -15,8 +15,8 @@
     :root{
       --navy:#0f172a;
       --muted:#6b7280;
-      --bg:#111111;
-      --hero-bg:#000000;
+      --bg:#111111;          /* dark page background for hero */
+      --hero-bg:#111111;
       --radius:22px;
       --btn-radius:14px;
       --container:1152px;
@@ -35,190 +35,113 @@
       width:100%;
       max-width:var(--container);
       margin-inline:auto;
-      padding:0 20px;
+      padding:16px 20px;     /* match abstractSubmission */
     }
 
-    /* ========== HEADER (same behaviour as About Us) ========== */
+    /* ============ HEADER: same theme as abstractSubmission ============ */
     .site-header{
-      position:fixed;
+      position:sticky;
       top:0;
-      left:0;
-      right:0;
-      z-index:60;
-      transition:background .25s ease, border-color .25s ease, box-shadow .25s ease;
+      z-index:50;
+      background:#ffffff;
+      border-bottom:1px solid rgba(15,23,42,.06);
     }
     .site-header .container{
+      padding:0 20px;
       height:56px;
       display:flex;
       align-items:center;
-      justify-content:space-between;
     }
     .header-row{
       display:flex;
       align-items:center;
+      justify-content:space-between;
       gap:12px;
+      height:56px;
       width:100%;
+      padding:0;
+      position:relative;
     }
-    .brand{ margin-left:10px; }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:0;
+      font-weight:500;
+      letter-spacing:0;
+    }
+    .brand a{
+      text-decoration:none;
+      color:var(--navy);
+      font-weight:500;
+    }
+
+    .header-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
 
     .mid-nav{
-      display:flex;
-      gap:22px;
       position:absolute;
       left:50%;
       transform:translateX(-50%);
+      display:flex;
       align-items:center;
-      flex-wrap:nowrap;
+      gap:22px;
+      font-weight:300;
     }
-    .mid-nav a{text-decoration:none;font-weight:500}
-
-    .brand-link{ text-decoration:none; }
-    .brand-link:link,
-    .brand-link:visited{ text-decoration:none; }
-    .brand-link:hover,
-    .brand-link:focus{
+    .mid-nav a{
       text-decoration:none;
+      color:var(--navy);
+      font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      letter-spacing:.2px;
+      transition:transform .18s cubic-bezier(.2,.65,.3,1),opacity .18s ease;
+    }
+    .mid-nav a:hover{
       transform:translateY(-1px);
       opacity:.85;
     }
-
-    .mid-nav a,
-    .brand-link{
-      display:inline-flex;
-      align-items:center;
-      height:34px;
-      padding:0 10px;
-      line-height:1;
-      white-space:nowrap;
-      transition: transform .18s cubic-bezier(.2,.65,.3,1), opacity .18s ease;
-      will-change: transform;
-    }
-
-    .mid-nav a.active{
-      position:relative;
-      padding:3px 10px;
-      border-radius:12px;
-      border:1px solid rgba(255,255,255,.36);
-      background:linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.10));
-      -webkit-backdrop-filter: blur(8px);
-      backdrop-filter: blur(8px);
-      box-shadow:
-        inset 0 6px 18px rgba(2,12,32,.18),
-        0 2px 8px rgba(2,12,32,.08);
-    }
-
-    .site-header.solid .mid-nav a.active{
-      border-color:rgba(15,23,42,.10);
-      background:linear-gradient(180deg, rgba(15,23,42,.05), rgba(15,23,42,.03));
-      box-shadow: inset 0 6px 16px rgba(2,12,32,.06);
-      color:var(--navy);
-    }
-
-    .mobile-menu a.active{
-      background:rgba(15,23,42,.05);
-      font-weight:700;
-    }
-
-    .mid-nav a:hover,
-    .brand-link:hover{
-      transform: translateY(-1px);
-      opacity:.85;
-    }
-    @media (prefers-reduced-motion: reduce){
-      .mid-nav a:hover,
-      .brand-link:hover{
-        transform:none;
-        opacity:1;
-      }
+    @media (max-width:900px){
+      .mid-nav{display:none;}
     }
 
     .icon-btn{
       width:34px;
       height:34px;
       border-radius:999px;
-      border:1px solid;
+      border:1px solid rgba(15,23,42,.12);
+      background:#fff;
       display:grid;
       place-items:center;
       cursor:pointer;
-      background:transparent;
     }
     .icon-btn.hamburger{display:none;}
-
-    /* Transparent (over hero) */
-    .site-header.transparent{
-      background:transparent;
-      border-bottom:1px solid transparent;
-    }
-    .site-header.transparent .brand-link,
-    .site-header.transparent .mid-nav a{ color:#fff; }
-    .site-header.transparent .icon-btn{
-      color:#fff;
-      border-color:rgba(255,255,255,.5);
-      background:rgba(0,0,0,.15);
-    }
-    .site-header.transparent .mid-nav a:hover{opacity:.85;}
-
-    /* Solid (after hero) */
-    .site-header.solid{
-      background:#fff;
-      border-bottom:1px solid rgba(15,23,42,.06);
-      box-shadow:0 6px 14px rgba(15,23,42,.06);
-    }
-    .site-header.solid .brand-link,
-    .site-header.solid .mid-nav a{ color:var(--navy); }
-    .site-header.solid .icon-btn{
-      color:var(--navy);
-      border-color:rgba(15,23,42,.12);
-      background:#fff;
-    }
-
     @media (max-width:900px){
-      .mid-nav{display:none;}
       .icon-btn.hamburger{display:grid;}
     }
 
-    /* Mobile dropdown */
-    .header-row{position:relative;}
     .mobile-menu{
       display:none;
       position:absolute;
-      top:56px;
+      top:calc(100% + 8px);
       left:16px;
       right:16px;
       background:#fff;
       border:1px solid rgba(15,23,42,.08);
       border-radius:14px;
       box-shadow:0 12px 28px rgba(15,23,42,.10);
-      z-index:65;
+      z-index:60;
     }
     .mobile-menu.open{display:block;}
     .mobile-menu a{
       display:block;
       padding:14px 16px;
+      border-bottom:1px solid rgba(15,23,42,.06);
       text-decoration:none;
       color:var(--navy);
       font-weight:600;
-      border-bottom:1px solid rgba(15,23,42,.06);
     }
     .mobile-menu a:last-child{border-bottom:0;}
-
-    /* MOBILE-ONLY: inset header from phone border */
-    @media (max-width:900px){
-      .site-header{
-        top:8px;
-        left:8px;
-        right:8px;
-        border-radius:18px;
-        overflow:hidden;
-      }
-      main{
-        padding-top:72px; /* space so hero doesn't hide under header */
-      }
-    }
-
-    @media (min-width:901px){
-      main{ padding-top:56px; } /* align content under fixed header */
-    }
 
     /* ========== COMING-SOON HERO ========== */
     .coming-hero{
@@ -227,7 +150,10 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      padding:80px 20px 40px;
+      padding:40px 20px 40px;
+    }
+    .coming-hero .container{
+      padding:0 20px; /* reset vertical padding inside hero */
     }
     .coming-inner{
       width:100%;
@@ -249,19 +175,15 @@
       font-family:'Oswald', system-ui, -apple-system, sans-serif;
       font-weight:700;
       text-transform:uppercase;
-      font-size:clamp(3.6rem, 11vw, 7.2rem); /* ≈ twice original */
-      line-height:.88;                         /* tighter line gap */
+      font-size:clamp(3.6rem, 11vw, 7.2rem);
+      line-height:.88;
       letter-spacing:.08em;
     }
-
-    .big-message span{
-      display:block;
-    }
+    .big-message span{display:block;}
 
     .promo-block{
       margin-top:10px;
     }
-
     .promo-label{
       display:inline-flex;
       align-items:center;
@@ -274,7 +196,6 @@
       text-transform:uppercase;
       white-space:nowrap;
     }
-
     .promo-team{
       display:flex;
       align-items:center;
@@ -282,7 +203,6 @@
       margin-top:12px;
       flex-wrap:wrap;
     }
-
     .promo-team img{
       width:52px;
       height:52px;
@@ -294,7 +214,10 @@
 
     @media (max-width:768px){
       .coming-hero{
-        padding:72px 16px 32px;
+        padding:32px 16px 32px;
+      }
+      .coming-hero .container{
+        padding:0 16px;
       }
       .coming-inner{
         gap:24px;
@@ -308,60 +231,58 @@
       }
     }
 
-    /* ========== FOOTER ========== */
+    /* ========== FOOTER: same theme as abstractSubmission ========== */
     .site-footer{
-      background:#ffffff;
+      background:#fff;
       border-top:1px solid rgba(15,23,42,.08);
     }
     .site-footer .container{
-      padding:0 20px;
+      padding:16px 20px;
     }
     .footer-inner{
-      padding:8px 0;
-      min-height:36px;
+      padding:12px 0;
       display:flex;
       justify-content:center;
-      align-items:center;
       text-align:center;
     }
     .footer-inner small{
-      margin:0;
       color:var(--muted);
-      line-height:1;
     }
   </style>
 </head>
 <body>
 
-  <!-- ===== HEADER (same pattern as About Us) ===== -->
-  <header class="site-header transparent" id="siteHeader">
-    <div class="container header-row">
-      <div class="brand" aria-label="AAPD 2026 brand">
-        <a href="index.html" class="brand-link">AAPD 2026</a>
+  <!-- ===== HEADER (theme like abstractSubmission) ===== -->
+  <header class="site-header">
+    <div class="container">
+      <div class="header-row">
+        <div class="brand" aria-label="AAPD 2026 brand">
+          <a href="index.html">AAPD 2026</a>
+        </div>
+
+        <nav class="mid-nav" aria-label="Primary">
+          <a href="aboutus.html">About Us</a>
+          <a href="registration.html">Registration</a>
+          <a href="abstractSubmission.html">Abstract Submission</a>
+          <a href="index.html#sponsors">Sponsors</a>
+          <a href="aboutus.html#contact">Contact Us</a>
+        </nav>
+
+        <div class="header-actions">
+          <button class="icon-btn hamburger" id="navToggle"
+                  aria-controls="mobileMenu" aria-expanded="false"
+                  aria-label="Open menu">☰</button>
+        </div>
+
+        <nav id="mobileMenu" class="mobile-menu" aria-label="Mobile menu">
+          <a href="index.html">Home</a>
+          <a href="aboutus.html">About Us</a>
+          <a href="registration.html">Registration</a>
+          <a href="abstractSubmission.html">Abstract Submission</a>
+          <a href="index.html#sponsors">Sponsors</a>
+          <a href="aboutus.html#contact">Contact Us</a>
+        </nav>
       </div>
-
-      <nav class="mid-nav" aria-label="Primary">
-        <a href="aboutus.html">About Us</a>
-        <a href="registration.html" class="active">Registration</a>
-        <a href="abstractSubmission.html">Abstract Submission</a>
-        <a href="index.html#sponsors">Sponsors</a>
-        <a href="aboutus.html#contact">Contact Us</a>
-      </nav>
-
-      <div class="header-actions">
-        <button class="icon-btn hamburger" id="navToggle"
-                aria-controls="mobileMenu" aria-expanded="false"
-                aria-label="Open menu">☰</button>
-      </div>
-
-      <nav id="mobileMenu" class="mobile-menu" aria-label="Mobile menu">
-        <a href="index.html">Home</a>
-        <a href="aboutus.html">About Us</a>
-        <a href="registration.html" class="active">Registration</a>
-        <a href="abstractSubmission.html">Abstract Submission</a>
-        <a href="index.html#sponsors">Sponsors</a>
-        <a href="aboutus.html#contact">Contact Us</a>
-      </nav>
     </div>
   </header>
 
@@ -382,6 +303,7 @@
           <div class="promo-block">
             <div class="promo-label">PUBLICITY &amp; PROMOTIONAL TEAM</div>
             <div class="promo-team">
+              <!-- update image paths to your actual files -->
               <img src="assets/icons/teamPromo1.svg" alt="Publicity team member 1">
               <img src="assets/icons/teamPromo2.svg" alt="Publicity team member 2">
               <img src="assets/icons/teamPromo3.svg" alt="Publicity team member 3">
@@ -397,29 +319,23 @@
 
   <!-- ===== FOOTER ===== -->
   <footer class="site-footer">
-    <div class="container footer-inner">
-      <small>Copyright © AAPD 2026 Organizing Committee and MADPHS. All rights reserved.</small>
+    <div class="container">
+      <div class="footer-inner">
+        <small>Copyright © AAPD 2026 Organizing Committee and MADPHS. All rights reserved.</small>
+      </div>
     </div>
   </footer>
 
-  <!-- ===== JS: mobile menu + header color toggle ===== -->
+  <!-- ===== JS: mobile menu (same logic as abstractSubmission) ===== -->
   <script>
-    // Mobile menu toggle + click-outside close (same logic as About Us)
     (function(){
       const btn  = document.getElementById('navToggle');
       const menu = document.getElementById('mobileMenu');
-      if (!btn || !menu) return;
+      if(!btn || !menu) return;
 
       btn.addEventListener('click', ()=>{
         const isOpen = menu.classList.toggle('open');
         btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-      });
-
-      document.addEventListener('click', (e)=>{
-        if (!menu.contains(e.target) && !btn.contains(e.target)){
-          menu.classList.remove('open');
-          btn.setAttribute('aria-expanded','false');
-        }
       });
 
       menu.querySelectorAll('a').forEach(a=>{
@@ -428,22 +344,6 @@
           btn.setAttribute('aria-expanded','false');
         });
       });
-    })();
-  </script>
-
-  <script>
-    // Header goes from transparent (white text) to solid (dark text) after hero
-    (function(){
-      const header = document.getElementById('siteHeader');
-      const hero   = document.getElementById('comingHero');
-      if (!header || !hero) return;
-
-      const io = new IntersectionObserver(([entry])=>{
-        header.classList.toggle('solid', !entry.isIntersecting);
-        header.classList.toggle('transparent', entry.isIntersecting);
-      }, { threshold: 0.25 });
-
-      io.observe(hero);
     })();
   </script>
 
