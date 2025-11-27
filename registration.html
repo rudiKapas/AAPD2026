@@ -179,15 +179,16 @@
 
     .big-message{
       font-family:'Barlow Condensed', system-ui, -apple-system, sans-serif;
-      font-weight:800;                          /* Extra-bold */
+      font-weight:800;
       text-transform:uppercase;
-      font-size:clamp(4.2rem, 13vw, 8.5rem);   /* big, responsive */
-      line-height:.88;
-      letter-spacing:.06em;                    /* slightly tighter for condensed font */
+      font-size:clamp(5rem, 15vw, 9.5rem);  /* larger text */
+      line-height:0.78;                      /* lines closer together */
+      letter-spacing:0.06em;                 /* keep it tidy horizontally */
     }
     .big-message span{
       display:block;
     }
+
 
 
     .promo-block{
@@ -232,8 +233,10 @@
         gap:24px;
       }
       .big-message{
-        font-size:clamp(2.8rem, 12vw, 4.4rem);
+        font-size:clamp(3.4rem, 14vw, 4.9rem);  /* bigger on mobile too */
+        line-height:0.82;                        /* slightly tighter lines */
       }
+
       .promo-team img{
         width:46px;
         height:46px;
