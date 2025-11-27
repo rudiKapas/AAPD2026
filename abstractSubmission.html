@@ -372,6 +372,9 @@
           width:22px;
           height:22px;
           display:block;
+          /* Tint monotone SVGs to the same teal as the border (#14b8a6) */
+          filter: invert(48%) sepia(72%) saturate(535%)
+                  hue-rotate(130deg) brightness(94%) contrast(93%);
         }
 
         /* Text styles inside the card */
@@ -1034,6 +1037,22 @@
       else{ base.addEventListener('load', start, {once:true}); }
     })();
   </script>
+
+  <script>
+    // Desktop-only: open email and WhatsApp links in a new tab
+    (function () {
+      if (window.matchMedia('(min-width: 901px)').matches) {
+        const contactLinks = document.querySelectorAll('.help-link');
+        contactLinks.forEach(link => {
+          link.setAttribute('target', '_blank');
+          link.setAttribute('rel', 'noopener');
+        });
+      }
+    })();
+  </script>
+
+  
 </body>
+  
 </html>
 
