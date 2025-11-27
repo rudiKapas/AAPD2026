@@ -156,10 +156,11 @@
 
     .coming-layout{
       display:flex;
-      gap:40px;
-      align-items:flex-end;
-      flex-wrap:wrap;
+      flex-direction:column;   /* stack items vertically */
+      gap:32px;
+      align-items:flex-start;  /* align to the left */
     }
+
     .coming-left{
       flex:1.4 1 260px;
     }
@@ -207,10 +208,6 @@
     @media (max-width:768px){
       .coming .container{
         padding-block:56px;
-      }
-      .coming-layout{
-        flex-direction:column;
-        align-items:flex-start;
       }
       .headline{
         font-size:clamp(3.8rem, 12vw, 5rem);
