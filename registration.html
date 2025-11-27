@@ -1,1 +1,351 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AAPD 2026 — Registration</title>
+  <meta name="description" content="Registration information for the 18th International Conference of the Asian Academy of Preventive Dentistry (18th ICAAPD), AAPD 2026 Kota Kinabalu." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Poppins:wght@300;400;500&family=Barlow+Condensed:wght@700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --navy:#0f172a;
+      --muted:#6b7280;
+      --bg:#ffffff;
+      --container:1152px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      color:var(--navy);
+      background:var(--bg);
+      line-height:1.5;
+    }
+
+    .container{
+      width:100%;
+      max-width:var(--container);
+      margin-inline:auto;
+      padding:16px 20px;
+    }
+
+    /* ======= Header (same as other pages) ======= */
+    .site-header{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:#ffffff;
+      border-bottom:1px solid rgba(15,23,42,.06);
+    }
+    .header-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      height:56px;
+      padding:0;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:0;
+      font-weight:500;
+      letter-spacing:0;
+    }
+    .brand a{
+      text-decoration:none;
+      color:var(--navy);
+      font-weight:500;
+    }
+
+    .header-actions{display:flex;align-items:center;gap:10px}
+
+    .header-row{position:relative;}
+    .mid-nav{
+      position:absolute;
+      left:50%;
+      transform:translateX(-50%);
+      display:flex;
+      align-items:center;
+      gap:22px;
+      font-weight:300;
+    }
+    .mid-nav a{
+      text-decoration:none;
+      color:var(--navy);
+      font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      letter-spacing:.2px;
+      transition:transform .18s cubic-bezier(.2,.65,.3,1),opacity .18s ease;
+    }
+    .mid-nav a:hover{
+      transform:translateY(-1px);
+      opacity:.85;
+    }
+    @media (max-width:900px){
+      .mid-nav{display:none;}
+    }
+
+    .icon-btn{
+      width:34px;
+      height:34px;
+      border-radius:999px;
+      border:1px solid rgba(15,23,42,.12);
+      background:#fff;
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+    }
+    .icon-btn.hamburger{display:none;}
+    @media (max-width:900px){
+      .icon-btn.hamburger{display:grid;}
+    }
+
+    .mobile-menu{
+      display:none;
+      position:absolute;
+      top:calc(100% + 8px);
+      left:16px;
+      right:16px;
+      background:#fff;
+      border:1px solid rgba(15,23,42,.08);
+      border-radius:14px;
+      box-shadow:0 12px 28px rgba(15,23,42,.10);
+      z-index:60;
+    }
+    .mobile-menu.open{display:block;}
+    .mobile-menu a{
+      display:block;
+      padding:14px 16px;
+      border-bottom:1px solid rgba(15,23,42,.06);
+      text-decoration:none;
+      color:var(--navy);
+      font-weight:600;
+    }
+    .mobile-menu a:last-child{border-bottom:0;}
+
+    /* ===== Coming Soon Layout ===== */
+    main{
+      background:#111111;
+      color:#f9fafb;
+      min-height:calc(100vh - 56px - 60px); /* header + footer approx */
+    }
+
+    .coming{
+      min-height:calc(100vh - 56px - 60px);
+      display:flex;
+      align-items:center;
+    }
+    .coming .container{
+      padding-block:72px;
+    }
+
+    .coming-brand{
+      font-family:Poppins,Inter,sans-serif;
+      font-size:.9rem;
+      text-transform:uppercase;
+      letter-spacing:.24em;
+      color:#e5e7eb;
+      margin-bottom:40px;
+    }
+
+    .coming-layout{
+      display:flex;
+      gap:40px;
+      align-items:flex-end;
+      flex-wrap:wrap;
+    }
+    .coming-left{
+      flex:1.4 1 260px;
+    }
+    .coming-right{
+      flex:1 1 240px;
+    }
+
+    /* Big headline */
+    .headline{
+      font-family:"Barlow Condensed",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+      line-height:0.78; /* tight */
+      font-size:clamp(5.5rem, 11vw, 9rem); /* roughly 2× bigger than default */
+    }
+    .headline-line{
+      display:block;
+    }
+    .headline-line.preparing{
+      letter-spacing:.02em;
+    }
+
+    /* Team block */
+    .team-label{
+      font-family:Poppins,Inter,sans-serif;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      font-size:.8rem;
+      color:#e5e7eb;
+      margin-bottom:16px;
+    }
+    .team-grid{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+    .team-grid img{
+      width:56px;
+      height:56px;
+      border-radius:999px;
+      display:block;
+    }
+
+    @media (max-width:768px){
+      .coming .container{
+        padding-block:56px;
+      }
+      .coming-layout{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+      .headline{
+        font-size:clamp(3.8rem, 12vw, 5rem);
+      }
+    }
+
+    /* ===== Footer ===== */
+    .site-footer{
+      background:#fff;
+      border-top:1px solid rgba(15,23,42,.08);
+    }
+    .footer-inner{
+      padding:12px 0;
+      display:flex;
+      justify-content:center;
+      text-align:center;
+    }
+    .footer-inner small{color:var(--muted);}
+
+    /* Simple fade-in */
+    .fx{opacity:0;transform:translateY(10px);will-change:opacity,transform;}
+    body.loaded .fx{
+      opacity:1;
+      transform:none;
+      transition:opacity .6s cubic-bezier(.2,.65,.3,1),
+                 transform .6s cubic-bezier(.2,.65,.3,1);
+      transition-delay:var(--d,0s);
+    }
+    @media (prefers-reduced-motion:reduce){
+      .fx,body.loaded .fx{opacity:1!important;transform:none!important;transition:none!important;}
+    }
+  </style>
+</head>
+<body>
+  <!-- ======= HEADER ======= -->
+  <header class="site-header">
+    <div class="container header-row fx" style="--d:.04s">
+      <div class="brand" aria-label="AAPD 2026 brand">
+        <a href="index.html">AAPD 2026</a>
+      </div>
+
+      <nav class="mid-nav" aria-label="Primary">
+        <a href="aboutus.html">About Us</a>
+        <a href="registration.html">Registration</a>
+        <a href="abstractSubmission.html">Abstract Submission</a>
+        <a href="index.html#sponsors">Sponsors</a>
+        <a href="aboutus.html#contact">Contact Us</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="icon-btn hamburger" id="navToggle"
+                aria-controls="mobileMenu" aria-expanded="false"
+                aria-label="Open menu">☰</button>
+      </div>
+
+      <nav id="mobileMenu" class="mobile-menu" aria-label="Mobile menu">
+        <a href="index.html">Home</a>
+        <a href="aboutus.html">About Us</a>
+        <a href="registration.html">Registration</a>
+        <a href="abstractSubmission.html">Abstract Submission</a>
+        <a href="index.html#sponsors">Sponsors</a>
+        <a href="aboutus.html#contact">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="coming">
+      <div class="container">
+        <div class="coming-brand">Stay Tuned</div>
+
+        <div class="coming-layout">
+          <div class="coming-left fx" style="--d:.08s">
+            <div class="headline">
+              <span class="headline-line">WE&rsquo;RE</span>
+              <span class="headline-line preparing">PREPARING</span>
+              <span class="headline-line">SOMETHING</span>
+              <span class="headline-line">BIG</span>
+            </div>
+          </div>
+
+          <div class="coming-right fx" style="--d:.14s">
+            <div class="team">
+              <div class="team-label">Publicity &amp; Promotional Team</div>
+              <div class="team-grid">
+                <img src="assets/icons/teamPromo1.svg" alt="Publicity &amp; Promotional Team member 1">
+                <img src="assets/icons/teamPromo2.svg" alt="Publicity &amp; Promotional Team member 2">
+                <img src="assets/icons/teamPromo3.svg" alt="Publicity &amp; Promotional Team member 3">
+                <img src="assets/icons/teamPromo4.svg" alt="Publicity &amp; Promotional Team member 4">
+                <img src="assets/icons/teamPromo5.svg" alt="Publicity &amp; Promotional Team member 5">
+                <img src="assets/icons/teamPromo6.svg" alt="Publicity &amp; Promotional Team member 6">
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ======= FOOTER ======= -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <small>Copyright © AAPD 2026 Organizing Committee and MADPHS. All rights reserved.</small>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu
+    (function(){
+      const btn = document.getElementById('navToggle');
+      const menu = document.getElementById('mobileMenu');
+      if(!btn || !menu) return;
+      btn.addEventListener('click', ()=>{
+        const isOpen = menu.classList.toggle('open');
+        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+      menu.querySelectorAll('a').forEach(a=>{
+        a.addEventListener('click', ()=>{
+          menu.classList.remove('open');
+          btn.setAttribute('aria-expanded','false');
+        });
+      });
+    })();
+  </script>
+
+  <script>
+    // Trigger entry animations
+    (function(){
+      document.documentElement.classList.add('js');
+      window.addEventListener('DOMContentLoaded', function(){
+        document.body.classList.add('loaded');
+      });
+    })();
+  </script>
+</body>
+</html>
 
