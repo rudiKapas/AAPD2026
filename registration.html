@@ -9,7 +9,8 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Poppins:wght@300;400;500&family=Oswald:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Poppins:wght@300;400;500&family=Oswald:wght@700&family=Barlow+Condensed:wght@800&display=swap" rel="stylesheet">
+
 
   <style>
     :root{
@@ -177,15 +178,17 @@
     }
 
     .big-message{
-      font-family:'Oswald', system-ui, -apple-system, sans-serif;
-      font-weight:700;
+      font-family:'Barlow Condensed', system-ui, -apple-system, sans-serif;
+      font-weight:800;                          /* Extra-bold */
       text-transform:uppercase;
-      font-size:clamp(4.2rem, 13vw, 8.5rem); /* bigger again */
+      font-size:clamp(4.2rem, 13vw, 8.5rem);   /* big, responsive */
       line-height:.88;
-      letter-spacing:.08em;
+      letter-spacing:.06em;                    /* slightly tighter for condensed font */
+    }
+    .big-message span{
+      display:block;
     }
 
-    .big-message span{display:block;}
 
     .promo-block{
       margin-top:10px;
