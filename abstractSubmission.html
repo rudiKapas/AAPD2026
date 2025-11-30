@@ -107,6 +107,17 @@
       .hero-img .hero-overlay{display:none;}
     }
 
+    @media (max-width:980px){
+      .img-register{
+        position:static;      /* no longer over the image */
+        right:auto;
+        bottom:auto;
+        display:inline-flex;  /* keep the pill/button look */
+        margin-top:8px;       /* tiny gap from the image, no extra big space */
+      }
+    }
+
+
     /* ======= Header (same as index) ======= */
     .site-header{
       position:sticky;
