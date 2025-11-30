@@ -259,12 +259,24 @@
       align-items:center;
     }
 
+    /* Default: mobile & tablet – button sits below the image */
     .img-register{
-      position:absolute;
-      right:20px;
-      bottom:20px;
+      position:static;        /* no absolute positioning on small screens */
       z-index:3;
+      display:inline-flex;
+      margin-top:8px;         /* small gap under the image, not extra big space */
     }
+    
+    /* Desktop only: put the button back over the image */
+    @media (min-width:981px){
+      .img-register{
+        position:absolute;
+        right:20px;
+        bottom:20px;
+        margin-top:0;         /* remove the gap when overlaying the image */
+      }
+    }
+
 
 
     @media (max-width:980px){
