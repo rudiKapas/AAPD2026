@@ -462,15 +462,22 @@
     .contact .contact-sub{
       margin-top: 4px;
       max-width: 60ch;      /* adjust if you want wider/narrower */
-      text-align: justify;  /* justify all lines */
+      color: var(--muted);
     }
     
-    /* force the last line to stretch to the full width */
-    .contact .contact-sub::after{
+    /* each sentence = one justified row */
+    .contact .contact-sub .contact-line{
+      display: block;
+      text-align: justify;
+    }
+    
+    /* force that row to stretch to the full width */
+    .contact .contact-sub .contact-line::after{
       content: "";
       display: inline-block;
       width: 100%;
     }
+
     
 
     
@@ -1166,8 +1173,14 @@
       <div class="container">
         <h2>Contact Us</h2>
         <p class="contact-sub">
-          We're getting our contact channels ready and will share full details here soon. For now, abstract-related questions can be directed to the Scientific Committee.
+          <span class="contact-line">
+            We're getting our contact channels ready and will share full details here soon.
+          </span>
+          <span class="contact-line">
+            For now, abstract-related questions can be directed to the Scientific Committee.
+          </span>
         </p>
+
     
         <a class="contact-cta" href="abstractSubmission.html#abstract-help">
           Abstract Submission Help &amp; Support
