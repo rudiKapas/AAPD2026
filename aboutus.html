@@ -469,8 +469,11 @@
     }
 
     .contact-sub {
-      text-align: justify;
+      max-width: 70ch;              /* narrow enough so it wraps into 2+ lines */
+      text-align: justify;          /* justify both left and right edges */
+      text-justify: inter-word;
     }
+    
 
     .contact-cta {
       display: inline-flex;
