@@ -1250,12 +1250,11 @@
     
     .venue-notice .venue-title{
       margin:0 0 12px;
-      font-family:Poppins,Inter,sans-serif;
-      font-weight:600;
-      font-size:clamp(1.2rem, 1.3vw + .7rem, 1.8rem);
-      color:var(--navy);
+      font-family:Poppins,Inter,system-ui,sans-serif;
+      font-weight:500;
+      /* match your generic .section h2 sizing (same as “Key Dates”) */
+      font-size:clamp(1.2rem, 1.3vw + .6rem, 1.8rem);
     }
-    
     .venue-card{
       position:relative;
       overflow:hidden;
@@ -1278,11 +1277,12 @@
 
     
     .venue-copy{
-      max-width:34rem;
-      color:var(--navy);
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: none;          /* remove the fixed 620px cap */
     }
-    
-    .venue-tag{
+     .venue-tag{
       font-size:.72rem;
       letter-spacing:.12em;
       text-transform:uppercase;
@@ -1291,15 +1291,22 @@
     }
     
      .venue-copy p{
-        margin: .45rem 0;
-        max-width: 58ch;
-        color: var(--navy);
-        font-size: clamp(1rem, 0.4vw + 1rem, 1.2rem);  /* bigger text */
-      }
+          margin: .5rem 0;
+          color: var(--navy);
+          font-size: clamp(1rem, 0.4vw + 1rem, 1.15rem);
+          text-align: justify;      /* justify on both desktop + mobile */
+        }
 
       .venue-copy p strong{
         font-weight: 650;   /* make highlighted bits stand out */
       }
+
+    /* Desktop: let the copy span ~4/5 of the card width */
+    @media (min-width: 900px){
+      .venue-copy{
+        width: 80%;
+      }
+    }
 
     
     /* right-side circular image with green overlay feel */
@@ -1511,13 +1518,10 @@
           <div class="venue-copy">
             <div class="venue-tag">Venue notice</div>
             <p>
-              The <strong>18<sup>th</sup> AAPD 2026 meeting</strong> will no longer be held at the
-              <strong>Sabah International Convention Centre (SICC)</strong>, as we’re finalising an
-              alternative venue in <strong>Kota Kinabalu, Sabah</strong> that better fits our needs.
+              The <strong>18<sup>th</sup> AAPD 2026 meeting</strong> will no longer be held at the <strong>Sabah International Convention Centre (SICC)</strong>, as we’re finalising an alternative venue in <strong>Kota Kinabalu, Sabah</strong> that better fits our needs.
             </p>
             <p>
-              Please note that while some flyers and videos still mention SICC, the conference dates
-              remain <strong>30 September – 3 October 2026</strong>, and only the venue name will change.
+              Please note that while some flyers and videos still mention SICC, the conference dates remain <strong>30 September – 3 October 2026</strong>, and only the venue name will change.
               We appreciate your understanding as we complete this update.
             </p>
           </div>
