@@ -1257,15 +1257,25 @@
     }
     
     .venue-card{
+      position:relative;
+      overflow:hidden;
       border-radius:22px;
       padding:22px 26px;
-      background:linear-gradient(135deg,#dcfce7,#bbf7d0); /* green gradient */
       box-shadow:0 14px 28px rgba(15,23,42,.10);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:24px;
+      color:var(--navy);
+      background-image:
+        linear-gradient(
+          120deg,
+          rgba(220,252,231,.95) 0%,
+          rgba(187,247,208,.92) 55%,
+          rgba(15,23,42,.30) 100%
+        ),
+        url("assets/img/kinabaluNotification.jpg");
+      background-size:cover;
+      background-position:center right;
+      background-repeat:no-repeat;
     }
+
     
     .venue-copy{
       max-width:34rem;
@@ -1317,11 +1327,8 @@
     /* stack nicely on mobile */
     @media (max-width:768px){
       .venue-card{
-        flex-direction:column;
-        align-items:flex-start;
-      }
-      .venue-image-wrap{
-        align-self:center;
+        padding:18px 18px;
+        background-position:center;
       }
     }
 
@@ -1492,28 +1499,22 @@
 
     <section id="venue-update" class="section venue-notice">
       <div class="container">
-        <h2 class="venue-title">Venue Update: Same City, New Venue</h2>
+        <h2 class="venue-title">Venue Update: Same Dates, New Location in Kota Kinabalu</h2>
     
         <div class="venue-card">
           <div class="venue-copy">
             <div class="venue-tag">Venue notice</div>
             <p>
-              Some early materials show the Sabah International Convention Centre (SICC), 
-              but the main committee is confirming a new venue in Kota Kinabalu that better 
-              fits the programme and expected attendance. Conference dates remain the same, 
-              and the confirmed venue will be announced here soon.
+              The 18<sup>th</sup> AAPD 2026 meeting will no longer be held at the Sabah International Convention Centre (SICC), as the committee is finalising an alternative venue in Kota Kinabalu, Sabah that better fits our needs.
             </p>
-          </div>
-    
-          <div class="venue-image-wrap">
-            <div class="venue-image-circle">
-              <img src="assets/img/kinabaluNotification.jpg"
-                   alt="Kota Kinabalu notification image" loading="lazy">
-            </div>
+            <p>
+              Please note that while some flyers and videos still mention SICC, the conference dates remain 30 September – 3 October 2026, and only the venue name will change. We appreciate your understanding as we complete this update.
+            </p>
           </div>
         </div>
       </div>
     </section>
+
 
 
    <!-- ============== SECTION 2 — DEADLINES (COUNTDOWN ROW) ============== -->
