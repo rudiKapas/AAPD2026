@@ -459,7 +459,13 @@
 
     
     /* ========== Contact section cards ========== */
-    .contact .contact-sub{ margin-top:4px; }
+    .contact .contact-sub{
+      margin-top: 4px;
+      max-width: 60ch;          /* force wrapping into multiple lines */
+      text-align: justify;      /* justify both edges */
+      text-justify: inter-word;
+    }
+
     
     .contact-grid{
       display:grid;
@@ -468,11 +474,6 @@
       margin-top:18px;
     }
 
-    .contact-sub {
-      max-width: 70ch;              /* narrow enough so it wraps into 2+ lines */
-      text-align: justify;          /* justify both left and right edges */
-      text-justify: inter-word;
-    }
     
 
     .contact-cta {
