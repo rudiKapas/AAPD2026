@@ -1182,6 +1182,26 @@
 
 
 </style>
+
+  <link rel="icon" type="image/svg+xml" href="assets/icons/AAPDGen.svg">
+  <style>
+    /* Desktop-only header logos (isolated so it won't touch other styles) */
+    .aapd-header-icons {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      margin-left: auto; /* pushes to the right inside a flex row */
+    }
+    .aapd-header-icons img {
+      height: 28px;
+      width: auto;
+      display: block;
+    }
+    @media (min-width: 1024px) {
+      .aapd-header-icons { display: flex; }
+    }
+  </style>
+
 </head>
 <body>
   
@@ -1216,6 +1236,16 @@
           </nav>
 
     </div>
+
+        <div class="aapd-header-icons">
+          <a href="index.html" aria-label="Go to AAPD home">
+            <img src="assets/icons/AAPDGen.svg" alt="AAPD">
+          </a>
+          <a href="index.html" aria-label="Go to AAPD 2026 home">
+            <img src="assets/icons/AAPD26.svg" alt="AAPD 2026">
+          </a>
+        </div>
+
 </header>
 
   <main>
