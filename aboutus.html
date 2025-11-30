@@ -461,10 +461,17 @@
     /* ========== Contact section cards ========== */
     .contact .contact-sub{
       margin-top: 4px;
-      max-width: 60ch;      /* adjust if you want wider/narrower */
+      max-width: none;      /* let it stretch full container width */
+      width: 100%;
       color: var(--muted);
+      text-align: justify;
     }
     
+    /* no special last-line trick needed */
+    .contact .contact-sub::after{
+      content: none;
+    }
+
     /* each sentence = one justified row */
     .contact .contact-sub .contact-line{
       display: block;
@@ -1173,13 +1180,9 @@
       <div class="container">
         <h2>Contact Us</h2>
         <p class="contact-sub">
-          <span class="contact-line">
-            We're getting our contact channels ready and will share full details here soon.
-          </span>
-          <span class="contact-line">
-            For now, abstract-related questions can be directed to the Scientific Committee.
-          </span>
+          We're getting our contact channels ready and will share full details here soon. For now, abstract-related questions can be directed to the Scientific Committee.
         </p>
+        
 
     
         <a class="contact-cta" href="abstractSubmission.html#abstract-help">
