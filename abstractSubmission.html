@@ -123,6 +123,25 @@
 
 
     /* ======= Header (same as index) ======= */
+    /* Desktop-only header logos (won't affect mobile) */
+    .aapd-header-icons{
+      display:none;              /* hidden by default */
+      align-items:center;
+      gap:10px;
+    }
+    .aapd-header-icons a{
+      display:inline-flex;
+      align-items:center;
+    }
+    .aapd-header-icons img{
+      height:28px;
+      width:auto;
+      display:block;
+    }
+    @media (min-width:1024px){
+      .aapd-header-icons{ display:flex; }
+    }
+
     .site-header{
       position:sticky;
       top:0;
@@ -659,6 +678,11 @@
       .fx,body.loaded .fx{opacity:1!important;transform:none!important;transition:none!important;}
     }
   </style>
+
+  <!-- Tab icon / favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/icons/AAPDGen.svg">
+  <link rel="icon" type="image/png" href="assets/icons/AAPD26.png">
+
 </head>
 <body>
   <!-- ======= HEADER ======= -->
@@ -678,10 +702,20 @@
       </nav>
 
       <div class="header-actions">
+        <div class="aapd-header-icons" aria-label="AAPD logos">
+          <a href="index.html" aria-label="Go to AAPD home">
+            <img src="assets/icons/AAPDGen.svg" alt="AAPD">
+          </a>
+          <a href="index.html" aria-label="Go to AAPD 2026 home">
+            <img src="assets/icons/AAPD26.png" alt="AAPD 2026">
+          </a>
+        </div>
+      
         <button class="icon-btn hamburger" id="navToggle"
                 aria-controls="mobileMenu" aria-expanded="false"
                 aria-label="Open menu">☰</button>
       </div>
+
 
       <nav id="mobileMenu" class="mobile-menu" aria-label="Mobile menu">
         <a href="index.html">Home</a>
