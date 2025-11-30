@@ -1180,6 +1180,27 @@
       }
     }
 
+    /* Sponsors & Collaborators: logo row above title */
+    .sponsor-icons{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:18px;
+      flex-wrap:wrap;
+      margin:0 0 12px;
+    }
+    .sponsor-icons img{
+      height:44px;
+      width:auto;
+      max-width:160px;
+      display:block;
+    }
+    @media (max-width:520px){
+      .sponsor-icons{ gap:14px; margin-bottom:10px; }
+      .sponsor-icons img{ height:34px; max-width:140px; }
+    }
+
+
 
 </style>
 
@@ -1504,16 +1525,23 @@
     <!-- ============== SECTION 4 — Sponsors & Collaborators ============== -->
     <section class="section sponsors" id="sponsors">
       <div class="container">
+    
+        <div class="sponsor-icons fx" style="--d:.03s" aria-label="Sponsors and collaborators logos">
+          <img src="assets/icons/AAPDGen.svg" alt="AAPD" loading="lazy">
+          <img src="assets/icons/AAPD26.png" alt="AAPD 2026" loading="lazy">
+          <img src="assets/icons/MADPHS.png" alt="MADPHS" loading="lazy">
+          <img src="assets/icons/MCEB.png" alt="MCEB" loading="lazy">
+        </div>
+    
         <h2 class="fx" style="--d:.06s">Sponsors and Collaborators</h2>
         <p class="fx" style="--d:.12s">
           We extend our sincere appreciation to our sponsors and collaborators—
           This conference would not be possible without your support. Thank you!.
         </p>
     
-        <!-- (Optional) logo grid can go here later -->
-        <!-- <div class="logo-grid">...</div> -->
       </div>
     </section>
+
 
 
     
