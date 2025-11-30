@@ -456,6 +456,14 @@
       .media-sub{font-size:.78rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     }
 
+      .media-card.disabled{
+        opacity:.45;
+        filter:grayscale(1);
+        cursor:default;
+        pointer-events:none;  /* prevents clicking / hovering */
+      }
+
+
     /* Make Section 2 visually as compact as Section 1 (desktop) */
     @media (min-width: 521px){
       .section{padding:24px 0}
@@ -1651,7 +1659,7 @@
 
 
           <!-- ===== YOUTUBE CARD 2 ===== -->
-          <a class="media-card" href="https://www.youtube.com/watch?v=V-gAc6m9SIc" target="_blank" rel="noopener">
+          <a class="media-card disabled" href="https://www.youtube.com/watch?v=V-gAc6m9SIc" target="_blank" rel="noopener">
             <div class="media-thumb yt">
               <img
                   src="https://img.youtube.com/vi/V-gAc6m9SIc/hqdefault.jpg"
