@@ -126,6 +126,29 @@
       transform:translateY(-1px);
       opacity:.85;
     }
+
+    /* Active nav pill (current page) */
+    .mid-nav a.active{
+      position:relative;
+      padding:6px 14px;                     /* a bit more padding for the pill */
+      border-radius:999px;                  /* pill shape */
+      border:1px solid rgba(15,23,42,.10);  /* subtle border */
+      background:linear-gradient(
+        180deg,
+        rgba(15,23,42,.05),
+        rgba(15,23,42,.03)
+      );
+      box-shadow:0 2px 8px rgba(15,23,42,.06);
+      font-weight:500;
+    }
+    
+    /* Active item inside the mobile dropdown */
+    .mobile-menu a.active{
+      background:rgba(15,23,42,.05);
+      font-weight:700;
+    }
+
+    
     @media (max-width:900px){
       .mid-nav{display:none;}
     }
@@ -299,7 +322,7 @@
 
         <nav class="mid-nav" aria-label="Primary">
           <a href="aboutus.html#top">About Us</a>
-          <a href="registration.html">Registration</a>
+          <a href="registration.html" class="active">Registration</a>
           <a href="abstractSubmission.html">Abstract Submission</a>
           <a href="index.html#sponsors">Sponsors</a>
           <a href="aboutus.html#contact">Contact Us</a>
@@ -324,7 +347,7 @@
         <nav id="mobileMenu" class="mobile-menu" aria-label="Mobile menu">
           <a href="index.html">Home</a>
           <a href="aboutus.html#top">About Us</a>
-          <a href="registration.html">Registration</a>
+          <a href="registration.html" class="active">Registration</a>
           <a href="abstractSubmission.html">Abstract Submission</a>
           <a href="index.html#sponsors">Sponsors</a>
           <a href="aboutus.html#contact">Contact Us</a>
