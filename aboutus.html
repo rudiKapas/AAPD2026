@@ -85,6 +85,29 @@
         0 2px 8px rgba(2,12,32,.08);
     }
 
+    /* Desktop: align icon block with same inset as the brand (brand has margin-left:10px) */
+    @media (min-width:1024px){
+      .header-actions{
+        margin-right:10px;            /* mirrors .brand { margin-left:10px } */
+      }
+    
+      .aapd-header-icons{
+        margin-left:0 !important;     /* IMPORTANT: kill any old margin-left:auto */
+        height:34px;                  /* match nav/brand clickable height */
+        padding:0 10px;               /* match brand/nav side padding */
+        display:flex;
+        align-items:center;
+        gap:10px;
+      }
+    
+      .aapd-header-icons img{
+        height:28px;
+        width:auto;
+        display:block;
+      }
+    }
+
+
     
     /* When header turns solid on white, keep frame visible */
     .site-header.solid .mid-nav a.active{
