@@ -461,11 +461,17 @@
     /* ========== Contact section cards ========== */
     .contact .contact-sub{
       margin-top: 4px;
-      max-width: 60ch;          /* adjust or remove if you want wider/narrower */
-      text-align: justify;      /* justify all lines */
-      text-align-last: justify; /* also justify the final line */
-      text-justify: inter-word;
+      max-width: 60ch;      /* adjust if you want wider/narrower */
+      text-align: justify;  /* justify all lines */
     }
+    
+    /* force the last line to stretch to the full width */
+    .contact .contact-sub::after{
+      content: "";
+      display: inline-block;
+      width: 100%;
+    }
+    
 
     
     .contact-grid{
