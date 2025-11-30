@@ -10,6 +10,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Poppins:wght@300;400;500&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 
+  <!-- Tab icon / favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/icons/AAPDGen.svg">
+  <link rel="icon" type="image/png" href="assets/icons/AAPD26.png">
+
 
   <style>
     :root{
@@ -883,7 +887,44 @@
         min-height: 400px !important;         /* taller tile for Prof Rahimah & AP Dr Haslina */
       }
     }
+
+    /* Desktop-only header logos (does not affect mobile) */
+    .header-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
     
+    .aapd-header-icons{
+      display:none;              /* hidden by default */
+      align-items:center;
+      gap:10px;
+    }
+    
+    .aapd-header-icons a{
+      display:inline-flex;
+      align-items:center;
+    }
+    
+    .aapd-header-icons img{
+      height:28px;
+      width:auto;
+      display:block;
+    }
+    
+    /* show only on desktop */
+    @media (min-width:1024px){
+      .aapd-header-icons{ display:flex; }
+    }
+    
+    /* optional: help visibility when header is transparent over the hero */
+    .site-header.transparent .aapd-header-icons img{
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,.35));
+    }
+    .site-header.solid .aapd-header-icons img{
+      filter: none;
+    }
+
 
     
     
@@ -907,8 +948,20 @@
       </nav>
 
       <div class="header-actions">
-        <button class="icon-btn hamburger" id="navToggle" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu">☰</button>
+      <div class="aapd-header-icons" aria-label="AAPD logos">
+        <a href="index.html" aria-label="Go to AAPD home">
+          <img src="assets/icons/AAPDGen.svg" alt="AAPD">
+        </a>
+        <a href="index.html" aria-label="Go to AAPD 2026 home">
+          <img src="assets/icons/AAPD26.png" alt="AAPD 2026">
+        </a>
       </div>
+    
+      <button class="icon-btn hamburger" id="navToggle"
+              aria-controls="mobileMenu" aria-expanded="false"
+              aria-label="Open menu">☰</button>
+    </div>
+
 
       <nav id="mobileMenu" class="mobile-menu" aria-label="Mobile menu">
         <a href="index.html">Home</a>
