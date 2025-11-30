@@ -1326,7 +1326,7 @@
     
       <div>
         <div class="title">Early Bird Registration</div>
-        <div class="date">1 Jun 2026 – 31 Jul 2026</div>
+        <div class="date">Opening soon in 2026 · Dates to be announced</div>
         <div class="time"><small>Starting in:</small><span class="remain">—</span></div>
       </div>
       <div class="bar"><span></span></div>
@@ -1339,7 +1339,7 @@
                data-start="2026-08-01" data-end="2026-09-15">
         <div>
           <div class="title">Late Registration (Online)</div>
-          <div class="date">1 Aug 2026 – 15 Sep 2026</div>
+          <div class="date">Following Early Bird · Dates to be announced</div>
           <div class="label">Starting in:</div>
           <div class="time"><span class="remain">—</span></div>
         </div>
@@ -1648,37 +1648,55 @@
                              .filter(Boolean).join(' ');
     
       // Labels
-      function render(){
-        const now = new Date();
-        row.querySelectorAll('.ccard').forEach(card=>{
-          const el = card.querySelector('.remain');
-          const title  = card.getAttribute('data-title')||'';
-          const target = new Date(card.getAttribute('data-start') + 'T00:00:00');
-          const d = diffMWD(now, target);
-          if (d.today){
-            el.textContent='Today'; card.dataset.long='Today'; card.dataset.compact='Today';
-            card.setAttribute('aria-label', title+' is today');
-          } else if (d.past){
-            el.textContent='Closed'; card.dataset.long='Closed'; card.dataset.compact='Closed';
-            card.setAttribute('aria-label', title+' has passed');
-        } else {
-          const L = fmtLong(d), S = fmtShort(d);
-          // break line before "and X days" on full cards
-          const Lhtml = L.replace(/,\s+and\s+(\d+\s+day[s]?)/, ',<br class="br-days" />and $1');
-        
-          // store variations
-          card.dataset.long = L;         // full text (fallback)
-          card.dataset.longHtml = Lhtml; // full text with line break
-          card.dataset.compact = S;      // rod text (e.g., 8m 3w 4d)
-        
-          // initial visible text (plain); applyLayout will swap to innerHTML for full cards
-          el.textContent = L;
-        
-          card.setAttribute('aria-label', title + ' in ' + L);
-        }
+            function render(){
+              const now = new Date();
+              row.querySelectorAll('.ccard').forEach(card=>{
+                const el    = card.querySelector('.remain');
+                const title = card.getAttribute('data-title') || '';
+      
+                // NEW: turn off countdown for cards marked data-countdown="off"
+                if (card.getAttribute('data-countdown') === 'off'){
+                  const msg = 'Dates to be announced';
+                  if (el){ el.textContent = 'TBA'; }
+                  card.dataset.long     = msg;
+                  card.dataset.longHtml = msg;
+                  card.dataset.compact  = 'TBA';
+                  card.setAttribute('aria-label', title + ' dates to be announced');
+                  return; // skip countdown calculation for this card
+                }
+      
+                const target = new Date(card.getAttribute('data-start') + 'T00:00:00');
+                const d = diffMWD(now, target);
+      
+                if (d.today){
+                  el.textContent = 'Today';
+                  card.dataset.long    = 'Today';
+                  card.dataset.compact = 'Today';
+                  card.setAttribute('aria-label', title + ' is today');
+                } else if (d.past){
+                  el.textContent = 'Closed';
+                  card.dataset.long    = 'Closed';
+                  card.dataset.compact = 'Closed';
+                  card.setAttribute('aria-label', title + ' has passed');
+                } else {
+                  const L = fmtLong(d), S = fmtShort(d);
+                  // break line before "and X days" on full cards
+                  const Lhtml = L.replace(/,\s+and\s+(\d+\s+day[s]?)/,
+                                          ',<br class="br-days" />and $1');
+      
+                  // store variations
+                  card.dataset.long     = L;      // full text (fallback)
+                  card.dataset.longHtml = Lhtml;  // full text with line break
+                  card.dataset.compact  = S;      // rod text (e.g., 8m 3w 4d)
+      
+                  // initial visible text (plain); applyLayout will swap to innerHTML for full cards
+                  el.textContent = L;
+      
+                  card.setAttribute('aria-label', title + ' in ' + L);
+                }
+              });
+            }
 
-        });
-      }
     
       // Layout
       const cards = Array.from(row.querySelectorAll('.ccard'));
