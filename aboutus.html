@@ -1276,6 +1276,54 @@
   </script>
 
   <script>
+      // Toggle active nav between "About Us" and "Contact Us" based on Contact section visibility
+      (function(){
+        const contactSection = document.getElementById('contact');
+        if (!contactSection) return;
+    
+        // Desktop nav links
+        const aboutDesktop   = document.querySelector('.mid-nav a[href="aboutus.html#top"]');
+        const contactDesktop = document.querySelector('.mid-nav a[href="#contact"]');
+    
+        // Mobile menu links
+        const aboutMobile    = document.querySelector('#mobileMenu a[href="aboutus.html#top"]');
+        const contactMobile  = document.querySelector('#mobileMenu a[href="#contact"]');
+    
+        if (!aboutDesktop && !aboutMobile && !contactDesktop && !contactMobile) return;
+    
+        function setState(contactInView){
+          const aboutLinks   = [aboutDesktop, aboutMobile];
+          const contactLinks = [contactDesktop, contactMobile];
+    
+          aboutLinks.forEach(link => {
+            if (!link) return;
+            link.classList.toggle('active', !contactInView);
+          });
+    
+          contactLinks.forEach(link => {
+            if (!link) return;
+            link.classList.toggle('active', contactInView);
+          });
+        }
+    
+        // If IO not supported, just keep "About Us" active
+        if (!('IntersectionObserver' in window)) return;
+    
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.target !== contactSection) return;
+            setState(entry.isIntersecting);
+          });
+        }, {
+          threshold: 0.35  // Contact section needs ~35% in view before switching
+        });
+    
+        io.observe(contactSection);
+      })();
+    </script>
+
+
+  <script>
   /* ===== Committee dataset (assets are in assets/committee) ===== */
   const committeeData = [
     {
