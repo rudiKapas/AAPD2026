@@ -1241,6 +1241,89 @@
       }
     }
 
+    /* ========== Venue update notification card ========== */
+    .section.venue-notice{
+      background:#f5fbf7;
+      padding-top:28px;
+      padding-bottom:32px;
+    }
+    
+    .venue-notice .venue-title{
+      margin:0 0 12px;
+      font-family:Poppins,Inter,sans-serif;
+      font-weight:600;
+      font-size:clamp(1.2rem, 1.3vw + .7rem, 1.8rem);
+      color:var(--navy);
+    }
+    
+    .venue-card{
+      border-radius:22px;
+      padding:22px 26px;
+      background:linear-gradient(135deg,#dcfce7,#bbf7d0); /* green gradient */
+      box-shadow:0 14px 28px rgba(15,23,42,.10);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:24px;
+    }
+    
+    .venue-copy{
+      max-width:34rem;
+      color:var(--navy);
+    }
+    
+    .venue-tag{
+      font-size:.72rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      opacity:.75;
+      margin-bottom:6px;
+    }
+    
+    .venue-copy p{
+      margin:0;
+      font-size:.98rem;
+      line-height:1.5;
+    }
+    
+    /* right-side circular image with green overlay feel */
+    .venue-image-wrap{
+      flex-shrink:0;
+      display:flex;
+      justify-content:flex-end;
+    }
+    
+    .venue-image-circle{
+      width:150px;
+      height:150px;
+      border-radius:999px;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,.75), rgba(22,163,74,.18)),
+        linear-gradient(135deg,#22c55e,#16a34a);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow:0 12px 26px rgba(15,23,42,.25);
+    }
+    
+    .venue-image-circle img{
+      width:86%;
+      height:86%;
+      border-radius:999px;
+      object-fit:cover;
+      display:block;
+    }
+    
+    /* stack nicely on mobile */
+    @media (max-width:768px){
+      .venue-card{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+      .venue-image-wrap{
+        align-self:center;
+      }
+    }
 
 
 
@@ -1405,6 +1488,33 @@
         </div> <!-- /hero-img -->
       </div><!-- /container -->
     </section>
+
+
+    <section id="venue-update" class="section venue-notice">
+      <div class="container">
+        <h2 class="venue-title">Venue Update: Same City, New Venue</h2>
+    
+        <div class="venue-card">
+          <div class="venue-copy">
+            <div class="venue-tag">Venue notice</div>
+            <p>
+              Some early materials show the Sabah International Convention Centre (SICC), 
+              but the main committee is confirming a new venue in Kota Kinabalu that better 
+              fits the programme and expected attendance. Conference dates remain the same, 
+              and the confirmed venue will be announced here soon.
+            </p>
+          </div>
+    
+          <div class="venue-image-wrap">
+            <div class="venue-image-circle">
+              <img src="assets/img/kinabaluNotification.jpg"
+                   alt="Kota Kinabalu notification image" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
 
    <!-- ============== SECTION 2 — DEADLINES (COUNTDOWN ROW) ============== -->
 <section class="section deadlines" id="deadlines">
