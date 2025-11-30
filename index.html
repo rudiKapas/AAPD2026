@@ -1290,11 +1290,17 @@
       margin-bottom:6px;
     }
     
-    .venue-copy p{
-      margin:0;
-      font-size:.98rem;
-      line-height:1.5;
-    }
+     .venue-copy p{
+        margin: .45rem 0;
+        max-width: 58ch;
+        color: var(--navy);
+        font-size: clamp(1rem, 0.4vw + 1rem, 1.2rem);  /* bigger text */
+      }
+
+      .venue-copy p strong{
+        font-weight: 650;   /* make highlighted bits stand out */
+      }
+
     
     /* right-side circular image with green overlay feel */
     .venue-image-wrap{
@@ -1505,10 +1511,14 @@
           <div class="venue-copy">
             <div class="venue-tag">Venue notice</div>
             <p>
-              The 18<sup>th</sup> AAPD 2026 meeting will no longer be held at the Sabah International Convention Centre (SICC), as the committee is finalising an alternative venue in Kota Kinabalu, Sabah that better fits our needs.
+              The <strong>18<sup>th</sup> AAPD 2026 meeting</strong> will no longer be held at the
+              <strong>Sabah International Convention Centre (SICC)</strong>, as we’re finalising an
+              alternative venue in <strong>Kota Kinabalu, Sabah</strong> that better fits our needs.
             </p>
             <p>
-              Please note that while some flyers and videos still mention SICC, the conference dates remain 30 September – 3 October 2026, and only the venue name will change. We appreciate your understanding as we complete this update.
+              Please note that while some flyers and videos still mention SICC, the conference dates
+              remain <strong>30 September – 3 October 2026</strong>, and only the venue name will change.
+              We appreciate your understanding as we complete this update.
             </p>
           </div>
         </div>
