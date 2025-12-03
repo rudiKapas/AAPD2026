@@ -1544,7 +1544,7 @@
             }</p>` : ``}
           </div>
           <div class="committee-figure">
-            <img class="committee-photo" src="${imgBase + m.fullImage}" alt="${m.memberName}" loading="lazy">
+            <img class="committee-photo" src="${imgBase + m.fullImage}" alt="${m.memberName}" ${idx === 0 ? '' : 'loading="lazy"'}>
           </div>
         `;
         slidesEl.appendChild(slide);
@@ -1587,8 +1587,10 @@
         const idx = slides.findIndex(s => s.id === btn.dataset.target);
         if(idx >= 0) goTo(idx);
       });
-    
 
+      // Ensure the hero starts on Prof Rahimah (first slide)
+      if (slides.length) goTo(0);
+    
     })();
     
 
