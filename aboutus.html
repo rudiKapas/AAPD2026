@@ -1564,6 +1564,12 @@
       // Single set of state and handlers
       const thumbs = Array.from(railEl.querySelectorAll('.committee-thumb'));
       const slides = Array.from(slidesEl.querySelectorAll('.committee-slide'));
+
+      // Show Prof Rahimah's slide by default without scrolling the page
+      if (slides.length) {
+        slidesEl.scrollLeft = slides[0].offsetLeft;
+      }
+
     
       let current = 0;
       function goTo(idx){
