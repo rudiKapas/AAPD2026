@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sponsorship Prospectus | AAPD 2026</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Poppins:wght@300;400;500&family=Oswald:wght@700&family=Barlow+Condensed:wght@800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="icon" type="image/svg+xml" href="assets/icons/AAPDGen.svg">
+    <link rel="icon" type="image/png" href="assets/icons/AAPD26.png">
+
+    <style>
+        /* --- MERGED VARIABLES --- */
+        :root {
+            /* Variables from Reference Code */
+            --navy: #0f172a;
+            --muted: #6b7280;
+            
+            /* Variables from Sponsorship Page */
+            --primary-blue: #003366; 
+            --accent-blue: #0055a5;
+            --light-gray: #f8f9fa;
+            --text-dark: #333;
+            --text-light: #666;
+            --platinum: #E5E4E2;
+            --gold: #D4AF37;
+            --silver: #C0C0C0;
+            --bronze: #CD7F32;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', 'Open Sans', sans-serif; 
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: #fff;
+        }
+
+        /* --- LAYOUT UTILITIES --- */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ============ HEADER STYLES ============ */
+        .aapd-header-icons{
+            display:none;
+            align-items:center;
+            gap:10px;
+        }
+        .aapd-header-icons a{
+            display:inline-flex;
+            align-items:center;
+        }
+        .aapd-header-icons img{
+            height:28px;
+            width:auto;
+            display:block;
+        }
+        @media (min-width:1024px){
+            .aapd-header-icons{ display:flex; }
+        }
+
+        .site-header{
+            position:sticky;
+            top:0;
+            z-index:1000;
+            background:#ffffff;
+            border-bottom:1px solid rgba(15,23,42,.06);
+        }
+        .site-header .container{
+            padding:0 20px;
+            height:56px;
+            display:flex;
+            align-items:center;
+        }
+        .header-row{
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:12px;
+            height:56px;
+            width:100%;
+            padding:0;
+            position:relative;
+        }
+        .brand{
+            display:flex;
+            align-items:center;
+            gap:0;
+            font-weight:500;
+            letter-spacing:0;
+        }
+        .brand a{
+            text-decoration:none;
+            color:var(--navy);
+            font-weight:500;
+        }
+
+        .header-actions{
+            display:flex;
+            align-items:center;
+            gap:10px;
+        }
+
+        .mid-nav{
+            position:absolute;
+            left:50%;
+            transform:translateX(-50%);
+            display:flex;
+            align-items:center;
+            gap:18px;
+            font-weight:300;
+            flex-wrap:nowrap;
+            white-space:nowrap;
+        }
+        
+        .mid-nav a{
+            text-decoration:none;
+            color:var(--navy);
+            font-family:Inter,system-ui,sans-serif;
+            font-weight:500;
+            letter-spacing:.2px;
+            display:inline-flex;
+            align-items:center;
+            height:34px;
+            padding:0 10px;
+            line-height:1;
+            white-space:nowrap;
+            transition:transform .18s cubic-bezier(.2,.65,.3,1),opacity .18s ease;
+        }
+
+        .mid-nav a:hover{
+            transform:translateY(-1px);
+            opacity:.85;
+        }
+
+        .mid-nav a.active{
+            position:relative;
+            padding:3px 10px;
+            border-radius:12px;
+            border:1px solid rgba(15,23,42,.10);
+            background:linear-gradient(180deg, rgba(15,23,42,.05), rgba(15,23,42,.03));
+            box-shadow: inset 0 6px 16px rgba(2,12,32,.06);
+            color:var(--navy);
+        }
+
+        .icon-btn{
+            width:34px;
+            height:34px;
+            border-radius:999px;
+            border:1px solid rgba(15,23,42,.12);
+            background:#fff;
+            display:grid;
+            place-items:center;
+            cursor:pointer;
+        }
+        .icon-btn.hamburger{display:none;}
+        @media (max-width:900px){
+            .icon-btn.hamburger{display:grid;}
+            .mid-nav{display:none;}
+        }
+
+        .mobile-menu{
+            display:none;
+            position:absolute;
+            top:calc(100% + 8px);
+            left:16px;
+            right:16px;
+            background:#fff;
+            border:1px solid rgba(15,23,42,.08);
+            border-radius:14px;
+            box-shadow:0 12px 28px rgba(15,23,42,.10);
+            z-index:60;
+        }
+        .mobile-menu.open{display:block;}
+        .mobile-menu a{
+            display:block;
+            padding:14px 16px;
+            border-bottom:1px solid rgba(15,23,42,.06);
+            text-decoration:none;
+            color:var(--navy);
+            font-weight:600;
+        }
+        .mobile-menu a:last-child{border-bottom:0;}
+        .mobile-menu a.active{
+            background:rgba(15,23,42,.05);
+            font-weight:700;
+        }
+
+        /* ============ EXISTING SPONSORSHIP STYLES ============ */
+        section {
+            padding: 36px 0;
+        }
+
+        h1, h2, h3 {
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 28px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--accent-blue);
+            margin: 10px auto 0;
+        }
+
+        .section-title.no-divider::after {
+            display: none;
+        }
+
+
+        /* --- UPDATED HERO SECTION STYLES --- */
+        .hero-wrapper {
+            background-color: #fff;
+            padding: 24px 0;
+        }
+
+        .hero-frame {
+            width: 100%;
+            /* IMPORTANT: CHANGE THIS PATH FOR GITHUB DEPLOYMENT
+                Example: background-image: url('assets/images/sponsorsHeroDesktop.png');
+            */
+            background-image: url('assets/img/sponsorsHeroDesktop.png');
+            
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px;
+            
+            /* Height control */
+            min-height: 450px;
+            
+            /* Layout for Left (Button) and Right (Image) */
+            position: relative;
+            display: flex;
+            padding: 40px; /* Inner spacing */
+            overflow: hidden; /* Ensures image respects rounded corners */
+        }
+
+
+
+
+
+        .hero-btn {
+            display: inline-block;
+            background-color: var(--accent-blue);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .hero-btn:hover {
+            background-color: #002244;
+            transform: translateY(-2px);
+        }
+
+        /* Target only the button inside the hero-left section */
+        .hero-left .hero-btn {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.4s forwards; /* 0.4s delay */
+        }
+
+        /* Update .hero-left to ensure text color and shadow for readability */
+        .hero-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: flex-start;
+            width: 50%; 
+            z-index: 2;
+            /* ADDED: Text styling base */
+            color: #ffffff; 
+            text-shadow: 0 2px 10px rgba(0,0,0,0.7); /* Adds shadow so text pops on any image */
+        }
+
+        /* ADD THESE NEW CLASSES for the text */
+        .hero-heading {
+            font-family: 'Oswald', sans-serif; 
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: white;
+            
+            /* Animation: Slides up immediately */
+            opacity: 0; 
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .hero-text {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            margin-bottom: 30px; 
+            max-width: 90%;
+            font-weight: 400;
+            
+            /* Animation: Slides up with 0.2s delay */
+            opacity: 0; 
+            animation: fadeInUp 0.8s ease-out 0.2s forwards;
+        }
+
+        /* --- ADD THIS NEW CLASS FOR THE GLASS LAYER --- */
+        .hero-glass-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 70%; /* Covers roughly 2/3rds */
+            
+            /* Glass Effect: Semi-transparent white gradient */
+            background: linear-gradient(
+                to right, 
+                rgba(255, 255, 255, 0.15) 0%, 
+                rgba(255, 255, 255, 0.05) 50%, 
+                transparent 100%
+            );
+
+            /* The Blur (Frosted Look) */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px); /* Safari support */
+
+            /* The Fade Out Mask: This makes the blur visually dissolve */
+            mask-image: linear-gradient(to right, black 0%, black 40%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to right, black 0%, black 40%, transparent 100%);
+
+            z-index: 1; /* Sits on top of background image */
+            border-radius: 20px 0 0 20px; /* Matches the container's left rounded corners */
+            pointer-events: none; /* Allows clicking through if necessary */
+        }
+
+        /* --- UPDATE THESE EXISTING CLASSES TO SIT IN FRONT --- */
+
+        .hero-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: flex-start;
+            width: 50%; 
+            z-index: 2; /* INCREASED: Sits in front of glass */
+            color: #ffffff; 
+            text-shadow: 0 2px 10px rgba(0,0,0,0.7);
+        }
+
+        .hero-person-img {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+            z-index: 2; 
+            
+            /* Animation: Slides in from right with 0.2s delay */
+            opacity: 0;
+            animation: fadeInRight 1s ease-out 0.2s forwards;
+        }
+
+        /* Adjust mobile view to ensure text fits */
+        @media (max-width: 768px) {
+            .hero-left { width: 100%; }
+            .hero-heading { font-size: 2.5rem; }
+            .hero-text { font-size: 1rem; max-width: 100%; }
+        }
+
+        /* --- COLLABORATORS STRIP --- */
+        .collab-section {
+            padding: 24px 0 30px;
+        }
+
+        .collab-bar {
+            background: #111827; /* dark pill background */
+            border-radius: 20px;
+            padding: 18px;
+            box-shadow: 0 18px 45px rgba(15,23,42,0.35);
+            overflow: hidden;
+        }
+
+        .collab-rail {
+            display: flex;
+            gap: 16px;
+            align-items: stretch;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .collab-rail::-webkit-scrollbar {
+            display: none;
+        }
+
+        .collab-tile {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 18px 20px;
+            min-width: 220px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            scroll-snap-align: start;
+        }
+
+        .collab-main {
+            position: relative;
+            overflow: hidden;
+            min-width: 260px;
+            color: #ffffff;
+
+            /* keep the same blue but as a glossy gradient */
+            background: linear-gradient(
+                135deg,
+                rgba(0, 85, 165, 0.96),
+                rgba(0, 85, 165, 0.82)
+            );
+
+            /* glassy edges */
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.45);
+
+            /* glass blur */
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        .collab-main::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -15%;
+            width: 140px;
+            height: 200px;
+            background: radial-gradient(
+                circle at center,
+                rgba(255, 255, 255, 0.65),
+                transparent 60%
+            );
+            opacity: 0.9;
+            pointer-events: none;
+        }
+
+
+
+        .collab-main h3 {
+            font-family: 'Barlow Condensed', system-ui, sans-serif;
+            font-size: 2rem;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            line-height: 1.05; /* tighter line gap */
+            color: #ffffff;  
+        }
+
+        .collab-main p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            opacity: 0.95;
+        }
+
+        /* Logo tiles */
+        .collab-logo-tile {
+            text-align: center;
+        }
+
+        .collab-logo-tile img {
+            max-width: 72px;
+            max-height: 40px;
+            object-fit: contain;
+            margin: 0 auto 10px;
+            display: block;
+        }
+
+        .collab-logo-tile span {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        @media (min-width: 900px) {
+            .collab-bar {
+                padding: 20px 24px;
+            }
+            .collab-rail {
+                overflow: visible; /* show full row, no horizontal scroll on desktop */
+                scroll-snap-type: none;
+            }
+        }
+
+
+        /* --- EVENT DETAILS --- */
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            background: var(--light-gray);
+            padding: 40px;
+            border-radius: 8px;
+        }
+
+        .detail-item h3 {
+            font-size: 1.2rem;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        /* --- PRICING/PACKAGES --- */
+        .packages-grid {
+            display: flex;
+            overflow-x: auto;
+            gap: 30px;
+            padding: 20px 5px;
+            scroll-behavior: smooth;
+            scroll-snap-type: x mandatory;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .packages-grid::-webkit-scrollbar {
+            display: none;
+        }
+
+        .package-card {
+            min-width: 320px;
+            width: 320px;
+            flex: 0 0 auto;
+            scroll-snap-align: center;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 25px;
+            background: white;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .package-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .scroll-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: white;
+            color: var(--primary-blue);
+            border: 1px solid #ddd;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 10;
+            transition: background 0.3s, transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .scroll-arrow:hover {
+            background-color: var(--primary-blue);
+            color: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .left-arrow { left: -15px; }
+        .right-arrow { right: -15px; }
+
+        @media (max-width: 768px) {
+            .scroll-arrow {
+                display: none;
+            }
+            .packages-grid {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            /* Hide the person image on mobile if it covers text, or adjust */
+            .hero-person-img {
+                display: none;
+            }
+
+            .section-title.no-divider {
+                margin-bottom: 20px;
+                line-height: 1.1;
+            }
+
+        }
+
+        .pkg-header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .pkg-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .pkg-features {
+            list-style: none;
+            flex-grow: 1;
+        }
+
+        .pkg-features li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 25px;
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+
+        .pkg-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: green;
+            font-weight: bold;
+        }
+
+        .platinum { border-top: 5px solid #5d5d5d; }
+        .gold { border-top: 5px solid var(--gold); }
+        .silver { border-top: 5px solid var(--silver); }
+        .bronze { border-top: 5px solid var(--bronze); }
+
+        /* --- BOOKING FORM --- */
+        .booking-section {
+            background-color: var(--light-gray);
+        }
+
+        .form-container {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .bank-details {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #eef2f7;
+            border-left: 5px solid var(--primary-blue);
+        }
+
+        /* --- FOOTER --- */
+        .site-footer{
+            background:#fff;
+            border-top:1px solid rgba(15,23,42,.08);
+        }
+        
+        .footer-inner{
+            padding:12px 0;
+            display:flex;
+            justify-content:center;
+            text-align:center;
+        }
+        
+        .footer-inner small{
+            color:var(--muted);
+        }
+
+        /* --- ANIMATION KEYFRAMES --- */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container">
+            <div class="header-row">
+                <div class="brand" aria-label="AAPD 2026 brand">
+                    <a href="index.html">AAPD 2026</a>
+                </div>
+
+                <nav class="mid-nav" aria-label="Primary">
+                    <a href="aboutus.html#top">About Us</a>
+                    <a href="registration.html">Registration</a>
+                    <a href="abstractSubmission.html">Abstract Submission</a>
+                    <a href="sponsors.html" class="active">Sponsors</a>
+                    <a href="aboutus.html#contact">Contact Us</a>
+                </nav>
+
+                <div class="header-actions">
+                    <div class="aapd-header-icons" aria-label="AAPD logos">
+                        <a href="index.html" aria-label="Go to AAPD home">
+                            <img src="assets/icons/AAPDGen.svg" alt="AAPD">
+                        </a>
+                        <a href="index.html" aria-label="Go to AAPD 2026 home">
+                            <img src="assets/icons/AAPD26.png" alt="AAPD 2026">
+                        </a>
+                    </div>
+                
+                    <button class="icon-btn hamburger" id="navToggle"
+                            aria-controls="mobileMenu" aria-expanded="false"
+                            aria-label="Open menu">☰</button>
+                </div>
+
+                <nav id="mobileMenu" class="mobile-menu" aria-label="Mobile menu">
+                    <a href="index.html">Home</a>
+                    <a href="aboutus.html#top">About Us</a>
+                    <a href="registration.html">Registration</a>
+                    <a href="abstractSubmission.html">Abstract Submission</a>
+                    <a href="sponsors.html" class="active">Sponsors</a>
+                    <a href="aboutus.html#contact">Contact Us</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero-wrapper">
+        <div class="container">
+            <div class="hero-frame">
+
+                <div class="hero-glass-overlay"></div>
+                
+                <div class="hero-left">
+                    <h2 class="hero-heading">Be Part of the event</h2>
+                    <p class="hero-text">
+                        Connect with a diverse community of dental public health professionals, 
+                        policymakers, researchers, and industry leaders. This is your prime 
+                        opportunity to showcase your brand to the experts shaping the future 
+                        of preventive dentistry.
+                    </p>
+
+                    <a href="#sponsorship" class="hero-btn">Become a Sponsor</a>
+                </div>
+
+                <img src="assets/img/DrFaridHero.png" 
+                    class="hero-person-img" 
+                    alt="Dr Farid">
+
+            </div>
+        </div>
+    </section>
+
+        <section class="collab-section">
+            <div class="container">
+                <div class="collab-bar">
+                    <div class="collab-rail">
+
+                        <!-- LEFT MAIN TILE -->
+                        <div class="collab-tile collab-main">
+                            <h3>Our Collaborators</h3>
+                            <p>
+                                Partner with us to amplify your brand across Asia’s preventive dentistry community and
+                                connect directly with leaders shaping oral health policy, education, and innovation.
+                            </p>
+                        </div>
+
+                        <!-- LOGO TILE 1 -->
+                        <div class="collab-tile collab-logo-tile">
+                            <img src="assets/icons/AAPDGen.svg" alt="Asian Academy of Preventive Dentistry logo">
+                            <span>Asian Academy of Preventive Dentistry</span>
+                        </div>
+
+
+                        <!-- LOGO TILE 3 -->
+                        <div class="collab-tile collab-logo-tile">
+                            <img src="assets/icons/MADPHS.png" alt="Malaysian Association of Dental Public Health Specialists logo">
+                            <span>Malaysian Association of Dental Public Health Specialists</span>
+                        </div>
+
+                        <!-- LOGO TILE 4 -->
+                        <div class="collab-tile collab-logo-tile">
+                            <img src="assets/icons/MCEB.png" alt="Malaysia Convention &amp; Exhibition Bureau logo">
+                            <span>Malaysia Convention &amp; Exhibition Bureau</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+    <section id="sponsorship">
+        <div class="container">
+            <h2 class="section-title no-divider">Sponsorship Packages</h2>
+            <div class="scroll-wrapper" style="position: relative; padding: 0 20px;">
+    
+                <button class="scroll-arrow left-arrow" onclick="scrollGrid(-1)">&#10094;</button>
+
+                <div class="packages-grid" id="pkgGrid">
+                    
+                    <div class="package-card platinum">
+                        <div class="pkg-header">
+                            <h3>Platinum Sponsor</h3>
+                            <div class="pkg-price">MYR 50,000</div>
+                        </div>
+                        <ul class="pkg-features">
+                            <li>Logo on all banners, programme book & digital materials</li>
+                            <li>2-minute promotional video played continuously</li>
+                            <li>THREE (3) complimentary conference registrations</li>
+                            <li>Priority exhibition table near conference hall (preferred location)</li>
+                            <li>Logo placement on MADPHS & AAPD YouTube/Website (during + 1 week after)</li>
+                        </ul>
+                    </div>
+
+                    <div class="package-card gold">
+                        <div class="pkg-header">
+                            <h3>Gold Sponsor</h3>
+                            <div class="pkg-price">MYR 30,000</div>
+                        </div>
+                        <ul class="pkg-features">
+                            <li>Logo on all banners, programme book & digital materials</li>
+                            <li>TWO (2) complimentary conference registrations</li>
+                            <li>Exhibition table near conference hall</li>
+                            <li>Logo placement on MADPHS & AAPD YouTube/Website (during + 1 week after)</li>
+                        </ul>
+                    </div>
+
+                    <div class="package-card silver">
+                        <div class="pkg-header">
+                            <h3>Silver Sponsor</h3>
+                            <div class="pkg-price">MYR 20,000</div>
+                        </div>
+                        <ul class="pkg-features">
+                            <li>Logo on all banners, programme book & digital materials</li>
+                            <li>ONE (1) complimentary conference registration</li>
+                            <li>Exhibition table near conference hall</li>
+                            <li>Logo placement on MADPHS & AAPD YouTube/Website (during + 1 week after)</li>
+                        </ul>
+                    </div>
+
+                    <div class="package-card bronze">
+                        <div class="pkg-header">
+                            <h3>Bronze Sponsor</h3>
+                            <div class="pkg-price">MYR 15,000</div>
+                        </div>
+                        <ul class="pkg-features">
+                            <li>Logo on all banners, programme book & digital materials</li>
+                            <li>Logo placement on MADPHS & AAPD YouTube/Website (during + 1 week after)</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <button class="scroll-arrow right-arrow" onclick="scrollGrid(1)">&#10095;</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="booking" class="booking-section">
+        <div class="container">
+            <h2 class="section-title no-divider">Booking & Payment</h2>
+            <div class="form-container">
+                <p style="text-align:center; margin-bottom:20px;">
+                    Please fill out the form below.
+                </p>
+                
+                <form id="bookingForm">
+                    <div class="form-group">
+                        <label>Company Name</label>
+                        <input type="text" id="companyName" placeholder="Enter company name">
+                    </div>
+                    <div class="form-group">
+                        <label>Contact Person</label>
+                        <input type="text" id="contactPerson" placeholder="Enter contact person">
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="emailAddress" placeholder="Enter email">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" id="phoneNumber" placeholder="Enter phone number">
+                    </div>
+                    <div class="form-group">
+                        <label>Select Sponsorship Package</label>
+                        <select id="packageSelect">
+                            <option>Platinum (MYR 50,000)</option>
+                            <option>Gold (MYR 30,000)</option>
+                            <option>Silver (MYR 20,000)</option>
+                            <option>Bronze (MYR 15,000)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <p style="font-weight: bold; margin-bottom: 10px;">Choose how to send:</p>
+                        
+                        <button type="button" onclick="sendEmail('gmail')" class="hero-btn" style="background-color: #DB4437; border:none; cursor:pointer; width:100%; margin-bottom: 10px;">
+                            Submit via Gmail (Web)
+                        </button>
+
+                        <button type="button" onclick="sendEmail('default')" class="hero-btn" style="border:none; cursor:pointer; width:100%; opacity: 0.8;">
+                            Submit via Default Email App
+                        </button>
+                        
+                        <p style="font-size: 0.8rem; color: #666; margin-top: 15px; text-align: center; line-height: 1.4;">
+                            *Important: After the email draft opens, please <strong>attach your payment proof</strong> manually before clicking Send.
+                        </p>
+                    </div>
+                </form>
+
+                <div class="bank-details">
+                    <h3>Payment Details</h3>
+                    <p><strong>Bank:</strong> CIMB</p>
+                    <p><strong>Account Name:</strong> Persatuan Pakar Kesihatan Awam Pergigian Malaysia</p>
+                    <p><strong>Account Number:</strong> 8600057436</p>
+                    <p><strong>Reference:</strong> AAPD2026</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" style="background-color: #fff; padding: 36px 0;">
+        <div class="container">
+            <div class="contact-wrapper" style="display: flex; flex-wrap: wrap; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); overflow: hidden;">
+                
+                <div class="contact-info" style="flex: 1; min-width: 300px; padding: 50px; background-color: #EEF2F7;">
+                    <h2 style="color: var(--primary-blue); margin-bottom: 20px;">Get in touch</h2>
+                    
+                    <p style="color: #555; margin-bottom: 35px; line-height: 1.6; font-size: 0.95rem;">
+                        We are dedicated to building meaningful partnerships that drive real value for your brand. 
+                        Whether you aim to elevate your visibility or demonstrate industry leadership, we are ready 
+                        to customize a sponsorship opportunity that aligns perfectly with your strategic goals. 
+                        Let's start the conversation.
+                    </p>
+
+
+                    <div class="info-item" style="display: flex; align-items: start; margin-bottom: 30px;">
+                        <div class="icon-box" style="width: 45px; height: 45px; margin-right: 20px; flex-shrink: 0;">
+                            <img src="assets/icons/email.svg" alt="Email" style="width: 100%; height: 100%; object-fit: contain;">
+                        </div>
+                        <div>
+                            <h4 style="color: var(--primary-blue); margin-bottom: 5px; font-size: 1.1rem;">Email Us</h4>
+                            <p style="color: #666; font-size: 0.95rem; line-height: 1.5;">
+                                <a href="mailto:18icaapdmalaysia@gmail.com" style="color: #666; text-decoration: none; transition: color 0.3s;">18icaapdmalaysia@gmail.com</a><br>
+                                <a href="mailto:madphs.treasurer@gmail.com" style="color: #666; text-decoration: none; transition: color 0.3s;">madphs.treasurer@gmail.com</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form-area" style="flex: 1.5; min-width: 300px; padding: 50px; background-color: #ffffff;">
+                    <h2 style="color: var(--primary-blue); margin-bottom: 30px;">Send us a message</h2>
+                    
+                    <form id="contactForm">
+                        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                            <div style="flex: 1; min-width: 200px; margin-bottom: 20px;">
+                                <label style="display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.9rem; color: #444;">Name</label>
+                                <input type="text" id="msgName" placeholder="Your Name" style="width: 100%; padding: 12px 15px; border: 1px solid #e0e0e0; border-radius: 6px; background: #fdfdfd;">
+                            </div>
+                            <div style="flex: 1; min-width: 200px; margin-bottom: 20px;">
+                                <label style="display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.9rem; color: #444;">Company</label>
+                                <input type="text" id="msgCompany" placeholder="Your Company" style="width: 100%; padding: 12px 15px; border: 1px solid #e0e0e0; border-radius: 6px; background: #fdfdfd;">
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                            <div style="flex: 1; min-width: 200px; margin-bottom: 20px;">
+                                <label style="display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.9rem; color: #444;">Phone</label>
+                                <input type="tel" id="msgPhone" placeholder="Phone Number" style="width: 100%; padding: 12px 15px; border: 1px solid #e0e0e0; border-radius: 6px; background: #fdfdfd;">
+                            </div>
+                            <div style="flex: 1; min-width: 200px; margin-bottom: 20px;">
+                                <label style="display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.9rem; color: #444;">Email</label>
+                                <input type="email" id="msgEmail" placeholder="Email Address" style="width: 100%; padding: 12px 15px; border: 1px solid #e0e0e0; border-radius: 6px; background: #fdfdfd;">
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.9rem; color: #444;">Subject</label>
+                            <input type="text" id="msgSubject" placeholder="Inquiry Subject" style="width: 100%; padding: 12px 15px; border: 1px solid #e0e0e0; border-radius: 6px; background: #fdfdfd;">
+                        </div>
+
+                        <div style="margin-bottom: 30px;">
+                            <label style="display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.9rem; color: #444;">Message</label>
+                            <textarea id="msgContent" rows="5" placeholder="How can we help you?" style="width: 100%; padding: 12px 15px; border: 1px solid #e0e0e0; border-radius: 6px; background: #fdfdfd; resize: vertical; font-family: inherit;"></textarea>
+                        </div>
+
+                        <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                            <button type="button" onclick="sendContactMessage('gmail')" class="hero-btn" style="flex: 1; background-color: #DB4437; border:none; cursor:pointer; text-align: center; border-radius: 6px; font-weight: 600; padding: 12px;">
+                                Send via Gmail (Web)
+                            </button>
+                            <button type="button" onclick="sendContactMessage('default')" class="hero-btn" style="flex: 1; background-color: var(--primary-blue); border:none; cursor:pointer; text-align: center; border-radius: 6px; font-weight: 600; padding: 12px;">
+                                Send via Default App
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <small>Copyright © AAPD 2026 Organizing Committee and MADPHS. All rights reserved.</small>
+        </div>
+    </footer>
+
+    <script>
+        function sendEmail(type) {
+            // 1. Get values from the inputs
+            var company = document.getElementById("companyName").value;
+            var person = document.getElementById("contactPerson").value;
+            var email = document.getElementById("emailAddress").value;
+            var phone = document.getElementById("phoneNumber").value;
+            var pkg = document.getElementById("packageSelect").value;
+
+            // 2. Define Recipient and CC
+            var toEmail = "18icaapdmalaysia@gmail.com";
+            var ccEmail = "madphs.treasurer@gmail.com";
+
+            // 3. Create Subject
+            var subject = "Sponsorship Booking: " + company;
+
+            // 4. Create Body Content
+            var body = "Dear AAPD Sponsorship Team,\n\n" +
+                        "I would like to book a sponsorship package for AAPD 2026.\n\n" +
+                        "--- Booking Details ---\n" +
+                        "Company Name: " + company + "\n" +
+                        "Contact Person: " + person + "\n" +
+                        "Email: " + email + "\n" +
+                        "Phone: " + phone + "\n" +
+                        "Selected Package: " + pkg + "\n\n" +
+                        "*** PLEASE ATTACH PAYMENT PROOF HERE ***\n\n" +
+                        "Please send us the invoice and further instructions.";
+
+            // 5. Open the correct email service
+            if (type === 'gmail') {
+                // Generates a link specific to Gmail web
+                var gmailLink = "https://mail.google.com/mail/?view=cm&fs=1" +
+                                "&to=" + toEmail +
+                                "&cc=" + ccEmail +
+                                "&su=" + encodeURIComponent(subject) +
+                                "&body=" + encodeURIComponent(body);
+                window.open(gmailLink, '_blank'); // Opens in new tab
+            } else {
+                // Generates a standard mailto link for Outlook/Apple Mail
+                var mailtoBody = body.replace(/\n/g, "%0D%0A");
+                var mailtoLink = "mailto:" + toEmail + 
+                                 "?cc=" + ccEmail + 
+                                 "&subject=" + encodeURIComponent(subject) + 
+                                 "&body=" + encodeURIComponent(mailtoBody);
+                window.location.href = mailtoLink;
+            }
+        }
+
+        function scrollGrid(direction) {
+            var container = document.getElementById("pkgGrid");
+            var scrollAmount = 260; // Card width (225) + Gap (30) + buffer
+            
+            // Scroll Left (-1) or Right (1)
+            container.scrollBy({
+                left: direction * scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+
+        function sendContactMessage(type) {
+            // 1. Get values from the CONTACT form
+            var name = document.getElementById("msgName").value;
+            var company = document.getElementById("msgCompany").value;
+            var phone = document.getElementById("msgPhone").value;
+            var email = document.getElementById("msgEmail").value;
+            var subject = document.getElementById("msgSubject").value;
+            var message = document.getElementById("msgContent").value;
+
+            // 2. Define Recipient
+            var toEmail = "18icaapdmalaysia@gmail.com";
+            var ccEmail = "madphs.treasurer@gmail.com";
+
+            // 3. Create Email Subject
+            // Use the user's subject or a default one if empty
+            var finalSubject = subject ? ("Inquiry: " + subject) : ("Inquiry from " + name);
+
+            // 4. Create Body Content
+            var body = "Dear AAPD Sponsorship Team,\n\n" +
+                    "I am interested in partnering with AAPD 2026 and would like to explore sponsorship opportunities for this event.\n\n" +
+                    "--- My Contact Details ---\n" +
+                    "Name: " + name + "\n" +
+                    "Company: " + company + "\n" +
+                    "Email: " + email + "\n" +
+                    "Phone: " + phone + "\n\n" +
+                    "--- Message ---\n" +
+                    message;
+
+            // 5. Open the correct email service
+            if (type === 'gmail') {
+                var gmailLink = "https://mail.google.com/mail/?view=cm&fs=1" +
+                                "&to=" + toEmail +
+                                "&cc=" + ccEmail +
+                                "&su=" + encodeURIComponent(finalSubject) +
+                                "&body=" + encodeURIComponent(body);
+                window.open(gmailLink, '_blank');
+            } else {
+                var mailtoBody = body.replace(/\n/g, "%0D%0A");
+                var mailtoLink = "mailto:" + toEmail + 
+                                 "?cc=" + ccEmail + 
+                                 "&subject=" + encodeURIComponent(finalSubject) + 
+                                 "&body=" + encodeURIComponent(mailtoBody);
+                window.location.href = mailtoLink;
+            }
+        }
+
+        // --- NEW MOBILE MENU SCRIPT ---
+        (function(){
+            const btn  = document.getElementById('navToggle');
+            const menu = document.getElementById('mobileMenu');
+            if(!btn || !menu) return;
+
+            btn.addEventListener('click', ()=>{
+                const isOpen = menu.classList.toggle('open');
+                btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            });
+
+            menu.querySelectorAll('a').forEach(a=>{
+                a.addEventListener('click', ()=>{
+                    menu.classList.remove('open');
+                    btn.setAttribute('aria-expanded','false');
+                });
+            });
+        })();
+    </script>
+
+</body>
+</html>
