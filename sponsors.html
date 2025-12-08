@@ -483,18 +483,21 @@
         /* Logo tiles */
         .collab-logo-tile {
             text-align: center;
+            align-items: center; 
         }
 
         .collab-logo-tile img {
-            max-width: 72px;
-            max-height: 40px;
+            max-width: 96px;
+            max-height: 64px;
+            height: 64px;          /* fixed logo box height so all align in the middle */
             object-fit: contain;
-            margin: 0 auto 10px;
+            margin: 0 auto 12px;
             display: block;
         }
 
+
         .collab-logo-tile span {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-weight: 600;
             color: var(--text-dark);
         }
@@ -794,7 +797,7 @@
                 <div class="hero-left">
                     <h2 class="hero-heading">Be Part of the event</h2>
                     <p class="hero-text">
-                        Connect with a diverse community of dental public health professionals, 
+                        Connect with a diverse community of dental professionals, 
                         policymakers, researchers, and industry leaders. This is your prime 
                         opportunity to showcase your brand to the experts shaping the future 
                         of preventive dentistry.
