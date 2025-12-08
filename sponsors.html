@@ -483,8 +483,11 @@
         /* Logo tiles */
         .collab-logo-tile {
             text-align: center;
-            align-items: center; 
+            align-items: center;   /* center contents horizontally in the flex tile */
+            text-decoration: none;
+            color: inherit;
         }
+
 
         .collab-logo-tile img {
             max-width: 96px;
@@ -823,29 +826,38 @@
                         <div class="collab-tile collab-main">
                             <h3>Our Collaborators</h3>
                             <p>
-                                Partner with us to amplify your brand across Asia’s preventive dentistry community and
-                                connect directly with leaders shaping oral health policy, education, and innovation.
+                                We are grateful for collaborators who stand with us in this journey to advance preventive dentistry,
+                                build meaningful connections, and support better oral health for communities across Asia.
                             </p>
                         </div>
 
                         <!-- LOGO TILE 1 -->
-                        <div class="collab-tile collab-logo-tile">
+                        <a class="collab-tile collab-logo-tile"
+                           href="https://www.aapdasia.org"
+                           target="_blank"
+                           rel="noopener noreferrer">
                             <img src="assets/icons/AAPDGen.svg" alt="Asian Academy of Preventive Dentistry logo">
                             <span>Asian Academy of Preventive Dentistry</span>
-                        </div>
+                        </a>
 
 
                         <!-- LOGO TILE 3 -->
-                        <div class="collab-tile collab-logo-tile">
+                        <a class="collab-tile collab-logo-tile"
+                           href="https://www.madphs.my"
+                           target="_blank"
+                           rel="noopener noreferrer">
                             <img src="assets/icons/MADPHS.png" alt="Malaysian Association of Dental Public Health Specialists logo">
                             <span>Malaysian Association of Dental Public Health Specialists</span>
-                        </div>
-
+                        </a>
+                        
                         <!-- LOGO TILE 4 -->
-                        <div class="collab-tile collab-logo-tile">
+                        <a class="collab-tile collab-logo-tile"
+                           href="https://www.myceb.com.my"
+                           target="_blank"
+                           rel="noopener noreferrer">
                             <img src="assets/icons/MCEB.png" alt="Malaysia Convention &amp; Exhibition Bureau logo">
                             <span>Malaysia Convention &amp; Exhibition Bureau</span>
-                        </div>
+                        </a>
 
                     </div>
                 </div>
@@ -933,6 +945,10 @@
                     <div class="form-group">
                         <label>Company Name</label>
                         <input type="text" id="companyName" placeholder="Enter company name">
+                    </div>
+                    <div class="form-group">
+                        <label>Company Website</label>
+                        <input type="url" id="companyWebsite" placeholder="https://www.example.com">
                     </div>
                     <div class="form-group">
                         <label>Contact Person</label>
@@ -1073,6 +1089,7 @@
         function sendEmail(type) {
             // 1. Get values from the inputs
             var company = document.getElementById("companyName").value;
+            var website = document.getElementById("companyWebsite").value;
             var person = document.getElementById("contactPerson").value;
             var email = document.getElementById("emailAddress").value;
             var phone = document.getElementById("phoneNumber").value;
@@ -1090,6 +1107,7 @@
                         "I would like to book a sponsorship package for AAPD 2026.\n\n" +
                         "--- Booking Details ---\n" +
                         "Company Name: " + company + "\n" +
+                        "Company Website: " + website + "\n" +
                         "Contact Person: " + person + "\n" +
                         "Email: " + email + "\n" +
                         "Phone: " + phone + "\n" +
