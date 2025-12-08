@@ -609,6 +609,16 @@
                 line-height: 1.1;
             }
 
+            .contact-info .info-item {
+                flex-direction: column;      /* icon on top, text below */
+                align-items: flex-start;
+            }
+        
+            .contact-info .info-item .icon-box {
+                margin-right: 0;             /* remove side gap */
+                margin-bottom: 12px;         /* add gap below icon */
+            }
+
         }
 
         .pkg-header {
@@ -988,7 +998,7 @@
 
                     <div class="info-item" style="display: flex; align-items: start; margin-bottom: 30px;">
                         <div class="icon-box" style="width: 45px; height: 45px; margin-right: 20px; flex-shrink: 0;">
-                            <img src="assets/icons/email.svg" alt="Email" style="width: 100%; height: 100%; object-fit: contain;">
+                            <img src="assets/icons/email.png" alt="Email" style="width: 100%; height: 100%; object-fit: contain; filter: brightness(0) saturate(100%) invert(14%) sepia(63%) saturate(1439%) hue-rotate(190deg) brightness(91%) contrast(101%);">
                         </div>
                         <div>
                             <h4 style="color: var(--primary-blue); margin-bottom: 5px; font-size: 1.1rem;">Email Us</h4>
