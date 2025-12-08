@@ -1132,14 +1132,14 @@
                                 "&body=" + encodeURIComponent(body);
                 window.open(gmailLink, '_blank'); // Opens in new tab
             } else {
-                // Generates a standard mailto link for Outlook/Apple Mail
-                var mailtoBody = body.replace(/\n/g, "%0D%0A");
+                // Standard mailto link for Outlook/Apple Mail
                 var mailtoLink = "mailto:" + toEmail + 
                                  "?cc=" + ccEmail + 
                                  "&subject=" + encodeURIComponent(subject) + 
-                                 "&body=" + encodeURIComponent(mailtoBody);
+                                 "&body=" + encodeURIComponent(body);
                 window.location.href = mailtoLink;
             }
+
         }
 
         function scrollGrid(direction) {
@@ -1190,13 +1190,13 @@
                                 "&body=" + encodeURIComponent(body);
                 window.open(gmailLink, '_blank');
             } else {
-                var mailtoBody = body.replace(/\n/g, "%0D%0A");
                 var mailtoLink = "mailto:" + toEmail + 
                                  "?cc=" + ccEmail + 
                                  "&subject=" + encodeURIComponent(finalSubject) + 
-                                 "&body=" + encodeURIComponent(mailtoBody);
+                                 "&body=" + encodeURIComponent(body);
                 window.location.href = mailtoLink;
             }
+
         }
 
         // --- NEW MOBILE MENU SCRIPT ---
