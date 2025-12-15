@@ -546,27 +546,31 @@
 
         @media (min-width: 900px) {
             .collab-bar {
-                padding: 20px 24px;
+                padding: 20px 12px;     /* was 24px (left/right) */
             }
         
             .collab-scroll{
-                padding: 0 56px;           /* space so arrows don’t cover tiles */
+                padding: 0 46px;        /* was 56px (left/right) */
             }
         
             .collab-arrow{
-                display: flex;             /* show arrows on desktop */
+                display: flex;
             }
+        
+            .collab-arrow.left{ left: 4px; }   /* was 10px */
+            .collab-arrow.right{ right: 4px; } /* was 10px */
         
             .collab-logo-tile{
                 min-width: 280px;
             }
         
             .collab-logo-tile img{
-                max-width: 190px;          /* bigger on desktop */
+                max-width: 190px;
                 height: 96px;
                 max-height: 110px;
             }
         }
+
 
 
 
