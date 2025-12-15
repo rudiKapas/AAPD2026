@@ -1228,24 +1228,43 @@
       }
     }
 
-    /* Sponsors & Collaborators: logo row above title */
+   /* Sponsors logos row + small "Supported By:" label */
     .sponsor-icons{
+      position:relative;                 /* allows label to sit above-right */
       display:flex;
       justify-content:center;
       align-items:center;
       gap:18px;
       flex-wrap:wrap;
-      margin:0 0 12px;
+      margin:18px 0 12px;                /* extra top space for the label */
     }
+    
     .sponsor-icons img{
       height:88px;
       width:auto;
       max-width:320px;
       display:block;
     }
+    
+    .sponsor-label{
+      position:absolute;
+      top:-12px;                         /* above the logos */
+      right:0;                           /* right edge of the logo row */
+      font-size:.8rem;                   /* smaller text */
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      color:var(--muted);
+    }
+    
     @media (max-width:520px){
-      .sponsor-icons{ gap:14px; margin-bottom:10px; }
-      .sponsor-icons img{ height:64px; max-width:280px; }
+      .sponsor-icons{
+        gap:14px;
+        margin-bottom:10px;
+      }
+      .sponsor-icons img{
+        height:64px;
+        max-width:280px;
+      }
     }
 
     @media (min-width:1101px){
@@ -1715,13 +1734,16 @@
       <div class="container">
     
         <div class="sponsor-icons fx" style="--d:.03s" aria-label="Sponsors and collaborators logos">
+          <span class="sponsor-label">Supported By:</span>
           <img src="assets/icons/AAPDGen.svg" alt="AAPD" loading="lazy">
           <img src="assets/icons/AAPD26.png" alt="AAPD 2026" loading="lazy">
           <img src="assets/icons/MADPHS.png" alt="MADPHS" loading="lazy">
           <img src="assets/icons/MCEB.png" alt="MCEB" loading="lazy">
+          <img src="assets/icons/MIM.svg" alt="MIM" loading="lazy">
+          <img src="assets/icons/VMY.png" alt="VMY" loading="lazy">
         </div>
     
-        <h2 class="fx" style="--d:.06s">Sponsors and Collaborators</h2>
+
         <p class="fx" style="--d:.12s">
           We extend our sincere appreciation to our sponsors and collaborators—
           This conference would not be possible without your support. Thank you!.
