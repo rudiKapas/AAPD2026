@@ -496,31 +496,78 @@
         }
 
 
+        .collab-logo-tile {
+            min-width: 260px; /* gives bigger logos room */
+        }
+        
         .collab-logo-tile img {
-            max-width: 96px;
-            max-height: 64px;
-            height: 64px;          /* fixed logo box height so all align in the middle */
+            max-width: 160px;
+            height: 88px;          /* bigger on mobile too */
+            max-height: 96px;
             object-fit: contain;
-            margin: 0 auto 12px;
+            margin: 0 auto 14px;
             display: block;
         }
-
-
+        
         .collab-logo-tile span {
-            font-size: 0.8rem;
+            font-size: 0.9rem;     /* slightly larger label */
             font-weight: 600;
             color: var(--text-dark);
         }
+
+        .collab-scroll{
+            position: relative;
+        }
+        
+        /* Desktop-only arrows */
+        .collab-arrow{
+            display: none;                 /* hidden on mobile */
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 999px;
+            border: 1px solid rgba(15,23,42,.18);
+            background: #ffffff;
+            color: var(--navy);
+            cursor: pointer;
+            box-shadow: 0 8px 18px rgba(15,23,42,0.18);
+            z-index: 20;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .collab-arrow.left{ left: 10px; }
+        .collab-arrow.right{ right: 10px; }
+
+
 
         @media (min-width: 900px) {
             .collab-bar {
                 padding: 20px 24px;
             }
-            .collab-rail {
-                overflow: visible; /* show full row, no horizontal scroll on desktop */
-                scroll-snap-type: none;
+        
+            .collab-scroll{
+                padding: 0 56px;           /* space so arrows don’t cover tiles */
+            }
+        
+            .collab-arrow{
+                display: flex;             /* show arrows on desktop */
+            }
+        
+            .collab-logo-tile{
+                min-width: 280px;
+            }
+        
+            .collab-logo-tile img{
+                max-width: 190px;          /* bigger on desktop */
+                height: 96px;
+                max-height: 110px;
             }
         }
+
 
 
         /* --- EVENT DETAILS --- */
@@ -827,7 +874,13 @@
         <section class="collab-section">
             <div class="container">
                 <div class="collab-bar">
-                    <div class="collab-rail">
+                  <div class="collab-scroll">
+                    <button class="collab-arrow left" type="button"
+                            aria-label="Scroll collaborators left"
+                            onclick="scrollCollab(-1)">&#10094;</button>
+                
+                    <div class="collab-rail" id="collabRail">
+                
 
                         <!-- LEFT MAIN TILE -->
                         <div class="collab-tile collab-main">
@@ -885,9 +938,13 @@
                         </a>
 
 
+                        </div>
+
+                        <button class="collab-arrow right" type="button"
+                                aria-label="Scroll collaborators right"
+                                onclick="scrollCollab(1)">&#10095;</button>
+                      </div>
                     </div>
-                </div>
-            </div>
         </section>
 
 
@@ -1171,6 +1228,18 @@
                 behavior: 'smooth'
             });
         }
+
+        function scrollCollab(direction) {
+            var rail = document.getElementById("collabRail");
+            if (!rail) return;
+        
+            var scrollAmount = 340; // tuned for wider logo tiles
+            rail.scrollBy({
+                left: direction * scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+
 
         function sendContactMessage(type) {
             // 1. Get values from the CONTACT form
