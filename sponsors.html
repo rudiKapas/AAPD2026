@@ -215,8 +215,14 @@
           background:#f3f6fb;
           border-radius:18px;
           padding:26px 28px;
-          box-shadow: 0 12px 30px rgba(15,23,42,0.08);
+        
+          /* stronger separation from page */
+          box-shadow:
+            0 24px 60px rgba(15,23,42,0.16),
+            0 6px 18px rgba(15,23,42,0.10);
+          border: 1px solid rgba(15,23,42,0.10);
         }
+
         
         .diamond-title{
           margin:0 0 10px;
@@ -251,6 +257,10 @@
           background-image: url('assets/img/lionBack.png');
           background-size: cover;
           background-position: center;
+          flex-direction: column;
+          justify-content: center;
+          gap: 12px;
+          text-align: center;
         }
         
         .diamond-tile::before{
@@ -269,7 +279,8 @@
         }
         
         .diamond-tile-left{
-          color:#ffffff;
+
+          max-width: 90%;
           font-weight:700;
           font-size:1.05rem;
           line-height:1.2;
@@ -277,9 +288,10 @@
         }
         
         .diamond-tile-logo{
-          height:56px;
-          width:auto;
-          display:block;
+          height: 64px;     /* optional: a touch larger */
+          width: auto;
+          display: block;
+          margin: 0 auto;
         }
         
         /* Desktop-only layout kept; stack on smaller screens */
