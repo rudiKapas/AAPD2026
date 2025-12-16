@@ -508,6 +508,13 @@
             margin: 0 auto 14px;
             display: block;
         }
+
+        /* Make only MCEB + Visit Malaysia logos slightly bigger */
+        .collab-logo-tile img[src$="MCEB.png"],
+        .collab-logo-tile img[src$="VMY.png"]{
+          transform: scale(1.18);
+          transform-origin: center;
+        }
         
         .collab-logo-tile span {
             font-size: 0.9rem;     /* slightly larger label */
@@ -546,19 +553,25 @@
 
         @media (min-width: 900px) {
             .collab-bar {
-                padding: 20px 12px;     /* was 24px (left/right) */
+                padding: 18px;     /* was 24px (left/right) */
             }
         
             .collab-scroll{
-                padding: 0 46px;        /* was 56px (left/right) */
+                padding: 0;        /* was 56px (left/right) */
             }
         
             .collab-arrow{
                 display: flex;
+                opacity: .6;
+                transition: opacity .18s ease;
             }
+            .collab-arrow:hover{
+                opacity: 1;
+            }
+
         
-            .collab-arrow.left{ left: 4px; }   /* was 10px */
-            .collab-arrow.right{ right: 4px; } /* was 10px */
+            .collab-arrow.left{ left: 8px; }   /* was 10px */
+            .collab-arrow.right{ right: 8px; } /* was 10px */
         
             .collab-logo-tile{
                 min-width: 280px;
