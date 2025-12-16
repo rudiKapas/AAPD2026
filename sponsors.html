@@ -288,36 +288,13 @@
         }
         
         .diamond-tile-logo{
-              height: 64px;     /* optional: a touch larger */
-              width: auto;
-              display: block;
-              margin: 0 auto;
-            
-              /* liquid glass behind logo */
-              position: relative;
-              z-index: 2;
-              padding: 14px 18px;
-              border-radius: 16px;
-            }
-            
-            .diamond-tile-logo::before{
-              content:"";
-              position:absolute;
-              inset:-6px;
-              border-radius: 18px;
-            
-              background: rgba(255,255,255,0.28);
-              border: 1px solid rgba(255,255,255,0.40);
-            
-              backdrop-filter: blur(14px) saturate(140%);
-              -webkit-backdrop-filter: blur(14px) saturate(140%);
-            
-              box-shadow:
-                0 18px 40px rgba(15,23,42,0.28),
-                inset 0 1px 0 rgba(255,255,255,0.55);
-            
-              z-index: -1;
-            }
+          height: 64px;
+          width: auto;
+          display: block;
+          margin: 0 auto;
+        }
+
+           
 
 
         /* Ensure logo is above text and both are centered */
@@ -328,7 +305,7 @@
           text-align: center;
         }
         
-        .diamond-tile-logo{ order: 1; }
+        .diamond-logo-glass{ order: 1; }
         .diamond-tile-left{ order: 2; }
 
         /* Desktop-only layout kept; stack on smaller screens */
@@ -337,7 +314,24 @@
           .diamond-tiles{ flex: 1 1 auto; }
         }
 
+        .diamond-logo-glass{
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          padding: 14px 18px;
+          border-radius: 16px;
         
+          background: rgba(255,255,255,0.30);
+          border: 1px solid rgba(255,255,255,0.45);
+        
+          backdrop-filter: blur(14px) saturate(140%);
+          -webkit-backdrop-filter: blur(14px) saturate(140%);
+        
+          box-shadow:
+            0 18px 40px rgba(15,23,42,0.28),
+            inset 0 1px 0 rgba(255,255,255,0.55);
+        }
+
         /* ============ EXISTING SPONSORSHIP STYLES ============ */
         section {
             padding: 36px 0;
@@ -1130,7 +1124,9 @@
                rel="noopener noreferrer"
                aria-label="Southern Lion Sdn Bhd">
               <div class="diamond-tile-left">Southern Lion Sdn Bhd</div>
-              <img class="diamond-tile-logo" src="assets/icons/lion.svg" alt="Southern Lion logo">
+              <<span class="diamond-logo-glass">
+                  <img class="diamond-tile-logo" src="assets/icons/lion.svg" alt="Southern Lion logo">
+              </span>
             </a>
           </div>
     
