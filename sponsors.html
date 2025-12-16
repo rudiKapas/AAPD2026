@@ -279,7 +279,7 @@
         }
         
         .diamond-tile-left{
-
+          color:#ffffff;
           max-width: 90%;
           font-weight:700;
           font-size:1.05rem;
@@ -293,7 +293,18 @@
           display: block;
           margin: 0 auto;
         }
+
+        /* Ensure logo is above text and both are centered */
+        .diamond-tile{
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+        }
         
+        .diamond-tile-logo{ order: 1; }
+        .diamond-tile-left{ order: 2; }
+
         /* Desktop-only layout kept; stack on smaller screens */
         @media (max-width: 900px){
           .diamond-wrap{ flex-direction:column; }
@@ -1081,7 +1092,7 @@
           <div class="diamond-copy">
             <h2 class="diamond-title">Diamond Sponsor (Exclusive)</h2>
             <p class="diamond-text">
-              We are grateful for the valued support and sponsorship of AAPD 2026 from Southern Lion Sdn Bhd. Your commitment to advancing preventive dentistry and enhancing community oral health is sincerely appreciated.
+              We are grateful for the valued support and sponsorship of AAPD 2026 from <strong>Southern Lion Sdn Bhd</strong>. Your commitment to advancing preventive dentistry and enhancing community oral health is sincerely appreciated.
             </p>
           </div>
     
