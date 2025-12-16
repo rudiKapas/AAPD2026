@@ -198,6 +198,97 @@
             font-weight:700;
         }
 
+
+        /* ===== Diamond Sponsor Section ===== */
+        .diamond-section{
+          padding: 18px 0 34px;
+        }
+        
+        .diamond-wrap{
+          display:flex;
+          gap:18px;
+          align-items:stretch;
+        }
+        
+        .diamond-copy{
+          flex: 1 1 60%;
+          background:#f3f6fb;
+          border-radius:18px;
+          padding:26px 28px;
+          box-shadow: 0 12px 30px rgba(15,23,42,0.08);
+        }
+        
+        .diamond-title{
+          margin:0 0 10px;
+          color: var(--primary-blue);
+          font-size: 1.6rem;
+        }
+        
+        .diamond-text{
+          margin:0;
+          color:#374151;
+          line-height:1.6;
+          font-size:.98rem;
+        }
+        
+        .diamond-tiles{
+          flex: 0 0 360px;
+          display:flex;
+        }
+        
+        .diamond-tile{
+          position:relative;
+          width:100%;
+          border-radius:18px;
+          overflow:hidden;
+          padding:22px 22px;
+          display:flex;
+          align-items:center;
+          justify-content:space-between;
+          text-decoration:none;
+          min-height: 150px;
+        
+          background-image: url('assets/img/lionBack.png');
+          background-size: cover;
+          background-position: center;
+        }
+        
+        .diamond-tile::before{
+          content:"";
+          position:absolute;
+          inset:0;
+          background: linear-gradient(135deg,
+            rgba(0, 85, 165, 0.88),
+            rgba(0, 35, 85, 0.62)
+          );
+        }
+        
+        .diamond-tile > *{
+          position:relative;
+          z-index:1;
+        }
+        
+        .diamond-tile-left{
+          color:#ffffff;
+          font-weight:700;
+          font-size:1.05rem;
+          line-height:1.2;
+          max-width: 70%;
+        }
+        
+        .diamond-tile-logo{
+          height:56px;
+          width:auto;
+          display:block;
+        }
+        
+        /* Desktop-only layout kept; stack on smaller screens */
+        @media (max-width: 900px){
+          .diamond-wrap{ flex-direction:column; }
+          .diamond-tiles{ flex: 1 1 auto; }
+        }
+
+        
         /* ============ EXISTING SPONSORSHIP STYLES ============ */
         section {
             padding: 36px 0;
@@ -970,6 +1061,33 @@
                     </div>
         </section>
 
+    <section class="diamond-section">
+      <div class="container">
+        <div class="diamond-wrap">
+    
+          <!-- LEFT: Text block -->
+          <div class="diamond-copy">
+            <h2 class="diamond-title">Diamond Sponsor (Exclusive)</h2>
+            <p class="diamond-text">
+              We are grateful for the valued support and sponsorship of AAPD 2026 from Southern Lion Sdn Bhd. Your commitment to advancing preventive dentistry and enhancing community oral health is sincerely appreciated.
+            </p>
+          </div>
+    
+          <!-- RIGHT: One tile (clickable) -->
+          <div class="diamond-tiles">
+            <a class="diamond-tile"
+               href="https://www.southernlion.com.my"
+               target="_blank"
+               rel="noopener noreferrer"
+               aria-label="Southern Lion Sdn Bhd">
+              <div class="diamond-tile-left">Southern Lion Sdn Bhd</div>
+              <img class="diamond-tile-logo" src="assets/icons/lion.svg" alt="Southern Lion logo">
+            </a>
+          </div>
+    
+        </div>
+      </div>
+    </section>
 
 
     <section id="sponsorship">
