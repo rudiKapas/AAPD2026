@@ -488,11 +488,12 @@
           display:flex;
           align-items:center;
           gap:14px;
-          padding:16px 16px;
-          border-radius:calc(var(--radius) - 10px);
-          border:1px solid rgba(20,184,166,.35);
-          background:linear-gradient(180deg, rgba(20,184,166,.10), rgba(20,184,166,.03));
+          padding:0;              /* remove inner tile padding */
+          border:0;               /* remove inner tile border */
+          background:transparent; /* remove inner tile background */
+          border-radius:0;        /* remove inner rounded frame */
         }
+
         
         .help-icon--primary{
           flex:0 0 52px;
@@ -1118,7 +1119,7 @@
                       </a>
                     </p>
                 
-                    <p class="help-primary-meta">We typically respond within 1–3 working days.</p>
+                    <p class="help-primary-meta">For guidance on abstract format, categories, or technical issues, please email the scientific committee.</p>
                 
                     <a class="help-cta" href="mailto:18icaapd.scientific@gmail.com">
                       Compose email
