@@ -1391,6 +1391,307 @@
       }
     }
 
+    /* ============== SECTION — Registration Fees ============== */
+    .section.fees{ background:var(--hero-bg); padding:28px 0; }
+
+    .fees-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .fees-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    /* ===== Fees tabs — match .btn.btn-teal shape ===== */
+    .fees-tabs{
+      display:inline-flex;
+      gap:6px;
+      padding:4px;
+      border-radius:var(--btn-radius);                 /* match button corners */
+      border:1px solid rgba(15,23,42,.08);
+      background:#fff;
+      box-shadow:0 10px 24px rgba(15,23,42,.06);       /* same family as your UI */
+    }
+
+    .fees-tab{
+      border:0;
+      background:transparent;
+      padding:.48rem .9rem;                            /* same as .btn */
+      border-radius:var(--btn-radius);                 /* match button corners */
+      font-weight:500;                                 /* match .btn weight */
+      font-size:.92rem;                                 /* match .btn size */
+      line-height:1;
+      color:var(--navy);
+      cursor:pointer;
+      transition:transform .12s ease, box-shadow .12s ease, filter .12s ease, background-color .12s ease, color .12s ease;
+    }
+
+    .fees-tab:hover{
+      filter:brightness(.98);
+      transform:translateY(-1px);
+    }
+
+    .fees-tab[aria-selected="true"]{
+      background:#0f766e;                               /* same as .btn.btn-teal */
+      color:#fff;
+      box-shadow:0 8px 20px rgba(15,118,110,.25);       /* same as .btn.btn-teal */
+    }
+
+    .fees-tab[aria-selected="true"]:hover{
+      box-shadow:0 10px 24px rgba(15,118,110,.30);      /* same hover feel as .btn */
+    }
+
+    .fees-tab:focus-visible{
+      outline:3px solid rgba(15,118,110,.28);
+      outline-offset:2px;
+    }
+
+
+    .fees-panels{ margin-top:16px; }
+
+    .fees-grid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:16px;
+      align-items:stretch;
+    }
+
+    .fee-card{
+      background:#fff;
+      border:1px solid rgba(15,23,42,.12);
+      border-radius:22px;
+      box-shadow:0 18px 32px rgba(15,23,42,.10);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      min-height: 320px;
+    }
+
+    .fee-top{
+      padding:14px 16px 12px;
+      border-bottom:1px solid rgba(15,23,42,.08);
+      position:relative;
+      overflow:hidden;
+      background:rgba(255,255,255,.72);
+      -webkit-backdrop-filter: blur(12px) saturate(170%);
+      backdrop-filter: blur(12px) saturate(170%);
+    }
+
+    /* Liquid-glass tint now fills the ENTIRE top area */
+    .fee-top::before{
+      content:"";
+      position:absolute;
+      inset:0;                 /* <-- fills full .fee-top (top/right/bottom/left) */
+      background:
+        linear-gradient(110deg,
+          color-mix(in srgb, var(--fee-accent) 55%, transparent) 0%,
+          color-mix(in srgb, var(--fee-accent) 22%, transparent) 45%,
+          rgba(255,255,255,.26) 72%,
+          rgba(255,255,255,.10) 100%);
+      border-bottom:1px solid color-mix(in srgb, var(--fee-accent) 30%, transparent);
+      -webkit-backdrop-filter: blur(14px) saturate(185%);
+      backdrop-filter: blur(14px) saturate(185%);
+      opacity:.96;
+      pointer-events:none;
+      z-index:0;
+    }
+
+    /* Specular highlight streak */
+    .fee-top::after{
+      content:"";
+      position:absolute;
+      top:-28px;
+      left:-70px;
+      width:240px;
+      height:120px;
+      transform:rotate(18deg);
+      background:linear-gradient(90deg, rgba(255,255,255,.62), rgba(255,255,255,0));
+      opacity:.55;
+      pointer-events:none;
+      z-index:0;
+    }
+
+    /* Keep text above the glass layers */
+    .fee-top > *{
+      position:relative;
+      z-index:1;
+    }
+
+
+  /* Specular highlight streak for “glass” feel */
+  .fee-top::after{
+    content:"";
+    position:absolute;
+    top:-24px;
+    left:-60px;
+    width:180px;
+    height:95px;
+    transform:rotate(18deg);
+    background:linear-gradient(90deg, rgba(255,255,255,.60), rgba(255,255,255,0));
+    opacity:.60;
+    pointer-events:none;
+  }
+
+  /* Ensure title/date sit above the glass overlays */
+  .fee-top > *{
+    position:relative;
+    z-index:1;
+  }
+
+
+    .fee-period{
+      font-family:Poppins,Inter,sans-serif;
+      font-weight:500;
+      margin:0;
+      font-size:1.05rem;
+    }
+    .fee-date{
+      margin:4px 0 0;
+      color:var(--muted);
+      font-size:.86rem;
+    }
+
+    .fee-list{
+      padding:10px 16px 12px;
+      display:grid;
+      gap:8px;
+    }
+
+    .fee-row{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      justify-content:space-between;
+      padding:8px 0;
+      border-bottom:1px dashed rgba(15,23,42,.12);
+    }
+    .fee-row:last-child{ border-bottom:0; }
+
+    .fee-cat{
+      color:var(--navy);
+      font-weight:500;
+      max-width: 70%;
+    }
+    .fee-val{
+      color:var(--navy);
+      font-weight:800;
+      white-space:nowrap;
+    }
+    .fee-val.muted{
+      color:var(--muted);
+      font-weight:700;
+    }
+
+    .fee-note{
+      margin-top:12px;
+      padding:12px 14px;
+      border-radius:16px;
+      border:1px solid rgba(15,23,42,.10);
+      background:#f8fafc;
+      color:var(--muted);
+      font-size:.92rem;
+    }
+
+    /* Mobile: horizontal scroller like your media cards */
+    @media (max-width:1100px){
+      .fees-grid{
+        display:flex;
+        gap:12px;
+        overflow-x:auto;
+        padding:0 4px 8px;
+        -webkit-overflow-scrolling:touch;
+        scroll-snap-type:x mandatory;
+      }
+      .fees-grid::-webkit-scrollbar{ display:none; }
+      .fees-grid{ -ms-overflow-style:none; scrollbar-width:none; }
+
+      .fee-card{
+        flex:0 0 280px;
+        width:280px;
+        min-width:280px;
+        scroll-snap-align:start;
+      }
+
+        /* Mobile: make all fee card headers the same height */
+        .fee-top{
+          min-height: 92px;           /* adjust if you want slightly taller/shorter */
+          display:flex;
+          flex-direction:column;
+          justify-content:flex-start;
+        }
+
+        /* Reserve space for up to 2 lines of date text so short dates don't shrink header */
+        .fee-date{
+          line-height: 1.25;
+          min-height: 2.5em;          /* ~2 lines */
+        }
+
+        /* For panels with ONLY ONE card, remove the scroller and stretch the tile full width */
+        #fees-panel-acdom .fees-grid,
+        #fees-panel-speaker .fees-grid{
+          overflow-x:visible;
+          scroll-snap-type:none;
+        }
+
+        #fees-panel-acdom .fee-card,
+        #fees-panel-speaker .fee-card{
+          flex:1 1 100%;
+          width:100%;
+          min-width:0;
+        }
+
+        /* Ensure 'Complimentary' never gets clipped on small screens */
+        #fees-panel-speaker .fee-val{
+          white-space:normal;       /* allow wrap if needed */
+          text-align:right;
+        }
+        #fees-panel-speaker .fee-cat{
+          max-width:55%;
+        }
+
+    }
+
+    @media (max-width:520px){
+      .fee-card{ flex-basis:220px; width:220px; min-width:220px; }
+      .fee-period{ font-size:1rem; }
+      .fee-val{ font-size:.98rem; }
+      .fee-top{ min-height: 98px; }
+      .fee-date{ min-height: 2.7em; }
+
+      /* Make the right-side actions stack and use the same full width */
+      .fees-actions{
+        width:100%;
+        display:flex;
+        flex-direction:column;
+        align-items:stretch;
+        gap:10px;
+      }
+
+      /* Tabs frame fills the same width as the button */
+      .fees-tabs{
+        width:100%;
+      }
+
+      /* Each tab shares the width equally (looks like segmented button group) */
+      .fees-tab{
+        flex:1;
+        text-align:center;
+        padding:.6rem .75rem; /* close to your button sizing */
+      }
+
+      /* Button matches tabs width */
+      .fees-actions .btn{
+        width:100%;
+        justify-content:center;
+      }
+    }
 
 
 </style>
@@ -1671,8 +1972,146 @@
   </div>
 </section>
 
-    <!-- ================= third SECTION media (white background) ================= -->
-    <section class="section alt" id="about">
+    <!-- ================= SECTION — Registration Fees ================= -->
+    <section class="section fees" id="fees">
+      <div class="container">
+        <div class="fees-head">
+          <div>
+            <h2 class="fx" style="--d:.03s">Registration Fees</h2>
+            <p class="fx" style="--d:.06s">
+              Fees are listed in USD. Choose a category group below to view Early Bird, Regular/Standard, and On-Site rates.
+            </p>
+          </div>
+
+          <div class="fees-actions fx" style="--d:.09s">
+            <div class="fees-tabs" role="tablist" aria-label="Registration fee categories">
+              <button class="fees-tab" role="tab" aria-selected="true"
+                      id="fees-tab-participants" aria-controls="fees-panel-participants"
+                      data-fees-tab="participants">
+                Participants
+              </button>
+              <button class="fees-tab" role="tab" aria-selected="false"
+                      id="fees-tab-acdom" aria-controls="fees-panel-acdom"
+                      data-fees-tab="acdom">
+                ACDOM
+              </button>
+              <button class="fees-tab" role="tab" aria-selected="false"
+                      id="fees-tab-speaker" aria-controls="fees-panel-speaker"
+                      data-fees-tab="speaker">
+                Speaker &amp; Committee
+              </button>
+            </div>
+
+            <a class="btn btn-teal" href="registration.html">View Registration</a>
+          </div>
+        </div>
+
+        <div class="fees-panels">
+
+          <!-- PANEL 1: Participants -->
+          <div class="fees-panel" id="fees-panel-participants" role="tabpanel" aria-labelledby="fees-tab-participants">
+            <div class="fees-grid">
+
+              <!-- Early Bird -->
+              <article class="fee-card fx" style="--d:.12s; --fee-accent:#0f766e;">
+                <div class="fee-top">
+                  <h3 class="fee-period">Early Bird</h3>
+                  <p class="fee-date">15 Jan 2026 until 23:59 31 Jul 2026</p>
+                </div>
+                <div class="fee-list">
+                  <div class="fee-row"><div class="fee-cat">Dentist</div><div class="fee-val">USD 350</div></div>
+                  <div class="fee-row"><div class="fee-cat">Dental Therapist / Hygienist / DSA / Postgrad</div><div class="fee-val">USD 290</div></div>
+                  <div class="fee-row"><div class="fee-cat">Undergrad</div><div class="fee-val">USD 200</div></div>
+                  <div class="fee-row"><div class="fee-cat">Accompanying Person</div><div class="fee-val">USD 50</div></div>
+                </div>
+              </article>
+
+              <!-- Regular / Standard -->
+              <article class="fee-card fx" style="--d:.16s; --fee-accent:#FBAC45;">
+                <div class="fee-top">
+                  <h3 class="fee-period">Regular / Standard</h3>
+                  <p class="fee-date">1 Aug 2026 until 23:59 22 Sept 2026</p>
+                </div>
+                <div class="fee-list">
+                  <div class="fee-row"><div class="fee-cat">Dentist</div><div class="fee-val">USD 425</div></div>
+                  <div class="fee-row"><div class="fee-cat">Dental Therapist / Hygienist / DSA / Postgrad</div><div class="fee-val">USD 315</div></div>
+                  <div class="fee-row"><div class="fee-cat">Undergrad</div><div class="fee-val">USD 200</div></div>
+                  <div class="fee-row"><div class="fee-cat">Accompanying Person</div><div class="fee-val">USD 50</div></div>
+                </div>
+              </article>
+
+              <!-- On-Site -->
+              <article class="fee-card fx" style="--d:.20s; --fee-accent:#22c55e;">
+                <div class="fee-top">
+                  <h3 class="fee-period">On-Site</h3>
+                  <p class="fee-date">30 Sept 2026 – 2 Oct 2026</p>
+                </div>
+                <div class="fee-list">
+                  <div class="fee-row"><div class="fee-cat">Dentist</div><div class="fee-val">USD 500</div></div>
+                  <div class="fee-row"><div class="fee-cat">Dental Therapist / Hygienist / DSA / Postgrad</div><div class="fee-val">USD 350</div></div>
+                  <div class="fee-row"><div class="fee-cat">Undergrad</div><div class="fee-val muted">NA</div></div>
+                  <div class="fee-row"><div class="fee-cat">Accompanying Person</div><div class="fee-val">USD 50</div></div>
+                </div>
+              </article>
+
+            </div>
+
+            <div class="fee-note">
+              Note: “NA” indicates not available. Fees above are listed in USD.
+            </div>
+          </div>
+
+          <!-- PANEL 2: ACDOM -->
+          <div class="fees-panel" id="fees-panel-acdom" role="tabpanel" aria-labelledby="fees-tab-acdom" hidden>
+            <div class="fees-grid">
+
+              <article class="fee-card fx" style="--d:.12s; --fee-accent:#0f766e;">
+                <div class="fee-top">
+                  <h3 class="fee-period">Any Registration Period</h3>
+                  <p class="fee-date">Applies across Early Bird, Regular/Standard, and On-Site.</p>
+                </div>
+                <div class="fee-list">
+                  <div class="fee-row"><div class="fee-cat">Chief Dental Officer</div><div class="fee-val">USD 200</div></div>
+                  <div class="fee-row"><div class="fee-cat">ACDOM Secretariat</div><div class="fee-val">USD 200</div></div>
+                </div>
+              </article>
+
+            </div>
+
+            <div class="fee-note">
+              ACDOM rates are fixed across all registration periods.
+            </div>
+          </div>
+
+          <!-- PANEL 3: Speaker & Committee -->
+          <div class="fees-panel" id="fees-panel-speaker" role="tabpanel" aria-labelledby="fees-tab-speaker" hidden>
+            <div class="fees-grid">
+
+              <article class="fee-card fx" style="--d:.12s; --fee-accent:#FBAC45;">
+                <div class="fee-top">
+                  <h3 class="fee-period">Any Registration Period</h3>
+                  <p class="fee-date">Registration fee is waived for invited speakers and committee members.</p>
+                </div>
+                <div class="fee-list">
+                  <div class="fee-row"><div class="fee-cat">Speaker</div><div class="fee-val">Complimentary</div></div>
+                  <div class="fee-row"><div class="fee-cat">Committee</div><div class="fee-val">Complimentary</div></div>
+                </div>
+              </article>
+
+            </div>
+
+            <div class="fee-note">
+              Complimentary indicates the registration fee is waived (USD 0).
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =================  SECTION media (white background) ================= -->
+    <section class="section" id="about">
       <div class="container">
         <h2>Media Materials</h2>
         <p>Official videos and downloadable flyers for AAPD 2026.</p>
@@ -2144,6 +2583,40 @@
         });
     
         io.observe(sponsorSection);
+      })();
+    </script>
+
+    <script>
+      // Fees tabs: Participants / ACDOM / Speaker & Committee
+      (function(){
+        const tabs = Array.from(document.querySelectorAll('.fees-tab[data-fees-tab]'));
+        const panels = {
+          participants: document.getElementById('fees-panel-participants'),
+          acdom: document.getElementById('fees-panel-acdom'),
+          speaker: document.getElementById('fees-panel-speaker')
+        };
+
+        if(!tabs.length || !panels.participants) return;
+
+        function activate(key){
+          tabs.forEach(t => {
+            const isActive = (t.dataset.feesTab === key);
+            t.setAttribute('aria-selected', isActive ? 'true' : 'false');
+          });
+
+          Object.keys(panels).forEach(k => {
+            if(!panels[k]) return;
+            panels[k].hidden = (k !== key);
+          });
+        }
+
+        tabs.forEach(t => {
+          t.addEventListener('click', () => activate(t.dataset.feesTab));
+          t.addEventListener('keydown', (e) => {
+            // basic keyboard support
+            if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); t.click(); }
+          });
+        });
       })();
     </script>
 
