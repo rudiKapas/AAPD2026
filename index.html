@@ -487,11 +487,35 @@
     .scroll-btn.left{left:-10px}
     .scroll-btn.right{right:-10px}
     .scroll-btn[disabled]{opacity:.35;pointer-events:none}
+
+    
     @media (min-width:1101px){
-      .scroll-btn{display:none}
-      .media-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;justify-content:stretch;align-items:stretch;overflow:visible;background:transparent}
-      .media-card{width:100%;flex:auto}
+      .scroll-btn{display:none} /* optional: change to display:grid if you want arrows on desktop */
+    
+      .media-grid{
+        display:flex;
+        gap:16px;
+        overflow-x:auto;
+        overflow-y:hidden;
+        padding:0 4px 8px;
+        -webkit-overflow-scrolling:touch;
+        scroll-snap-type:x mandatory;
+        scroll-behavior:smooth;
+      }
+    
+      /* hide native scrollbar */
+      .media-grid::-webkit-scrollbar{display:none}
+      .media-grid{ -ms-overflow-style:none; scrollbar-width:none; }
+    
+      /* desktop card width (adjust 260px if you want bigger/smaller tiles) */
+      .media-card{
+        flex:0 0 260px;
+        width:260px;
+        min-width:260px;
+        scroll-snap-align:start;
+      }
     }
+
 
 
     /* ===== Footer (minimal) ===== */
