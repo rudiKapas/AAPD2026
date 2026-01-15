@@ -425,7 +425,7 @@
 
 
     /* ===== Media Materials grid (2 YouTube + 2 A4) ===== */
-    .media-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:16px}
+    .media-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;margin-top:16px}
     .media-card{background:#fff;border:2px solid rgba(15,23,42,.12);border-radius:22px;box-shadow:0 18px 32px rgba(15,23,42,.14);overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:transform .16s ease, box-shadow .16s ease, background-color .16s ease;will-change:transform,box-shadow}
     .media-card:hover{background:#ffffff;transform:translateY(-2px);box-shadow:0 10px 22px rgba(15,23,42,.12)}
     .media-card:active{transform:translateY(0);box-shadow:0 6px 14px rgba(15,23,42,.10)}
@@ -2178,6 +2178,21 @@
               <p class="media-sub">JPG • Click to open full size</p>
             </div>
           </a>
+
+          <!-- ===== FLYER CARD 3 (Fees) ===== -->
+          <a class="media-card"
+             href="assets/img/FLYERS%20AAPD%202026%20INTERNATIONA.jpg"
+             target="_blank" rel="noopener noreferrer">
+            <div class="media-thumb a4">
+              <img src="assets/img/FLYERS%20AAPD%202026%20INTERNATIONA.jpg"
+                   alt="Flyer — AAPD26 Fees" />
+            </div>
+            <div class="media-body">
+              <h3 class="media-title">Flyer — AAPD26 Fees</h3>
+              <p class="media-sub">JPG • Click to open full size</p>
+            </div>
+          </a>
+
         </div>
       </div>
       </div>
