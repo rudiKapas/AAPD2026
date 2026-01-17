@@ -2429,35 +2429,54 @@
                   return; // skip countdown calculation for this card
                 }
       
-                const target = new Date(card.getAttribute('data-start') + 'T00:00:00');
-                const d = diffMWD(now, target);
-      
-                if (d.today){
-                  el.textContent = 'Today';
-                  card.dataset.long    = 'Today';
-                  card.dataset.compact = 'Today';
-                  card.setAttribute('aria-label', title + ' is today');
-                } else if (d.past){
-                  el.textContent = 'Closed';
-                  card.dataset.long    = 'Closed';
-                  card.dataset.compact = 'Closed';
-                  card.setAttribute('aria-label', title + ' has passed');
-                } else {
+                const start = new Date(card.getAttribute('data-start') + 'T00:00:00');
+                const end   = new Date(card.getAttribute('data-end')   + 'T23:59:59'); // keep open through end date
+                
+                // Ensure every card has a label element (<small>) so desktop doesn't inject "Starting in:" via CSS
+                const timeWrap = card.querySelector('.time');
+                let labelEl = timeWrap ? timeWrap.querySelector('small') : null;
+                if (timeWrap && !labelEl){
+                  labelEl = document.createElement('small');
+                  timeWrap.insertBefore(labelEl, timeWrap.firstChild);
+                }
+                
+                if (now < start){
+                  // Not started yet → countdown to START
+                  if (labelEl) labelEl.textContent = 'Opens in:';
+                
+                  const d = diffMWD(now, start);
                   const L = fmtLong(d), S = fmtShort(d);
-                  // break line before "and X days" on full cards
                   const Lhtml = L.replace(/,\s+and\s+(\d+\s+day[s]?)/,
                                           ',<br class="br-days" />and $1');
-      
-                  // store variations
-                  card.dataset.long     = L;      // full text (fallback)
-                  card.dataset.longHtml = Lhtml;  // full text with line break
-                  card.dataset.compact  = S;      // rod text (e.g., 8m 3w 4d)
-      
-                  // initial visible text (plain); applyLayout will swap to innerHTML for full cards
+                
+                  card.dataset.long     = L;
+                  card.dataset.longHtml = Lhtml;
+                  card.dataset.compact  = S;
+                
                   el.textContent = L;
-      
-                  card.setAttribute('aria-label', title + ' in ' + L);
+                  card.setAttribute('aria-label', title + ' opens in ' + L);
+                
+                } else if (now > end){
+                  // Ended → CLOSED (only after end date)
+                  if (labelEl) labelEl.textContent = 'Status:';
+                
+                  el.textContent = 'Closed';
+                  card.dataset.long     = 'Closed';
+                  card.dataset.longHtml = 'Closed';
+                  card.dataset.compact  = 'Closed';
+                  card.setAttribute('aria-label', title + ' is closed');
+                
+                } else {
+                  // Active window → OPEN NOW
+                  if (labelEl) labelEl.textContent = 'Status:';
+                
+                  el.textContent = 'Open now';
+                  card.dataset.long     = 'Open now';
+                  card.dataset.longHtml = 'Open now';
+                  card.dataset.compact  = 'Open now';
+                  card.setAttribute('aria-label', title + ' is open now');
                 }
+
               });
             }
 
