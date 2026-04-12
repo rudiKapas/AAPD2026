@@ -1416,6 +1416,303 @@
       }
     }
 
+     /* ============== SECTION — Abstract Awards / Call for Abstract ============== */
+    .section.abstract-awards{
+      background:linear-gradient(180deg,#ffffff 0%, #fbfbfd 100%);
+      padding:16px 0 18px;
+    }
+
+    .abstract-awards-card{
+      position:relative;
+      overflow:hidden;
+      border-radius:22px;
+      padding:18px 20px;
+      background:rgba(255,255,255,.68);
+      border:1px solid rgba(255,255,255,.52);
+      box-shadow:
+        0 10px 24px rgba(15,23,42,.06),
+        inset 0 1px 0 rgba(255,255,255,.72);
+      -webkit-backdrop-filter: blur(14px) saturate(145%);
+      backdrop-filter: blur(14px) saturate(145%);
+    }
+
+    .abstract-awards-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(135deg,
+          rgba(255,255,255,.55) 0%,
+          rgba(255,255,255,.18) 24%,
+          rgba(251,172,69,.10) 42%,
+          rgba(255,255,255,.10) 62%,
+          rgba(15,118,110,.08) 100%);
+      pointer-events:none;
+      z-index:0;
+    }
+
+    .abstract-awards-card::after{
+      content:"";
+      position:absolute;
+      top:-42px;
+      left:-90px;
+      width:340px;
+      height:150px;
+      background:linear-gradient(90deg, rgba(255,255,255,.55), rgba(255,255,255,0));
+      transform:rotate(16deg);
+      opacity:.7;
+      pointer-events:none;
+      z-index:0;
+    }
+
+    .abstract-awards-card > *{
+      position:relative;
+      z-index:1;
+    }
+
+    .abstract-awards-grid{
+      display:grid;
+      grid-template-columns:minmax(0,1.12fr) minmax(260px,.88fr);
+      gap:18px;
+      align-items:start;
+    }
+
+    .abstract-awards-kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:.34rem .68rem;
+      border-radius:999px;
+      background:rgba(15,118,110,.08);
+      border:1px solid rgba(15,118,110,.12);
+      color:#0f766e;
+      font-size:.76rem;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .abstract-awards-copy h2{
+      margin:10px 0 8px;
+      font-size:clamp(1.45rem, 1.7vw + .7rem, 2.05rem);
+      line-height:1.04;
+    }
+
+    .abstract-awards-prize{
+      margin:0 0 12px;
+      padding:12px 14px;
+      border-radius:18px;
+      background:linear-gradient(135deg,#0f172a 0%, #162036 100%);
+      color:#fff;
+      box-shadow:0 12px 20px rgba(15,23,42,.14);
+      font-size:clamp(.98rem,.35vw + .92rem,1.04rem);
+      line-height:1.3;
+      max-width:560px;
+    }
+
+    .abstract-awards-prize strong{
+      display:block;
+      margin-top:3px;
+      font-size:clamp(1.2rem,1vw + .82rem,1.75rem);
+      line-height:1.02;
+      letter-spacing:.01em;
+    }
+
+    .abstract-awards-copy p{
+      margin:0;
+      color:var(--muted);
+      max-width:54ch;
+      font-size:.98rem;
+      line-height:1.5;
+    }
+
+    .abstract-awards-meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:14px;
+    }
+
+    .abstract-awards-chip{
+      min-width:155px;
+      padding:10px 12px;
+      border-radius:15px;
+      border:1px solid rgba(15,23,42,.08);
+      background:#fff;
+      box-shadow:0 8px 16px rgba(15,23,42,.05);
+    }
+
+    .abstract-awards-chip-label{
+      display:block;
+      font-size:.72rem;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:var(--muted);
+      margin-bottom:3px;
+    }
+
+    .abstract-awards-chip-value{
+      display:block;
+      font-weight:700;
+      color:var(--navy);
+      line-height:1.24;
+      font-size:.95rem;
+    }
+
+    .abstract-awards-actions{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+
+    .abstract-awards-link{
+      color:var(--navy);
+      font-weight:600;
+      text-decoration:none;
+      border-bottom:1px solid rgba(15,23,42,.22);
+      transition:opacity .12s ease, transform .12s ease;
+    }
+
+    .abstract-awards-link:hover{
+      opacity:.8;
+      transform:translateY(-1px);
+    }
+
+    .abstract-awards-sponsors{
+      margin-top:16px;
+      padding-top:14px;
+      border-top:1px solid rgba(15,23,42,.08);
+    }
+
+    .abstract-awards-sponsors-label{
+      margin-bottom:8px;
+      font-size:.76rem;
+      text-transform:uppercase;
+      letter-spacing:.1em;
+      color:var(--muted);
+      font-weight:700;
+    }
+
+    .abstract-awards-sponsor-list{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:10px;
+    }
+
+    .abstract-awards-sponsor-card{
+      padding:12px 12px 10px;
+      border-radius:16px;
+      border:1px solid rgba(15,23,42,.08);
+      background:#ffffff;
+      box-shadow:0 8px 16px rgba(15,23,42,.05);
+      min-height:68px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+
+    .abstract-awards-sponsor-name{
+      font-weight:700;
+      color:var(--navy);
+      line-height:1.15;
+      font-size:.94rem;
+    }
+
+    .abstract-awards-sponsor-role{
+      margin-top:6px;
+      font-size:.78rem;
+      color:var(--muted);
+      line-height:1.25;
+    }
+
+    .abstract-awards-poster-wrap{
+      display:flex;
+      justify-content:flex-end;
+      align-items:flex-start;
+      padding-top:4px;
+    }
+
+    .abstract-awards-poster-card{
+      display:block;
+      width:min(100%, 300px);
+      border-radius:22px;
+      overflow:hidden;
+      background:#fff;
+      border:1px solid rgba(15,23,42,.08);
+      box-shadow:0 16px 28px rgba(15,23,42,.14);
+      transform:rotate(-1.5deg);
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+
+    .abstract-awards-poster-card:hover{
+      transform:rotate(-1deg) translateY(-2px);
+      box-shadow:0 20px 34px rgba(15,23,42,.16);
+    }
+
+    .abstract-awards-poster-card img{
+      display:block;
+      width:100%;
+      height:auto;
+    }
+
+    @media (max-width:980px){
+      .abstract-awards-grid{
+        grid-template-columns:1fr;
+        gap:14px;
+      }
+
+      .abstract-awards-poster-wrap{
+        order:-1;
+        justify-content:center;
+        padding-top:0;
+      }
+
+      .abstract-awards-poster-card{
+        width:min(100%, 280px);
+        transform:none;
+      }
+
+      .abstract-awards-poster-card:hover{
+        transform:translateY(-2px);
+      }
+    }
+
+    @media (max-width:640px){
+      .section.abstract-awards{
+        padding:12px 0 14px;
+      }
+
+      .abstract-awards-card{
+        padding:16px;
+      }
+
+      .abstract-awards-sponsor-list{
+        grid-template-columns:1fr;
+      }
+
+      .abstract-awards-chip{
+        width:100%;
+      }
+
+      .abstract-awards-actions{
+        flex-direction:column;
+        align-items:stretch;
+      }
+
+      .abstract-awards-actions .btn{
+        width:100%;
+        justify-content:center;
+      }
+
+      .abstract-awards-link{
+        width:100%;
+        text-align:center;
+        padding-top:4px;
+      }
+    }
+
     /* ============== SECTION — Registration Fees ============== */
     .section.fees{ background:var(--hero-bg); padding:28px 0; }
 
@@ -1997,6 +2294,77 @@
     </div>
   </div>
 </section>
+
+
+        <!-- ============== SECTION — Abstract Awards / Call for Abstract ============== -->
+    <section class="section abstract-awards" id="abstract-awards">
+      <div class="container">
+        <div class="abstract-awards-card">
+          <div class="abstract-awards-grid">
+            
+            <div class="abstract-awards-copy">
+              <span class="abstract-awards-kicker">Abstract Awards 2026</span>
+              <h2>Call for Abstract</h2>
+
+              <div class="abstract-awards-prize">
+                Stand a chance to win prizes worth over
+                <strong>USD5,000.00</strong>
+              </div>
+
+              <p>
+                Share your work, exchange knowledge, and compete for sponsored awards that recognise
+                excellence in preventive dentistry and community oral health across Asia and beyond.
+              </p>
+
+              <div class="abstract-awards-meta">
+                <div class="abstract-awards-chip">
+                  <span class="abstract-awards-chip-label">Submission Deadline</span>
+                  <span class="abstract-awards-chip-value">15 May 2026</span>
+                </div>
+
+                <div class="abstract-awards-chip">
+                  <span class="abstract-awards-chip-label">Awards Highlight</span>
+                  <span class="abstract-awards-chip-value">Sponsored abstract prizes for selected presenters</span>
+                </div>
+              </div>
+
+              <div class="abstract-awards-actions">
+                <a class="btn btn-teal" href="abstractSubmission.html">Submit Abstract</a>
+                <a class="abstract-awards-link" href="assets/img/chancetToWinPrizes.jpeg" target="_blank" rel="noopener noreferrer">View Poster</a>
+              </div>
+
+              <div class="abstract-awards-sponsors">
+                <div class="abstract-awards-sponsors-label">Awards Sponsored By</div>
+
+                <div class="abstract-awards-sponsor-list">
+                  <div class="abstract-awards-sponsor-card">
+                    <span class="abstract-awards-sponsor-name">LION</span>
+                    <span class="abstract-awards-sponsor-role">Award sponsor</span>
+                  </div>
+
+                  <div class="abstract-awards-sponsor-card">
+                    <span class="abstract-awards-sponsor-name">MADPHS</span>
+                    <span class="abstract-awards-sponsor-role">Award sponsor</span>
+                  </div>
+
+                  <div class="abstract-awards-sponsor-card">
+                    <span class="abstract-awards-sponsor-name">Society of Preventive Dentistry of Hong Kong</span>
+                    <span class="abstract-awards-sponsor-role">Award sponsor</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="abstract-awards-poster-wrap">
+              <a class="abstract-awards-poster-card" href="assets/img/chancetToWinPrizes.jpeg" target="_blank" rel="noopener noreferrer" aria-label="Open call for abstract poster">
+                <img src="assets/img/chancetToWinPrizes.jpeg" alt="AAPD 2026 call for abstract poster highlighting prizes worth over USD5,000.00 and award sponsors">
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- ================= SECTION — Registration Fees ================= -->
     <section class="section fees" id="fees">
