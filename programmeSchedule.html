@@ -1,0 +1,1011 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Programme Schedule | AAPD 2026</title>
+  <meta name="description" content="Programme Schedule for AAPD 2026." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/svg+xml" href="assets/icons/AAPDGen.svg">
+  <link rel="icon" type="image/png" href="assets/icons/AAPD26.png">
+
+  <style>
+    :root{
+      --primary-blue:#003366;
+      --accent-blue:#0055a5;
+      --navy:#0f172a;
+      --muted:#6b7280;
+      --bg:#ffffff;
+      --hero-bg:#f6f7fb;
+      --soft:#eef3fb;
+      --line:rgba(15,23,42,.08);
+      --line-strong:rgba(15,23,42,.12);
+      --shadow:0 14px 28px rgba(15,23,42,.08);
+      --shadow-soft:0 12px 24px rgba(15,23,42,.06);
+      --radius:22px;
+      --card-radius:18px;
+      --container:1152px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    html,body{margin:0;padding:0}
+    body{
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--navy);
+      background:var(--bg);
+      line-height:1.55;
+    }
+
+    a{color:inherit}
+    .container{
+      width:100%;
+      max-width:var(--container);
+      margin-inline:auto;
+      padding:0 20px;
+    }
+
+    /* ===== Header: same style/content family as current pages ===== */
+    .aapd-header-icons{
+      display:none;
+      align-items:center;
+      gap:10px;
+    }
+    .aapd-header-icons a{
+      display:inline-flex;
+      align-items:center;
+    }
+    .aapd-header-icons img{
+      height:28px;
+      width:auto;
+      display:block;
+    }
+    @media (min-width:1024px){
+      .aapd-header-icons{ display:flex; }
+    }
+
+    .site-header{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      background:#ffffff;
+      border-bottom:1px solid rgba(15,23,42,.06);
+    }
+    .site-header .container{
+      padding:0 20px;
+      height:56px;
+      display:flex;
+      align-items:center;
+    }
+    .header-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      height:56px;
+      width:100%;
+      padding:0;
+      position:relative;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:0;
+      font-weight:500;
+      letter-spacing:0;
+    }
+    .brand a{
+      text-decoration:none;
+      color:var(--navy);
+      font-weight:500;
+    }
+    .header-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .mid-nav{
+      position:absolute;
+      left:50%;
+      transform:translateX(-50%);
+      display:flex;
+      align-items:center;
+      gap:18px;
+      font-weight:300;
+      flex-wrap:nowrap;
+      white-space:nowrap;
+    }
+    .mid-nav a{
+      text-decoration:none;
+      color:var(--navy);
+      font-family:Inter,system-ui,sans-serif;
+      font-weight:500;
+      letter-spacing:.2px;
+      display:inline-flex;
+      align-items:center;
+      height:34px;
+      padding:0 10px;
+      line-height:1;
+      white-space:nowrap;
+      transition:transform .18s cubic-bezier(.2,.65,.3,1),opacity .18s ease;
+    }
+    .mid-nav a:hover{
+      transform:translateY(-1px);
+      opacity:.85;
+    }
+
+    .icon-btn{
+      width:34px;
+      height:34px;
+      border-radius:999px;
+      border:1px solid rgba(15,23,42,.12);
+      background:#fff;
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+    }
+    .icon-btn.hamburger{display:none;}
+    @media (max-width:900px){
+      .icon-btn.hamburger{display:grid;}
+      .mid-nav{display:none;}
+    }
+
+    .mobile-menu{
+      display:none;
+      position:absolute;
+      top:calc(100% + 8px);
+      left:16px;
+      right:16px;
+      background:#fff;
+      border:1px solid rgba(15,23,42,.08);
+      border-radius:14px;
+      box-shadow:0 12px 28px rgba(15,23,42,.10);
+      z-index:60;
+    }
+    .mobile-menu.open{display:block;}
+    .mobile-menu a{
+      display:block;
+      padding:14px 16px;
+      border-bottom:1px solid rgba(15,23,42,.06);
+      text-decoration:none;
+      color:var(--navy);
+      font-weight:600;
+    }
+    .mobile-menu a:last-child{border-bottom:0;}
+
+    /* ===== Hero ===== */
+    .hero{
+      background:
+        radial-gradient(circle at top right, rgba(0,85,165,.08), transparent 28%),
+        linear-gradient(180deg, #f8fbff 0%, #f3f6fb 100%);
+      border-bottom:1px solid rgba(15,23,42,.06);
+    }
+    .hero-inner{
+      padding:36px 0 30px;
+      display:grid;
+      grid-template-columns:minmax(0, 1.15fr) minmax(320px, .85fr);
+      gap:20px;
+      align-items:stretch;
+    }
+    .hero-panel,
+    .hero-side{
+      background:rgba(255,255,255,.78);
+      border:1px solid rgba(255,255,255,.85);
+      border-radius:26px;
+      box-shadow:0 14px 30px rgba(15,23,42,.08);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+    }
+    .hero-panel{
+      padding:28px 28px 26px;
+    }
+    .eyebrow{
+      margin:0 0 10px;
+      font-size:.78rem;
+      font-weight:700;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:#4b5563;
+    }
+    h1{
+      margin:0;
+      font-family:Poppins,Inter,sans-serif;
+      font-weight:500;
+      line-height:1.02;
+      letter-spacing:-.02em;
+      font-size:clamp(2.2rem, 3.4vw + .9rem, 4.3rem);
+    }
+    .hero-lead{
+      margin:16px 0 0;
+      color:var(--muted);
+      max-width:58ch;
+      font-size:1rem;
+    }
+    .hero-tags{
+      margin-top:20px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    .hero-tag{
+      display:inline-flex;
+      align-items:center;
+      min-height:38px;
+      padding:8px 14px;
+      border-radius:999px;
+      background:#fff;
+      border:1px solid rgba(15,23,42,.08);
+      box-shadow:0 8px 18px rgba(15,23,42,.06);
+      color:#334155;
+      font-weight:600;
+      font-size:.92rem;
+    }
+    .hero-side{
+      padding:22px;
+      display:grid;
+      grid-template-rows:auto auto 1fr;
+      gap:14px;
+    }
+    .meta-card{
+      background:linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+      border:1px solid rgba(15,23,42,.07);
+      border-radius:18px;
+      padding:16px 16px 14px;
+      box-shadow:var(--shadow-soft);
+    }
+    .meta-label{
+      display:block;
+      margin-bottom:4px;
+      font-size:.76rem;
+      font-weight:700;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:#64748b;
+    }
+    .meta-value{
+      font-size:1.08rem;
+      font-weight:700;
+      color:var(--primary-blue);
+      line-height:1.3;
+    }
+    .meta-copy{
+      margin:.35rem 0 0;
+      color:var(--muted);
+      font-size:.94rem;
+      line-height:1.55;
+    }
+    .tentative-note{
+      background:linear-gradient(135deg, rgba(0,85,165,.08), rgba(0,51,102,.05));
+      border:1px solid rgba(0,85,165,.12);
+      border-radius:18px;
+      padding:16px;
+    }
+    .tentative-note strong{
+      display:block;
+      margin-bottom:4px;
+      color:var(--primary-blue);
+    }
+    .tentative-note p{
+      margin:0;
+      color:#475569;
+      font-size:.94rem;
+    }
+
+    /* ===== Schedule sections ===== */
+    .programme-wrap{
+      padding:30px 0 52px;
+      background:#ffffff;
+    }
+
+    .schedule-intro{
+      margin-bottom:18px;
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+    .schedule-intro h2{
+      margin:0;
+      font-family:Poppins,Inter,sans-serif;
+      font-size:clamp(1.6rem, 1.1vw + 1.2rem, 2.2rem);
+      font-weight:500;
+      line-height:1.1;
+    }
+    .schedule-intro p{
+      margin:6px 0 0;
+      max-width:58ch;
+      color:var(--muted);
+    }
+    .schedule-chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(15,23,42,.08);
+      background:#f8fbff;
+      color:var(--primary-blue);
+      font-weight:700;
+      font-size:.9rem;
+      box-shadow:0 8px 16px rgba(15,23,42,.05);
+    }
+
+    .day-section{
+      background:linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+      border:1px solid rgba(15,23,42,.07);
+      border-radius:28px;
+      box-shadow:0 18px 34px rgba(15,23,42,.06);
+      padding:28px;
+      margin-top:20px;
+      overflow:hidden;
+      position:relative;
+    }
+    .day-section::before{
+      content:"";
+      position:absolute;
+      inset:0 auto auto 0;
+      width:220px;
+      height:220px;
+      background:radial-gradient(circle, rgba(0,85,165,.10), transparent 65%);
+      pointer-events:none;
+    }
+
+    .day-header{
+      position:relative;
+      z-index:1;
+      display:grid;
+      grid-template-columns:minmax(0, 1fr) auto;
+      gap:14px;
+      align-items:end;
+      margin-bottom:22px;
+    }
+    .day-kicker{
+      display:block;
+      margin-bottom:6px;
+      font-size:.78rem;
+      font-weight:700;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:#64748b;
+    }
+    .day-title{
+      margin:0;
+      font-family:Poppins,Inter,sans-serif;
+      font-weight:500;
+      line-height:1.02;
+      letter-spacing:-.02em;
+      color:var(--accent-blue);
+      font-size:clamp(2rem, 3vw + .7rem, 3.2rem);
+    }
+    .day-sub{
+      margin:12px 0 0;
+      color:var(--muted);
+      max-width:56ch;
+    }
+    .day-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:144px;
+      min-height:46px;
+      padding:10px 16px;
+      border-radius:16px;
+      background:linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+      color:#fff;
+      font-weight:700;
+      text-align:center;
+      box-shadow:0 14px 24px rgba(0,51,102,.18);
+    }
+
+    .day-columns{
+      position:relative;
+      z-index:1;
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:0;
+      border-top:1px solid rgba(15,23,42,.08);
+      padding-top:8px;
+    }
+    .day-column{
+      min-width:0;
+      padding:10px 18px 0;
+    }
+    .day-column + .day-column{
+      border-left:1px solid rgba(15,23,42,.12);
+    }
+
+    .programme-item{
+      padding:14px 0 18px;
+    }
+    .programme-item + .programme-item{
+      border-top:1px solid rgba(15,23,42,.08);
+    }
+    .time{
+      display:block;
+      margin:0 0 8px;
+      font-size:clamp(1.55rem, 1vw + 1.2rem, 2.1rem);
+      line-height:1;
+      font-weight:700;
+      letter-spacing:-.03em;
+      color:var(--navy);
+    }
+    .session-title{
+      margin:0;
+      font-size:1.05rem;
+      line-height:1.35;
+      font-weight:700;
+      color:var(--navy);
+    }
+    .session-copy{
+      margin:6px 0 0;
+      color:var(--muted);
+      font-size:.95rem;
+      line-height:1.55;
+    }
+    .session-note{
+      margin-top:10px;
+      font-size:.9rem;
+      line-height:1.5;
+      color:#475569;
+    }
+
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      margin-bottom:10px;
+      padding:6px 10px;
+      border-radius:999px;
+      background:#edf5ff;
+      color:var(--primary-blue);
+      border:1px solid rgba(0,85,165,.10);
+      font-size:.76rem;
+      font-weight:700;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+    .tag.dark{
+      background:#eef2f7;
+      color:#334155;
+      border-color:rgba(15,23,42,.08);
+    }
+
+    .parallel-list{
+      margin-top:12px;
+      display:grid;
+      gap:10px;
+    }
+    .parallel-card{
+      border:1px solid rgba(15,23,42,.08);
+      background:linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+      border-radius:16px;
+      padding:12px 12px 11px;
+      box-shadow:0 8px 18px rgba(15,23,42,.05);
+    }
+    .parallel-card h4{
+      margin:0;
+      font-size:.98rem;
+      line-height:1.35;
+      color:var(--navy);
+    }
+    .parallel-card p{
+      margin:6px 0 0;
+      font-size:.88rem;
+      color:var(--muted);
+      line-height:1.5;
+    }
+
+    .note-strip{
+      margin-top:16px;
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:14px;
+      width:100%;
+    }
+    .note-card{
+      padding:16px;
+      border-radius:16px;
+      border:1px solid rgba(15,23,42,.08);
+      background:#fff;
+      box-shadow:0 8px 16px rgba(15,23,42,.05);
+      height:100%;
+    }
+    .note-card h3{
+      margin:0 0 6px;
+      font-size:1rem;
+    }
+    .note-card p{
+      margin:0;
+      color:var(--muted);
+      font-size:.92rem;
+      line-height:1.6;
+    }
+
+    /* ===== Footer ===== */
+    .site-footer{
+      background:#fff;
+      border-top:1px solid rgba(15,23,42,.08);
+    }
+    .footer-inner{
+      padding:12px 0;
+      display:flex;
+      justify-content:center;
+      text-align:center;
+    }
+    .footer-inner small{
+      color:var(--muted);
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width:980px){
+      .hero-inner{
+        grid-template-columns:1fr;
+      }
+      .day-header{
+        grid-template-columns:1fr;
+        align-items:start;
+      }
+      .day-badge{
+        justify-self:start;
+      }
+      .note-strip{
+        grid-template-columns:repeat(3,minmax(0,1fr));
+      }
+    }
+
+    @media (max-width:860px){
+      .day-columns{
+        grid-template-columns:1fr;
+        gap:0;
+      }
+      .day-column{
+        padding:0;
+      }
+      .day-column + .day-column{
+        border-left:0;
+        border-top:1px solid rgba(15,23,42,.10);
+        margin-top:2px;
+        padding-top:6px;
+      }
+      .programme-item{
+        padding:16px 0;
+      }
+    }
+
+    @media (max-width:640px){
+      .hero-inner{
+        padding:26px 0 22px;
+      }
+      .hero-panel,
+      .hero-side,
+      .day-section{
+        border-radius:22px;
+      }
+      .hero-panel{
+        padding:22px 20px 20px;
+      }
+      .hero-side{
+        padding:16px;
+      }
+      .day-section{
+        padding:20px 18px;
+      }
+      .schedule-intro{
+        align-items:start;
+      }
+      .note-strip{
+        grid-template-columns:1fr;
+      }
+      .time{
+        font-size:1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="header-row">
+        <div class="brand" aria-label="AAPD 2026 brand">
+          <a href="index.html">AAPD 2026</a>
+        </div>
+
+        <nav class="mid-nav" aria-label="Primary">
+          <a href="aboutus.html">About Us</a>
+          <a href="https://e7tech.com/aapd2026/login.asp" target="_blank" rel="noopener noreferrer">Registration</a>
+          <a href="abstractSubmission.html">Abstract Submission</a>
+          <a href="programmeSchedule.html" class="active">Programme Schedule</a>
+          <a href="sponsors.html">Sponsors</a>
+          <a href="aboutus.html#contact">Contact Us</a>
+        </nav>
+
+        <div class="header-actions">
+          <div class="aapd-header-icons" aria-label="AAPD logos">
+            <a href="index.html" aria-label="Go to AAPD home">
+              <img src="assets/icons/AAPDGen.svg" alt="AAPD">
+            </a>
+            <a href="index.html" aria-label="Go to AAPD 2026 home">
+              <img src="assets/icons/AAPD26.png" alt="AAPD 2026">
+            </a>
+          </div>
+
+          <button class="icon-btn hamburger" id="navToggle"
+                  aria-controls="mobileMenu" aria-expanded="false"
+                  aria-label="Open menu">☰</button>
+        </div>
+
+        <nav id="mobileMenu" class="mobile-menu" aria-label="Mobile menu">
+          <a href="index.html">Home</a>
+          <a href="aboutus.html#top">About Us</a>  
+          <a href="https://e7tech.com/aapd2026/login.asp" target="_blank" rel="noopener noreferrer">Registration</a>
+          <a href="abstractSubmission.html">Abstract Submission</a>
+          <a href="programmeSchedule.html" class="active">Programme Schedule</a>
+          <a href="sponsors.html">Sponsors</a>
+          <a href="aboutus.html#contact">Contact Us</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-inner">
+          <div class="hero-panel">
+            <p class="eyebrow">18<sup style="text-transform:none;">th</sup> ICAAPD Malaysia 2026</p>
+            <h1>Programme<br>schedule</h1>
+            <p class="hero-lead">
+              Explore the official programme schedule for the AAPD 2026, organised by day for easy reference.
+            </p>
+
+          </div>
+
+          <aside class="hero-side" aria-label="Programme summary">
+            <div class="meta-card">
+              <span class="meta-label">Dates</span>
+              <div class="meta-value">30 September to 2 October 2026</div>
+              <p class="meta-copy">Three-day programme covering workshops, plenaries, symposia, free papers, networking sessions and gala dinner.</p>
+            </div>
+
+            <div class="tentative-note">
+              <strong>Important</strong>
+              <p>The programme is tentative and may be updated from time to time as session details are finalised.</p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="programme-wrap">
+      <div class="container">
+        <div class="schedule-intro">
+          <div>
+            <h2>Scientific programme overview</h2>
+            <p>Browse the conference programme by day, including keynote sessions, symposiums, free papers, social events and other scheduled activities.</p>
+          </div>
+        </div>
+
+        <section class="day-section" aria-labelledby="day1-title">
+          <div class="day-header">
+            <div>
+              <span class="day-kicker">Day 1</span>
+              <h2 id="day1-title" class="day-title">30 September 2026</h2>
+              <p class="day-sub">Pre-conference day featuring registration, workshops, free papers, board meeting and the invited welcome reception.</p>
+            </div>
+            <div class="day-badge">Pre-conference</div>
+          </div>
+
+          <div class="day-columns">
+            <div class="day-column">
+              <article class="programme-item">
+                <span class="tag">Registration</span>
+                <span class="time">08.00 - 08.30</span>
+                <h3 class="session-title">Registration - Level 1</h3>
+              </article>
+
+              <article class="programme-item">
+                <span class="tag">Workshops</span>
+                <span class="time">08.30 - 14.00</span>
+                <h3 class="session-title">Workshop sessions</h3>
+                <p class="session-copy">Multiple pre-conference workshops are scheduled within the same block.</p>
+
+                <div class="parallel-list">
+                  <div class="parallel-card">
+                    <h4>Elderly Oral Care Workshop</h4>
+                    <p>Open attendance</p>
+                  </div>
+                  <div class="parallel-card">
+                    <h4>Oral Health Literacy Workshop</h4>
+                    <p>Open attendance</p>
+                  </div>
+                  <div class="parallel-card">
+                    <h4>Fluoride Workshop</h4>
+                    <p>Closed workshop</p>
+                  </div>
+                  <div class="parallel-card">
+                    <h4>Smoking Cessation and Vaping Workshop</h4>
+                    <p>Open attendance</p>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <div class="day-column">
+              <article class="programme-item">
+                <span class="tag dark">Refreshment</span>
+                <span class="time">14.00 - 14.30</span>
+                <h3 class="session-title">Light refreshment</h3>
+              </article>
+
+              <article class="programme-item">
+                <span class="tag">Meetings and presentations</span>
+                <span class="time">14.30 - 16.30</span>
+                <h3 class="session-title">AAPD Board Meeting and Free Papers</h3>
+                <p class="session-copy">Free papers include oral presentation, poster presentation and 3MT formats.</p>
+              </article>
+            </div>
+
+            <div class="day-column">
+              <article class="programme-item">
+                <span class="tag dark">Free time</span>
+                <span class="time">16.30 - 17.00</span>
+                <h3 class="session-title">Free time</h3>
+              </article>
+
+              <article class="programme-item">
+                <span class="tag">Reception</span>
+                <span class="time">17.00 - 19.00</span>
+                <h3 class="session-title">Welcome reception</h3>
+                <p class="session-copy">By invitation only for AAPD BOE members, speakers and main sponsors.</p>
+                <p class="session-note">Invited groups include Diamond and Platinum sponsors.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="day-section" aria-labelledby="day2-title">
+          <div class="day-header">
+            <div>
+              <span class="day-kicker">Day 2</span>
+              <h2 id="day2-title" class="day-title">1 October 2026</h2>
+              <p class="day-sub">Main conference opening day with plenary sessions, distinguished forum, keynote, symposium tracks, free papers and gala dinner.</p>
+            </div>
+            <div class="day-badge">Main conference</div>
+          </div>
+
+          <div class="day-columns">
+            <div class="day-column">
+              <article class="programme-item">
+                <span class="tag">Registration</span>
+                <span class="time">08.00 - 12.00</span>
+                <h3 class="session-title">Registration</h3>
+              </article>
+
+              <article class="programme-item">
+                <span class="tag">Plenary 1</span>
+                <span class="time">08.30 - 09.15</span>
+                <h3 class="session-title">From Molecular to Population: Prevention of Dental Caries and Periodontal Diseases</h3>
+              </article>
+
+              <article class="programme-item">
+                <span class="tag">Distinguished forum</span>
+                <span class="time">09.15 - 10.30</span>
+                <h3 class="session-title">Integrating Oral Health into Universal Health Coverage in Asia: Strategic Initiatives and Challenges</h3>
+              </article>
+
+              <article class="programme-item">
+                <span class="tag dark">Break</span>
+                <span class="time">10.30 - 10.45</span>
+                <h3 class="session-title">Coffee break and networking</h3>
+              </article>
+            </div>
+
+            <div class="day-column">
+              <article class="programme-item">
+                <span class="tag">Ceremony</span>
+                <span class="time">11.00 - 11.45</span>
+                <h3 class="session-title">18th ICAAPD Opening Ceremony</h3>
+              </article>
+
+              <article class="programme-item">
+                <span class="tag">Keynote</span>
+                <span class="time">11.45 - 12.05</span>
+                <h3 class="session-title">Keynote Speech</h3>
+              </article>
+
+              <article class="programme-item">
+                <span class="tag dark">Networking</span>
+                <span class="time">12.05 - 13.30</span>
+                <h3 class="session-title">Lunch, Poster and Exhibition Viewing</h3>
+                <p class="session-copy">Networking session during the lunch break.</p>
+              </article>
+            </div>
+
+            <div class="day-column">
+              <article class="programme-item">
+                <span class="tag">Symposiums</span>
+                <span class="time">13.30 - 15.00</span>
+                <h3 class="session-title">Parallel symposium sessions</h3>
+                <div class="parallel-list">
+                  <div class="parallel-card">
+                    <h4>Symposium 1</h4>
+                    <p>The New Nicotine Frontier: Tobacco, Vaping, Oral Health and the Evolving Risk Landscape</p>
+                  </div>
+                  <div class="parallel-card">
+                    <h4>Symposium 2</h4>
+                    <p>Strengthening Public Health Impact through Education and Training</p>
+                  </div>
+                </div>
+              </article>
+
+              <article class="programme-item">
+                <span class="tag">Free papers</span>
+                <span class="time">15.30 - 17.30</span>
+                <h3 class="session-title">Free papers</h3>
+                <p class="session-copy">Oral presentation, poster presentation and 3MT sessions.</p>
+              </article>
+
+              <article class="programme-item">
+                <span class="tag dark">Free time</span>
+                <span class="time">17.30 - 19.30</span>
+                <h3 class="session-title">Free time</h3>
+              </article>
+
+              <article class="programme-item">
+                <span class="tag">Dinner</span>
+                <span class="time">19.30 - 22.30</span>
+                <h3 class="session-title">Gala Dinner</h3>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="day-section" aria-labelledby="day3-title">
+          <div class="day-header">
+            <div>
+              <span class="day-kicker">Day 3</span>
+              <h2 id="day3-title" class="day-title">2 October 2026</h2>
+              <p class="day-sub">Main conference continuation with free papers, plenaries, parallel symposia, closing ceremony and award presentation.</p>
+            </div>
+            <div class="day-badge">Main conference</div>
+          </div>
+
+          <div class="day-columns">
+            <div class="day-column">
+              <article class="programme-item">
+                <span class="tag">Registration</span>
+                <span class="time">08.00 - 12.00</span>
+                <h3 class="session-title">Registration</h3>
+              </article>
+
+              <article class="programme-item">
+                <span class="tag">Free papers</span>
+                <span class="time">08.30 - 10.00</span>
+                <h3 class="session-title">Free papers</h3>
+                <p class="session-copy">Oral presentation, poster presentation and 3MT sessions.</p>
+              </article>
+
+              <article class="programme-item">
+                <span class="tag dark">Break</span>
+                <span class="time">10.00 - 10.15</span>
+                <h3 class="session-title">Coffee break and networking</h3>
+              </article>
+            </div>
+
+            <div class="day-column">
+              <article class="programme-item">
+                <span class="tag">Symposiums</span>
+                <span class="time">10.15 - 11.45</span>
+                <h3 class="session-title">Parallel symposium sessions</h3>
+                <div class="parallel-list">
+                  <div class="parallel-card">
+                    <h4>Symposium 3</h4>
+                    <p>Caries Prevention in Children and Adolescents: Innovations and Policy Implication</p>
+                  </div>
+                  <div class="parallel-card">
+                    <h4>Symposium 4</h4>
+                    <p>Transforming Preventive Dentistry through Digital Health Technologies</p>
+                  </div>
+                </div>
+              </article>
+
+              <article class="programme-item">
+                <span class="tag">Plenary 2</span>
+                <span class="time">11.45 - 12.30</span>
+                <h3 class="session-title">Topic - TBC</h3>
+              </article>
+
+              <article class="programme-item">
+                <span class="tag dark">Networking</span>
+                <span class="time">12.30 - 13.45</span>
+                <h3 class="session-title">Lunch, Poster and Exhibition Viewing</h3>
+                <p class="session-copy">Networking session during the lunch break.</p>
+              </article>
+            </div>
+
+            <div class="day-column">
+              <article class="programme-item">
+                <span class="tag">Symposiums</span>
+                <span class="time">13.45 - 15.15</span>
+                <h3 class="session-title">Parallel symposium sessions</h3>
+                <div class="parallel-list">
+                  <div class="parallel-card">
+                    <h4>Symposium 5</h4>
+                    <p>Advancing Oral Health Literacy and Population Health</p>
+                  </div>
+                  <div class="parallel-card">
+                    <h4>Symposium 6</h4>
+                    <p>Preventive Dentistry for Ageing Population: Ensuring Quality of Life and Independence</p>
+                  </div>
+                </div>
+              </article>
+
+              <article class="programme-item">
+                <span class="tag">Plenary 3</span>
+                <span class="time">15.30 - 16.15</span>
+                <h3 class="session-title">Dental Preparedness in Times of Disaster</h3>
+                <p class="session-copy">Topic marked as TBC in the simplified schedule.</p>
+              </article>
+
+              <article class="programme-item">
+                <span class="tag">Closing</span>
+                <span class="time">16.15 - 17.00</span>
+                <h3 class="session-title">Closing and Award Giving Ceremony</h3>
+              </article>
+
+              <article class="programme-item">
+                <span class="tag dark">Adjournment</span>
+                <span class="time">17.00 - 17.30</span>
+                <h3 class="session-title">Tea break and adjourned</h3>
+              </article>
+            </div>
+          </div>
+
+          <div class="note-strip">
+            <article class="note-card">
+              <h3>Free papers</h3>
+              <p>Include oral presentation, poster presentation and 3MT formats.</p>
+            </article>
+            <article class="note-card">
+              <h3>Competing entries</h3>
+              <p>Competing entries include 3-minute thesis, oral presentation and poster presentation.</p>
+            </article>
+            <article class="note-card">
+              <h3>Non-competing entries</h3>
+              <p>Non-competing entries will be presented via e-poster.</p>
+            </article>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <small>Copyright © AAPD 2026 Organizing Committee and MADPHS. All rights reserved.</small>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      const btn = document.getElementById('navToggle');
+      const menu = document.getElementById('mobileMenu');
+      if(!btn || !menu) return;
+      btn.addEventListener('click', ()=>{
+        const isOpen = menu.classList.toggle('open');
+        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+      menu.querySelectorAll('a').forEach(a=>{
+        a.addEventListener('click', ()=>{
+          menu.classList.remove('open');
+          btn.setAttribute('aria-expanded','false');
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
