@@ -2064,27 +2064,30 @@
     }
 
     .featured-highlight-stage{
-      position:relative;
+    position:relative;
+    display:grid;
+    align-items:start;
     }
 
     .highlight-slide{
-      display:none;
+    grid-area:1 / 1;
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transform:translateY(14px) scale(.985);
+    transition:
+        opacity .55s ease,
+        transform .55s cubic-bezier(.2,.65,.3,1),
+        visibility 0s linear .55s;
+    will-change:opacity, transform;
     }
 
     .highlight-slide.is-active{
-      display:block;
-      animation:highlightSlideIn .58s cubic-bezier(.2,.65,.3,1) both;
-    }
-
-    @keyframes highlightSlideIn{
-      from{
-        opacity:0;
-        transform:translateX(18px);
-      }
-      to{
-        opacity:1;
-        transform:none;
-      }
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+    transform:translateY(0) scale(1);
+    transition-delay:0s;
     }
 
     .featured-speaker-card{
@@ -2096,27 +2099,16 @@
     }
 
     .speaker-pdf-poster{
-      width:min(100%, 420px) !important;
-      transform:rotate(-1deg);
-      background:#fff;
+    width:min(100%, 420px) !important;
+    transform:rotate(-1deg);
+    background:#fff;
     }
 
-    .speaker-pdf-poster object{
-      display:block;
-      width:100%;
-      height:560px;
-      border:0;
-      background:#fff;
-    }
-
-    .speaker-pdf-fallback{
-      min-height:420px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:18px;
-      text-align:center;
-      color:var(--muted);
+    .speaker-pdf-poster img{
+    display:block;
+    width:100%;
+    height:auto;
+    background:#fff;
     }
 
     @media (max-width:980px){
@@ -2138,9 +2130,6 @@
         transform:none;
       }
 
-      .speaker-pdf-poster object{
-        height:390px;
-      }
     }
 
     @media (prefers-reduced-motion:reduce){
@@ -2540,11 +2529,6 @@
                     <span class="abstract-awards-chip-value">20 Distinguished Speakers</span>
                   </div>
 
-                  <div class="abstract-awards-chip featured-speaker-chip">
-                    <span class="abstract-awards-chip-label">Conference Theme</span>
-                    <span class="abstract-awards-chip-value">Empowering Communities Through Preventive Dentistry</span>
-                  </div>
-                </div>
 
                 <div class="abstract-awards-actions">
                   <a class="btn btn-teal" href="assets/Speakers%20Lineup%20%282%29.pdf" target="_blank" rel="noopener noreferrer">View Speaker Line-up</a>
@@ -2574,15 +2558,14 @@
               </div>
 
               <div class="abstract-awards-poster-wrap" style="display:flex; justify-content:center; align-items:center; height:100%; padding-top:0;">
-                <div class="abstract-awards-poster-card speaker-pdf-poster" aria-label="AAPD 2026 distinguished speakers lineup poster">
-                  <object data="assets/Speakers%20Lineup%20%282%29.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf">
-                    <div class="speaker-pdf-fallback">
-                      <a href="assets/Speakers%20Lineup%20%282%29.pdf" target="_blank" rel="noopener noreferrer">
-                        Open speaker line-up poster PDF
-                      </a>
-                    </div>
-                  </object>
-                </div>
+                <a class="abstract-awards-poster-card speaker-pdf-poster"
+                href="assets/Speakers%20Lineup%20%282%29.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open AAPD 2026 distinguished speakers lineup poster PDF">
+                <img src="assets/img/speakersLineup.jpg"
+                    alt="AAPD 2026 distinguished speakers lineup poster">
+                </a>
               </div>
 
             </div>
