@@ -2016,6 +2016,139 @@
     }
 
 
+    /* ============== FEATURED HIGHLIGHTS SLIDER ============== */
+    .featured-highlights-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:14px;
+      margin-bottom:14px;
+      flex-wrap:wrap;
+    }
+
+    .featured-highlights-head h2{
+      margin:0 0 4px;
+    }
+
+    .featured-highlight-tabs{
+      display:inline-flex;
+      gap:6px;
+      padding:4px;
+      border-radius:var(--btn-radius);
+      border:1px solid rgba(15,23,42,.08);
+      background:#fff;
+      box-shadow:0 10px 24px rgba(15,23,42,.06);
+    }
+
+    .featured-highlight-tab{
+      border:0;
+      background:transparent;
+      padding:.48rem .9rem;
+      border-radius:var(--btn-radius);
+      font-weight:500;
+      font-size:.92rem;
+      line-height:1;
+      color:var(--navy);
+      cursor:pointer;
+      transition:transform .18s cubic-bezier(.2,.65,.3,1), box-shadow .18s ease, background-color .18s ease, color .18s ease;
+    }
+
+    .featured-highlight-tab:hover{
+      transform:translateY(-1px);
+    }
+
+    .featured-highlight-tab[aria-selected="true"]{
+      background:#0f766e;
+      color:#fff;
+      box-shadow:0 8px 20px rgba(15,118,110,.25);
+    }
+
+    .featured-highlight-stage{
+      position:relative;
+    }
+
+    .highlight-slide{
+      display:none;
+    }
+
+    .highlight-slide.is-active{
+      display:block;
+      animation:highlightSlideIn .58s cubic-bezier(.2,.65,.3,1) both;
+    }
+
+    @keyframes highlightSlideIn{
+      from{
+        opacity:0;
+        transform:translateX(18px);
+      }
+      to{
+        opacity:1;
+        transform:none;
+      }
+    }
+
+    .featured-speaker-card{
+      background:linear-gradient(135deg,#0f172a 0%, #162036 100%);
+    }
+
+    .featured-speaker-chip{
+      min-width:155px;
+    }
+
+    .speaker-pdf-poster{
+      width:min(100%, 420px) !important;
+      transform:rotate(-1deg);
+      background:#fff;
+    }
+
+    .speaker-pdf-poster object{
+      display:block;
+      width:100%;
+      height:560px;
+      border:0;
+      background:#fff;
+    }
+
+    .speaker-pdf-fallback{
+      min-height:420px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      text-align:center;
+      color:var(--muted);
+    }
+
+    @media (max-width:980px){
+      .featured-highlights-head{
+        align-items:flex-start;
+      }
+
+      .featured-highlight-tabs{
+        width:100%;
+      }
+
+      .featured-highlight-tab{
+        flex:1;
+        text-align:center;
+      }
+
+      .speaker-pdf-poster{
+        width:min(100%, 280px) !important;
+        transform:none;
+      }
+
+      .speaker-pdf-poster object{
+        height:390px;
+      }
+    }
+
+    @media (prefers-reduced-motion:reduce){
+      .highlight-slide.is-active{
+        animation:none;
+      }
+    }
+
 </style>
 
   <link rel="icon" type="image/svg+xml" href="assets/icons/AAPDGen.svg">
@@ -2298,71 +2431,163 @@
 </section>
 
 
-     <!-- ============== SECTION — Abstract Awards / Call for Abstract ============== -->
-    <section class="section abstract-awards" id="abstract-awards">
+     <!-- ============== SECTION — Featured Highlights: Abstract + Speakers ============== -->
+    <section class="section abstract-awards featured-highlights" id="abstract-awards">
       <div class="container">
-        <div class="abstract-awards-card">
-          <div class="abstract-awards-grid">
 
-            <div class="abstract-awards-copy">
-              <h2>Call for Abstract</h2>
-
-              <div class="abstract-awards-prize">
-                Stand a chance to win prizes worth over
-                <strong>USD5,000.00</strong>
-              </div>
-
-              <p>
-                Share your work, exchange knowledge, and compete for sponsored awards that recognise
-                excellence in preventive dentistry and community oral health across Asia and beyond.
-              </p>
-
-              <div class="abstract-awards-meta">
-                <div class="abstract-awards-chip">
-                  <span class="abstract-awards-chip-label">Submission Deadline</span>
-                  <span class="abstract-awards-chip-value">15 June 2026</span>
-                </div>
-
-                <div class="abstract-awards-chip">
-                  <span class="abstract-awards-chip-label">Awards Highlight</span>
-                  <span class="abstract-awards-chip-value">Sponsored abstract prizes for selected presenters</span>
-                </div>
-              </div>
-
-              <div class="abstract-awards-actions">
-                <a class="btn btn-teal" href="abstractSubmission.html">Submit Abstract</a>
-                <a class="abstract-awards-link" href="assets/img/chancetToWinPrizes.jpeg" target="_blank" rel="noopener noreferrer">View Poster</a>
-              </div>
-
-              <div class="abstract-awards-sponsors">
-                <div class="abstract-awards-sponsors-label">Awards Sponsored By</div>
-
-                <div class="abstract-awards-sponsor-list">
-                  <div class="abstract-awards-sponsor-card" style="display:flex; align-items:center; justify-content:center; text-align:center; gap:8px;">
-                    <img src="assets/icons/lion.svg" alt="LION" style="display:block; max-width:120px; max-height:36px; width:auto; height:auto;">
-                    <span class="abstract-awards-sponsor-role" style="margin-top:0;">Award sponsor</span>
-                  </div>
-
-                  <div class="abstract-awards-sponsor-card" style="display:flex; align-items:center; justify-content:center; text-align:center; gap:8px;">
-                    <img src="assets/icons/MADPHS.png" alt="MADPHS" style="display:block; max-width:120px; max-height:40px; width:auto; height:auto;">
-                    <span class="abstract-awards-sponsor-role" style="margin-top:0;">Award sponsor</span>
-                  </div>
-
-                  <div class="abstract-awards-sponsor-card" style="display:flex; align-items:center; justify-content:center; text-align:center; gap:8px;">
-                    <img src="assets/icons/spdhk-logo-colour.png" alt="Society of Preventive Dentistry of Hong Kong" style="display:block; max-width:150px; max-height:42px; width:auto; height:auto;">
-                    <span class="abstract-awards-sponsor-role" style="margin-top:0;">Award sponsor</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="abstract-awards-poster-wrap" style="display:flex; justify-content:center; align-items:center; height:100%; padding-top:0;">
-              <a class="abstract-awards-poster-card" href="assets/img/chancetToWinPrizes.jpeg" target="_blank" rel="noopener noreferrer" aria-label="Open call for abstract poster" style="width:min(100%, 420px); transform:rotate(-1deg);">
-                <img src="assets/img/chancetToWinPrizes.jpeg" alt="AAPD 2026 call for abstract poster highlighting prizes worth over USD5,000.00 and award sponsors">
-              </a>
-            </div>
-
+        <div class="featured-highlights-head">
+          <div>
+            <h2>Featured Highlights</h2>
+            <p>Important conference highlights for abstract submission, speaker line-up, and registration.</p>
           </div>
+
+          <div class="featured-highlight-tabs" role="tablist" aria-label="Featured highlights">
+            <button class="featured-highlight-tab" type="button" role="tab" aria-selected="true" data-highlight-tab="0">
+              Call for Abstract
+            </button>
+            <button class="featured-highlight-tab" type="button" role="tab" aria-selected="false" data-highlight-tab="1">
+              Speakers
+            </button>
+          </div>
+        </div>
+
+        <div class="featured-highlight-stage" data-highlight-slider>
+
+          <!-- Slide 1: Call for Abstract -->
+          <article class="abstract-awards-card highlight-slide is-active" data-highlight-slide="0" aria-hidden="false">
+            <div class="abstract-awards-grid">
+
+              <div class="abstract-awards-copy">
+                <h2>Call for Abstract</h2>
+
+                <div class="abstract-awards-prize">
+                  Stand a chance to win prizes worth over
+                  <strong>USD5,000.00</strong>
+                </div>
+
+                <p>
+                  Share your work, exchange knowledge, and compete for sponsored awards that recognise
+                  excellence in preventive dentistry and community oral health across Asia and beyond.
+                </p>
+
+                <div class="abstract-awards-meta">
+                  <div class="abstract-awards-chip">
+                    <span class="abstract-awards-chip-label">Submission Deadline</span>
+                    <span class="abstract-awards-chip-value">15 June 2026</span>
+                  </div>
+
+                  <div class="abstract-awards-chip">
+                    <span class="abstract-awards-chip-label">Awards Highlight</span>
+                    <span class="abstract-awards-chip-value">Sponsored abstract prizes for selected presenters</span>
+                  </div>
+                </div>
+
+                <div class="abstract-awards-actions">
+                  <a class="btn btn-teal" href="abstractSubmission.html">Submit Abstract</a>
+                  <a class="abstract-awards-link" href="assets/img/chancetToWinPrizes.jpeg" target="_blank" rel="noopener noreferrer">View Poster</a>
+                </div>
+
+                <div class="abstract-awards-sponsors">
+                  <div class="abstract-awards-sponsors-label">Awards Sponsored By</div>
+
+                  <div class="abstract-awards-sponsor-list">
+                    <div class="abstract-awards-sponsor-card" style="display:flex; align-items:center; justify-content:center; text-align:center; gap:8px;">
+                      <img src="assets/icons/lion.svg" alt="LION" style="display:block; max-width:120px; max-height:36px; width:auto; height:auto;">
+                      <span class="abstract-awards-sponsor-role" style="margin-top:0;">Award sponsor</span>
+                    </div>
+
+                    <div class="abstract-awards-sponsor-card" style="display:flex; align-items:center; justify-content:center; text-align:center; gap:8px;">
+                      <img src="assets/icons/MADPHS.png" alt="MADPHS" style="display:block; max-width:120px; max-height:40px; width:auto; height:auto;">
+                      <span class="abstract-awards-sponsor-role" style="margin-top:0;">Award sponsor</span>
+                    </div>
+
+                    <div class="abstract-awards-sponsor-card" style="display:flex; align-items:center; justify-content:center; text-align:center; gap:8px;">
+                      <img src="assets/icons/spdhk-logo-colour.png" alt="Society of Preventive Dentistry of Hong Kong" style="display:block; max-width:150px; max-height:42px; width:auto; height:auto;">
+                      <span class="abstract-awards-sponsor-role" style="margin-top:0;">Award sponsor</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="abstract-awards-poster-wrap" style="display:flex; justify-content:center; align-items:center; height:100%; padding-top:0;">
+                <a class="abstract-awards-poster-card" href="assets/img/chancetToWinPrizes.jpeg" target="_blank" rel="noopener noreferrer" aria-label="Open call for abstract poster" style="width:min(100%, 420px); transform:rotate(-1deg);">
+                  <img src="assets/img/chancetToWinPrizes.jpeg" alt="AAPD 2026 call for abstract poster highlighting prizes worth over USD5,000.00 and award sponsors">
+                </a>
+              </div>
+
+            </div>
+          </article>
+
+          <!-- Slide 2: Distinguished Speakers -->
+          <article class="abstract-awards-card highlight-slide" data-highlight-slide="1" aria-hidden="true">
+            <div class="abstract-awards-grid">
+
+              <div class="abstract-awards-copy">
+                <h2>Our Distinguished Speakers</h2>
+
+                <div class="abstract-awards-prize featured-speaker-card">
+                  Meet leading experts in preventive dentistry, dental public health, clinical prevention, education, and oral health innovation.
+                </div>
+
+                <p>
+                  AAPD 2026 brings together distinguished speakers from across Asia and beyond to share evidence,
+                  experience, and future directions in preventive dentistry.
+                </p>
+
+                <div class="abstract-awards-meta">
+                  <div class="abstract-awards-chip featured-speaker-chip">
+                    <span class="abstract-awards-chip-label">Speaker Line-up</span>
+                    <span class="abstract-awards-chip-value">20 Distinguished Speakers</span>
+                  </div>
+
+                  <div class="abstract-awards-chip featured-speaker-chip">
+                    <span class="abstract-awards-chip-label">Conference Theme</span>
+                    <span class="abstract-awards-chip-value">Empowering Communities Through Preventive Dentistry</span>
+                  </div>
+                </div>
+
+                <div class="abstract-awards-actions">
+                  <a class="btn btn-teal" href="assets/Speakers%20Lineup%20%282%29.pdf" target="_blank" rel="noopener noreferrer">View Speaker Line-up</a>
+                  <a class="abstract-awards-link" href="https://e7tech.com/aapd2026/login.asp" target="_blank" rel="noopener noreferrer">Register Now</a>
+                </div>
+
+                <div class="abstract-awards-sponsors">
+                  <div class="abstract-awards-sponsors-label">Featured Areas</div>
+
+                  <div class="abstract-awards-sponsor-list">
+                    <div class="abstract-awards-sponsor-card">
+                      <div class="abstract-awards-sponsor-name">Preventive Dentistry</div>
+                      <div class="abstract-awards-sponsor-role">Evidence, clinical prevention, and community-level impact</div>
+                    </div>
+
+                    <div class="abstract-awards-sponsor-card">
+                      <div class="abstract-awards-sponsor-name">Dental Public Health</div>
+                      <div class="abstract-awards-sponsor-role">Policy, systems, surveillance, and population oral health</div>
+                    </div>
+
+                    <div class="abstract-awards-sponsor-card">
+                      <div class="abstract-awards-sponsor-name">Oral Health Innovation</div>
+                      <div class="abstract-awards-sponsor-role">Education, technology, and future-ready prevention strategies</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="abstract-awards-poster-wrap" style="display:flex; justify-content:center; align-items:center; height:100%; padding-top:0;">
+                <div class="abstract-awards-poster-card speaker-pdf-poster" aria-label="AAPD 2026 distinguished speakers lineup poster">
+                  <object data="assets/Speakers%20Lineup%20%282%29.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf">
+                    <div class="speaker-pdf-fallback">
+                      <a href="assets/Speakers%20Lineup%20%282%29.pdf" target="_blank" rel="noopener noreferrer">
+                        Open speaker line-up poster PDF
+                      </a>
+                    </div>
+                  </object>
+                </div>
+              </div>
+
+            </div>
+          </article>
+
         </div>
       </div>
     </section>
@@ -3053,6 +3278,71 @@
       })();
     </script>
 
+
+    <script>
+      // Featured Highlights slider: Call for Abstract / Speakers
+      (function(){
+        const slider = document.querySelector('[data-highlight-slider]');
+        if(!slider) return;
+
+        const slides = Array.from(slider.querySelectorAll('[data-highlight-slide]'));
+        const tabs = Array.from(document.querySelectorAll('[data-highlight-tab]'));
+
+        if(!slides.length || !tabs.length) return;
+
+        let active = 0;
+        let timer = null;
+        const delay = 8000;
+
+        function show(index, userAction){
+          active = (index + slides.length) % slides.length;
+
+          slides.forEach((slide, i) => {
+            const isActive = i === active;
+            slide.classList.toggle('is-active', isActive);
+            slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+          });
+
+          tabs.forEach((tab, i) => {
+            const isActive = i === active;
+            tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+          });
+
+          if(userAction) restart();
+        }
+
+        function start(){
+          if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+          timer = window.setInterval(() => {
+            show(active + 1, false);
+          }, delay);
+        }
+
+        function stop(){
+          if(timer){
+            window.clearInterval(timer);
+            timer = null;
+          }
+        }
+
+        function restart(){
+          stop();
+          start();
+        }
+
+        tabs.forEach((tab, i) => {
+          tab.addEventListener('click', () => show(i, true));
+        });
+
+        slider.addEventListener('mouseenter', stop);
+        slider.addEventListener('mouseleave', start);
+        slider.addEventListener('focusin', stop);
+        slider.addEventListener('focusout', start);
+
+        show(0, false);
+        start();
+      })();
+    </script>
 
 </body>
 </html>
