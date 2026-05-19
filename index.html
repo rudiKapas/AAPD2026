@@ -2015,6 +2015,232 @@
       }
     }
 
+          /* ============== SECTION — Accommodation & Nearby Hotels ============== */
+    .section.accommodation{
+      background:linear-gradient(180deg,#ffffff 0%, #f6f7fb 100%);
+      padding:28px 0;
+    }
+
+    .accommodation-card{
+      border-radius:22px;
+      padding:20px;
+      background:rgba(255,255,255,.72);
+      border:1px solid rgba(15,23,42,.08);
+      box-shadow:0 18px 32px rgba(15,23,42,.10);
+      overflow:hidden;
+      position:relative;
+    }
+
+    .accommodation-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(135deg,
+          rgba(255,255,255,.62) 0%,
+          rgba(251,172,69,.10) 42%,
+          rgba(15,118,110,.08) 100%);
+      pointer-events:none;
+      z-index:0;
+    }
+
+    .accommodation-card > *{
+      position:relative;
+      z-index:1;
+    }
+
+    .accommodation-grid{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) minmax(300px,.95fr);
+      gap:20px;
+      align-items:start;
+    }
+
+    .accommodation-copy h2{
+      margin:0 0 8px;
+    }
+
+    .accommodation-copy p{
+      max-width:58ch;
+      line-height:1.55;
+    }
+
+    .accommodation-note{
+      margin-top:14px;
+      padding:12px 14px;
+      border-radius:16px;
+      background:#fff;
+      border:1px solid rgba(15,23,42,.08);
+      color:var(--muted);
+      font-size:.9rem;
+      line-height:1.45;
+    }
+
+    .nearest-hotels{
+      display:grid;
+      gap:10px;
+    }
+
+    .nearest-hotels-title{
+      font-size:.76rem;
+      text-transform:uppercase;
+      letter-spacing:.1em;
+      color:var(--muted);
+      font-weight:700;
+      margin-bottom:2px;
+    }
+
+    .hotel-mini-card{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      padding:12px 14px;
+      border-radius:16px;
+      background:#fff;
+      border:1px solid rgba(15,23,42,.08);
+      box-shadow:0 8px 16px rgba(15,23,42,.05);
+    }
+
+    .hotel-name{
+      font-weight:700;
+      color:var(--navy);
+      line-height:1.2;
+    }
+
+    .hotel-distance{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      flex-shrink:0;
+      min-width:78px;
+      padding:6px 9px;
+      border-radius:999px;
+      background:rgba(15,118,110,.08);
+      color:#0f766e;
+      font-size:.78rem;
+      font-weight:700;
+      text-align:center;
+    }
+
+    .hotel-distance.venue{
+      background:#0f766e;
+      color:#fff;
+    }
+
+    .hotel-full-list{
+      margin-top:18px;
+      border-top:1px solid rgba(15,23,42,.08);
+      padding-top:14px;
+    }
+
+    .hotel-full-list summary{
+      list-style:none;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:.48rem .9rem;
+      border-radius:var(--btn-radius);
+      background:#0f766e;
+      color:#fff;
+      font-weight:500;
+      font-size:.92rem;
+      box-shadow:0 8px 20px rgba(15,118,110,.25);
+      width:auto;
+    }
+
+    .hotel-full-list summary::-webkit-details-marker{
+      display:none;
+    }
+
+    .hotel-full-list summary:hover{
+      transform:translateY(-1px);
+      box-shadow:0 10px 24px rgba(15,118,110,.30);
+    }
+
+    .hotel-list-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .hotel-card{
+      padding:12px;
+      border-radius:16px;
+      background:#fff;
+      border:1px solid rgba(15,23,42,.08);
+      box-shadow:0 8px 16px rgba(15,23,42,.05);
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      min-height:128px;
+    }
+
+    .hotel-card-top{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:flex-start;
+    }
+
+    .hotel-link{
+      margin-top:auto;
+      color:#0f766e;
+      font-weight:700;
+      font-size:.88rem;
+      text-decoration:none;
+      border-bottom:1px solid rgba(15,118,110,.25);
+      width:max-content;
+    }
+
+    .hotel-link:hover{
+      opacity:.85;
+    }
+
+    .ov-anchor-link{
+      display:inline-flex;
+      margin-top:4px;
+      color:#0f766e;
+      font-size:.76rem;
+      font-weight:700;
+      text-decoration:none;
+    }
+
+    .ov-anchor-link:hover{
+      text-decoration:underline;
+    }
+
+    @media (max-width:980px){
+      .accommodation-grid{
+        grid-template-columns:1fr;
+      }
+
+      .hotel-list-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width:640px){
+      .accommodation-card{
+        padding:16px;
+      }
+
+      .hotel-mini-card{
+        align-items:flex-start;
+        flex-direction:column;
+      }
+
+      .hotel-distance{
+        min-width:auto;
+      }
+
+      .hotel-full-list summary{
+        width:100%;
+      }
+    }
 
     /* ============== FEATURED HIGHLIGHTS SLIDER ============== */
     .featured-highlights-head{
@@ -2256,7 +2482,11 @@
                 </span>
                 <div class="ov-text">
                   <div class="ov-label">Location</div>
-                  <div class="ov-value">Hilton Kota Kinabalu<br><span class="ov-sub">Kota Kinabalu, Sabah</span></div>
+                  <div class="ov-value">
+                    Hilton Kota Kinabalu<br>
+                    <span class="ov-sub">Kota Kinabalu, Sabah</span><br>
+                    <a class="ov-anchor-link" href="#accommodation">Nearby hotels</a>
+                  </div>
                 </div>
               </div>
 
@@ -2737,6 +2967,138 @@
       </div>
     </section>
 
+      <!-- ============== SECTION — Accommodation & Nearby Hotels ============== -->
+      <section class="section accommodation" id="accommodation">
+        <div class="container">
+          <div class="accommodation-card">
+
+            <div class="accommodation-grid">
+              <div class="accommodation-copy">
+                <h2>Accommodation &amp; Nearby Hotels</h2>
+                <p>
+                  Several hotels are located near Hilton Kota Kinabalu, the conference venue.
+                  Participants may use the list below as a practical guide when planning their stay in Kota Kinabalu.
+                </p>
+
+                <div class="accommodation-note">
+                  The hotels listed below are provided for participants’ convenience. Room availability, rates,
+                  and booking conditions are subject to the respective hotels and may change without prior notice.
+                  Participants are advised to contact the hotels directly for the latest information.
+                </div>
+              </div>
+
+              <div class="nearest-hotels">
+                <div class="nearest-hotels-title">Nearest options</div>
+
+                <div class="hotel-mini-card">
+                  <div>
+                    <div class="hotel-name">Hilton Kota Kinabalu</div>
+                    <div class="ov-sub">Conference venue hotel</div>
+                  </div>
+                  <span class="hotel-distance venue">Venue</span>
+                </div>
+
+                <div class="hotel-mini-card">
+                  <div>
+                    <div class="hotel-name">Cititel Express Kota Kinabalu</div>
+                    <div class="ov-sub">Nearby city hotel</div>
+                  </div>
+                  <span class="hotel-distance">0.5 km</span>
+                </div>
+
+                <div class="hotel-mini-card">
+                  <div>
+                    <div class="hotel-name">Sheraton Kota Kinabalu</div>
+                    <div class="ov-sub">Nearby international hotel</div>
+                  </div>
+                  <span class="hotel-distance">0.5 km</span>
+                </div>
+              </div>
+            </div>
+
+            <details class="hotel-full-list">
+              <summary>View all nearby hotels</summary>
+
+              <div class="hotel-list-grid">
+
+                <article class="hotel-card">
+                  <div class="hotel-card-top">
+                    <div class="hotel-name">Hilton Kota Kinabalu</div>
+                    <span class="hotel-distance venue">Venue</span>
+                  </div>
+                  <a class="hotel-link" href="https://www.hilton.com/en/hotels/bkikkhi-hilton-kota-kinabalu/" target="_blank" rel="noopener noreferrer">Visit website</a>
+                </article>
+
+                <article class="hotel-card">
+                  <div class="hotel-card-top">
+                    <div class="hotel-name">Cititel Express Kota Kinabalu</div>
+                    <span class="hotel-distance">0.5 km</span>
+                  </div>
+                  <a class="hotel-link" href="https://www.cititelexpress-kk.com/" target="_blank" rel="noopener noreferrer">Visit website</a>
+                </article>
+
+                <article class="hotel-card">
+                  <div class="hotel-card-top">
+                    <div class="hotel-name">Sheraton Kota Kinabalu</div>
+                    <span class="hotel-distance">0.5 km</span>
+                  </div>
+                  <a class="hotel-link" href="https://www.marriott.com/en-us/hotels/bkisi-sheraton-kota-kinabalu/overview/" target="_blank" rel="noopener noreferrer">Visit website</a>
+                </article>
+
+                <article class="hotel-card">
+                  <div class="hotel-card-top">
+                    <div class="hotel-name">Holiday Inn Express Kota Kinabalu City Centre</div>
+                    <span class="hotel-distance">0.65 km</span>
+                  </div>
+                  <a class="hotel-link" href="https://www.ihg.com/holidayinnexpress/hotels/us/en/kota-kinabalu/bkikk/hoteldetail" target="_blank" rel="noopener noreferrer">Visit website</a>
+                </article>
+
+                <article class="hotel-card">
+                  <div class="hotel-card-top">
+                    <div class="hotel-name">Le Méridien Kota Kinabalu</div>
+                    <span class="hotel-distance">1.1 km</span>
+                  </div>
+                  <a class="hotel-link" href="https://www.marriott.com/en-us/hotels/bkimd-le-meridien-kota-kinabalu/overview/" target="_blank" rel="noopener noreferrer">Visit website</a>
+                </article>
+
+                <article class="hotel-card">
+                  <div class="hotel-card-top">
+                    <div class="hotel-name">Kota Kinabalu Marriott Hotel</div>
+                    <span class="hotel-distance">1.5 km</span>
+                  </div>
+                  <a class="hotel-link" href="https://www.marriott.com/en-us/hotels/bkikk-kota-kinabalu-marriott-hotel/overview/" target="_blank" rel="noopener noreferrer">Visit website</a>
+                </article>
+
+                <article class="hotel-card">
+                  <div class="hotel-card-top">
+                    <div class="hotel-name">Hyatt Centric Kota Kinabalu</div>
+                    <span class="hotel-distance">1.9 km</span>
+                  </div>
+                  <a class="hotel-link" href="https://www.hyatt.com/hyatt-centric/bkict-hyatt-centric-kota-kinabalu" target="_blank" rel="noopener noreferrer">Visit website</a>
+                </article>
+
+                <article class="hotel-card">
+                  <div class="hotel-card-top">
+                    <div class="hotel-name">Mercure Kota Kinabalu City Centre</div>
+                    <span class="hotel-distance">3.1 km</span>
+                  </div>
+                  <a class="hotel-link" href="https://all.accor.com/hotel/9416/index.en.shtml" target="_blank" rel="noopener noreferrer">Visit website</a>
+                </article>
+
+                <article class="hotel-card">
+                  <div class="hotel-card-top">
+                    <div class="hotel-name">Hotel Grandis</div>
+                    <span class="hotel-distance">3.5 km</span>
+                  </div>
+                  <a class="hotel-link" href="https://www.hotelgrandis.com/" target="_blank" rel="noopener noreferrer">Visit website</a>
+                </article>
+
+              </div>
+            </details>
+
+          </div>
+        </div>
+      </section>
 
     <!-- =================  SECTION media (white background) ================= -->
     <section class="section" id="about">
