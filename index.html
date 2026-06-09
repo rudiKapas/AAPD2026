@@ -1271,6 +1271,13 @@
       display:block;
     }
 
+    /* Make Jata KKM readable without overpowering the row */
+    .sponsor-icons img[src$="jataKkm.png"]{
+      height:118px;
+      max-width:190px;
+      object-fit:contain;
+    }
+
     /* Make the VMY.png logo slightly larger */
     .sponsor-icons img[src$="VMY.png"]{
       height:110px;   /* tweak 96–104px if you want more/less size */
@@ -1302,6 +1309,10 @@
       .sponsor-icons img{
         height:64px;
         max-width:280px;
+      }
+      .sponsor-icons img[src$="jataKkm.png"]{
+        height:82px;
+        max-width:160px;
       }
     }
 
@@ -3193,6 +3204,7 @@
     
         <div class="sponsor-icons fx" style="--d:.03s" aria-label="Sponsors and collaborators logos">
           <span class="sponsor-label">Supported By:</span>
+          <img src="assets/icons/jataKkm.png" alt="Ministry of Health Malaysia Oral Health Programme" loading="lazy">
           <img src="assets/icons/AAPDGen.svg" alt="AAPD" loading="lazy">
           <img src="assets/icons/AAPD26.png" alt="AAPD 2026" loading="lazy">
           <img src="assets/icons/MADPHS.png" alt="MADPHS" loading="lazy">
