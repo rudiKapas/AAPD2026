@@ -2062,7 +2062,7 @@
 
     .accommodation-grid{
       display:grid;
-      grid-template-columns:minmax(0,1fr) minmax(300px,.95fr);
+      grid-template-columns:1fr;
       gap:20px;
       align-items:start;
     }
@@ -2071,8 +2071,9 @@
       margin:0 0 8px;
     }
 
-    .accommodation-copy p{
-      max-width:58ch;
+    .accommodation-copy > p{
+      max-width:none;
+      width:100%;
       line-height:1.55;
     }
 
@@ -2109,6 +2110,7 @@
       color:var(--muted);
       font-size:.9rem;
       line-height:1.45;
+      max-width:none;
     }
 
     .hotel-offer{
@@ -3057,33 +3059,7 @@
                 </div>
               </div>
 
-              <div class="nearest-hotels">
-                <div class="nearest-hotels-title">Nearest options</div>
 
-                <div class="hotel-mini-card">
-                  <div>
-                    <div class="hotel-name">Hilton Kota Kinabalu</div>
-                    <div class="ov-sub">Conference venue hotel</div>
-                  </div>
-                  <span class="hotel-distance venue">Venue</span>
-                </div>
-
-                <div class="hotel-mini-card">
-                  <div>
-                    <div class="hotel-name">Cititel Express Kota Kinabalu</div>
-                    <div class="ov-sub">Nearby city hotel</div>
-                  </div>
-                  <span class="hotel-distance">0.5 km</span>
-                </div>
-
-                <div class="hotel-mini-card">
-                  <div>
-                    <div class="hotel-name">Sheraton Kota Kinabalu</div>
-                    <div class="ov-sub">Nearby international hotel</div>
-                  </div>
-                  <span class="hotel-distance">0.5 km</span>
-                </div>
-              </div>
             </div>
 
             <details class="hotel-full-list">
@@ -3106,7 +3082,7 @@
                 <article class="hotel-card">
                   <div class="hotel-card-top">
                     <div class="hotel-name">Cititel Express Kota Kinabalu</div>
-                    <span class="hotel-distance">0.5 km</span>
+                    <span class="hotel-distance">Closest · 0.5 km</span>
                   </div>
                   <div class="hotel-offer">Mention AAPD 2026 during reservation to enjoy the hotel offer.</div>
                   <div class="hotel-links">
@@ -3117,7 +3093,7 @@
                 <article class="hotel-card">
                   <div class="hotel-card-top">
                     <div class="hotel-name">Sheraton Kota Kinabalu</div>
-                    <span class="hotel-distance">0.5 km</span>
+                    <span class="hotel-distance">Closest · 0.5 km</span>
                   </div>
                   <a class="hotel-link" href="https://www.marriott.com/en-us/hotels/bkisi-sheraton-kota-kinabalu/overview/" target="_blank" rel="noopener noreferrer">Visit website</a>
                 </article>
