@@ -2424,6 +2424,18 @@
       }
     }
 
+
+    /* =========================================================
+       AAPD KEY DATES - STOP BAR AFTER DEADLINE
+       Applies to desktop + mobile.
+       Does not change dimensions.
+       ========================================================= */
+    .section.deadlines .ccard.deadline-reached .bar span {
+      animation: none !important;
+      transition: none !important;
+      transform: none !important;
+    }
+
 </style>
 
   <link rel="icon" type="image/svg+xml" href="assets/icons/AAPDGen.svg">
@@ -3449,6 +3461,9 @@
               row.querySelectorAll('.ccard').forEach(card=>{
                 const el    = card.querySelector('.remain');
                 const title = card.getAttribute('data-title') || '';
+
+                // Reset expired state before recalculating this card
+                card.classList.remove('deadline-reached');
       
                 // NEW: turn off countdown for cards marked data-countdown="off"
                 if (card.getAttribute('data-countdown') === 'off'){
@@ -3497,6 +3512,9 @@
                   card.dataset.longHtml = 'Closed';
                   card.dataset.compact  = 'Closed';
                   card.setAttribute('aria-label', title + ' is closed');
+
+                  // Deadline has passed: stop this card's bar animation
+                  card.classList.add('deadline-reached');
                 
                 } else {
                   // Active window
