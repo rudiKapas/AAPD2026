@@ -2629,7 +2629,7 @@
     <!-- Early Bird -->
     <article class="ccard" data-accent="teal"
              data-title="Early Bird Registration"
-             data-start="2026-01-15" data-end="2026-08-15">
+             data-start="2026-01-15" data-end="2026-08-31">
       <!-- top-right CTA (shown only on full card) -->
 
       <a class="more-btn" href="https://e7tech.com/aapd2026/login.asp" target="_blank" rel="noopener noreferrer" aria-label="More info: Early Bird">More Info</a>
@@ -3499,14 +3499,25 @@
                   card.setAttribute('aria-label', title + ' is closed');
                 
                 } else {
-                  // Active window → Now open
+                  // Active window
+                  const remainingMs = end - now;
+                  const remainingDays = Math.ceil(remainingMs / MS_DAY);
+
                   if (labelEl) labelEl.textContent = 'Status:';
-                
-                  el.textContent = 'Now open';
-                  card.dataset.long     = 'Now open';
-                  card.dataset.longHtml = 'Now open';
-                  card.dataset.compact  = 'Now open';
-                  card.setAttribute('aria-label', title + ' is now open');
+
+                  if (remainingDays <= 7) {
+                    el.textContent = 'Closing soon';
+                    card.dataset.long     = 'Closing soon';
+                    card.dataset.longHtml = 'Closing soon';
+                    card.dataset.compact  = 'Closing soon';
+                    card.setAttribute('aria-label', title + ' is closing soon');
+                  } else {
+                    el.textContent = 'Now open';
+                    card.dataset.long     = 'Now open';
+                    card.dataset.longHtml = 'Now open';
+                    card.dataset.compact  = 'Now open';
+                    card.setAttribute('aria-label', title + ' is now open');
+                  }
                 }
 
               });
