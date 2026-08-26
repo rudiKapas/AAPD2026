@@ -2436,6 +2436,85 @@
       transform: none !important;
     }
 
+
+    /* ==========================================================
+       AAPD SPEAKER POSTER RESPONSIVE FIX
+       Supports new speakersLineup.jpg aspect ratio
+       ========================================================== */
+
+    .featured-highlights .speaker-poster-wrap{
+      display:flex !important;
+      justify-content:center !important;
+      align-items:center !important;
+      width:100%;
+      min-width:0;
+      padding:0 !important;
+    }
+
+    .featured-highlights .speaker-pdf-poster{
+      display:block !important;
+      width:min(100%, 520px) !important;
+      max-width:520px !important;
+      height:auto !important;
+      aspect-ratio:auto !important;
+      overflow:hidden;
+      background:#fff;
+      border-radius:22px;
+      transform:none !important;
+    }
+
+    .featured-highlights .speaker-pdf-poster img{
+      display:block !important;
+      width:100% !important;
+      max-width:100% !important;
+      height:auto !important;
+      min-height:0 !important;
+      object-fit:contain !important;
+      object-position:center !important;
+      aspect-ratio:auto !important;
+      background:#fff;
+    }
+
+    /* Tablet + mobile */
+    @media (max-width:980px){
+
+      .featured-highlights .speaker-poster-wrap{
+        order:-1;
+        width:100%;
+        justify-content:center !important;
+        align-items:center !important;
+      }
+
+      .featured-highlights .speaker-pdf-poster{
+        width:min(100%, 460px) !important;
+        max-width:460px !important;
+        height:auto !important;
+      }
+
+      .featured-highlights .speaker-pdf-poster img{
+        width:100% !important;
+        height:auto !important;
+        object-fit:contain !important;
+      }
+    }
+
+    /* Small mobile */
+    @media (max-width:520px){
+
+      .featured-highlights .speaker-pdf-poster{
+        width:100% !important;
+        max-width:100% !important;
+        height:auto !important;
+        border-radius:16px;
+      }
+
+      .featured-highlights .speaker-pdf-poster img{
+        width:100% !important;
+        height:auto !important;
+        object-fit:contain !important;
+      }
+    }
+
 </style>
 
   <link rel="icon" type="image/svg+xml" href="assets/icons/AAPDGen.svg">
@@ -2843,7 +2922,7 @@
 
             <div class="abstract-awards-actions">
               <a class="btn btn-teal"
-                 href="assets/img/speakersLineup.jpg"
+                 href="assets/img/speakersLineup.jpg?v=20260826"
                  target="_blank"
                  rel="noopener noreferrer">
                 View Speaker Line-up
@@ -2880,13 +2959,13 @@
           </div>
 
           <!-- RIGHT COLUMN: Speakers poster -->
-          <div class="abstract-awards-poster-wrap speaker-poster-wrap" style="display:flex; justify-content:center; align-items:center; height:100%; padding-top:0;">
+          <div class="abstract-awards-poster-wrap speaker-poster-wrap">
             <a class="abstract-awards-poster-card speaker-pdf-poster"
                href="assets/img/speakersLineup.jpg"
                target="_blank"
                rel="noopener noreferrer"
-               aria-label="Open AAPD 2026 distinguished speakers lineup poster PDF">
-              <img src="assets/img/speakersLineup.jpg"
+               aria-label="Open AAPD 2026 distinguished speakers line-up poster">
+              <img src="assets/img/speakersLineup.jpg?v=20260826"
                    alt="AAPD 2026 distinguished speakers lineup poster">
             </a>
           </div>
