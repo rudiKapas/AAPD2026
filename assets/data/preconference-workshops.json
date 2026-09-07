@@ -1,0 +1,168 @@
+{
+  "source_files": [
+    "ICAAPD2026_PreConference_Abstracts_ForWebsite",
+    "Geriatric Workshop Details"
+  ],
+  "listed_date": "30 September 2026",
+  "venue": "Hilton Kota Kinabalu",
+  "location": "Sabah, Malaysia",
+  "registration_url": "https://forms.cloud.microsoft/r/f0Me1XQYaE",
+  "geriatric_date_confirmed": false,
+  "workshops": [
+    {
+      "id": "geriatric",
+      "short_title": "Oral Health for Older People",
+      "title": "Optimal Oral Health for Older People — A Common Protocol for Oral Health Survey of the Aged Population in Asia",
+      "attendance": "open",
+      "speaker_label": "Lead facilitator",
+      "speakers": [
+        {
+          "name": "Prof. Hiroshi Ogawa",
+          "affiliation": "Professor, Division of Preventive Dentistry, Graduate School of Medical and Dental Sciences, Niigata University, Japan; Director, WHO Collaborating Centre for Translation of Oral Health Science",
+          "image": "assets/img/workshops/hiroshi-ogawa.jpg",
+          "width": 241,
+          "height": 334
+        }
+      ],
+      "summary": "Explore optimal oral health in ageing, practical oral function assessment and a common survey protocol for comparable data across Asia.",
+      "focus": [
+        "Assessment and management of oral function",
+        "Hands-on demonstration of the common protocol",
+        "Data collection and regional collaboration"
+      ],
+      "audience": "Dental professionals, researchers and policymakers working with ageing populations.",
+      "description": "As Asia's population ages, one question matters more than ever: what does optimal oral health look like for older people, and how do we help them achieve it? Japan, one of the world's most rapidly ageing societies, has spent decades building deep expertise and hands-on experience in this exact challenge, and this workshop brings that expertise directly to you. Led by leading Japanese specialists, the session combines current science with hands-on, practical skills you can use straight away. You will start with a clear framework for optimal oral health in ageing, then move into practical approaches for assessing and managing oral function, including chewing, swallowing, saliva and other key parameters in older adults. See real regional data as findings from a cross-Asia survey of oral functional status are presented, giving you a comparative view of practice and gaps across the region. The highlight of the day is the Common Protocol for Oral Health Survey for the Aged Population, built on Japan's pioneering experience in geriatric oral health and designed to make oral function data comparable across Asian countries, which you will get to try out yourself in a live, hands-on demonstration. You will also hear a Japanese industry perspective on ongoing initiatives supporting oral health care for older people. By the end of the workshop, you will know how to design and run your own data collection using the common protocol, whether for research or everyday clinical work, and you will join a growing regional network committed to sharing outcomes and driving future collaboration. Whether you are a dental professional, researcher or policymaker working with ageing populations, this interactive workshop offers Japan's science, tools and experience to help you make a real difference. Open to all delegates — register early to secure your seat.",
+      "contributors": [
+        {
+          "group": "Japanese Society for Oral Health",
+          "people": [
+            "Professor Hiroshi Ogawa, Department of Preventive Dentistry, Niigata University",
+            "Professor Masanori Iwasaki, Department of Preventive Dentistry, Hokkaido University",
+            "Dr Takashi Hoshino, Department of Preventive Dentistry, Niigata University"
+          ]
+        },
+        {
+          "group": "LION cooperation",
+          "people": [
+            "Dr Naho Suzuki",
+            "Dr Chiyoko Uchiyama",
+            "Dr Satoshi Tomeoka"
+          ]
+        }
+      ],
+      "agenda": [
+        {
+          "time": "08:30-08:45",
+          "session": "Introduction What is optimal oral health for older people to achieve healthy aging?",
+          "speaker": "Professor Hiroshi Ogawa"
+        },
+        {
+          "time": "08:45-09:30",
+          "session": "Assessment and Management of Oral Function in the Aging Population",
+          "speaker": "Professor Masanori Iwasaki"
+        },
+        {
+          "time": "09:30-10:00",
+          "session": "Questionnaire survey of oral functional status in Asia",
+          "speaker": "Dr Takashi Hoshino"
+        },
+        {
+          "time": "10:00-10:30",
+          "session": "Common protocol for oral health survey for aged population",
+          "speaker": "Professor Masanori Iwasaki & Professor Hiroshi Ogawa"
+        },
+        {
+          "time": "10:30-12:00",
+          "session": "Demonstration of oral functional assessment",
+          "speaker": "All"
+        },
+        {
+          "time": "12:00-13:00",
+          "session": "Lion’s initiatives in the Field of Oral Health Care",
+          "speaker": "Dr Naho Suzuki, Dr Chiyoko Uchiyama & Dr Satoshi Tomeoka"
+        },
+        {
+          "time": "13:00-13:30",
+          "session": "Design of data collection (How to use common protocol) in research and clinical work",
+          "speaker": "All"
+        },
+        {
+          "time": "13:30-14:00",
+          "session": "Future action: how to collaborate and share the outcomes and wrap up",
+          "speaker": "All"
+        }
+      ]
+    },
+    {
+      "id": "oral-health-literacy",
+      "short_title": "Oral Health Literacy",
+      "title": "Leveraging Oral Health Literacy to Advance Oral Health Promotion and Disease Prevention",
+      "attendance": "open",
+      "speaker_label": "Facilitator",
+      "speakers": [
+        {
+          "name": "Associate Professor Wong Mun Loke",
+          "affiliation": "Vice Dean (Education) and Associate Provost (Integrated Education); Faculty of Dentistry, National University of Singapore",
+          "image": "assets/img/workshops/wong-mun-loke.jpg",
+          "width": 259,
+          "height": 282
+        }
+      ],
+      "summary": "Explore how people access, understand, appraise and apply oral health information, with practical approaches for communities, clinics and research.",
+      "focus": [
+        "Barriers to and drivers of prevention",
+        "Strategies to strengthen oral health literacy",
+        "Interactive discussion and measuring progress"
+      ],
+      "audience": "Clinicians, educators, public health practitioners and researchers.",
+      "description": "Information about oral health has never been more available, so why do dental caries and periodontal disease remain the two most common conditions affecting people everywhere? The answer lies beyond health education alone, in oral health literacy: how well people can access, understand, appraise and apply health information in their everyday lives. This engaging workshop invites you to rethink oral health promotion through the lens of health literacy, moving beyond simply handing out preventive advice to genuinely empowering individuals and communities to make informed choices about their oral health. You will explore the real barriers to, and drivers of, prevention at both the population and individual level, and gain a deeper understanding of what oral health literacy really means, why it matters, and how it can be strengthened in diverse communities. Through a mix of engaging presentations and lively interactive group discussions, you will leave with practical strategies to enhance oral health literacy in your own community, clinic or research setting, and with tools to measure progress along the way. Whether you are a clinician, educator, public health practitioner or researcher, this workshop offers fresh, practical thinking on one of the most powerful levers we have for preventing oral disease at scale. Don't miss this opportunity to learn directly from an international expert in dental education and oral health promotion, and to connect with fellow delegates who share a passion for building healthier, more informed communities. Seats are limited — register early to join us for this open, interactive pre-conference workshop."
+    },
+    {
+      "id": "smoking-vaping",
+      "short_title": "Smoking & Vaping Cessation",
+      "title": "Smoking & Vaping Cessation",
+      "attendance": "open",
+      "speaker_label": "Facilitators",
+      "speakers": [
+        {
+          "name": "Professor Chris Bullen",
+          "affiliation": "Professor of Public Health; Head, Department of General Practice and Primary Care; Director, Centre for Translational Health Research, School of Population Health, Faculty of Medical and Health Sciences, University of Auckland, New Zealand",
+          "image": "assets/img/workshops/chris-bullen.jpg",
+          "width": 450,
+          "height": 418
+        },
+        {
+          "name": "Dr Amer Siddiq Amer Nordin",
+          "affiliation": "Associate Professor in Psychiatry & Consultant Psychiatrist, Universiti Malaya; Head, Nicotine Addiction Research Group, University Malaya Centre of Addiction Sciences (UMCAS), Malaysia",
+          "image": "assets/img/workshops/amer-siddiq.jpg",
+          "width": 289,
+          "height": 330
+        }
+      ],
+      "summary": "Build practical skills for supporting patients who smoke or vape through case discussions, demonstrations and small-group exercises.",
+      "focus": [
+        "Nicotine dependence and behavioural counselling",
+        "Pharmacotherapy and relapse management",
+        "Vaping cessation and support for dual use"
+      ],
+      "audience": "Frontline healthcare professionals, including dental practitioners.",
+      "description": "Tobacco kills more than 8 million people every year, and the rise of vaping is reshaping the nicotine landscape faster than most clinicians can keep up. Are you ready to help your patients navigate it? This hands-on workshop equips healthcare professionals with practical, evidence-based tools to tackle tobacco and nicotine dependence in everyday clinical practice, from assessing nicotine dependence, and applying behavioural counselling and motivational interviewing, to selecting the right pharmacotherapy and managing relapse in patients who smoke or vape. Beyond cigarettes, you will also get up to speed on the fast-moving evidence around vaping, including its role in harm reduction, strategies for vaping cessation, how to support patients who use both cigarettes and vapes, and how to separate fact from common misconceptions. Drawing on international guidelines and real-world implementation experience in Malaysia, this workshop is designed for frontline healthcare professionals, including dental practitioners, who want to build genuine confidence in supporting patients to quit. Expect concise, practical lectures, real case discussions, live demonstrations and small-group exercises that let you practise what you learn, not just hear about it. By the end of the session, you will walk away with tools you can use in your very next patient consultation to support smoking cessation and address the growing challenges of vaping and dual use. Whether tobacco control is already part of your daily practice or a new frontier for you, this workshop will sharpen your skills and your confidence. Spaces are limited — register early to secure your place at this open, interactive pre-conference workshop."
+    },
+    {
+      "id": "fluoride",
+      "short_title": "School-Based NaF Varnish",
+      "title": "Use of NaF Varnish in School-based Programs in Asia",
+      "attendance": "invited",
+      "speaker_label": "Invited expert panel",
+      "speakers": [],
+      "summary": "A closed expert workshop on regional evidence, implementation and consensus recommendations for school-based fluoride varnish programmes in Asia.",
+      "focus": [
+        "National and regional evidence",
+        "Review of school-based fluoride varnish application",
+        "Regional consensus recommendations and collaboration"
+      ],
+      "audience": "Invited international experts from across Asia.",
+      "description": "Use of NaF Varnish in School-Based Programs in Asia is a closed, invitation-only workshop bringing together a select panel of international experts from across Asia to advance regional collaboration on school-based fluoride varnish (FV) programmes for children. Dental caries remains one of the most prevalent non-communicable diseases affecting children across the region, and school-based FV application is recognised as a proven, cost-effective strategy for prevention at population scale, yet its implementation still varies widely from country to country. Over a focused morning session, the invited expert panel will review the latest national and regional dental caries prevalence data for five- and twelve-year-old children, alongside existing school-based oral health programmes in their respective countries and will critically appraise a systematic review on school-based FV application to strengthen it as a shared regional evidence base. Building on this evidence, the panel will work towards regional consensus recommendations to guide the implementation of school-based fluoride varnish programmes across Asia, accounting for differences in population needs, workforce capacity and health system resources. The workshop will also lay the groundwork for at least two post-workshop academic publications arising from the panel's discussions. As this session is reserved for invited experts only, it is not open for general registration. We look forward to sharing the key outcomes and consensus recommendations from this important regional initiative with the wider dental and public health community following the conference."
+    }
+  ]
+}

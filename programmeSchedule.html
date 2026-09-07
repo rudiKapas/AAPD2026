@@ -621,6 +621,11 @@
       }
     }
   </style>
+
+<!-- AAPD WORKSHOP SHARED ASSETS START -->
+<link rel="stylesheet" href="assets/css/programme-navigation.css">
+<script src="assets/js/programme-navigation.js" defer></script>
+<!-- AAPD WORKSHOP SHARED ASSETS END -->
 </head>
 <body>
   <header class="site-header">
@@ -634,7 +639,15 @@
           <a href="aboutus.html">About Us</a>
           <a href="https://e7tech.com/aapd2026/login.asp" target="_blank" rel="noopener noreferrer">Registration</a>
           <a href="abstractSubmission.html">Abstract Submission</a>
-          <a href="programmeSchedule.html" class="active">Programme Schedule</a>
+          <!-- AAPD PROGRAMME NAV DESKTOP START -->
+<details class="aapd-programme-menu" data-current="true">
+  <summary aria-controls="aapd-programme-desktop">Programme <svg class="ws-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></summary>
+  <div class="aapd-programme-panel" id="aapd-programme-desktop">
+    <a href="programmeSchedule.html" aria-current="page">Programme Schedule</a>
+    <a href="preConferenceWorkshops.html">Pre-Conference Workshops</a>
+  </div>
+</details>
+<!-- AAPD PROGRAMME NAV DESKTOP END -->
           <a href="sponsors.html">Sponsors</a>
           <a href="aboutus.html#contact">Contact Us</a>
         </nav>
@@ -659,7 +672,15 @@
           <a href="aboutus.html#top">About Us</a>  
           <a href="https://e7tech.com/aapd2026/login.asp" target="_blank" rel="noopener noreferrer">Registration</a>
           <a href="abstractSubmission.html">Abstract Submission</a>
-          <a href="programmeSchedule.html" class="active">Programme Schedule</a>
+          <!-- AAPD PROGRAMME NAV MOBILE START -->
+<details class="aapd-programme-menu" data-current="true">
+  <summary aria-controls="aapd-programme-mobile">Programme <svg class="ws-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></summary>
+  <div class="aapd-programme-panel" id="aapd-programme-mobile">
+    <a href="programmeSchedule.html" aria-current="page">Programme Schedule</a>
+    <a href="preConferenceWorkshops.html">Pre-Conference Workshops</a>
+  </div>
+</details>
+<!-- AAPD PROGRAMME NAV MOBILE END -->
           <a href="sponsors.html">Sponsors</a>
           <a href="aboutus.html#contact">Contact Us</a>
         </nav>
@@ -729,24 +750,29 @@
                 <h3 class="session-title">Workshop sessions</h3>
                 <p class="session-copy">Multiple pre-conference workshops are scheduled within the same block.</p>
 
-                <div class="parallel-list">
-                  <div class="parallel-card">
-                    <h4>Elderly Oral Care Workshop</h4>
-                    <p>Open attendance</p>
-                  </div>
-                  <div class="parallel-card">
-                    <h4>Oral Health Literacy Workshop</h4>
-                    <p>Open attendance</p>
-                  </div>
-                  <div class="parallel-card">
-                    <h4>Fluoride Workshop</h4>
-                    <p>Closed workshop</p>
-                  </div>
-                  <div class="parallel-card">
-                    <h4>Smoking Cessation and Vaping Workshop</h4>
-                    <p>Open attendance</p>
-                  </div>
-                </div>
+                <div class="parallel-list" data-aapd-workshop-list="true">
+<div class="parallel-card">
+  <h4>Oral Health for Older People</h4>
+  <p>Open attendance<span class="aapd-date-pending">Date confirmation pending — see details.</span></p>
+  <a class="aapd-entry-link" href="preConferenceWorkshops.html#geriatric">View details<span aria-hidden="true"> →</span><span class="ws-sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">: Oral Health for Older People</span></a>
+</div>
+<div class="parallel-card">
+  <h4>Oral Health Literacy</h4>
+  <p>Open attendance</p>
+  <a class="aapd-entry-link" href="preConferenceWorkshops.html#oral-health-literacy">View details<span aria-hidden="true"> →</span><span class="ws-sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">: Oral Health Literacy</span></a>
+</div>
+<div class="parallel-card">
+  <h4>School-Based NaF Varnish</h4>
+  <p>Invited experts only</p>
+  <a class="aapd-entry-link" href="preConferenceWorkshops.html#fluoride">View details<span aria-hidden="true"> →</span><span class="ws-sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">: School-Based NaF Varnish</span></a>
+</div>
+<div class="parallel-card">
+  <h4>Smoking &amp; Vaping Cessation</h4>
+  <p>Open attendance</p>
+  <a class="aapd-entry-link" href="preConferenceWorkshops.html#smoking-vaping">View details<span aria-hidden="true"> →</span><span class="ws-sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">: Smoking &amp; Vaping Cessation</span></a>
+</div>
+<div class="aapd-workshop-schedule-cta"><a class="aapd-entry-button" href="preConferenceWorkshops.html">Explore all workshops →</a></div>
+</div>
               </article>
             </div>
 

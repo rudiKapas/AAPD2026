@@ -1,0 +1,39 @@
+/* AAPD 2026 — shared Programme disclosure and workshop entry points. */
+.site-header .aapd-programme-menu{position:relative;flex:0 0 auto;color:#0f172a;font:inherit;}
+.site-header .aapd-programme-menu>summary{list-style:none;display:flex;align-items:center;gap:8px;min-height:44px;padding:0 10px;cursor:pointer;border-radius:12px;white-space:nowrap;letter-spacing:.2px;font:inherit;user-select:none;}
+.site-header .aapd-programme-menu>summary::-webkit-details-marker{display:none;}
+.site-header .aapd-programme-menu>summary::marker{content:"";}
+.site-header .aapd-programme-menu>summary svg{width:12px;height:12px;flex-shrink:0;transition:transform .18s ease;}
+.site-header .aapd-programme-menu[open]>summary svg{transform:rotate(180deg);}
+.site-header .aapd-programme-menu>summary:hover,.site-header .aapd-programme-menu[open]>summary{background:#f3f6f9;}
+.site-header .aapd-programme-menu[data-current="true"]>summary{background:#eff4f8;box-shadow:inset 0 0 0 1px #e1e7ee;}
+.site-header .aapd-programme-panel{position:absolute;top:calc(100% + 8px);left:0;width:280px;max-width:calc(100vw - 40px);padding:8px;background:#fff;border:1px solid #e2e8f0;border-radius:16px;box-shadow:0 16px 38px rgb(15 23 42 / 12%);z-index:1100;}
+.site-header .aapd-programme-panel a{display:flex;align-items:center;min-height:48px;height:auto;padding:12px 14px;border:0;border-radius:9px;line-height:1.4;white-space:normal;font-size:.9rem;font-weight:500;text-decoration:none;letter-spacing:0;color:#0f172a;transition:background .15s ease;transform:none;}
+.site-header .aapd-programme-panel a:hover{background:#f2f7f8;color:#075e5b;opacity:1;transform:none;}
+.site-header .aapd-programme-panel a[aria-current="page"]{background:#e9f5f3;color:#086b66;font-weight:600;}
+.site-header .aapd-programme-menu>summary:focus-visible,.site-header .aapd-programme-panel a:focus-visible{outline:3px solid #0f766e;outline-offset:3px;}
+.site-header .mobile-menu .aapd-programme-menu{display:block;border-bottom:1px solid rgb(15 23 42 / 6%);}
+.site-header .mobile-menu .aapd-programme-menu>summary{min-height:50px;padding:14px 16px;justify-content:space-between;font-weight:600;border-radius:0;}
+.site-header .mobile-menu .aapd-programme-panel{position:static;max-width:none;width:auto;margin:0 12px 10px;padding:4px;background:#f5f8fa;border:0;border-radius:10px;box-shadow:none;}
+.site-header .mobile-menu{max-height:calc(100dvh - 90px);overflow-y:auto;}
+@media(max-width:1180px){
+ .site-header .mid-nav{display:none!important;}
+ .site-header .icon-btn.hamburger{display:grid!important;}
+ .site-header .aapd-header-icons{display:none!important;}
+}
+@media(min-width:1181px){.site-header .mobile-menu{display:none!important;}}
+.aapd-workshop-entry{color:#0f172a;}
+.aapd-workshop-teaser{padding:28px 20px 36px;}
+.aapd-workshop-teaser-inner{max-width:1112px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center;padding:28px 30px;border:1px solid #dce9e9;border-radius:22px;background:linear-gradient(115deg,#f0f8f7,#f8fafd);}
+.aapd-workshop-entry .aapd-entry-kicker{margin:0 0 8px;color:#0b7069;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;}
+.aapd-workshop-entry h2{margin:0 0 8px;font:500 clamp(1.5rem,2vw,2rem)/1.2 Poppins,Inter,sans-serif;color:#0f172a;}
+.aapd-workshop-entry p{margin:0;max-width:65ch;font-size:.94rem;line-height:1.65;color:#526174;}
+.aapd-entry-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+.aapd-entry-button{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:12px 18px;border-radius:12px;background:#0f766e;color:#fff!important;font-size:.92rem;font-weight:600;line-height:1.4;text-decoration:none!important;}
+.aapd-entry-button:hover{background:#095f59;}
+.aapd-entry-link{display:inline-flex;align-items:center;gap:7px;min-height:44px;color:#0b7069!important;font-weight:600;font-size:.88rem;text-decoration:underline;text-underline-offset:4px;line-height:1.4;}
+.aapd-entry-link:focus-visible,.aapd-entry-button:focus-visible{outline:3px solid #0f766e;outline-offset:4px;}
+.aapd-workshop-schedule-cta{margin-top:12px;}
+.aapd-date-pending{display:block;font-size:.8rem;color:#775416;margin-top:5px;}
+@media(max-width:760px){.aapd-workshop-teaser-inner{grid-template-columns:1fr;padding:24px 20px;gap:18px;}.aapd-workshop-teaser{padding:20px 18px 28px;}.aapd-entry-actions .aapd-entry-button{width:100%;}}
+@media(prefers-reduced-motion:reduce){.site-header .aapd-programme-menu>summary svg{transition:none;}}
