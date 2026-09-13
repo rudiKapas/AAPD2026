@@ -35,24 +35,31 @@
 }
 
 .aapd-gallery-entry-icon{
-  width:70px;
+  width:86px;
   height:70px;
-  display:grid;
-  place-items:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
   border:1px solid rgba(255,255,255,.2);
   border-radius:20px;
-  background:rgba(255,255,255,.12);
+  background:rgba(255,255,255,.16);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 8px 20px rgba(3,10,20,.16);
   backdrop-filter:blur(8px);
 }
 
 .aapd-gallery-entry-icon svg{
-  width:34px;
-  height:34px;
+  width:30px;
+  height:30px;
   fill:none;
   stroke:currentColor;
-  stroke-width:1.65;
+  stroke-width:1.9;
   stroke-linecap:round;
   stroke-linejoin:round;
+}
+
+.aapd-gallery-entry-video-icon{
+  color:#8ee4d9;
 }
 
 .aapd-gallery-entry-kicker{
@@ -122,8 +129,8 @@
 @media(max-width:760px){
   .aapd-gallery-entry{padding:14px 0 4px}
   .aapd-gallery-entry-card{grid-template-columns:auto minmax(0,1fr);gap:16px;padding:22px 20px}
-  .aapd-gallery-entry-icon{width:58px;height:58px;border-radius:17px}
-  .aapd-gallery-entry-icon svg{width:29px;height:29px}
+  .aapd-gallery-entry-icon{width:76px;height:58px;border-radius:17px}
+  .aapd-gallery-entry-icon svg{width:26px;height:26px}
   .aapd-gallery-entry-button{grid-column:1/-1;width:100%;margin-top:2px}
 }
 
