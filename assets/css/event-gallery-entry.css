@@ -46,11 +46,15 @@
   backdrop-filter:blur(8px);
 }
 
-.aapd-gallery-entry-icon img{
+.aapd-gallery-entry-icon svg{
   width:42px;
   height:42px;
   display:block;
-  filter:brightness(0) invert(1);
+  color:#fff;
+}
+
+.aapd-gallery-entry-icon svg path{
+  fill:currentColor;
 }
 
 .aapd-gallery-entry-kicker{
@@ -121,7 +125,7 @@
   .aapd-gallery-entry{padding:14px 0 4px}
   .aapd-gallery-entry-card{grid-template-columns:auto minmax(0,1fr);gap:16px;padding:22px 20px}
   .aapd-gallery-entry-icon{width:58px;height:58px;border-radius:17px}
-  .aapd-gallery-entry-icon img{width:35px;height:35px}
+  .aapd-gallery-entry-icon svg{width:35px;height:35px}
   .aapd-gallery-entry-button{grid-column:1/-1;width:100%;margin-top:2px}
 }
 
