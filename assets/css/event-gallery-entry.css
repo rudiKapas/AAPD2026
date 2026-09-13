@@ -1,0 +1,137 @@
+/* Prominent homepage entry point for the AAPD 2026 Event Gallery. */
+.aapd-gallery-entry{
+  padding:18px 0 8px;
+  background:#fff;
+}
+
+.aapd-gallery-entry-card{
+  position:relative;
+  isolation:isolate;
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  align-items:center;
+  gap:22px;
+  min-height:148px;
+  padding:26px 30px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:22px;
+  background:linear-gradient(118deg,#0f172a 0%,#12375a 58%,#0f766e 100%);
+  box-shadow:0 18px 38px rgba(15,23,42,.18);
+  color:#fff;
+}
+
+.aapd-gallery-entry-card::after{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  width:280px;
+  height:280px;
+  right:15%;
+  top:-190px;
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:50%;
+  box-shadow:0 0 0 45px rgba(255,255,255,.035),0 0 0 90px rgba(255,255,255,.025);
+}
+
+.aapd-gallery-entry-icon{
+  width:70px;
+  height:70px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:20px;
+  background:rgba(255,255,255,.12);
+  backdrop-filter:blur(8px);
+}
+
+.aapd-gallery-entry-icon svg{
+  width:34px;
+  height:34px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.65;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+.aapd-gallery-entry-kicker{
+  margin:0 0 5px;
+  color:#8ee4d9;
+  font-size:.75rem;
+  font-weight:700;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+}
+
+.aapd-gallery-entry-copy h2{
+  margin:0 0 5px;
+  color:#fff;
+  font-family:Poppins,Inter,sans-serif;
+  font-size:clamp(1.45rem,2.3vw,2rem);
+  font-weight:500;
+  line-height:1.2;
+  letter-spacing:-.02em;
+}
+
+.aapd-gallery-entry-copy p:last-child{
+  max-width:62ch;
+  margin:0;
+  color:rgba(255,255,255,.78);
+  font-size:.94rem;
+}
+
+.aapd-gallery-entry-button{
+  min-height:48px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  padding:12px 18px;
+  border-radius:13px;
+  background:#fff;
+  box-shadow:0 10px 22px rgba(3,10,20,.2);
+  color:#0f172a;
+  font-size:.91rem;
+  font-weight:700;
+  text-decoration:none;
+  white-space:nowrap;
+  transition:transform .18s ease,box-shadow .18s ease;
+}
+
+.aapd-gallery-entry-button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 14px 28px rgba(3,10,20,.28);
+}
+
+.aapd-gallery-entry-button:focus-visible{
+  outline:3px solid #8ee4d9;
+  outline-offset:4px;
+}
+
+.aapd-gallery-entry-button svg{
+  width:18px;
+  height:18px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+@media(max-width:760px){
+  .aapd-gallery-entry{padding:14px 0 4px}
+  .aapd-gallery-entry-card{grid-template-columns:auto minmax(0,1fr);gap:16px;padding:22px 20px}
+  .aapd-gallery-entry-icon{width:58px;height:58px;border-radius:17px}
+  .aapd-gallery-entry-icon svg{width:29px;height:29px}
+  .aapd-gallery-entry-button{grid-column:1/-1;width:100%;margin-top:2px}
+}
+
+@media(max-width:480px){
+  .aapd-gallery-entry-card{grid-template-columns:1fr;padding:21px 18px;border-radius:18px}
+  .aapd-gallery-entry-icon{display:none}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .aapd-gallery-entry-button{transition:none}
+}
