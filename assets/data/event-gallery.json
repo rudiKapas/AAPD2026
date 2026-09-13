@@ -1,0 +1,39 @@
+{
+  "eventName": "AAPD 2026 Event Gallery",
+  "eventLocation": "Kota Kinabalu, Sabah, Malaysia",
+  "photoFeedUrl": "",
+  "days": [
+    {
+      "id": "2026-09-30",
+      "label": "30 Sep",
+      "title": "Pre-Conference",
+      "photoFolderId": "1ha3AjlZwF8kLS2d9kIKTSVN_ZvJWjAIH",
+      "photoFolderUrl": "https://drive.google.com/drive/folders/1ha3AjlZwF8kLS2d9kIKTSVN_ZvJWjAIH",
+      "youtubePlaylistId": "PLPATGQzuTN8Y"
+    },
+    {
+      "id": "2026-10-01",
+      "label": "1 Oct",
+      "title": "Conference",
+      "photoFolderId": "1Z7n2Y_65dJcZjHJFyuRL8vaME1xFBuMn",
+      "photoFolderUrl": "https://drive.google.com/drive/folders/1Z7n2Y_65dJcZjHJFyuRL8vaME1xFBuMn",
+      "youtubePlaylistId": "PLdtGWorFPb9c"
+    },
+    {
+      "id": "2026-10-02",
+      "label": "2 Oct",
+      "title": "Conference",
+      "photoFolderId": "1Hsnuhj6cjBQCU-WIUNbI_NXUTbSWQRNj",
+      "photoFolderUrl": "https://drive.google.com/drive/folders/1Hsnuhj6cjBQCU-WIUNbI_NXUTbSWQRNj",
+      "youtubePlaylistId": "PLMh3RsgxkbLY"
+    },
+    {
+      "id": "2026-10-03",
+      "label": "3 Oct",
+      "title": "Closing & Additional",
+      "photoFolderId": "1ov9mrn98i__dg6oGcwkbAHtRLTDKjBXM",
+      "photoFolderUrl": "https://drive.google.com/drive/folders/1ov9mrn98i__dg6oGcwkbAHtRLTDKjBXM",
+      "youtubePlaylistId": "PLaOhG4-UVEYc"
+    }
+  ]
+}
