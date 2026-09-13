@@ -8,9 +8,11 @@
     activeDay: null,
     activeMedia: 'photos',
     photosByDay: new Map(),
+    videosByDay: new Map(),
     visiblePhotos: [],
     renderedCount: 0,
-    lightboxIndex: 0
+    lightboxIndex: 0,
+    feedAvailable: false
   };
 
   const elements = {};
@@ -27,7 +29,7 @@
       validateConfig(state.config);
       state.activeDay = getInitialDay();
       renderDayTabs();
-      await loadPhotoFeed();
+      await loadGalleryFeed();
       updateSelectedDay();
       showActiveMedia();
     } catch (error) {
@@ -41,7 +43,7 @@
   }
 
   function cacheElements() {
-    ['dayTabs','galleryStatus','photosPanel','videosPanel','photoGrid','photoEmpty','driveFolderLink','driveFallback','driveFrame','driveFallbackLink','loadMore','youtubePlayer','youtubePlaylistLink','videoDayTitle','lightbox','lightboxClose','lightboxPrevious','lightboxNext','lightboxImage','lightboxCaption'].forEach(id => {
+    ['dayTabs','galleryStatus','photosPanel','videosPanel','photoGrid','photoEmpty','driveFolderLink','driveFallback','driveFrame','driveFallbackLink','loadMore','videoGrid','videoEmpty','videoFolderLink','videoFallback','videoDriveFrame','videoFallbackLink','videoLightbox','videoLightboxClose','driveVideoPlayer','videoLightboxTitle','driveVideoLink','lightbox','lightboxClose','lightboxPrevious','lightboxNext','lightboxImage','lightboxCaption'].forEach(id => {
       elements[id] = document.getElementById(id);
     });
   }
@@ -71,18 +73,22 @@
     elements.lightboxPrevious.addEventListener('click', () => stepLightbox(-1));
     elements.lightboxNext.addEventListener('click', () => stepLightbox(1));
     elements.lightbox.addEventListener('click', event => { if (event.target === elements.lightbox) closeLightbox(); });
+    elements.videoLightboxClose.addEventListener('click', closeVideoPlayer);
+    elements.videoLightbox.addEventListener('click', event => { if (event.target === elements.videoLightbox) closeVideoPlayer(); });
     document.addEventListener('keydown', event => {
-      if (elements.lightbox.hidden) return;
-      if (event.key === 'Escape') closeLightbox();
-      if (event.key === 'ArrowLeft') stepLightbox(-1);
-      if (event.key === 'ArrowRight') stepLightbox(1);
+      if (!elements.videoLightbox.hidden && event.key === 'Escape') closeVideoPlayer();
+      if (!elements.lightbox.hidden) {
+        if (event.key === 'Escape') closeLightbox();
+        if (event.key === 'ArrowLeft') stepLightbox(-1);
+        if (event.key === 'ArrowRight') stepLightbox(1);
+      }
     });
   }
 
   function validateConfig(config) {
     if (!config || !Array.isArray(config.days) || config.days.length === 0) throw new Error('No gallery days configured');
     config.days.forEach(day => {
-      ['id','label','title','photoFolderId','photoFolderUrl','youtubePlaylistId'].forEach(key => {
+      ['id','label','title','photoFolderId','photoFolderUrl','videoFolderId','videoFolderUrl'].forEach(key => {
         if (!day[key]) throw new Error(`Missing ${key} for gallery day`);
       });
     });
@@ -119,27 +125,43 @@
     });
     elements.driveFolderLink.href = state.activeDay.photoFolderUrl;
     elements.driveFallbackLink.href = state.activeDay.photoFolderUrl;
+    elements.videoFolderLink.href = state.activeDay.videoFolderUrl;
+    elements.videoFallbackLink.href = state.activeDay.videoFolderUrl;
     renderPhotosForDay();
-    if (state.activeMedia === 'videos') updateVideoForDay();
+    renderVideosForDay();
+    updateGalleryStatus();
   }
 
-  async function loadPhotoFeed() {
+  async function loadGalleryFeed() {
     const endpoint = String(state.config.photoFeedUrl || '').trim();
     if (!endpoint) {
-      elements.galleryStatus.textContent = 'Google Drive photo view';
+      elements.galleryStatus.textContent = 'Google Drive media view';
       return;
     }
-    elements.galleryStatus.textContent = 'Updating photographs…';
+    elements.galleryStatus.textContent = 'Updating event media…';
     try {
       const payload = await loadJsonp(endpoint);
-      if (!payload || !Array.isArray(payload.days)) throw new Error('Invalid photo feed');
-      payload.days.forEach(day => state.photosByDay.set(day.id, Array.isArray(day.photos) ? day.photos : []));
-      const total = [...state.photosByDay.values()].reduce((sum, photos) => sum + photos.length, 0);
-      elements.galleryStatus.textContent = total ? `${total.toLocaleString()} official photograph${total === 1 ? '' : 's'}` : 'Photos will appear automatically';
+      if (!payload || !payload.ok || !Array.isArray(payload.days)) throw new Error('Invalid gallery feed');
+      payload.days.forEach(day => {
+        state.photosByDay.set(day.id, Array.isArray(day.photos) ? day.photos : []);
+        state.videosByDay.set(day.id, Array.isArray(day.videos) ? day.videos : []);
+      });
+      state.feedAvailable = true;
     } catch (error) {
-      console.warn('Native photo feed unavailable; using Drive folder view.', error);
-      elements.galleryStatus.textContent = 'Google Drive photo view';
+      console.warn('Native gallery feed unavailable; using Drive folder views.', error);
+      elements.galleryStatus.textContent = 'Google Drive media view';
     }
+  }
+
+  function updateGalleryStatus() {
+    if (!state.feedAvailable || !state.activeDay) return;
+    const items = state.activeMedia === 'photos'
+      ? state.photosByDay.get(state.activeDay.id) || []
+      : state.videosByDay.get(state.activeDay.id) || [];
+    const noun = state.activeMedia === 'photos' ? 'photograph' : 'video';
+    elements.galleryStatus.textContent = items.length
+      ? `${items.length.toLocaleString()} official ${noun}${items.length === 1 ? '' : 's'}`
+      : `${noun[0].toUpperCase()}${noun.slice(1)}s will appear automatically`;
   }
 
   function loadJsonp(endpoint) {
@@ -167,6 +189,7 @@
     state.visiblePhotos = state.photosByDay.get(state.activeDay.id) || [];
     state.renderedCount = 0;
     elements.photoGrid.replaceChildren();
+    elements.photoGrid.classList.toggle('featured-layout', state.visiblePhotos.length >= 6);
     elements.loadMore.hidden = true;
     elements.photoEmpty.hidden = true;
     elements.driveFallback.hidden = true;
@@ -209,11 +232,65 @@
     elements.loadMore.hidden = state.renderedCount >= state.visiblePhotos.length;
   }
 
+  function renderVideosForDay() {
+    if (!state.activeDay || !elements.videoGrid) return;
+    const hasNativeFeed = state.videosByDay.has(state.activeDay.id);
+    const videos = state.videosByDay.get(state.activeDay.id) || [];
+    elements.videoGrid.replaceChildren();
+    elements.videoEmpty.hidden = true;
+    elements.videoFallback.hidden = true;
+
+    if (!hasNativeFeed) {
+      const frameUrl = `https://drive.google.com/embeddedfolderview?id=${encodeURIComponent(state.activeDay.videoFolderId)}#grid`;
+      if (elements.videoDriveFrame.src !== frameUrl) elements.videoDriveFrame.src = frameUrl;
+      elements.videoFallback.hidden = false;
+      return;
+    }
+    if (videos.length === 0) {
+      elements.videoEmpty.hidden = false;
+      return;
+    }
+
+    const fragment = document.createDocumentFragment();
+    videos.forEach((video, index) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'video-card';
+      button.setAttribute('aria-label', `Play ${cleanFileName(video.name) || `video ${index + 1}`}`);
+
+      const thumbnail = document.createElement('div');
+      thumbnail.className = 'video-thumbnail';
+      const image = document.createElement('img');
+      image.src = video.thumbnailUrl;
+      image.alt = '';
+      image.loading = 'lazy';
+      image.decoding = 'async';
+      image.addEventListener('error', () => image.remove());
+      thumbnail.append(image, createPlayIcon());
+
+      const title = document.createElement('span');
+      title.className = 'video-card-title';
+      title.textContent = cleanFileName(video.name) || `Event video ${index + 1}`;
+      button.append(thumbnail, title);
+      button.addEventListener('click', () => openVideoPlayer(video));
+      fragment.appendChild(button);
+    });
+    elements.videoGrid.appendChild(fragment);
+  }
+
+  function createPlayIcon() {
+    const icon = document.createElement('span');
+    icon.className = 'video-play-icon';
+    icon.setAttribute('aria-hidden', 'true');
+    icon.textContent = '▶';
+    return icon;
+  }
+
   function showActiveMedia() {
     const showPhotos = state.activeMedia === 'photos';
     elements.photosPanel.hidden = !showPhotos;
     elements.videosPanel.hidden = showPhotos;
-    if (!showPhotos) updateVideoForDay();
+    updateGalleryStatus();
     document.querySelectorAll('[data-media]').forEach(button => {
       const active = button.dataset.media === state.activeMedia;
       button.classList.toggle('active', active);
@@ -221,11 +298,19 @@
     });
   }
 
-  function updateVideoForDay() {
-    const playerUrl = `https://www.youtube-nocookie.com/embed/videoseries?list=${encodeURIComponent(state.activeDay.youtubePlaylistId)}&rel=0`;
-    if (elements.youtubePlayer.src !== playerUrl) elements.youtubePlayer.src = playerUrl;
-    elements.youtubePlaylistLink.href = `https://www.youtube.com/playlist?list=${encodeURIComponent(state.activeDay.youtubePlaylistId)}`;
-    elements.videoDayTitle.textContent = `${state.activeDay.label} · ${state.activeDay.title}`;
+  function openVideoPlayer(video) {
+    elements.driveVideoPlayer.src = video.previewUrl;
+    elements.videoLightboxTitle.textContent = cleanFileName(video.name) || 'AAPD event video';
+    elements.driveVideoLink.href = video.driveUrl;
+    elements.videoLightbox.hidden = false;
+    document.body.classList.add('lightbox-open');
+    elements.videoLightboxClose.focus();
+  }
+
+  function closeVideoPlayer() {
+    elements.videoLightbox.hidden = true;
+    elements.driveVideoPlayer.src = '';
+    document.body.classList.remove('lightbox-open');
   }
 
   function openLightbox(index) {

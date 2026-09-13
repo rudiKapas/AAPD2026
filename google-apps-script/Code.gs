@@ -1,22 +1,22 @@
 /**
- * AAPD 2026 photo-feed endpoint for the static event gallery.
+ * AAPD 2026 media-feed endpoint for the static event gallery.
  *
  * Deploy this project as a Google Apps Script web app:
  *   Execute as: Me
  *   Who has access: Anyone
  *
- * The public endpoint exposes only file metadata and image URLs from the four
- * configured public Photos folders. Video folders are not scanned.
+ * The public endpoint exposes only file metadata and display URLs from the
+ * configured public Photos and Videos folders.
  */
 const GALLERY_CONFIG = Object.freeze({
   indexFolderId: '1c_EFuO5DGaAaozb6bMbbWZ8UZ286Jt8Y',
   indexFileName: '.gallery-index.json',
   refreshMinutes: 5,
   days: [
-    { id: '2026-09-30', folderId: '1ha3AjlZwF8kLS2d9kIKTSVN_ZvJWjAIH' },
-    { id: '2026-10-01', folderId: '1Z7n2Y_65dJcZjHJFyuRL8vaME1xFBuMn' },
-    { id: '2026-10-02', folderId: '1Hsnuhj6cjBQCU-WIUNbI_NXUTbSWQRNj' },
-    { id: '2026-10-03', folderId: '1ov9mrn98i__dg6oGcwkbAHtRLTDKjBXM' }
+    { id: '2026-09-30', photoFolderId: '1ha3AjlZwF8kLS2d9kIKTSVN_ZvJWjAIH', videoFolderId: '1qWi28HfioSaGuAuZ5sDmgESa5sHNDcoT' },
+    { id: '2026-10-01', photoFolderId: '1Z7n2Y_65dJcZjHJFyuRL8vaME1xFBuMn', videoFolderId: '1gPbFAGbFZ5w4AnLgENdiLaovgNCJIAxn' },
+    { id: '2026-10-02', photoFolderId: '1Hsnuhj6cjBQCU-WIUNbI_NXUTbSWQRNj', videoFolderId: '1kBelllzFYxxo3DZ5pU4t9HDMHZErVpEl' },
+    { id: '2026-10-03', photoFolderId: '1ov9mrn98i__dg6oGcwkbAHtRLTDKjBXM', videoFolderId: '1jmrzQGPvUtGniTGiOXWMEt5eNWLYOplN' }
   ]
 });
 
@@ -78,28 +78,11 @@ function getGalleryIndex_() {
 
 function buildGalleryIndex_() {
   const days = GALLERY_CONFIG.days.map(day => {
-    const files = DriveApp.getFolderById(day.folderId).getFiles();
-    const photos = [];
-
-    while (files.hasNext()) {
-      const file = files.next();
-      const mimeType = file.getMimeType();
-      if (!mimeType || mimeType.indexOf('image/') !== 0) continue;
-
-      const id = file.getId();
-      photos.push({
-        id: id,
-        name: file.getName(),
-        mimeType: mimeType,
-        createdAt: file.getDateCreated().toISOString(),
-        size: file.getSize(),
-        thumbnailUrl: 'https://drive.google.com/thumbnail?id=' + encodeURIComponent(id) + '&sz=w1200',
-        fullUrl: 'https://drive.google.com/thumbnail?id=' + encodeURIComponent(id) + '&sz=w2400'
-      });
-    }
-
+    const photos = listMediaFiles_(day.photoFolderId, 'image/');
+    const videos = listMediaFiles_(day.videoFolderId, 'video/');
     photos.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
-    return { id: day.id, photos: photos };
+    videos.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+    return { id: day.id, photos: photos, videos: videos };
   });
 
   return {
@@ -107,6 +90,37 @@ function buildGalleryIndex_() {
     generatedAt: new Date().toISOString(),
     days: days
   };
+}
+
+function listMediaFiles_(folderId, mimePrefix) {
+  const files = DriveApp.getFolderById(folderId).getFiles();
+  const items = [];
+
+  while (files.hasNext()) {
+    const file = files.next();
+    const mimeType = file.getMimeType();
+    if (!mimeType || mimeType.indexOf(mimePrefix) !== 0) continue;
+
+    const id = file.getId();
+    const item = {
+      id: id,
+      name: file.getName(),
+      mimeType: mimeType,
+      createdAt: file.getDateCreated().toISOString(),
+      size: file.getSize(),
+      thumbnailUrl: 'https://drive.google.com/thumbnail?id=' + encodeURIComponent(id) + '&sz=w1200',
+      driveUrl: 'https://drive.google.com/file/d/' + encodeURIComponent(id) + '/view'
+    };
+
+    if (mimePrefix === 'image/') {
+      item.fullUrl = 'https://drive.google.com/thumbnail?id=' + encodeURIComponent(id) + '&sz=w2400';
+    } else {
+      item.previewUrl = 'https://drive.google.com/file/d/' + encodeURIComponent(id) + '/preview';
+    }
+    items.push(item);
+  }
+
+  return items;
 }
 
 function readStoredIndex_() {
