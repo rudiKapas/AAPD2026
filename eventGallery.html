@@ -139,16 +139,18 @@
         </div>
 
         <div class="gallery-panel" id="videosPanel" role="tabpanel" hidden>
-          <div class="video-layout">
-            <div class="video-player-shell">
-              <iframe id="youtubePlayer" title="AAPD 2026 event videos" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          <div class="video-grid" id="videoGrid" aria-live="polite"></div>
+          <div class="empty-state" id="videoEmpty" hidden>
+            <div class="empty-icon video-empty-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m10 9 5 3-5 3Z"/></svg>
             </div>
-            <aside class="video-copy">
-              <p class="section-kicker">Selected date</p>
-              <h3 id="videoDayTitle">Event videos</h3>
-              <p>Use the playlist control inside the player to choose a video. New uploads appear here automatically once YouTube finishes processing them.</p>
-              <a id="youtubePlaylistLink" class="primary-button" href="#" target="_blank" rel="noopener noreferrer">View full playlist</a>
-            </aside>
+            <h3>Videos are on the way</h3>
+            <p>New recordings will appear here automatically after the event team uploads them.</p>
+            <a id="videoFolderLink" class="secondary-button" href="#" target="_blank" rel="noopener noreferrer">Open video folder</a>
+          </div>
+          <div class="drive-fallback" id="videoFallback" hidden>
+            <iframe id="videoDriveFrame" title="Event videos on Google Drive" loading="lazy"></iframe>
+            <a id="videoFallbackLink" class="secondary-button" href="#" target="_blank" rel="noopener noreferrer">Open full video folder</a>
           </div>
         </div>
       </div>
@@ -173,6 +175,19 @@
       <figcaption id="lightboxCaption"></figcaption>
     </figure>
     <button class="lightbox-nav next" id="lightboxNext" type="button" aria-label="Next photo">›</button>
+  </div>
+
+  <div class="video-lightbox" id="videoLightbox" role="dialog" aria-modal="true" aria-labelledby="videoLightboxTitle" hidden>
+    <button class="lightbox-close" id="videoLightboxClose" type="button" aria-label="Close video player">×</button>
+    <div class="video-dialog">
+      <div class="video-player-shell">
+        <iframe id="driveVideoPlayer" title="AAPD 2026 event video" allow="autoplay; fullscreen" allowfullscreen></iframe>
+      </div>
+      <div class="video-dialog-footer">
+        <h3 id="videoLightboxTitle">Event video</h3>
+        <a id="driveVideoLink" class="secondary-button" href="#" target="_blank" rel="noopener noreferrer">Open in Google Drive</a>
+      </div>
+    </div>
   </div>
 
   <footer class="site-footer">
