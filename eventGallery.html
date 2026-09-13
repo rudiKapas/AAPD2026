@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Event Gallery | AAPD 2026</title>
+  <meta name="description" content="Official photographs and videos from the 18th International Conference of the Asian Academy of Preventive Dentistry.">
+  <meta property="og:title" content="AAPD 2026 Event Gallery">
+  <meta property="og:description" content="Explore official photographs and videos from AAPD 2026 in Kota Kinabalu, Sabah.">
+  <meta property="og:url" content="https://aapd2026.com/eventGallery.html">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://aapd2026.com/assets/img/hero.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/AAPDGen.svg">
+  <link rel="icon" type="image/png" href="assets/icons/AAPD26.png">
+  <link rel="stylesheet" href="assets/css/programme-navigation.css">
+  <link rel="stylesheet" href="assets/css/event-gallery.css">
+  <script src="assets/js/programme-navigation.js" defer></script>
+  <script src="assets/js/event-gallery.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#galleryContent">Skip to gallery</a>
+
+  <header class="site-header" id="siteHeader">
+    <div class="container header-row">
+      <div class="brand" aria-label="AAPD 2026 brand">
+        <a href="index.html">AAPD 2026</a>
+      </div>
+
+      <nav class="mid-nav" aria-label="Primary">
+        <a href="aboutus.html#top">About Us</a>
+        <a href="https://e7tech.com/aapd2026/login.asp" target="_blank" rel="noopener noreferrer">Registration</a>
+        <a href="abstractSubmission.html">Abstract Submission</a>
+        <details class="aapd-programme-menu" data-current="false">
+          <summary aria-controls="aapd-programme-desktop">Programme
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </summary>
+          <div class="aapd-programme-panel" id="aapd-programme-desktop">
+            <a href="programmeSchedule.html">Programme Schedule</a>
+            <a href="preConferenceWorkshops.html">Pre-Conference Workshops</a>
+          </div>
+        </details>
+        <a href="sponsors.html">Sponsors</a>
+        <a href="index.html#contact">Contact Us</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="aapd-header-icons" aria-label="AAPD logos">
+          <a href="index.html" aria-label="Go to AAPD home"><img src="assets/icons/AAPDGen.svg" alt="AAPD"></a>
+          <a href="index.html" aria-label="Go to AAPD 2026 home"><img src="assets/icons/AAPD26.png" alt="AAPD 2026"></a>
+        </div>
+        <button class="icon-btn hamburger" id="navToggle" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu">☰</button>
+      </div>
+
+      <nav id="mobileMenu" class="mobile-menu" aria-label="Mobile menu">
+        <a href="index.html">Home</a>
+        <a href="aboutus.html#top">About Us</a>
+        <a href="https://e7tech.com/aapd2026/login.asp" target="_blank" rel="noopener noreferrer">Registration</a>
+        <a href="abstractSubmission.html">Abstract Submission</a>
+        <details class="aapd-programme-menu" data-current="false">
+          <summary aria-controls="aapd-programme-mobile">Programme
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </summary>
+          <div class="aapd-programme-panel" id="aapd-programme-mobile">
+            <a href="programmeSchedule.html">Programme Schedule</a>
+            <a href="preConferenceWorkshops.html">Pre-Conference Workshops</a>
+          </div>
+        </details>
+        <a href="sponsors.html">Sponsors</a>
+        <a href="index.html#contact">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="galleryContent">
+    <section class="gallery-hero">
+      <div class="container gallery-hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">18th International Conference</p>
+          <h1>Event Gallery</h1>
+          <p class="hero-lead">Moments from AAPD 2026 in Kota Kinabalu—shared as the conference unfolds.</p>
+          <div class="hero-meta" aria-label="Event details">
+            <span>30 September–3 October 2026</span>
+            <span>Kota Kinabalu, Sabah</span>
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <img src="assets/img/hero.png" alt="">
+          <div class="hero-art-card">
+            <span class="live-dot"></span>
+            <span>Official event media</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery-section" aria-labelledby="galleryHeading">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Browse the conference</p>
+            <h2 id="galleryHeading">Photos and videos</h2>
+          </div>
+          <p id="galleryStatus" class="gallery-status" role="status" aria-live="polite">Loading gallery…</p>
+        </div>
+
+        <div class="gallery-controls" aria-label="Gallery controls">
+          <div class="day-tabs" id="dayTabs" role="tablist" aria-label="Event date"></div>
+          <div class="media-switch" role="tablist" aria-label="Media type">
+            <button type="button" class="media-switch-button active" data-media="photos" role="tab" aria-selected="true">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9" r="1.5"/><path d="m5 17 4.5-4 3.5 3 2.5-2 3.5 3"/></svg>
+              Photos
+            </button>
+            <button type="button" class="media-switch-button" data-media="videos" role="tab" aria-selected="false">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m10 9 5 3-5 3Z"/></svg>
+              Videos
+            </button>
+          </div>
+        </div>
+
+        <div class="gallery-panel" id="photosPanel" role="tabpanel">
+          <div class="photo-grid" id="photoGrid" aria-live="polite"></div>
+          <div class="empty-state" id="photoEmpty" hidden>
+            <div class="empty-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9" r="1.5"/><path d="m5 17 4.5-4 3.5 3 2.5-2 3.5 3"/></svg>
+            </div>
+            <h3>Photos are on the way</h3>
+            <p>New photographs will appear here automatically after the event team uploads them.</p>
+            <a id="driveFolderLink" class="secondary-button" href="#" target="_blank" rel="noopener noreferrer">Open photo folder</a>
+          </div>
+          <div class="drive-fallback" id="driveFallback" hidden>
+            <iframe id="driveFrame" title="Event photographs on Google Drive" loading="lazy"></iframe>
+            <a id="driveFallbackLink" class="secondary-button" href="#" target="_blank" rel="noopener noreferrer">Open full photo folder</a>
+          </div>
+          <button class="load-more" id="loadMore" type="button" hidden>Load more photos</button>
+        </div>
+
+        <div class="gallery-panel" id="videosPanel" role="tabpanel" hidden>
+          <div class="video-layout">
+            <div class="video-player-shell">
+              <iframe id="youtubePlayer" title="AAPD 2026 event videos" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+            <aside class="video-copy">
+              <p class="section-kicker">Selected date</p>
+              <h3 id="videoDayTitle">Event videos</h3>
+              <p>Use the playlist control inside the player to choose a video. New uploads appear here automatically once YouTube finishes processing them.</p>
+              <a id="youtubePlaylistLink" class="primary-button" href="#" target="_blank" rel="noopener noreferrer">View full playlist</a>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery-note">
+      <div class="container gallery-note-inner">
+        <div>
+          <p class="section-kicker">Media notice</p>
+          <h2>Sharing conference moments responsibly</h2>
+        </div>
+        <p>Event photographs and recordings may include delegates and participants. For media-related enquiries or removal requests, please contact the organising committee.</p>
+      </div>
+    </section>
+  </main>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Close photo viewer">×</button>
+    <button class="lightbox-nav previous" id="lightboxPrevious" type="button" aria-label="Previous photo">‹</button>
+    <figure>
+      <img id="lightboxImage" src="" alt="">
+      <figcaption id="lightboxCaption"></figcaption>
+    </figure>
+    <button class="lightbox-nav next" id="lightboxNext" type="button" aria-label="Next photo">›</button>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <small>Copyright © AAPD 2026 Organizing Committee and MADPHS. All rights reserved.</small>
+    </div>
+  </footer>
+</body>
+</html>
