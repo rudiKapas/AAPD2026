@@ -1,6 +1,6 @@
-# AAPD 2026 automatic photo feed
+# AAPD 2026 automatic media feed
 
-This small Google Apps Script lets `eventGallery.html` display a clean native photo grid while the event team uploads photographs to the existing Google Drive folders.
+This small Google Apps Script lets `eventGallery.html` display clean native photo and video grids while the event team uploads media to the existing Google Drive folders.
 
 ## One-time setup
 
@@ -13,13 +13,15 @@ This small Google Apps Script lets `eventGallery.html` display a clean native ph
 7. Copy the `/exec` web-app URL.
 8. Paste that URL into `assets/data/event-gallery.json` as the value of `photoFeedUrl`.
 
-The site will then check for newly uploaded images automatically. The feed refreshes at most once every five minutes, avoiding a full Drive scan for each visitor. Until the endpoint is configured, the gallery page automatically shows Google's public folder view instead.
+The site will then check for newly uploaded photos and videos automatically. The feed refreshes at most once every five minutes, avoiding a full Drive scan for each visitor. Until the endpoint is configured, the gallery page automatically shows Google's public folder view instead.
 
 ## Event workflow
 
 - The event media person uploads original photos to the correct date's `Photos` folder in Google Drive.
-- The event media person uploads videos to the matching unlisted YouTube playlist.
+- The event media person uploads MP4 videos to the correct date's `Videos` folder in Google Drive.
 - Visitors use `eventGallery.html`; no delegate sign-in is required.
 - No website or JSON file needs to be edited during the event.
 
-Only the four configured public `Photos` folders are indexed. The Drive `Videos` folders and the private gallery root are not exposed by this script.
+Only the four configured public `Photos` and `Videos` folders are indexed. The private gallery root is not exposed by this script.
+
+When this script changes, choose **Deploy → Manage deployments**, edit the existing web-app deployment, select **New version**, and deploy. The `/exec` URL remains the same.
