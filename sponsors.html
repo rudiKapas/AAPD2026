@@ -958,7 +958,123 @@
             }
         }
 
-    </style>
+
+        /* AAPD CONFIRMED SPONSORS START */
+        .confirmed-sponsors {
+            padding: 72px 0;
+            background: #f8fafc;
+        }
+
+        .confirmed-sponsors-header {
+            max-width: 720px;
+            margin: 0 auto 42px;
+            text-align: center;
+        }
+
+        .confirmed-sponsors-header h2 {
+            margin-bottom: 10px;
+            color: var(--navy);
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            font-weight: 500;
+        }
+
+        .confirmed-sponsors-header p {
+            color: var(--muted);
+            font-size: 1rem;
+        }
+
+        .confirmed-sponsor-tier + .confirmed-sponsor-tier {
+            margin-top: 46px;
+        }
+
+        .confirmed-sponsor-tier-title {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+            color: var(--navy);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 500;
+        }
+
+        .confirmed-sponsor-tier-title::after {
+            content: "";
+            height: 1px;
+            flex: 1;
+            background: #dfe5ec;
+        }
+
+        .confirmed-sponsor-grid {
+            display: grid;
+            gap: 22px;
+        }
+
+        .confirmed-sponsor-grid.gold-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .confirmed-sponsor-grid.silver-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            max-width: 790px;
+            margin-inline: auto;
+        }
+
+        .confirmed-sponsor-card {
+            min-height: 190px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            overflow: hidden;
+            background: #fff;
+            border: 1px solid #e4e9ef;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+        }
+
+        .confirmed-sponsor-card.gold-card {
+            border-top: 5px solid var(--gold);
+        }
+
+        .confirmed-sponsor-card.silver-card {
+            border-top: 5px solid var(--silver);
+        }
+
+        .confirmed-sponsor-card img {
+            display: block;
+            width: auto;
+            height: auto;
+            max-width: 88%;
+            max-height: 105px;
+            object-fit: contain;
+        }
+
+        .confirmed-sponsor-card.raf-card img {
+            max-width: 94%;
+            max-height: 82px;
+        }
+
+        @media (max-width: 760px) {
+            .confirmed-sponsors {
+                padding: 52px 0;
+            }
+
+            .confirmed-sponsor-grid.gold-grid,
+            .confirmed-sponsor-grid.silver-grid {
+                grid-template-columns: 1fr;
+                max-width: 480px;
+                margin-inline: auto;
+            }
+
+            .confirmed-sponsor-card {
+                min-height: 160px;
+                padding: 24px;
+            }
+        }
+        /* AAPD CONFIRMED SPONSORS END */
+</style>
 
 <!-- AAPD WORKSHOP SHARED ASSETS START -->
 <link rel="stylesheet" href="assets/css/programme-navigation.css">
@@ -1160,6 +1276,51 @@
     </section>
 
 
+    <!-- AAPD CONFIRMED SPONSORS START -->
+    <section class="confirmed-sponsors" aria-labelledby="confirmed-sponsors-title">
+        <div class="container">
+            <div class="confirmed-sponsors-header">
+                <h2 id="confirmed-sponsors-title">Our Sponsors</h2>
+                <p>We gratefully acknowledge the organisations supporting AAPD 2026.</p>
+            </div>
+
+            <div class="confirmed-sponsor-tier">
+                <h3 class="confirmed-sponsor-tier-title">Gold Sponsors</h3>
+                <div class="confirmed-sponsor-grid gold-grid">
+                    <div class="confirmed-sponsor-card gold-card">
+                        <img src="assets/icons/Gold Colgate_Logo_Lockup-edit.jpg.jpeg"
+                             alt="Colgate, Gold Sponsor">
+                    </div>
+
+                    <div class="confirmed-sponsor-card gold-card">
+                        <img src="assets/icons/Gold Logo Solventum.jpeg"
+                             alt="Solventum, Gold Sponsor">
+                    </div>
+
+                    <div class="confirmed-sponsor-card gold-card">
+                        <img src="assets/icons/Gold Pharmaniaga Logo - Fullcolor.png"
+                             alt="Pharmaniaga, Gold Sponsor">
+                    </div>
+                </div>
+            </div>
+
+            <div class="confirmed-sponsor-tier">
+                <h3 class="confirmed-sponsor-tier-title">Silver Sponsors</h3>
+                <div class="confirmed-sponsor-grid silver-grid">
+                    <div class="confirmed-sponsor-card silver-card">
+                        <img src="assets/icons/Silver Kenvue_Logo_Black_RGB.png"
+                             alt="Kenvue, Silver Sponsor">
+                    </div>
+
+                    <div class="confirmed-sponsor-card silver-card raf-card">
+                        <img src="assets/icons/Silver RAF SYNERGY-web.png"
+                             alt="RAF Synergy, Silver Sponsor">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- AAPD CONFIRMED SPONSORS END -->
     <section id="sponsorship">
         <div class="container">
             <h2 class="section-title no-divider">Sponsorship Packages</h2>
