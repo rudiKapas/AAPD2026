@@ -7,7 +7,7 @@
   "venue": "Hilton Kota Kinabalu",
   "location": "Sabah, Malaysia",
   "registration_url": "https://forms.cloud.microsoft/r/f0Me1XQYaE",
-  "geriatric_date_confirmed": false,
+  "geriatric_date_confirmed": true,
   "workshops": [
     {
       "id": "geriatric",
