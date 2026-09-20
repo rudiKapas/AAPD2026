@@ -1,0 +1,16 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "aapd-chatbot",
+  "main": "src/index.mjs",
+  "compatibility_date": "2026-09-20",
+  "account_id": "c782af140e29c20269902811d617149c",
+  "workers_dev": true,
+  "ai": { "binding": "AI" },
+  "kv_namespaces": [
+    { "binding": "AAPD_CHAT_CACHE", "id": "06a913ddbe594b0db436d7af3c7df576" }
+  ],
+  "vectorize": [
+    { "binding": "VECTORIZE", "index_name": "aapd-knowledge" }
+  ],
+  "observability": { "enabled": false }
+}
