@@ -12,5 +12,6 @@
   "vectorize": [
     { "binding": "VECTORIZE", "index_name": "aapd-knowledge" }
   ],
+  "ratelimits": [{ "name": "CHAT_LIMIT", "namespace_id": "202609201", "simple": { "limit": 12, "period": 60 } }],
   "observability": { "enabled": false }
 }

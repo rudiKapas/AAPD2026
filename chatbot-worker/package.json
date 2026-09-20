@@ -1,5 +1,13 @@
 {
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build-knowledge.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "check": "npm run build && npm test && wrangler deploy --dry-run",
+    "deploy": "npm run build && wrangler deploy"
+  },
   "devDependencies": {
+    "linkedom": "0.18.12",
     "wrangler": "4.135.0"
   }
 }
