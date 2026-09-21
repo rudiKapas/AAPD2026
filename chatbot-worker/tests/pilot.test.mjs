@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import worker, { validate, cleanAnswer, isConferenceQuestion } from '../src/index.mjs';
+import worker, { validate, cleanAnswer, isConferenceQuestion, malaysiaDateTime } from '../src/index.mjs';
 import { extract } from '../scripts/build-knowledge.mjs';
 import knowledge from '../src/generated/knowledge.mjs';
 
@@ -48,6 +48,10 @@ test('Supports model response formats and suppresses thinking', () => {
   assert.throws(() => cleanAnswer({ response: '<think>incomplete' }));
   assert.throws(() => cleanAnswer({ choices: [{ finish_reason: 'length', message: { content: 'cut' } }] }));
 });
+test('Malaysia clock is used as the source of truth for relative dates', () => {
+  assert.match(malaysiaDateTime(new Date('2026-09-21T16:30:00.000Z')), /22 September 2026/);
+  assert.match(malaysiaDateTime(new Date('2026-09-21T16:30:00.000Z')), /00:30/);
+});
 test('Allows official website CORS and rejects foreign origins', async () => {
   const good = await worker.fetch(req(), env(), ctx); assert.equal(good.status, 200); assert.equal(good.headers.get('Access-Control-Allow-Origin'), siteOrigin);
   const bad = await worker.fetch(req({}, { Origin: 'https://evil.example' }), env(), ctx); assert.equal(bad.status, 403);
@@ -64,7 +68,7 @@ test('Rejects oversized request bodies', async () => { assert.equal((await worke
 test('Grounding, current page and follow-up history reach AI; source IDs resolve', async () => {
   let prompt; const e = env(async (_, input) => { prompt = input; return { response: 'Workshops are on 30 September [5].' }; });
   const response = await worker.fetch(req({ question: 'What about the date?', pagePath: '/programmeSchedule.html', history: [{ role: 'user', content: 'Workshops?' }] }), e, ctx);
-  assert.equal(response.status, 200); const body = await response.json(); assert.equal(body.sources[0].url, 'https://aapd2026.com/preConferenceWorkshops.html'); assert.match(prompt.messages[0].content, /Do NOT confirm Hilton/); assert.match(prompt.messages[0].content, /programmeSchedule\.html/); assert.equal(prompt.messages[1].content, 'Workshops?');
+  assert.equal(response.status, 200); const body = await response.json(); assert.equal(body.sources[0].url, 'https://aapd2026.com/preConferenceWorkshops.html'); assert.match(prompt.messages[0].content, /Do NOT confirm Hilton/); assert.match(prompt.messages[0].content, /Live Malaysia date and time/); assert.match(prompt.messages[0].content, /programmeSchedule\.html/); assert.equal(prompt.messages[1].content, 'Workshops?');
 });
 test('Quota failures return honest error and official links', async () => {
   const response = await worker.fetch(req(), env(async () => { throw new Error('private backend detail'); }), ctx); assert.equal(response.status, 503); const body = await response.json(); assert.ok(body.sources.length); assert.doesNotMatch(body.error, /private backend/);
@@ -73,7 +77,7 @@ test('Worker root redirects to the conference site', async () => {
   const response = await worker.fetch(new Request('https://test.example/'), env(), ctx); assert.equal(response.status, 302); assert.equal(response.headers.get('Location'), siteOrigin + '/');
 });
 test('Widget safely renders answer text instead of model HTML', () => {
-  const script = readFileSync(resolve('..', 'assets/js/aapd-chat-widget.js'), 'utf8'); assert.match(script, /bubble\.textContent = text/); assert.doesNotMatch(script, /bubble\.innerHTML/);
+  const script = readFileSync(resolve('..', 'assets/js/aapd-chat-widget.js'), 'utf8'); assert.match(script, /bubble\.textContent = text/); assert.match(script, /Asia\/Kuala_Lumpur/); assert.doesNotMatch(script, /bubble\.innerHTML/);
 });
 test('Health describes the integrated widget stage', async () => {
   const response = await worker.fetch(new Request('https://test.example/health'), env(), ctx); assert.equal((await response.json()).stage, 'integrated-widget');

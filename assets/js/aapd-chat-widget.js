@@ -6,6 +6,7 @@
   const ENDPOINT = 'https://aapd-chatbot.aapd2026-assistant.workers.dev/chat';
   const HISTORY_KEY = 'aapd-chat-history-v1';
   const SESSION_KEY = 'aapd-chat-session-v1';
+  const mytLabel = () => new Intl.DateTimeFormat('en-MY', { timeZone: 'Asia/Kuala_Lumpur', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).format(new Date()) + ' MYT';
   const host = document.createElement('div');
   host.id = 'aapd-chat-widget';
   document.body.append(host);
@@ -28,7 +29,7 @@
     <button class="launcher" type="button" aria-expanded="false" aria-controls="aapd-chat-panel" aria-label="Open AAPD conference assistant"><span class="launcher-mark" aria-hidden="true">✦</span><span class="launcher-label">Ask AAPD</span></button>
     <div class="scrim"></div>
     <section class="panel" id="aapd-chat-panel" role="dialog" aria-label="AAPD 2026 Conference Assistant" aria-hidden="true">
-      <header class="head"><span class="brand" aria-hidden="true">A</span><div class="title"><strong>AAPD Assistant</strong><span><i class="dot"></i> Conference information</span></div><button class="icon-btn clear" type="button" title="Start a new chat" aria-label="Start a new chat">↻</button><button class="icon-btn close" type="button" title="Minimise chat" aria-label="Minimise chat">×</button></header>
+      <header class="head"><span class="brand" aria-hidden="true">A</span><div class="title"><strong>AAPD Assistant</strong><span><i class="dot"></i> Conference information · <time data-myt></time></span></div><button class="icon-btn clear" type="button" title="Start a new chat" aria-label="Start a new chat">↻</button><button class="icon-btn close" type="button" title="Minimise chat">×</button></header>
       <div class="messages" role="log" aria-live="polite" aria-relevant="additions">
         <div class="welcome"><div class="spark" aria-hidden="true">✦</div><h2>How can I help?</h2><p>Ask about AAPD 2026 in English or Bahasa Melayu. Follow-up questions are welcome.</p><div class="suggestions"><button type="button">How do I register?</button><button type="button">Which workshops can I attend?</button><button type="button">What are the abstract requirements?</button><button type="button">Bila bengkel pra-persidangan?</button></div><p class="notice">Please verify important arrangements with the organisers. Don’t share personal, payment or health information.</p></div>
       </div>
@@ -39,6 +40,9 @@
   const $ = selector => root.querySelector(selector);
   const launcher = $('.launcher');
   const panel = $('.panel');
+  const clock = $('[data-myt]');
+  const refreshClock = () => { clock.textContent = mytLabel(); };
+  refreshClock(); setInterval(refreshClock, 60000);
   const scrim = $('.scrim');
   const messages = $('.messages');
   const question = $('textarea');
