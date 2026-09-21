@@ -1,6 +1,7 @@
 import knowledge from './generated/knowledge.mjs';
 
 const MODEL = '@cf/qwen/qwen3-30b-a3b-fp8';
+const ANSWER_VERSION = '2026-09-21-date-links';
 const SITE = 'https://aapd2026.com';
 const ALLOWED_ORIGINS = new Set([SITE, 'https://www.aapd2026.com']);
 const baseHeaders = { 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'no-referrer' };
@@ -111,7 +112,7 @@ export default {
     if (!env.CHAT_LIMIT) return json({ error: 'Request protection is not configured.' }, 503, corsHeaders);
     const limit = await env.CHAT_LIMIT.limit({ key: 'widget:' + input.sessionId });
     if (!limit.success) return json({ error: 'Please wait one minute before asking again.' }, 429, { ...corsHeaders, 'Retry-After': '60' });
-    const key = new Request(url.origin + '/cache/' + await hash(JSON.stringify([knowledge.version, new Date().toISOString().slice(0,10), input.question, MODEL])));
+    const key = new Request(url.origin + '/cache/' + await hash(JSON.stringify([ANSWER_VERSION, knowledge.version, new Date().toISOString().slice(0,10), input.question, MODEL])));
     const cache = globalThis.caches?.default;
     if (!input.history.length && cache) {
       try { const hit = await cache.match(key); if (hit) return json({ ...await hit.json(), cached: true }, 200, corsHeaders); } catch { /* Cache is optional. */ }
