@@ -2,7 +2,7 @@ import knowledge from './generated/knowledge.mjs';
 
 const MODEL = '@cf/qwen/qwen3-30b-a3b-fp8';
 const EMBED_MODEL = '@cf/baai/bge-m3';
-const ANSWER_VERSION = '2026-09-29-programme-rag-v5-role-labels';
+const ANSWER_VERSION = '2026-09-29-programme-rag-v6-source-fallback';
 const SITE = 'https://aapd2026.com';
 const PROGRAMME_URL = `${SITE}/assets/media/Conference%20Book_18th%20ICAAPD%202026.pdf`;
 const PROGRAMME_VERSION = '2026-09-29-final';
@@ -341,7 +341,10 @@ export default {
       const result = await env.AI.run(MODEL, { messages: [{ role: 'system', content: system + grounding.text + '\nLive Malaysia date and time: ' + malaysiaDateTime(now) + '\n' + timeOrientation(now) + '\n' + pageHint }, ...(exactPresentationCode ? [] : input.history), { role: 'user', content: input.question + '\n/no_think' }], max_tokens: 800, temperature: 0.2 });
       const rawAnswer = result?.response ?? result?.choices?.[0]?.message?.content ?? '';
       const answer = cleanAnswer(result);
-      const payload = { answer, sources: answerSources(rawAnswer, grounding.extraSources), version: `${knowledge.version}:${PROGRAMME_VERSION}`, retrieval: retrievalMode };
+      const resolvedSources = answerSources(rawAnswer, grounding.extraSources);
+      const programmeDetail = exactPresentationCode || /\b(symposium|plenary|keynote|speaker|moderator|chair|poster|oral|presentation|presenter|session)\b/i.test(input.question);
+      if (!resolvedSources.length && programmeDetail && grounding.extraSources.length) resolvedSources.push(...grounding.extraSources);
+      const payload = { answer, sources: resolvedSources, version: `${knowledge.version}:${PROGRAMME_VERSION}`, retrieval: retrievalMode };
       if (!input.history.length && cache) ctx.waitUntil(cache.put(key, Response.json(payload, { headers: { 'Cache-Control': 'public, max-age=3600' } })).catch(() => {}));
       return json(payload, 200, corsHeaders);
     } catch {
