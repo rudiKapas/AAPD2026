@@ -2,7 +2,7 @@ import knowledge from './generated/knowledge.mjs';
 
 const MODEL = '@cf/qwen/qwen3-30b-a3b-fp8';
 const EMBED_MODEL = '@cf/baai/bge-m3';
-const ANSWER_VERSION = '2026-09-29-programme-rag-v2';
+const ANSWER_VERSION = '2026-09-29-programme-rag-v3';
 const SITE = 'https://aapd2026.com';
 const PROGRAMME_URL = `${SITE}/assets/media/Conference%20Book_18th%20ICAAPD%202026.pdf`;
 const PROGRAMME_VERSION = '2026-09-29-final';
@@ -230,10 +230,14 @@ export async function ensureProgrammeIndex(env) {
 }
 async function retrieveProgramme(input, env, ready, warmChunks = []) {
   const seed = retrievalSeed(input);
+  const exactCode = /\b(?:op|3m|pp|ep)\s*[-_]?\s*\d+\b/i.test(input.question);
+  const chunks = warmChunks.length ? warmChunks : await readProgrammeChunks(env);
+  const lexicalChunks = retrieveProgrammeLexically(input.question, chunks, 5);
   let vectorChunks = [];
   if (ready && env?.AI?.run && env?.VECTORIZE?.query) {
     try {
-      const embedded = await env.AI.run(EMBED_MODEL, { text: seed });
+      const semanticSeed = exactCode ? input.question : seed;
+      const embedded = await env.AI.run(EMBED_MODEL, { text: semanticSeed });
       const row = embeddingRows(embedded)[0];
       const result = await env.VECTORIZE.query(row, { topK: 5, namespace: PROGRAMME_NAMESPACE, returnMetadata: 'all' });
       vectorChunks = (result?.matches || []).map(match => match?.metadata?.text ? { id: match.metadata.chunkId || match.id, text: String(match.metadata.text) } : null).filter(Boolean);
@@ -241,9 +245,18 @@ async function retrieveProgramme(input, env, ready, warmChunks = []) {
       console.error('Programme vector query failed:', error?.message || error);
     }
   }
-  if (vectorChunks.length) return vectorChunks;
-  const chunks = warmChunks.length ? warmChunks : await readProgrammeChunks(env);
-  return retrieveProgrammeLexically(seed, chunks, 5);
+  const merged = [];
+  const seen = new Set();
+  const add = list => {
+    for (const chunk of list) {
+      const key = chunk.id || chunk.text;
+      if (!chunk?.text || seen.has(key)) continue;
+      seen.add(key); merged.push(chunk);
+    }
+  };
+  if (exactCode) { add(lexicalChunks); add(vectorChunks); }
+  else { add(vectorChunks); add(lexicalChunks); }
+  return merged.slice(0, 5);
 }
 function programmeGrounding(chunks) {
   if (!chunks.length) return { extraSources: [], text: '' };
