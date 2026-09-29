@@ -6,7 +6,7 @@
   const ENDPOINT = 'https://aapd-chatbot.aapd2026-assistant.workers.dev/chat';
   const HISTORY_KEY = 'aapd-chat-history-v1';
   const SESSION_KEY = 'aapd-chat-session-v1';
-  const LOCAL_SYMPOSIUM_FACTS_VERSION = '20260929-v2';
+  const LOCAL_SYMPOSIUM_FACTS_VERSION = '20260929-v3';
   const PROGRAMME_BOOK_URL = 'https://aapd2026.com/assets/media/Conference%20Book_18th%20ICAAPD%202026.pdf';
 
   const SYMPOSIUM_FACTS = Object.freeze({
@@ -28,6 +28,8 @@
 
   function localProgrammeAnswer(value,prior=[]) {
     const text=String(value||'').trim();
+
+    if(/\b(?:op|3m|pp|ep)\s*[-_]?\s*\d+\b/i.test(text)) return null;
 
     if(/\b(where|venue|room|location|tempat|bilik)\b/i.test(text)) return null;
 

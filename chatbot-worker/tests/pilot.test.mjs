@@ -119,6 +119,60 @@ test('All six symposiums use verified structured programme facts', async () => {
     assert.equal(aiCalled, false);
   }
 });
+
+test('Exact presentation codes bypass symposium follow-up routing', () => {
+  const script = readFileSync(
+    resolve('..', 'assets/js/aapd-chat-widget.js'),
+    'utf8'
+  );
+
+  const start = script.indexOf('const LOCAL_SYMPOSIUM_FACTS_VERSION');
+  const end = script.indexOf('  const host =');
+
+  assert.ok(start >= 0 && end > start);
+
+  const localProgrammeAnswer = new Function(
+    script.slice(start, end) + '\nreturn localProgrammeAnswer;'
+  )();
+
+  const symposiumHistory = [
+    {
+      role: 'user',
+      content: 'Who are the speakers for Symposium 4?'
+    },
+    {
+      role: 'assistant',
+      content: 'Symposium 4: Transforming Preventive Dentistry through Digital Health Technologies'
+    }
+  ];
+
+  assert.equal(
+    localProgrammeAnswer(
+      'When and who present OP 26?',
+      symposiumHistory
+    ),
+    null,
+    'OP26 must bypass local symposium routing'
+  );
+
+  assert.equal(
+    localProgrammeAnswer(
+      'When and who present OP26?',
+      symposiumHistory
+    ),
+    null,
+    'OP26 without a space must also bypass symposium routing'
+  );
+
+  assert.equal(
+    localProgrammeAnswer(
+      'Who are the speakers?',
+      symposiumHistory
+    ).answer.includes('Professor Dr. Ollie Yiru Yu'),
+    true,
+    'Real Symposium 4 follow-up must still work'
+  );
+});
 test('Supports model response formats and suppresses thinking', () => {
   assert.equal(cleanAnswer({ response: '<think>private</think>Answer' }), 'Answer');
   assert.equal(cleanAnswer({ response: '**Plenary 1** — [View programme](https://aapd2026.com/programmeSchedule.html)' }), 'Plenary 1 — View programme');
