@@ -39,7 +39,7 @@ async function build() {
   const knowledge = { version, builtAt: new Date().toISOString(), pages };
   await mkdir(resolve(worker, 'src/generated'), { recursive: true });
   await writeFile(resolve(worker, 'src/generated/knowledge.mjs'), 'export default ' + JSON.stringify(knowledge) + ';\n');
-  console.log(`Knowledge ${version}: ${pages.length} HTML pages, ${content.length.toLocaleString()} characters. No embeddings or paid API calls used.`);
-  console.log('Scope: published HTML text, links and image descriptions. Images/PDFs and external forms are not read. Rebuild and deploy after site changes.');
+  console.log(`Knowledge ${version}: ${pages.length} HTML pages, ${content.length.toLocaleString()} characters. No embeddings or paid API calls used for the HTML snapshot.`);
+  console.log('Scope: published HTML text, links and image descriptions. The final Programme Book PDF is indexed separately at runtime through Workers AI + Vectorize. External forms and private registrations are not read.');
 }
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) await build();
