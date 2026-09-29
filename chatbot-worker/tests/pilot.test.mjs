@@ -45,7 +45,7 @@ test('Deterministic scope filter rejects unrelated prompts and permits event fol
 test('Exact presentation codes are prioritized by lexical programme retrieval', () => {
   const chunks = [
     { id: 'a', text: 'General oral presentation programme and speaker schedule.' },
-    { id: 'b', text: 'OP53 3:30pm-3:39pm Geraldo Hendri Teacher Empowerment Training for Dental Health Education.' },
+    { id: 'b', text: 'OP 53 3:30pm-3:39pm Geraldo Hendri Teacher Empowerment Training for Dental Health Education.' },
   ];
   const hits = retrieveProgrammeLexically('When is and who present OP53?', chunks, 5);
   assert.equal(hits[0].id, 'b');

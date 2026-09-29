@@ -2,7 +2,7 @@ import knowledge from './generated/knowledge.mjs';
 
 const MODEL = '@cf/qwen/qwen3-30b-a3b-fp8';
 const EMBED_MODEL = '@cf/baai/bge-m3';
-const ANSWER_VERSION = '2026-09-29-programme-rag-v3';
+const ANSWER_VERSION = '2026-09-29-programme-rag-v4-exact-code';
 const SITE = 'https://aapd2026.com';
 const PROGRAMME_URL = `${SITE}/assets/media/Conference%20Book_18th%20ICAAPD%202026.pdf`;
 const PROGRAMME_VERSION = '2026-09-29-final';
@@ -83,7 +83,7 @@ export function cleanAnswer(result) {
 
 const stopWords = new Set('a an and are as at be been by can for from has have how i in is it me my of on or our please tell that the their them there this to what when where which who with you your about into does do did was were will would could should dan di ke dari dalam untuk yang ini itu saya anda apakah bila mana siapa dengan pada ada ialah adalah tentang program programme conference persidangan'.split(/\s+/));
 function normalize(value) {
-  return String(value || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  return String(value || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').replace(/\b(op|pp|ep|3m)\s+(\d+)\b/g, '$1$2').trim();
 }
 function queryTerms(value) {
   return normalize(value).split(/\s+/).filter(term => term.length >= 2 && !stopWords.has(term));
@@ -314,6 +314,7 @@ export default {
       const malay = /\b(apa|siapa|kenapa|bagaimana|cerita|tentang|boleh|saya)\b/i.test(input.question);
       return json({ answer: malay ? 'Saya hanya boleh membantu dengan soalan berkaitan AAPD 2026. Anda boleh bertanya tentang pendaftaran, yuran, program, bengkel, pembentangan atau penghantaran abstrak.' : 'I can only help with AAPD 2026. You can ask about registration, fees, the programme, workshops, presentations or abstract submission.', sources: [], version: `${knowledge.version}:${PROGRAMME_VERSION}`, declined: true }, 200, corsHeaders);
     }
+    const exactPresentationCode = /\b(?:op|3m|pp|ep)\s*[-_]?\s*\d+\b/i.test(input.question);
     if (!env.CHAT_LIMIT) return json({ error: 'Request protection is not configured.' }, 503, corsHeaders);
     const limit = await env.CHAT_LIMIT.limit({ key: 'widget:' + input.sessionId });
     if (!limit.success) return json({ error: 'Please wait one minute before asking again.' }, 429, { ...corsHeaders, 'Retry-After': '60' });
@@ -336,7 +337,7 @@ export default {
     try {
       const pageHint = `The participant is currently viewing ${SITE}${input.pagePath}. Use this only to understand ambiguous references; it is not evidence.`;
       const now = new Date();
-      const result = await env.AI.run(MODEL, { messages: [{ role: 'system', content: system + grounding.text + '\nLive Malaysia date and time: ' + malaysiaDateTime(now) + '\n' + timeOrientation(now) + '\n' + pageHint }, ...input.history, { role: 'user', content: input.question + '\n/no_think' }], max_tokens: 800, temperature: 0.2 });
+      const result = await env.AI.run(MODEL, { messages: [{ role: 'system', content: system + grounding.text + '\nLive Malaysia date and time: ' + malaysiaDateTime(now) + '\n' + timeOrientation(now) + '\n' + pageHint }, ...(exactPresentationCode ? [] : input.history), { role: 'user', content: input.question + '\n/no_think' }], max_tokens: 800, temperature: 0.2 });
       const rawAnswer = result?.response ?? result?.choices?.[0]?.message?.content ?? '';
       const answer = cleanAnswer(result);
       const payload = { answer, sources: answerSources(rawAnswer, grounding.extraSources), version: `${knowledge.version}:${PROGRAMME_VERSION}`, retrieval: retrievalMode };
