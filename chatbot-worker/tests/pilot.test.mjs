@@ -88,6 +88,6 @@ test('Worker root redirects to the conference site', async () => {
 test('Widget safely renders answer text instead of model HTML', () => {
   const script = readFileSync(resolve('..', 'assets/js/aapd-chat-widget.js'), 'utf8'); assert.match(script, /bubble\.textContent = text/); assert.match(script, /Open \$\{labels/); assert.doesNotMatch(script, /bubble\.innerHTML/); assert.doesNotMatch(script, /Asia\/Kuala_Lumpur/);
 });
-test('Health describes the integrated widget stage', async () => {
-  const response = await worker.fetch(new Request('https://test.example/health'), env(), ctx); assert.equal((await response.json()).stage, 'integrated-widget');
+test('Health describes the programme RAG stage', async () => {
+  const response = await worker.fetch(new Request('https://test.example/health'), env(), ctx); assert.equal((await response.json()).stage, 'programme-rag');
 });
