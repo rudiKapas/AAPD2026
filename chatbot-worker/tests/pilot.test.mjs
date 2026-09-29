@@ -85,7 +85,7 @@ test('Rejects oversized request bodies', async () => { assert.equal((await worke
 test('Grounding, current page and follow-up history reach AI; source IDs resolve', async () => {
   let prompt; const e = env(async (_, input) => { prompt = input; return { response: 'Workshops are on 30 September [5].' }; });
   const response = await worker.fetch(req({ question: 'What about the date?', pagePath: '/programmeSchedule.html', history: [{ role: 'user', content: 'Workshops?' }] }), e, ctx);
-  assert.equal(response.status, 200); const body = await response.json(); assert.equal(body.sources[0].url, 'https://aapd2026.com/preConferenceWorkshops.html'); assert.match(prompt.messages[0].content, /Do NOT confirm Hilton/); assert.match(prompt.messages[0].content, /CURRENT STATUS/); assert.match(prompt.messages[0].content, /programmeSchedule\.html/); assert.equal(prompt.messages[1].content, 'Workshops?');
+  assert.equal(response.status, 200); const body = await response.json(); assert.equal(body.sources[0].url, 'https://aapd2026.com/preConferenceWorkshops.html'); assert.match(prompt.messages[0].content, /Do NOT confirm Hilton/); assert.match(prompt.messages[0].content, /Moderator or Chair is not a Speaker/); assert.match(prompt.messages[0].content, /CURRENT STATUS/); assert.match(prompt.messages[0].content, /programmeSchedule\.html/); assert.equal(prompt.messages[1].content, 'Workshops?');
 });
 test('Quota failures return honest error and official links', async () => {
   const response = await worker.fetch(req(), env(async () => { throw new Error('private backend detail'); }), ctx); assert.equal(response.status, 503); const body = await response.json(); assert.ok(body.sources.length); assert.doesNotMatch(body.error, /private backend/);
