@@ -137,7 +137,12 @@
     for (const item of items) {
       try {
         const url = new URL(item.url); if (url.origin !== 'https://aapd2026.com') continue;
-        const link = document.createElement('a'); link.href = url.href; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.textContent = `Open ${labels[url.pathname.split('/').pop()] || 'conference source'} →`; wrap.append(link);
+        const link = document.createElement('a'); link.href = url.href; link.target = '_blank'; link.rel = 'noopener noreferrer';
+        const sourcePath = url.pathname.split('/').pop();
+        if (item.title === 'Conference Programme Book') link.textContent = 'Open Conference Programme Book \u2192';
+        else if (item.title === 'Programme Schedule' || sourcePath === 'programmeSchedule.html') link.textContent = 'View Programme Schedule \u2192';
+        else link.textContent = `Open ${labels[sourcePath] || 'conference source'} \u2192`;
+        wrap.append(link);
       } catch { /* Ignore malformed model metadata. */ }
     }
     node.append(wrap);

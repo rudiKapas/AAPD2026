@@ -453,7 +453,8 @@ export default {
       return json(payload, 200, corsHeaders);
     } catch {
       const programmeSourceFallback = { id: sources.length + 1, title: 'Conference Programme Book', url: PROGRAMME_URL };
-      return json({ error: 'The assistant is temporarily unavailable or its free allowance has been reached. Please use the conference links on this page and try again later.', sources: dedupeSources([...sources.filter(s => /index.html|programmeSchedule|preConference|abstractSubmission/.test(s.url)), programmeSourceFallback]) }, 503, corsHeaders);
+      const programmeScheduleFallback = { id: sources.length + 2, title: 'Programme Schedule', url: SITE + '/programmeSchedule.html' };
+      return json({ error: 'The AAPD AI Assistant is temporarily unavailable due to high usage. Please try again later. In the meantime, you can continue browsing the official AAPD 2026 programme and conference information below.', sources: dedupeSources([programmeSourceFallback, programmeScheduleFallback]) }, 503, corsHeaders);
     }
   }
 };

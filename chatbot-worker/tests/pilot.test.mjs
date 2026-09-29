@@ -213,6 +213,52 @@ test('Grounding, current page and follow-up history reach AI; source IDs resolve
 test('Quota failures return honest error and official links', async () => {
   const response = await worker.fetch(req(), env(async () => { throw new Error('private backend detail'); }), ctx); assert.equal(response.status, 503); const body = await response.json(); assert.ok(body.sources.length); assert.doesNotMatch(body.error, /private backend/);
 });
+
+
+test('AI usage fallback uses approved message and exactly two programme links', async () => {
+  const response = await worker.fetch(
+    req(),
+    env(async () => { throw new Error('private backend detail'); }),
+    ctx
+  );
+
+  assert.equal(response.status, 503);
+
+  const body = await response.json();
+
+  assert.equal(
+    body.error,
+    'The AAPD AI Assistant is temporarily unavailable due to high usage. Please try again later. In the meantime, you can continue browsing the official AAPD 2026 programme and conference information below.'
+  );
+
+  assert.equal(body.sources.length, 2);
+
+  assert.equal(
+    body.sources[0].title,
+    'Conference Programme Book'
+  );
+
+  assert.equal(
+    body.sources[1].title,
+    'Programme Schedule'
+  );
+
+  assert.match(
+    body.sources[0].url,
+    /Conference%20Book_18th%20ICAAPD%202026\.pdf/
+  );
+
+  assert.equal(
+    body.sources[1].url,
+    'https://aapd2026.com/programmeSchedule.html'
+  );
+
+  assert.doesNotMatch(
+    body.error,
+    /quota|allowance|cloudflare|429|3036/i
+  );
+});
+
 test('Worker root redirects to the conference site', async () => {
   const response = await worker.fetch(new Request('https://test.example/'), env(), ctx); assert.equal(response.status, 302); assert.equal(response.headers.get('Location'), siteOrigin + '/');
 });
