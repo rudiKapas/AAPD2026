@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import worker, { validate, cleanAnswer, isConferenceQuestion, malaysiaDateTime, timeOrientation, answerSources } from '../src/index.mjs';
+import worker, { validate, cleanAnswer, isConferenceQuestion, malaysiaDateTime, timeOrientation, answerSources, retrieveProgrammeLexically } from '../src/index.mjs';
 import { extract } from '../scripts/build-knowledge.mjs';
 import knowledge from '../src/generated/knowledge.mjs';
 
@@ -41,6 +41,14 @@ test('Deterministic scope filter rejects unrelated prompts and permits event fol
   assert.equal(isConferenceQuestion('How much is the dentist registration fee?'), true);
   assert.equal(isConferenceQuestion('When is it?'), true);
   assert.equal(isConferenceQuestion('What about the date?', [{ role: 'user', content: 'Workshops?' }]), true);
+});
+test('Exact presentation codes are prioritized by lexical programme retrieval', () => {
+  const chunks = [
+    { id: 'a', text: 'General oral presentation programme and speaker schedule.' },
+    { id: 'b', text: 'OP53 3:30pm-3:39pm Geraldo Hendri Teacher Empowerment Training for Dental Health Education.' },
+  ];
+  const hits = retrieveProgrammeLexically('When is and who present OP53?', chunks, 5);
+  assert.equal(hits[0].id, 'b');
 });
 test('Supports model response formats and suppresses thinking', () => {
   assert.equal(cleanAnswer({ response: '<think>private</think>Answer' }), 'Answer');
