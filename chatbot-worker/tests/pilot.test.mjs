@@ -50,6 +50,75 @@ test('Exact presentation codes are prioritized by lexical programme retrieval', 
   const hits = retrieveProgrammeLexically('When is and who present OP53?', chunks, 5);
   assert.equal(hits[0].id, 'b');
 });
+test('All six symposiums use verified structured programme facts', async () => {
+  const expected = {
+    1: [
+      'Dr. Yuriko Harada',
+      'Associate Professor Dr. Amer Siddiq Amer Nordin',
+      'Professor Dr. Chris Bullen',
+      'Dr. Muhammad Zulkefli Ramlay'
+    ],
+    2: [
+      'Professor Dr. Michelle Segarra',
+      'Professor Dr. Waranuch Pitiphat',
+      'Associate Professor Dr. Tammy Duangporn Duangthip',
+      'Professor Dr. Tuti Ningseh Mohd Dom'
+    ],
+    3: [
+      'Professor Dr. Shuguo Zheng',
+      'Professor Dr. Zamros Yuzadi Mohd Yusof',
+      'Dr. Flora Chan Wai Ling',
+      'Dr. Irene Adyatmaka'
+    ],
+    4: [
+      'Professor Dr. Chu Chun Hong',
+      'Professor Dr. Ollie Yiru Yu',
+      'Associate Professor Dr. Hoang Trong Hung',
+      'Professor Emeritus Dr. Rosnah Md Zain'
+    ],
+    5: [
+      'Professor Dr. Waranuch Pitiphat',
+      'Associate Professor Dr. Wong Mun Loke',
+      'Dr. Melissa Adiatman',
+      'Dr. Habibah Yaacob'
+    ],
+    6: [
+      'Professor Dr. Hiroshi Ogawa',
+      'Professor Dr. Sri Susilawati',
+      'Professor Dr. Michelle Segarra',
+      'Professor Dr. Choi Youn-Hee'
+    ]
+  };
+
+  for (const [number, names] of Object.entries(expected)) {
+    let aiCalled = false;
+
+    const response = await worker.fetch(
+      req({ question: `Who are the speakers and moderator for Symposium ${number}?` }),
+      env(async () => {
+        aiCalled = true;
+        return { response: 'WRONG' };
+      }),
+      ctx
+    );
+
+    assert.equal(response.status, 200);
+
+    const body = await response.json();
+
+    assert.equal(body.retrieval, 'structured-programme');
+    assert.equal(body.sources[0].title, 'Conference Programme Book');
+
+    for (const name of names) {
+      assert.ok(
+        body.answer.includes(name),
+        `Symposium ${number} missing ${name}`
+      );
+    }
+
+    assert.equal(aiCalled, false);
+  }
+});
 test('Supports model response formats and suppresses thinking', () => {
   assert.equal(cleanAnswer({ response: '<think>private</think>Answer' }), 'Answer');
   assert.equal(cleanAnswer({ response: '**Plenary 1** — [View programme](https://aapd2026.com/programmeSchedule.html)' }), 'Plenary 1 — View programme');
