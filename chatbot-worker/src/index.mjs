@@ -2,7 +2,7 @@ import knowledge from './generated/knowledge.mjs';
 
 const MODEL = '@cf/qwen/qwen3-30b-a3b-fp8';
 const EMBED_MODEL = '@cf/baai/bge-m3';
-const ANSWER_VERSION = '2026-09-29-programme-rag-v6-source-fallback';
+const ANSWER_VERSION = '2026-09-29-programme-rag-v7-cache-source';
 const SITE = 'https://aapd2026.com';
 const PROGRAMME_URL = `${SITE}/assets/media/Conference%20Book_18th%20ICAAPD%202026.pdf`;
 const PROGRAMME_VERSION = '2026-09-29-final';
@@ -330,10 +330,11 @@ export default {
     const retrieved = await retrieveProgramme(input, env, ready, warmChunks);
     const grounding = programmeGrounding(retrieved);
     const retrievalMode = ready ? 'vector+lexical' : grounding.text ? 'lexical' : 'website-only';
+    const programmeDetail = exactPresentationCode || /\b(symposium|plenary|keynote|speaker|moderator|chair|poster|oral|presentation|presenter|session)\b/i.test(input.question);
     const key = new Request(url.origin + '/cache/' + await hash(JSON.stringify([ANSWER_VERSION, knowledge.version, PROGRAMME_VERSION, retrievalMode, new Date().toISOString().slice(0,10), input.question, MODEL])));
     const cache = globalThis.caches?.default;
     if (!input.history.length && cache) {
-      try { const hit = await cache.match(key); if (hit) return json({ ...await hit.json(), cached: true }, 200, corsHeaders); } catch { /* Cache is optional. */ }
+      try { const hit = await cache.match(key); if (hit) { const cachedPayload = await hit.json(); if ((!cachedPayload.sources || !cachedPayload.sources.length) && programmeDetail) { const fallback = grounding.extraSources.length ? grounding.extraSources : sources.filter(s => /programmeSchedule\.html/.test(s.url)).slice(0,1); cachedPayload.sources = fallback; } return json({ ...cachedPayload, cached: true }, 200, corsHeaders); } } catch { /* Cache is optional. */ }
     }
     try {
       const pageHint = `The participant is currently viewing ${SITE}${input.pagePath}. Use this only to understand ambiguous references; it is not evidence.`;
@@ -342,8 +343,7 @@ export default {
       const rawAnswer = result?.response ?? result?.choices?.[0]?.message?.content ?? '';
       const answer = cleanAnswer(result);
       const resolvedSources = answerSources(rawAnswer, grounding.extraSources);
-      const programmeDetail = exactPresentationCode || /\b(symposium|plenary|keynote|speaker|moderator|chair|poster|oral|presentation|presenter|session)\b/i.test(input.question);
-      if (!resolvedSources.length && programmeDetail && grounding.extraSources.length) resolvedSources.push(...grounding.extraSources);
+      if (!resolvedSources.length && programmeDetail) { if (grounding.extraSources.length) resolvedSources.push(...grounding.extraSources); else { const programmePage = sources.find(s => /programmeSchedule\.html/.test(s.url)); if (programmePage) resolvedSources.push(programmePage); } }
       const payload = { answer, sources: resolvedSources, version: `${knowledge.version}:${PROGRAMME_VERSION}`, retrieval: retrievalMode };
       if (!input.history.length && cache) ctx.waitUntil(cache.put(key, Response.json(payload, { headers: { 'Cache-Control': 'public, max-age=3600' } })).catch(() => {}));
       return json(payload, 200, corsHeaders);
