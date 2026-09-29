@@ -6,6 +6,61 @@
   const ENDPOINT = 'https://aapd-chatbot.aapd2026-assistant.workers.dev/chat';
   const HISTORY_KEY = 'aapd-chat-history-v1';
   const SESSION_KEY = 'aapd-chat-session-v1';
+  const LOCAL_SYMPOSIUM_FACTS_VERSION = '20260929-v2';
+  const PROGRAMME_BOOK_URL = 'https://aapd2026.com/assets/media/Conference%20Book_18th%20ICAAPD%202026.pdf';
+
+  const SYMPOSIUM_FACTS = Object.freeze({
+    1:{title:'The New Nicotine Frontier: Tobacco, Vaping, Oral Health and the Evolving Risk Landscape',date:'1 October 2026',time:'13:30–15:00',moderator:'Dr. Yuriko Harada',speakers:['Associate Professor Dr. Amer Siddiq Amer Nordin','Professor Dr. Chris Bullen','Dr. Muhammad Zulkefli Ramlay']},
+    2:{title:'Strengthening Public Health Impact through Education and Training',date:'1 October 2026',time:'13:30–15:00',moderator:'Professor Dr. Michelle Segarra',speakers:['Professor Dr. Waranuch Pitiphat','Associate Professor Dr. Tammy Duangporn Duangthip','Professor Dr. Tuti Ningseh Mohd Dom']},
+    3:{title:'Caries Prevention in Children and Adolescents: Innovations and Policy Implications',date:'2 October 2026',time:'10:15–11:45',moderator:'Professor Dr. Shuguo Zheng',speakers:['Professor Dr. Zamros Yuzadi Mohd Yusof','Dr. Flora Chan Wai Ling','Dr. Irene Adyatmaka']},
+    4:{title:'Transforming Preventive Dentistry through Digital Health Technologies',date:'2 October 2026',time:'10:15–11:45',moderator:'Professor Dr. Chu Chun Hong',speakers:['Professor Dr. Ollie Yiru Yu','Associate Professor Dr. Hoang Trong Hung','Professor Emeritus Dr. Rosnah Md Zain']},
+    5:{title:'Advancing Oral Health Literacy and Population Health',date:'2 October 2026',time:'13:45–15:15',moderator:'Professor Dr. Waranuch Pitiphat',speakers:['Associate Professor Dr. Wong Mun Loke','Dr. Melissa Adiatman','Dr. Habibah Yaacob']},
+    6:{title:'Preventive Dentistry for Ageing Population: Ensuring Quality of Life and Independence',date:'2 October 2026',time:'13:45–15:15',moderator:'Professor Dr. Hiroshi Ogawa',speakers:['Professor Dr. Sri Susilawati','Professor Dr. Michelle Segarra','Professor Dr. Choi Youn-Hee']}
+  });
+
+  function extractSymposiumNumber(value) {
+    const text=String(value||'');
+    let m=text.match(/\b(?:symposium|sym)\s*#?\s*([1-6])\b/i);
+    if(m) return Number(m[1]);
+    m=text.match(/\bsymposium\s+(one|two|three|four|five|six)\b/i);
+    return m ? ({one:1,two:2,three:3,four:4,five:5,six:6})[m[1].toLowerCase()] : null;
+  }
+
+  function localProgrammeAnswer(value,prior=[]) {
+    const text=String(value||'').trim();
+
+    if(/\b(where|venue|room|location|tempat|bilik)\b/i.test(text)) return null;
+
+    let number=extractSymposiumNumber(text);
+    const direct=Boolean(number);
+
+    if(!number && Array.isArray(prior)){
+      for(let i=prior.length-1;i>=0;i--){
+        number=extractSymposiumNumber(prior[i]?.content);
+        if(number) break;
+      }
+    }
+
+    if(!number) return null;
+
+    if(!direct && !/\b(speaker|speakers|moderator|chair|who|when|time|date|title|topic|presenter|present|session|penceramah|siapa|bila|masa|tarikh)\b/i.test(text)) return null;
+
+    const item=SYMPOSIUM_FACTS[number];
+
+    return {
+      answer:[
+        `Symposium ${number}: ${item.title}`,
+        `${item.date} · ${item.time}`,
+        `Moderator: ${item.moderator}`,
+        'Speakers:',
+        ...item.speakers.map(name=>`- ${name}`)
+      ].join('\n'),
+      sources:[{
+        title:'Conference Programme Book',
+        url:PROGRAMME_BOOK_URL
+      }]
+    };
+  }
   const host = document.createElement('div');
   host.id = 'aapd-chat-widget';
   document.body.append(host);
@@ -99,6 +154,20 @@
   async function ask(value, showUser = true) {
     const text = value.trim(); if (!text || busy) return;
     lastQuestion = text; const prior = history.slice(-6); setBusy(true); status.textContent = 'Reading the conference information…'; $('.welcome').hidden = true; if (showUser) addMessage('user', text); question.value = ''; $('.count').textContent = '0 / 800'; typing(true);
+    const localAnswer = localProgrammeAnswer(text, prior);
+    if (localAnswer) {
+      typing(false);
+      addMessage('assistant', localAnswer.answer, localAnswer.sources);
+      history.push(
+        { role: 'user', content: text },
+        { role: 'assistant', content: localAnswer.answer }
+      );
+      history = history.slice(-6);
+      saveHistory();
+      status.textContent = 'Answer ready.';
+      setBusy(false);
+      return;
+    }
     const controller = new AbortController(); const timeout = setTimeout(() => controller.abort(), 60000);
     try {
       const response = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ question: text, history: prior, sessionId, pagePath: location.pathname }), signal: controller.signal });
