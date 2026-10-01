@@ -137,3 +137,34 @@
 @media(prefers-reduced-motion:reduce){
   .aapd-gallery-entry-button{transition:none}
 }
+
+/* Homepage Programme Book + Proceedings */
+.aapd-publication-entry{
+  padding-top:10px;
+}
+
+.aapd-publication-actions{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+@media(max-width:760px){
+  .aapd-publication-actions{
+    grid-column:1/-1;
+    width:100%;
+  }
+
+  .aapd-publication-actions .aapd-gallery-entry-button{
+    flex:1 1 180px;
+  }
+}
+
+@media(max-width:480px){
+  .aapd-publication-actions{
+    display:grid;
+    grid-template-columns:1fr;
+  }
+}
